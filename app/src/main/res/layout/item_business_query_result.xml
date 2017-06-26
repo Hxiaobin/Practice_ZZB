@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_common_background_gray"
+    android:orientation="vertical">
+
+    <!--通知提醒通用消息item-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_margin_normal"
+        android:layout_marginRight="@dimen/common_margin_normal"
+        android:background="@drawable/shape_background_message"
+        android:padding="@dimen/common_padding_normal">
+
+        <LinearLayout
+            android:id="@+id/rltMsgTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_background_message"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvContractId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="1"
+                android:gravity="center_vertical|left"
+                android:textColor="@color/common_text_black"
+                android:textSize="@dimen/text_size_medium" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewContractLine"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height_low"
+            android:layout_below="@+id/rltMsgTop"
+            android:layout_marginTop="@dimen/common_margin_small"
+            android:background="@color/line_horizontal_gray" />
+
+        <LinearLayout
+            android:id="@+id/lltOpeningAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewContractLine"
+            android:layout_marginTop="@dimen/common_padding_small_to_normal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/activity_text_normal_gray"
+                android:lineSpacingExtra="@dimen/common_margin_micro"
+                android:text="开证金额：" />
+
+            <TextView
+                android:id="@+id/tvOpeningAmount"
+                style="@style/activity_text_normal_gray"
+                android:layout_marginLeft="@dimen/common_margin_small"
+                android:lineSpacingExtra="@dimen/common_margin_micro" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lltOpeningAmount"
+            android:layout_marginTop="@dimen/common_padding_small_to_normal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/activity_text_normal_gray"
+                android:lineSpacingExtra="@dimen/common_margin_micro"
+                android:text="信用证余额：" />
+
+            <TextView
+                android:id="@+id/tvCreditBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin_small"
+                android:lineSpacingExtra="@dimen/common_margin_micro"
+                android:lines="1"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                style="@style/activity_text_normal_gray"
+                android:lineSpacingExtra="@dimen/common_margin_micro"
+                android:text="元"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

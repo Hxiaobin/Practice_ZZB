@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_common_background_gray"
+    android:orientation="vertical">
+
+    <!--业务查询-->
+    <include layout="@layout/layout_back_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_margin_normal"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/shape_background_message"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/common_padding_micro">
+
+            <ImageView
+                android:id="@+id/ivBusinessQueryScan"
+                android:layout_width="@dimen/icon_small_width"
+                android:layout_height="@dimen/icon_small_high"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_scan"
+                android:visibility="visible" />
+
+            <EditText
+                android:id="@+id/etBusinessQuery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin_small"
+                android:background="@null"
+                android:hint="@string/common_business_query_please_enter_the_contract_id"
+                android:lines="1"
+                android:maxLength="20"
+                android:textColor="@color/common_text_black"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/text_size_normal" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnBusinessQuery"
+            android:layout_width="@dimen/button_width_small"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/common_margin_small"
+            android:background="@drawable/shape_button_search_small"
+            android:text="@string/common_search"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ExpandableListView
+            android:id="@+id/elvBusiness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="#00000000"
+            android:childDivider="@color/line_horizontal_gray"
+            android:divider="@color/line_horizontal_gray"
+            android:dividerHeight="@dimen/line_height_high"
+            android:groupIndicator="@null"
+            android:listSelector="#00000000"
+            android:scrollbars="none">
+
+        </ExpandableListView>
+
+    </LinearLayout>
+
+</LinearLayout>

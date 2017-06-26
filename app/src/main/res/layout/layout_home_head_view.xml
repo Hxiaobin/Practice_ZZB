@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_common_background_gray"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpAdvertisingCarousel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/viewPager_advertisingCarousel_high" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/common_padding_small"
+            android:paddingTop="@dimen/common_padding_small">
+
+            <Button
+                android:id="@+id/btnMessageReminder"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height_smaller"
+                android:layout_marginRight="@dimen/common_padding_small"
+                android:layout_weight="1"
+                android:background="@drawable/shape_button_message_reminder"
+                android:text="@string/common_message_reminder"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_normal" />
+
+            <Button
+                android:id="@+id/btnBusinessQuery"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height_smaller"
+                android:layout_marginRight="@dimen/common_padding_small"
+                android:layout_weight="1"
+                android:background="@drawable/shape_button_business_query"
+                android:text="@string/common_business_query"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_normal" />
+
+            <Button
+                android:id="@+id/btnBOCAnalyse"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height_smaller"
+                android:layout_marginRight="@dimen/common_padding_small"
+                android:layout_weight="1"
+                android:background="@drawable/shape_button_boc_analyse"
+                android:text="@string/common_boc_analyse"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_normal" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_margin="@dimen/common_padding_small"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/image_exchange_rate" />
+    </LinearLayout>
+
+</LinearLayout>

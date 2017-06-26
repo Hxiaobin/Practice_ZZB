@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/common_activity_title_bar_high_normal"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rltToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_activity_title_bar_high_normal"
+        android:background="@color/appColor"
+        android:paddingLeft="@dimen/common_padding_normal"
+        android:paddingRight="@dimen/common_padding_normal">
+
+        <ImageView
+            android:id="@+id/ivTitleBarBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_back"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/ivTitleBarPersonalCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_nav_user"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvTitleBarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_medium" />
+
+        <ImageView
+            android:id="@+id/ivTitleBarScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_nav_scan"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/ivTitleBarFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_nav_filter"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</LinearLayout>

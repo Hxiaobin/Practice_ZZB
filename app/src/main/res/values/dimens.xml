@@ -1,0 +1,78 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- 通用margin -->
+    <dimen name="common_margin_micro">4dp</dimen>
+    <dimen name="common_margin_small">8dp</dimen>
+    <dimen name="common_margin_small_to_normal">12dp</dimen>
+    <dimen name="common_margin_normal">16dp</dimen>
+    <dimen name="common_margin_big">24dp</dimen>
+    <dimen name="common_margin_super_big">48dp</dimen>
+
+    <!-- 通用padding -->
+    <dimen name="common_padding_more_micro">2dp</dimen>
+    <dimen name="common_padding_micro">4dp</dimen>
+    <dimen name="common_padding_micro_to_small">6dp</dimen>
+    <dimen name="common_padding_small">8dp</dimen>
+    <dimen name="common_padding_small_to_normal">12dp</dimen>
+    <dimen name="common_padding_normal">16dp</dimen>
+    <!--通用View的高度-->
+    <dimen name="common_view_high_null">0dp</dimen>
+
+    <!--标题栏高度 -->
+    <dimen name="common_activity_title_bar_high_normal">48dp</dimen>
+
+    <!--底部栏高度 -->
+    <dimen name="common_activity_bottom_bar_high_normal">48dp</dimen>
+
+    <!-- 字体大小 -->
+    <dimen name="text_size_more_micro">10sp</dimen>
+    <dimen name="text_size_micro">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_super">28sp</dimen>
+
+    <!--大图标-->
+    <dimen name="icon_large_width">80dp</dimen>
+    <dimen name="icon_large_high">80dp</dimen>
+    <!--大图标-->
+    <dimen name="icon_super_width">100dp</dimen>
+    <dimen name="icon_super_high">100dp</dimen>
+    <!--小图标-->
+    <dimen name="icon_small_width">32dp</dimen>
+    <dimen name="icon_small_high">32dp</dimen>
+    <!--正常图片-->
+    <dimen name="image_normal_width">90dp</dimen>
+    <dimen name="image_normal_high">90dp</dimen>
+
+    <!--分割线高度-->
+    <dimen name="line_height_low">1dp</dimen>
+    <dimen name="line_height_normal">4dp</dimen>
+    <dimen name="line_height_high">8dp</dimen>
+    <dimen name="line_height_more_high">16dp</dimen>
+
+    <!--广告轮播区域高度-->
+    <dimen name="viewPager_advertisingCarousel_high">180dp</dimen>
+
+    <dimen name="activity_detail_image_high">180dp</dimen>
+
+    <!--按钮宽度高度-->
+    <dimen name="button_width_small">64dp</dimen>
+    <dimen name="button_width_normal">80dp</dimen>
+    <dimen name="button_width_large">96dp</dimen>
+    <dimen name="button_height_smaller">44dp</dimen>
+    <dimen name="button_height_small">48dp</dimen>
+    <dimen name="button_height_normal">56dp</dimen>
+
+    <!--PopupWindow-->
+    <dimen name="popupWindow_padding_left">24dp</dimen>
+    <dimen name="popupWindow_padding_right">24dp</dimen>
+    <dimen name="popupWindow_padding_top">16dp</dimen>
+    <dimen name="popupWindow_padding_bottom">16dp</dimen>
+
+
+</resources>

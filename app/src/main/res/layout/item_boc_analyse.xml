@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/common_padding_normal">
+
+    <ImageView
+        android:id="@+id/ivBocAnalyseNewsImageUrl"
+        android:layout_width="@dimen/image_normal_width"
+        android:layout_height="@dimen/image_normal_high"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/image_boc_analyse_two" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_margin_normal"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvBocAnalyseNewsTitle"
+            style="@style/activity_text_normal_black"/>
+
+        <TextView
+            android:id="@+id/tvBocAnalyseNewsDesc"
+            style="@style/activity_text_small_gray"
+            android:layout_marginTop="@dimen/common_margin_small"/>
+
+        <TextView
+            android:id="@+id/tvBocAnalyseNewsDate"
+            style="@style/activity_text_small_gray"
+            android:layout_marginTop="@dimen/common_margin_small"/>
+
+    </LinearLayout>
+
+</LinearLayout>

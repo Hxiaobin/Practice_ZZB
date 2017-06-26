@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_common_background_gray"
+    android:orientation="vertical">
+
+    <!--通知提醒列表-->
+    <include layout="@layout/layout_back_title_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/lltMessageReminderImport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_small_to_normal"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/common_padding_small"
+                android:paddingLeft="@dimen/common_padding_normal"
+                android:paddingRight="@dimen/common_padding_normal"
+                android:paddingTop="@dimen/common_padding_small">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_message_reminder_import" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_margin_normal"
+                    android:layout_marginRight="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvImport"
+                        style="@style/activity_text_normal_black"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/common_message_reminder_import" />
+
+                    <TextView
+                        android:id="@+id/tvImportUnReadSum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/common_margin_big"
+                        android:layout_toRightOf="@+id/tvImport"
+                        android:background="@mipmap/ic_un_read"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/common_padding_micro"
+                        android:paddingLeft="@dimen/common_padding_micro"
+                        android:paddingRight="@dimen/common_padding_micro"
+                        android:paddingTop="@dimen/common_padding_more_micro"
+                        android:text="20"
+                        android:textSize="@dimen/text_size_more_micro" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_open" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lltMessageReminderExport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_small_to_normal"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/common_padding_small"
+                android:paddingLeft="@dimen/common_padding_normal"
+                android:paddingRight="@dimen/common_padding_normal"
+                android:paddingTop="@dimen/common_padding_small">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_message_reminder_export" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_margin_normal"
+                    android:layout_marginRight="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvExport"
+                        style="@style/activity_text_normal_black"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/common_message_reminder_export" />
+
+                    <TextView
+                        android:id="@+id/tvExportUnReadSum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/common_margin_big"
+                        android:layout_toRightOf="@+id/tvExport"
+                        android:background="@mipmap/ic_un_read"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/common_padding_micro"
+                        android:paddingLeft="@dimen/common_padding_micro"
+                        android:paddingRight="@dimen/common_padding_micro"
+                        android:paddingTop="@dimen/common_padding_more_micro"
+                        android:text="20"
+                        android:textSize="@dimen/text_size_more_micro" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_open" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lltMessageReminderGuarantee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_small_to_normal"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/common_padding_small"
+                android:paddingLeft="@dimen/common_padding_normal"
+                android:paddingRight="@dimen/common_padding_normal"
+                android:paddingTop="@dimen/common_padding_small">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_message_reminder_guarantee" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_margin_normal"
+                    android:layout_marginRight="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvGuarantee"
+                        style="@style/activity_text_normal_black"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/common_message_reminder_guarantee" />
+
+                    <TextView
+                        android:id="@+id/tvGuaranteeUnReadSum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/common_margin_big"
+                        android:layout_toRightOf="@+id/tvGuarantee"
+                        android:background="@mipmap/ic_un_read"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/common_padding_micro"
+                        android:paddingLeft="@dimen/common_padding_micro"
+                        android:paddingRight="@dimen/common_padding_micro"
+                        android:paddingTop="@dimen/common_padding_more_micro"
+                        android:text="20"
+                        android:textSize="@dimen/text_size_more_micro" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_open" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lltMessageReminderFactoring"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_small_to_normal"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/common_padding_small"
+                android:paddingLeft="@dimen/common_padding_normal"
+                android:paddingRight="@dimen/common_padding_normal"
+                android:paddingTop="@dimen/common_padding_small">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_message_reminder_factoring" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_margin_normal"
+                    android:layout_marginRight="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvFactoring"
+                        style="@style/activity_text_normal_black"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/common_message_reminder_factoring" />
+
+                    <TextView
+                        android:id="@+id/tvFactoringUnReadSum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/common_margin_big"
+                        android:layout_toRightOf="@+id/tvFactoring"
+                        android:background="@mipmap/ic_un_read"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/common_padding_micro"
+                        android:paddingLeft="@dimen/common_padding_micro"
+                        android:paddingRight="@dimen/common_padding_micro"
+                        android:paddingTop="@dimen/common_padding_more_micro"
+                        android:text="20"
+                        android:textSize="@dimen/text_size_more_micro" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_open" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lltMessageReminderForward"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_small_to_normal"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/common_padding_small"
+                android:paddingLeft="@dimen/common_padding_normal"
+                android:paddingRight="@dimen/common_padding_normal"
+                android:paddingTop="@dimen/common_padding_small">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_message_reminder_forward" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_margin_normal"
+                    android:layout_marginRight="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvForward"
+                        style="@style/activity_text_normal_black"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/common_message_reminder_forward" />
+
+                    <TextView
+                        android:id="@+id/tvForwardUnReadSum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/common_margin_big"
+                        android:layout_toRightOf="@+id/tvForward"
+                        android:background="@mipmap/ic_un_read"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/common_padding_micro"
+                        android:paddingLeft="@dimen/common_padding_micro"
+                        android:paddingRight="@dimen/common_padding_micro"
+                        android:paddingTop="@dimen/common_padding_more_micro"
+                        android:text="20"
+                        android:textSize="@dimen/text_size_more_micro" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_open" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

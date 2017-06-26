@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--中银分析详情-->
+    <include layout="@layout/layout_back_title_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/activity_common_background_gray"
+            android:orientation="vertical">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpBocAnalyseDetail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/viewPager_advertisingCarousel_high" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/common_margin_normal"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvBocAnalyseDetailNewsTitle"
+                    style="@style/activity_text_medium_black"
+                    android:paddingLeft="@dimen/common_padding_normal"
+                    android:paddingRight="@dimen/common_padding_normal"
+                    android:paddingTop="@dimen/common_padding_small" />
+
+                <TextView
+                    android:id="@+id/tvBocAnalyseDetailHtmlContent"
+                    style="@style/activity_text_normal_gray"
+                    android:lineSpacingExtra="@dimen/common_padding_micro_to_small"
+                    android:padding="@dimen/common_padding_normal" />
+
+                <TextView
+                    android:id="@+id/tvBocAnalyseDetailNewsDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:padding="@dimen/common_padding_normal"
+                    android:textColor="@color/common_text_gray"
+                    android:textSize="@dimen/text_size_normal" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
