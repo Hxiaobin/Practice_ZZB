@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sf.bocfinancialsoftware.com.sf.bocfinancialsoftware.activity.tool.calculator.ForwardQuotationCalculateActivity">
+
+    <include layout="@layout/layout_top_bar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/tv_calculator"
+                    android:text="@string/tv_calculate_currency"/>
+
+                <Spinner
+                    android:id="@+id/spinnerForwardQuotation"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_spinner_down">
+                </Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/tv_calculator"
+                    android:text="@string/tv_calculate_trade_direction"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnForwardQuotationSettlement"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:textColor="@color/white"
+                        android:background="@mipmap/btn_left_pre"
+                        android:text="结汇"/>
+
+                    <Button
+                        android:id="@+id/btnForwardQuotationSurrendering"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="@mipmap/btn_right"
+                        android:textColor="@color/tv_subtitle"
+                        android:text="售汇"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/tv_calculator"
+                    android:text="远期到期日:"/>
+
+                <TextView
+                    android:id="@+id/tvForwardQuotationData"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:gravity="center|left"
+                    android:textColor="@color/tv_subtitle"
+                    android:textSize="@dimen/text_size_normal"
+                    android:padding="@dimen/common_padding_normal"
+                    android:layout_margin="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_search"
+                    android:drawableRight="@mipmap/rl_07"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/tv_calculator"
+                    android:text="@string/tv_calculate_spot_purchase_price"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvSpotPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:text="1,000,000.00"
+                        android:textColor="@color/tv_subtitle"
+                        android:textSize="@dimen/text_size_normal"/>
+
+                    <TextView
+                        android:id="@+id/tvForwardQuotationPurchasePrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/common_margin_small"
+                        android:text="美元"
+                        android:textColor="@color/tv_subtitle"
+                        android:textSize="@dimen/text_size_normal"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/tv_calculator"
+                    android:text="@string/tv_calculate_rate"/>
+
+                <EditText
+                    android:id="@+id/etForwardQuotationRate"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_search"
+                    android:gravity="right"
+                    android:inputType="number"
+                    android:padding="@dimen/common_padding_normal"
+                    android:textSize="@dimen/text_size_normal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/tv_calculator"
+                    android:text="@string/tv_calculate_foreign_currency_amount"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etForwardQuotationCurrency"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/shape_search"
+                        android:gravity="right"
+                        android:inputType="number"
+                        android:padding="@dimen/common_padding_normal"
+                        android:textSize="@dimen/text_size_normal"/>
+
+                    <TextView
+                        android:id="@+id/tvForwardQuotationAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_margin_small"
+                        android:text="美元"
+                        android:textColor="@color/tv_subtitle"
+                        android:textSize="@dimen/text_size_normal"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    style="@style/tv_calculator"
+                    android:text="@string/tv_calculate_exchange"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="@dimen/common_margin_normal"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvForwardQuotationExchange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:text="900,000.00"
+                        android:textColor="#da9928"
+                        android:textSize="@dimen/text_size_normal"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/common_margin_normal"
+                        android:layout_marginRight="@dimen/common_margin_medium"
+                        android:text="元"
+                        android:textColor="@color/tv_subtitle"
+                        android:textSize="@dimen/text_size_normal"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/common_margin_normal"
+                android:background="@mipmap/line_03"/>
+
+            <include layout="@layout/layout_bottom_content"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

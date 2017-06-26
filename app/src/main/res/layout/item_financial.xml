@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_padding_medium"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tvFinancialTitle"
+            style="@style/tv_financial"
+            android:text="中银QD02(中银稳健增长)"/>
+
+        <TextView
+            android:id="@+id/tvFinancialTime"
+            style="@style/tv_financial"
+            android:layout_alignParentRight="true"
+            android:text="2014-10-01"/>
+
+    </RelativeLayout>
+</LinearLayout>

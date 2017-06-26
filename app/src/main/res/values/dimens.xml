@@ -74,5 +74,38 @@
     <dimen name="popupWindow_padding_top">16dp</dimen>
     <dimen name="popupWindow_padding_bottom">16dp</dimen>
 
+<!---->
+    <!--padding公共正常间距-->
+    <dimen name="common_padding_medium">16dp</dimen>
+    <dimen name="common_padding_large">20dp</dimen>
 
+    <!--margin公共正常间距-->
+    <dimen name="common_margin_medium">15dp</dimen>
+    <dimen name="common_margin_large">20dp</dimen>
+    <dimen name="common_margin_super">30dp</dimen>
+
+    <dimen name="button_small_height">30dp</dimen>
+    <dimen name="button_normal_height">40dp</dimen>
+    <dimen name="button_large_height">50dp</dimen>
+
+    <dimen name="line_horizontal_bold_height">1dp</dimen>
+    <dimen name="line_horizontal_small_height">0.5dp</dimen>
+
+    <dimen name="line_vertical_bold_width">1dp</dimen>
+    <dimen name="line_vertical_small_width">0.5dp</dimen>
+
+
+    <!-- 通用margin -->
+    <dimen name="small_margin">5dp</dimen>
+    <dimen name="medium_margin">10dp</dimen>
+    <dimen name="large_margin">15dp</dimen>
+
+    <!-- 通用padding -->
+    <dimen name="small_padding">5dp</dimen>
+    <dimen name="medium_padding">10dp</dimen>
+    <dimen name="large_padding">15dp</dimen>
+
+    <!-- 个人中心登录竖直方框-->
+    <dimen name="vertical_width">0dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

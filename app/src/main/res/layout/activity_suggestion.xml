@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context="com.sf.bocfinancialsoftware.com.sf.bocfinancialsoftware.activity.user.SuggestionActivity">
+
+    <include layout="@layout/layout_top_bar"/>
+    <EditText
+        android:id="@+id/etSuggestion"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:minHeight="100dp"
+        android:maxHeight="130dp"
+        android:layout_marginLeft="@dimen/common_margin_normal"
+        android:layout_marginRight="@dimen/common_margin_normal"
+        android:layout_marginTop="@dimen/common_margin_super"
+        android:background="@drawable/shape_suggestion"
+        android:hint="@string/et_suggestion"
+        android:padding="@dimen/common_padding_small"
+        android:textColorHint="@color/login_text"
+        android:textSize="@dimen/text_size_normal"
+        android:gravity="top|start"/>
+
+    <EditText
+        android:id="@+id/etContact"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_margin="@dimen/common_margin_normal"
+        android:background="@drawable/shape_suggestion"
+        android:hint="@string/et_contact"
+        android:padding="@dimen/common_padding_small"
+        android:textSize="@dimen/text_size_normal"
+        android:textColorHint="@color/login_text"/>
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/btn_red"
+        android:layout_marginLeft="@dimen/common_margin_normal"
+        android:layout_marginRight="@dimen/common_margin_normal"
+        android:layout_marginTop="48dp"
+        android:text="@string/btn_send"
+        />
+
+</LinearLayout>

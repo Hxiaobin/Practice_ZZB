@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--产品市场图片的文字标题-->
+    <array name="tool_product_name">
+        <item>@string/text_analysis</item>
+        <item>@string/text_rate</item>
+        <item>@string/text_product_introduction</item>
+        <item>@string/text_product</item>
+    </array>
+    <!--工具箱图片的文字标题-->
+    <array name="tool_calculator_name">
+        <item>@string/text_calculator</item>
+    </array>
+    <!--产品市场图片-->
+    <array name="tool_product_icon">
+        <item>@drawable/selector_icon_analysis</item>
+        <item>@drawable/selector_icon_rate</item>
+        <item>@drawable/selector_icon_introduction</item>
+        <item>@drawable/selector_icon_product</item>
+    </array>
+    <!--工具箱图片-->
+    <array name="tool_calculator_icon">
+        <item>@drawable/selector_icon_calculator</item>
+    </array>
+    <!--中银分析图片-->
+    <array name="tool_analysis_icon">
+        <item>@mipmap/banner1</item>
+        <item>@mipmap/banner2</item>
+        <item>@mipmap/banner3</item>
+    </array>
+    <!--热销理财产品标题-->
+    <array name="tool_financial_title">
+        <item>@string/text_financial_title1</item>
+        <item>@string/text_financial_title2</item>
+        <item>@string/text_financial_title3</item>
+        <item>@string/text_financial_title4</item>
+        <item>@string/text_financial_title5</item>
+        <item>@string/text_financial_title6</item>
+    </array>
+    <!--热销理财产品时间-->
+    <array name="tool_financial_time">
+        <item>@string/text_financial_time1</item>
+        <item>@string/text_financial_time2</item>
+        <item>@string/text_financial_time3</item>
+        <item>@string/text_financial_time4</item>
+        <item>@string/text_financial_time5</item>
+        <item>@string/text_financial_time6</item>
+    </array>
+    <!--产品介绍 供应链融资-->
+    <array name="tool_product_name_supply">
+        <item>订单融资</item>
+        <item>销易达</item>
+        <item>融货达</item>
+        <item>融信达</item>
+        <item>出口双保理</item>
+        <item>进口双保理</item>
+        <item>国际综合保理</item>
+        <item>国内商业发票贴现</item>
+        <item>国际商业发票贴现</item>
+    </array>
+    <!--产品介绍 国际贸易结算-->
+    <array name="tool_product_name_trade">
+        <item>信用证开立</item>
+        <item>信用证通知</item>
+        <item>信用证保税</item>
+        <item>进口代收</item>
+        <item>信用证审单/议付</item>
+        <item>出口跟单托收</item>
+        <item>汇入汇款</item>
+        <item>汇出汇款</item>
+        <item>信用证通知</item>
+    </array>
+    <!--计算器 币种-->
+    <array name="calculate_currency">
+        <item>美元</item>
+        <item>欧元</item>
+        <item>日元</item>
+    </array>
+    <!--汇率 币种-->
+    <array name="rate_currency">
+        <item>币种</item>
+        <item>美元</item>
+        <item>美元</item>
+        <item>美元</item>
+        <item>美元</item>
+        <item>欧元</item>
+        <item>欧元</item>
+        <item>欧元</item>
+        <item>欧元</item>
+        <item>日元</item>
+        <item>日元</item>
+        <item>日元</item>
+        <item>日元</item>
+        <item>日元</item>
+    </array>
+    <!--汇率 期限-->
+    <array name="rate_time">
+        <item>即期</item>
+        <item>3个月</item>
+        <item>6个月</item>
+        <item>1年</item>
+    </array>
+    <!--汇率 结汇价-->
+    <array name="rate_knot">
+        <item>即期</item>
+        <item>3个月</item>
+        <item>6个月</item>
+        <item>1年</item>
+    </array>
+    <!--汇率 售汇价-->
+    <array name="rate_selling">
+        <item>即期</item>
+        <item>3个月</item>
+        <item>6个月</item>
+        <item>1年</item>
+    </array>
+</resources>

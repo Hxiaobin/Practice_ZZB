@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_padding_normal">
+
+        <ImageView
+            android:id="@+id/ivAnalysisIv"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin_normal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvAnalysisTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/common_padding_small"
+                android:text="@string/tv_tool_analysis_title"
+                android:textColor="@color/tv_subtitle"
+                android:textSize="@dimen/text_size_medium"/>
+
+            <TextView
+                android:id="@+id/tvAnalysisContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/common_padding_small"
+                android:text="@string/tv_tool_analysis_content"
+                android:textColor="@color/tv_time"
+                android:textSize="@dimen/text_size_normal"/>
+
+            <TextView
+                android:id="@+id/tvAnalysisTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/common_padding_small"
+                android:text="@string/tv_tool_analysis_time"
+                android:textColor="@color/tv_time"
+                android:textSize="@dimen/text_size_normal"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

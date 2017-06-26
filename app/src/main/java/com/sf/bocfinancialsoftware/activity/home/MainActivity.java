@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.activity.business.BusinessQueryResultActivity;
+import com.sf.bocfinancialsoftware.activity.user.UserActivity;
 import com.sf.bocfinancialsoftware.adapter.HomeFragmentPagerAdapter;
 import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
 import com.sf.bocfinancialsoftware.bean.ContractBean;
@@ -21,6 +22,7 @@ import com.sf.bocfinancialsoftware.bean.PleasantMessageBean;
 import com.sf.bocfinancialsoftware.fragment.FinancialAssistantFragment;
 import com.sf.bocfinancialsoftware.fragment.HomeFragment;
 import com.sf.bocfinancialsoftware.fragment.PleasantMessageFragment;
+import com.sf.bocfinancialsoftware.fragment.ToolFragment;
 import com.sf.bocfinancialsoftware.fragment.ToolbarFragment;
 import com.sf.bocfinancialsoftware.util.DataBaseSQLiteUtil;
 import com.sf.bocfinancialsoftware.util.DataUtil;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     private List<String> titleList;
     private List<Fragment> fragmentList;
+    private ImageView ivUser; //注册  登录个人中心
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         ivTitleBarScan = (ImageView) findViewById(R.id.ivTitleBarScan);
         vpMain = (ViewPager) findViewById(R.id.vpMain);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        ivUser = (ImageView) findViewById(R.id.ivTitleBarBack);
     }
 
     private void initData() {
@@ -115,6 +119,12 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     private void initListener() {
         tabLayout.setOnTabSelectedListener(this);
         ivTitleBarScan.setOnClickListener(this);
+        ivUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, UserActivity.class));
+            }
+        });
     }
 
     /**
@@ -128,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         fragmentList.add(0, new HomeFragment());
         fragmentList.add(1, new PleasantMessageFragment());
         fragmentList.add(2, new FinancialAssistantFragment());
-        fragmentList.add(3, new ToolbarFragment());
+        fragmentList.add(3, new ToolFragment());
     }
 
     /**

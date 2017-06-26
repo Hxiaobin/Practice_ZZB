@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sf.bocfinancialsoftware.com.sf.bocfinancialsoftware.activity.tool.rate.RateActivity">
+
+    <include layout="@layout/layout_top_bar"/>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/common_margin_normal"
+        android:paddingRight="@dimen/common_margin_normal"
+        android:scrollbars="none">
+
+    </ListView>
+
+</LinearLayout>

@@ -36,4 +36,30 @@
     <color name="swipe_color_3">#fc9b96</color>
     <color name="swipe_color_4">#fac0bd</color>
 
+    <!--//////////////////////////////////////////////////////////-->
+    <!--通用背景颜色-->
+    <color name="background">#ececec</color>
+
+    <!-- 通用颜色值 -->
+    <color name="login_text">#bfbfbf</color>
+
+    <!-- 个人中心登录横线-->
+    <color name="line">#ececec</color>
+
+    <!-- 个人中心注册按钮-->
+    <color name="btn_registered">#2f9df1</color>
+
+    <!-- 个人中心登录按钮-->
+    <color name="btn_login">#f55656</color>
+    <!-- 财务助手副标题-->
+    <color name="tv_subtitle">#494949</color>
+    <!-- 财务助手时间-->
+    <color name="tv_time">#6e6e6e</color>
+    <!-- 财务助手余额-->
+    <color name="tv_account">#e10202</color>
+    <!-- 查找边框按钮-->
+    <color name="et_border">#d2d2d2</color>
+    <color name="tagcloud_color">#f2f2f2</color>
+    <!-- 汇率 表头蓝色 -->
+    <color name="rate_blue">#2f9df1</color>
 </resources>
