@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <!--业务查询二级目录-->
+    <!--业务查询可扩展列表二级目录item-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,9 +19,10 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_micro_width"
+            android:layout_height="@dimen/icon_micro_high"
             android:layout_marginLeft="@dimen/common_margin_normal"
+            android:scaleType="centerCrop"
             android:src="@mipmap/ic_open" />
 
     </LinearLayout>

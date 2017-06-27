@@ -5,6 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <!--业务查询可扩展列表一级目录item-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,11 +15,20 @@
 
         <TextView
             android:id="@+id/tvGroupName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_normal" />
+
+        <ImageView
+            android:id="@+id/ivOperateList"
+            android:layout_width="@dimen/icon_micro_width"
+            android:layout_height="@dimen/icon_micro_high"
+            android:layout_marginLeft="@dimen/common_margin_normal"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_right" />
 
     </LinearLayout>
 

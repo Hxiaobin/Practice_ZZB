@@ -21,7 +21,6 @@ public class ConstantConfig {
     public static final String LOGOUT = "logout";//登录
     public static final String USER = "user"; //用户信息
     public static final String TITLE = "title";
-    //==============================================
 
     public static final String NEWS_ID = "newsId";  //新闻id
     public static final String MSG_TYPE_ID = "typeId";  //消息类型id

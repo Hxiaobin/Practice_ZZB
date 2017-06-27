@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
@@ -72,11 +73,17 @@ public class BusinessQueryAdapter extends BaseExpandableListAdapter {
             groupViewHolder = new GroupViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.item_business_group, parent, false);
             groupViewHolder.tvGroupName = (TextView) convertView.findViewById(R.id.tvGroupName);
+            groupViewHolder.ivOperateList = (ImageView) convertView.findViewById(R.id.ivOperateList);
             convertView.setTag(groupViewHolder);
         } else {
             groupViewHolder = (GroupViewHolder) convertView.getTag();
         }
         groupViewHolder.tvGroupName.setText(groups.get(groupPosition).getTypeName());
+        if (isExpanded) { //判断isExpanded就可以控制是按下还是关闭，同时更换图片
+            groupViewHolder.ivOperateList.setImageResource(R.mipmap.ic_down);
+        } else {
+            groupViewHolder.ivOperateList.setImageResource(R.mipmap.ic_right);
+        }
         return convertView;
     }
 
@@ -101,7 +108,8 @@ public class BusinessQueryAdapter extends BaseExpandableListAdapter {
     }
 
     private static class GroupViewHolder {
-        private TextView tvGroupName;
+        private TextView tvGroupName;  //一级目录名称
+        private ImageView ivOperateList;  //操作图标
     }
 
     private static class ChildItemViewHolder {

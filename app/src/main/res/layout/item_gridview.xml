@@ -14,15 +14,15 @@
 
         <ImageView
             android:id="@+id/ivIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_normal_width"
+            android:layout_height="@dimen/icon_normal_high"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_zzb_zyfx"/>
 
         <TextView
             android:id="@+id/tvText"
-            style="@style/activity_text_normal_black"
-            android:layout_marginTop="@dimen/common_margin_small"
+            style="@style/activity_text_small_black"
+            android:layout_marginTop="@dimen/common_margin_micro"
             android:text="@string/text_analysis"/>
 
     </LinearLayout>

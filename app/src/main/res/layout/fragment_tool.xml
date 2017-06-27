@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/activity_common_background_gray"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_common_background_gray"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,13 +21,17 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/tv_tool"
-                    android:text="@string/tv_tool_product"/>
+                    style="@style/activity_text_medium_black"
+                    android:layout_marginBottom="@dimen/common_margin_small_to_normal"
+                    android:layout_marginLeft="@dimen/common_margin_normal"
+                    android:layout_marginRight="@dimen/common_margin_normal"
+                    android:layout_marginTop="@dimen/common_margin_normal"
+                    android:text="@string/tv_tool_product" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/line_horizontal_small_height"
-                    android:background="@color/line"/>
+                    android:background="@color/line" />
 
                 <com.sf.bocfinancialsoftware.util.MyGridView
                     android:id="@+id/gvProduct"
@@ -37,8 +41,7 @@
                     android:layout_marginLeft="@dimen/common_margin_normal"
                     android:layout_marginRight="@dimen/common_margin_normal"
                     android:numColumns="3"
-                    android:scrollbars="none">
-                </com.sf.bocfinancialsoftware.util.MyGridView>
+                    android:scrollbars="none"></com.sf.bocfinancialsoftware.util.MyGridView>
             </LinearLayout>
 
             <LinearLayout
@@ -49,13 +52,18 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/tv_tool"
-                    android:text="@string/tv_tool_toolkit"/>
+                    android:id="@+id/textView3"
+                    style="@style/activity_text_medium_black"
+                    android:layout_marginBottom="@dimen/common_margin_small_to_normal"
+                    android:layout_marginLeft="@dimen/common_margin_normal"
+                    android:layout_marginRight="@dimen/common_margin_normal"
+                    android:layout_marginTop="@dimen/common_margin_normal"
+                    android:text="@string/tv_tool_toolkit" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/line_horizontal_small_height"
-                    android:background="@color/line"/>
+                    android:background="@color/line" />
 
                 <com.sf.bocfinancialsoftware.util.MyGridView
                     android:id="@+id/gvToolkit"
@@ -65,8 +73,7 @@
                     android:layout_marginLeft="@dimen/common_margin_normal"
                     android:layout_marginRight="@dimen/common_margin_normal"
                     android:numColumns="3"
-                    android:scrollbars="none">
-                </com.sf.bocfinancialsoftware.util.MyGridView>
+                    android:scrollbars="none"></com.sf.bocfinancialsoftware.util.MyGridView>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
