@@ -15,8 +15,7 @@
         android:scrollbars="none"
         android:layout_marginTop="0dp"
         android:divider="@color/background"
-        android:dividerHeight="1dp"
-        android:background="@color/white">
+        android:dividerHeight="1dp">
 
     </ListView>
 

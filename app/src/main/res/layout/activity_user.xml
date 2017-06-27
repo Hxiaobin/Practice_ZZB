@@ -187,7 +187,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:text="@string/tv_user_about"
-                        android:textSize="@dimen/text_size_normal"/>
+                        android:textSize="@dimen/text_size_normal"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"/>
 
                     <ImageView
                         android:layout_width="wrap_content"

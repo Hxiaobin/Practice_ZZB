@@ -23,7 +23,7 @@ import com.jude.rollviewpager.RollPagerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FinanceProductListActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, View.OnFocusChangeListener {
+public class FinanceProductListActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private ImageView ivBack;
     private ImageView ivSearch;
@@ -60,7 +60,6 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
         lvFinancial = (ListView) findViewById(R.id.lvFinancial);
         rollPagerView = (RollPagerView) mHeaderView.findViewById(R.id.rollPagerView);
         etSearch.setFocusable(true);
-        //  etSearch.setFocusableInTouchMode(true);
     }
 
     private void initData() {
@@ -82,7 +81,6 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
         ivBack.setOnClickListener(this);
         ivSearch.setOnClickListener(this);
         lvFinancial.setOnItemClickListener(this);
-        etSearch.setOnFocusChangeListener(this);
     }
 
 
@@ -116,7 +114,6 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
                 //获取查询的字符串
                 int len = pLen - searchContent.length() + 1;
                 for (j = 0; j < len; j++) {
-                    //String string = tvFinancialTitle[i].substring(j, j + searchContent.length());
                     boolean contains = tvFinancialTitle[i].contains(searchContent);
                     if (contains) {
                         mList.add(new FinanceBean(tvFinancialTitle[i], ""));
@@ -126,6 +123,9 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
                 }
             }
             if (flag) {
+                mList.add(new FinanceBean("", ""));
+                lvFinancial.setBackgroundColor(getResources().getColor(R.color.activity_common_background_gray));
+                lvFinancial.setDividerHeight(0);
                 Toast.makeText(this, "没有找到相匹配的产品", Toast.LENGTH_LONG).show();
             }
             Log.e(TAG, "show: " + mList.size());
@@ -140,13 +140,4 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
         startActivity(intent);
     }
 
-    //EditText 显示光标 获取焦点
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-//        if (hasFocus) {//获得焦点
-//            etSearch.requestFocus();
-//        } else {
-//            etSearch.clearFocus();
-//        }
-    }
 }

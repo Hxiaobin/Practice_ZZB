@@ -56,7 +56,8 @@
             <View
                 android:layout_width="@dimen/line_vertical_small_width"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
                 android:background="@color/line"/>
 
             <EditText
@@ -98,7 +99,8 @@
             <View
                 android:layout_width="@dimen/line_vertical_small_width"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
                 android:background="@color/line"/>
 
             <EditText
