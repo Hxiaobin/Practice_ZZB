@@ -22,6 +22,7 @@ import java.util.Date;
 
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.BUSINESS_NAME;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.CONTRACT_ID;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.DATE_PICKER_TAG;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.END_DATE;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.START_DATE;
 
@@ -40,8 +41,7 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
     private Button btnBusinessQueryCancel; //取消
     private Button btnBusinessQueryOK; //确定
     private Intent intent;
-    private String businessName;
-    public static final String DATE_PICKER_TAG = "datePicker";
+    private String businessName; //业务名称
     private DatePickerDialog startDatePickerDialog;  //开始日期选择器对话框
     private DatePickerDialog endDatePickerDialog;  //结束日期选择器对话框
     private Calendar startCalendar; //日历
@@ -116,47 +116,23 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
                 String contractId = etBusinessQueryContractId.getText().toString();
                 Intent intent;
                 if (!TextUtils.isEmpty(startTime) && !TextUtils.isEmpty(endTime) && TextUtils.isEmpty(contractId)) { //开始时间、结束时间不为空，业务编号为空，可查询
-//                    try {
-//                        Date date1 = format2.parse(startTime);
-//                        Date date2 = format2.parse(endTime);
-//                        if (date2.getTime() < date1.getTime()) { //结束时间小于开始时间
-//                            Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.activity_business_query_end_time_wrong), Toast.LENGTH_SHORT).show();
-//                        } else if (date2.getTime() > System.currentTimeMillis()) {
-//                            Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.activity_business_query_end_time_wrong2), Toast.LENGTH_SHORT).show();
-//                        } else {//结束时间大于等于开始时间,且结束时间不能大于当前时间
                     intent = new Intent(BusinessQueryCriteriaActivity.this, BusinessQueryResultActivity.class);
                     intent.putExtra(BUSINESS_NAME, businessName);
                     intent.putExtra(START_DATE, startTime);
                     intent.putExtra(END_DATE, endTime);
                     startActivity(intent);
-//                        }
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
                 } else if (!TextUtils.isEmpty(contractId) && (TextUtils.isEmpty(startTime) || TextUtils.isEmpty(endTime))) {//输入了业务编号 和其他
                     intent = new Intent(BusinessQueryCriteriaActivity.this, BusinessQueryResultActivity.class);
                     intent.putExtra(BUSINESS_NAME, businessName);
                     intent.putExtra(CONTRACT_ID, contractId);
                     startActivity(intent);
                 } else if (!TextUtils.isEmpty(startTime) && !TextUtils.isEmpty(endTime) && !TextUtils.isEmpty(contractId)) { //开始时间、结束时间、业务编号都输入
-//                    try {
-//                        Date date1 = format2.parse(startTime);
-//                        Date date2 = format2.parse(endTime);
-//                        if (date2.getTime() < date1.getTime()) { //结束时间小于开始时间
-//                            Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.activity_business_query_end_time_wrong), Toast.LENGTH_SHORT).show();
-//                        } else if (date2.getTime() > System.currentTimeMillis()) {
-//                            Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.activity_business_query_end_time_wrong2), Toast.LENGTH_SHORT).show();
-//                        } else {//结束时间大于等于开始时间,且结束时间不能大于当前时间
                     intent = new Intent(BusinessQueryCriteriaActivity.this, BusinessQueryResultActivity.class);
                     intent.putExtra(BUSINESS_NAME, businessName);
                     intent.putExtra(START_DATE, startTime);
                     intent.putExtra(END_DATE, endTime);
                     intent.putExtra(CONTRACT_ID, contractId);
                     startActivity(intent);
-//                        }
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
                 } else {
                     Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.common_please_enter_the_useful_criteria), Toast.LENGTH_SHORT).show();
                 }

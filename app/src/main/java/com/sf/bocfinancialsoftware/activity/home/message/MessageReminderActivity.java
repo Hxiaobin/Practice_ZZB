@@ -151,6 +151,27 @@ public class MessageReminderActivity extends BaseActivity implements View.OnClic
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == IMPORT_REQUEST && resultCode == IMPORT_RESPONSE) { //进口通知未读数量
+            int unReadSum = importUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
+            showMsgUnReadSum(unReadSum, tvImportUnReadSum);
+        } else if (requestCode == EXPORT_REQUEST && resultCode == EXPORT_RESPONSE) { //出口通知未读数量
+            int unReadSum = exportUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
+            showMsgUnReadSum(unReadSum, tvExportUnReadSum);
+        } else if (requestCode == GUARANTEE_REQUEST && resultCode == GUARANTEE_RESPONSE) { //保函通知未读数量
+            int unReadSum = guaranteeUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
+            showMsgUnReadSum(unReadSum, tvGuaranteeUnReadSum);
+        } else if (requestCode == FACTORING_REQUEST && resultCode == FACTORING_RESPONSE) { //保理通知未读数量
+            int unReadSum = factoringUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
+            showMsgUnReadSum(unReadSum, tvFactoringUnReadSum);
+        } else if (requestCode == FORWARD_REQUEST && resultCode == FORWARD_RESPONSE) { //远期通知未读数量
+            int unReadSum = forwardUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
+            showMsgUnReadSum(unReadSum, tvForwardUnReadSum);
+        }
+    }
+
     /**
      * 打开Activity的时候，遍历消息列表获取总未读消息数量
      */
@@ -176,27 +197,6 @@ public class MessageReminderActivity extends BaseActivity implements View.OnClic
             tv.setVisibility(View.GONE);
         } else {
             tv.setText(String.valueOf(unReadSum));
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == IMPORT_REQUEST && resultCode == IMPORT_RESPONSE) { //进口通知未读数量
-            int unReadSum = importUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
-            showMsgUnReadSum(unReadSum, tvImportUnReadSum);
-        } else if (requestCode == EXPORT_REQUEST && resultCode == EXPORT_RESPONSE) { //出口通知未读数量
-            int unReadSum = exportUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
-            showMsgUnReadSum(unReadSum, tvExportUnReadSum);
-        } else if (requestCode == GUARANTEE_REQUEST && resultCode == GUARANTEE_RESPONSE) { //保函通知未读数量
-            int unReadSum = guaranteeUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
-            showMsgUnReadSum(unReadSum, tvGuaranteeUnReadSum);
-        } else if (requestCode == FACTORING_REQUEST && resultCode == FACTORING_RESPONSE) { //保理通知未读数量
-            int unReadSum = factoringUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
-            showMsgUnReadSum(unReadSum, tvFactoringUnReadSum);
-        } else if (requestCode == FORWARD_REQUEST && resultCode == FORWARD_RESPONSE) { //远期通知未读数量
-            int unReadSum = forwardUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
-            showMsgUnReadSum(unReadSum, tvForwardUnReadSum);
         }
     }
 

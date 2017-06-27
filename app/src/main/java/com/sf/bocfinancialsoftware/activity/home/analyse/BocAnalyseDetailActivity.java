@@ -83,6 +83,30 @@ public class BocAnalyseDetailActivity extends BaseActivity implements ViewPager.
         vpBocAnalyseDetail.setCurrentItem(Integer.MAX_VALUE / 2);//默认广告页在中间，使用户看不到边界
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        handler.sendMessage(Message.obtain(handler, ImageCarouselHandler.MSG_PAGE_CHANGED, position, 0));
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        switch (state) {
+            case ViewPager.SCROLL_STATE_DRAGGING:
+                handler.sendEmptyMessage(ImageCarouselHandler.MSG_KEEP_SILENT);
+                break;
+            case ViewPager.SCROLL_STATE_IDLE:
+                handler.sendEmptyMessageDelayed(ImageCarouselHandler.MSG_UPDATE_IMAGE, ImageCarouselHandler.MSG_DELAY);
+                break;
+            default:
+                break;
+        }
+    }
+
     /**
      * 显示页面数据
      *
@@ -110,30 +134,6 @@ public class BocAnalyseDetailActivity extends BaseActivity implements ViewPager.
             views.add(view);
         }
         vpBocAnalyseDetail.setAdapter(new ImageCarouselAdapter(views));
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        handler.sendMessage(Message.obtain(handler, ImageCarouselHandler.MSG_PAGE_CHANGED, position, 0));
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-        switch (state) {
-            case ViewPager.SCROLL_STATE_DRAGGING:
-                handler.sendEmptyMessage(ImageCarouselHandler.MSG_KEEP_SILENT);
-                break;
-            case ViewPager.SCROLL_STATE_IDLE:
-                handler.sendEmptyMessageDelayed(ImageCarouselHandler.MSG_UPDATE_IMAGE, ImageCarouselHandler.MSG_DELAY);
-                break;
-            default:
-                break;
-        }
     }
 
     /**

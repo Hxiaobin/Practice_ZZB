@@ -127,7 +127,7 @@ public class BocAnalyseListActivity extends BaseActivity implements AdapterView.
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        BocAnalyseBean bocAnalyseBean = bocAnalyseBeanList.get(position); //当前点击项
+        BocAnalyseBean bocAnalyseBean = bocAnalyseBeanList.get(position + 1); //当前点击项
         String newsId = bocAnalyseBean.getNewsId();
         Intent intent = new Intent(BocAnalyseListActivity.this, BocAnalyseDetailActivity.class);
         intent.putExtra(NEWS_ID, newsId);

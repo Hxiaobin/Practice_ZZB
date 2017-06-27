@@ -208,6 +208,60 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
     }
 
     /**
+     * 下拉刷新
+     */
+    @Override
+    public void onRefresh() {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    sleep(1000); //睡眠1秒
+                    Message msg = new Message();
+                    msg.what = 4;
+                    mHandler.sendMessage(msg);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
+            if (messageBeanList.size() >= allMessageList.size()) { // 如果加载完毕，隐藏掉正在加载图标
+                lltLoadMore.setVisibility(View.GONE);
+                Toast.makeText(FactoringMessageListActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
+            } else {
+                lltLoadMore.setVisibility(View.VISIBLE);// 如果未加载完毕，显示掉正在加载图标
+                new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+                        try {
+                            sleep(1000); //睡眠3秒
+                            Message msg = new Message();
+                            msg.what = 14;
+                            mHandler.sendMessage(msg);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
+            }
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0) {  //当滚到最后一行
+            isLastLine = true;
+        }
+    }
+
+    /**
      * 筛选并刷新列表
      */
     private void filterMessage(String id, String filter, int page, int count) {
@@ -270,60 +324,6 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         mPopWindow.setBackgroundDrawable(new ColorDrawable(0));
         // anchor:是能够触发显示PopupWindow的试图
         mPopWindow.showAsDropDown(ivTitleBarFilter);
-    }
-
-    /**
-     * 下拉刷新
-     */
-    @Override
-    public void onRefresh() {
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    sleep(1000); //睡眠1秒
-                    Message msg = new Message();
-                    msg.what = 4;
-                    mHandler.sendMessage(msg);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-    }
-
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
-            if (messageBeanList.size() >= allMessageList.size()) { // 如果加载完毕，隐藏掉正在加载图标
-                lltLoadMore.setVisibility(View.GONE);
-                Toast.makeText(FactoringMessageListActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
-            } else {
-                lltLoadMore.setVisibility(View.VISIBLE);// 如果未加载完毕，显示掉正在加载图标
-                new Thread() {
-                    @Override
-                    public void run() {
-                        super.run();
-                        try {
-                            sleep(1000); //睡眠3秒
-                            Message msg = new Message();
-                            msg.what = 14;
-                            mHandler.sendMessage(msg);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }.start();
-            }
-        }
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0) {  //当滚到最后一行
-            isLastLine = true;
-        }
     }
 
 }

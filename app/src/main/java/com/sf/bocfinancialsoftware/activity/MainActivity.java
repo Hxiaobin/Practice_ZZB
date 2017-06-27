@@ -33,6 +33,9 @@ import java.util.List;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.CONTRACT_ID;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.SCAN_CODE_REQUEST_MAIN;
 
+/**
+ *
+ */
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, View.OnClickListener {
 
     private TextView tvTitleBarTitle; //标题

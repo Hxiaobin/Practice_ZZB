@@ -54,7 +54,7 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
     private String endDate; // 结束时间
     private String contractId; //业务编号
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private int page = 0;
+    private int page = 0;  //查询页码
     private Handler mHandler = new Handler() {  //主线程中的Handler对象
         @Override
         public void handleMessage(Message msg) {
