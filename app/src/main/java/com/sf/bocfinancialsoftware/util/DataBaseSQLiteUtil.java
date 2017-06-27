@@ -165,7 +165,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 向中银分析列表插入数据
      *
-     * @param bean
+     * @param bean 中银分析Bean对象
      * @return
      */
     public static long insertToBocAnalyse(BocAnalyseBean bean) {
@@ -190,7 +190,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 插入中银分析详情图片
      *
-     * @param bean
+     * @param bean 中银分析Bean对象
      * @return
      */
     public static long insertToBocAnalyseDetail(BocAnalyseBean bean) {
@@ -229,10 +229,10 @@ public class DataBaseSQLiteUtil {
 
 
     /**
-     * 获取中银分析列表
+     * 分页查询中银分析列表
      *
-     * @param page
-     * @param count
+     * @param page  页码
+     * @param count 每页查询数据条数
      * @return
      */
     public static List<BocAnalyseBean> queryBocAnalyseList(int page, int count) {
@@ -257,7 +257,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 通过新闻id查询中银分析详情
      *
-     * @param id
+     * @param id 新闻id
      * @return
      */
     public static BocAnalyseBean getBocAnalyseById(String id) {
@@ -281,7 +281,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 通过新闻id查询中银分析详情的图片轮播
      *
-     * @param id
+     * @param id 新闻id
      * @return
      */
     public static List<String> getBocAnalyseImageListById(String id) {
@@ -301,7 +301,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 向通知提醒列表插入数据
      *
-     * @param bean
+     * @param bean 通知Bean对象
      * @return
      */
     public static long insertToMessageReminder(MessageReminderBean bean) {
@@ -320,7 +320,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 更新消息是否已读的状态
      *
-     * @param bean
+     * @param bean 通知Bean对象
      * @return
      */
     public static int updateMessageReminder(MessageReminderBean bean) {
@@ -364,6 +364,8 @@ public class DataBaseSQLiteUtil {
     /**
      * PopupWindow筛选通知，获取全部该类通知
      *
+     * @param typeId 通知类型id
+     * @param title  筛选条件
      * @return
      */
     public static List<MessageReminderBean> queryAllMessageByTypeAndTitle(String typeId, String title) {
@@ -399,6 +401,10 @@ public class DataBaseSQLiteUtil {
     /**
      * 通过消息typeId和筛选条件，分页查询通知提醒列表
      *
+     * @param typeId 通知类型Id
+     * @param title  筛选条件
+     * @param page   页码
+     * @param count  每页查询数据条数
      * @return
      */
     public static List<MessageReminderBean> queryMessageByTypeAndTitle(String typeId, String title, int page, int count) {
@@ -430,6 +436,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 向业务类别表中插入数据
      *
+     * @param bean 业务类型Bean对象
      * @return
      */
     public static long insertToBusinessType(BusinessTypeBean bean) {
@@ -444,6 +451,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 向业务表中插入数据
      *
+     * @param bean 通业务Bean对象
      * @return
      */
     public static long insertToBusiness(BusinessBean bean) {
@@ -461,6 +469,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 向合同表中插入数据
      *
+     * @param bean 合同bean对象
      * @return
      */
     public static long insertToContract(ContractBean bean) {
@@ -508,6 +517,12 @@ public class DataBaseSQLiteUtil {
     /**
      * 根据不同的条件，分页查询业务
      *
+     * @param businessName 业务名称
+     * @param startDate    开始时间
+     * @param endDate      结束时间
+     * @param contractId   业务编号
+     * @param page         页码
+     * @param count        每页查询数据条数
      * @return
      */
     public static List<ContractBean> queryContractList(String businessName, String startDate, String endDate, String contractId, int page, int count) {
@@ -545,8 +560,11 @@ public class DataBaseSQLiteUtil {
     }
 
     /**
-     * 通过业务编号分页合同列表
+     * 通过业务编号分页查询合同列表
      *
+     * @param contractId 业务编号
+     * @param page       页码
+     * @param count      每页查询数据条数
      * @return
      */
     public static List<ContractBean> queryContractByContractId(String contractId, int page, int count) {
@@ -573,7 +591,7 @@ public class DataBaseSQLiteUtil {
     /**
      * 向温馨提示列表插入数据
      *
-     * @param bean
+     * @param bean 温馨提示Bean对象
      * @return
      */
     public static long insertToPleasantMessage(PleasantMessageBean bean) {
@@ -618,8 +636,8 @@ public class DataBaseSQLiteUtil {
     /**
      * 分页查询温馨提示消息列表
      *
-     * @param page
-     * @param count
+     * @param page  页码
+     * @param count 每页查询数据条数
      * @return
      */
     public static List<PleasantMessageBean> queryPleasantMessage(int page, int count) {

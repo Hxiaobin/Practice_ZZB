@@ -66,8 +66,8 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
     protected void initData() {
         tvTitleBarTitle.setText(getString(R.string.common_business_query));
         ivTitleBarBack.setVisibility(View.VISIBLE);
-        groups = new ArrayList<BusinessTypeBean>();
-        children = new ArrayList<List<BusinessBean>>();
+        groups = new ArrayList<>();
+        children = new ArrayList<>();
         DataUtil.setExpandableListData(groups, children); //设置好友列表信息
         adapter = new BusinessQueryAdapter(BusinessQueryActivity.this, groups, children);
         elvBusiness.setAdapter(adapter);

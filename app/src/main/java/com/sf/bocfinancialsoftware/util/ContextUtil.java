@@ -16,13 +16,6 @@ public class ContextUtil extends Application {
         ContextUtil.instance = instance;
     }
 
-    /***
-     * 是否FinishGoodsActivity
-     * 1.当点击去结算的时候，这个时候来到下单界面
-     *     1.一旦点击提交订单那么在返回的时候直接FinishGoodsActivity
-     *     2.未点击的时候，那么我们就返回到GoodActivity
-     * @return
-     */
     public boolean isFinishGoodsActivity() {
         return isFinishGoodsActivity;
     }

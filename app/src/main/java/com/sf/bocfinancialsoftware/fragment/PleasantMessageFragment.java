@@ -98,7 +98,6 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
         allPleasantMessageBeanList = DataBaseSQLiteUtil.queryAllPleasantMessage();
         if (pleasantMessageBeanList.size() >= allPleasantMessageBeanList.size()) {
             lltLoadMore.setVisibility(View.GONE);// 如果加载完毕，隐藏掉正在加载图标
-//            Toast.makeText(getActivity(), getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
         }
         adapter.notifyDataSetChanged();
         SwipeRefreshUtil.setRefreshCircle(swipeRefreshLayoutPleasantMessage); //设置刷新样式
@@ -119,7 +118,7 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
             public void run() {
                 super.run();
                 try {
-                    sleep(1000); //睡眠3秒
+                    sleep(1000); //睡眠1秒
                     Message msg = new Message();
                     msg.what = 9;
                     mHandler.sendMessage(msg);
@@ -129,7 +128,6 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
             }
         }.start();
     }
-
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {

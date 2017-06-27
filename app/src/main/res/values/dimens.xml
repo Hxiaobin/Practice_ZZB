@@ -9,6 +9,7 @@
     <dimen name="common_margin_small_to_normal">12dp</dimen>
     <dimen name="common_margin_normal">16dp</dimen>
     <dimen name="common_margin_big">24dp</dimen>
+    <dimen name="common_margin_more_big">32dp</dimen>
     <dimen name="common_margin_super_big">48dp</dimen>
 
     <!-- 通用padding -->
@@ -42,24 +43,27 @@
     <!--大图标-->
     <dimen name="icon_super_width">100dp</dimen>
     <dimen name="icon_super_high">100dp</dimen>
+    <!--正常图标-->
+    <dimen name="icon_normal_width">54dp</dimen>
+    <dimen name="icon_normal_high">54dp</dimen>
+    <!--超小图标-->
+    <dimen name="icon_micro_width">20dp</dimen>
+    <dimen name="icon_micro_high">20dp</dimen>
     <!--小图标-->
     <dimen name="icon_small_width">32dp</dimen>
     <dimen name="icon_small_high">32dp</dimen>
     <!--正常图片-->
     <dimen name="image_normal_width">90dp</dimen>
     <dimen name="image_normal_high">90dp</dimen>
-
     <!--分割线高度-->
     <dimen name="line_height_low">1dp</dimen>
     <dimen name="line_height_normal">4dp</dimen>
     <dimen name="line_height_high">8dp</dimen>
+    <dimen name="line_height_higher">12dp</dimen>
     <dimen name="line_height_more_high">16dp</dimen>
-
     <!--广告轮播区域高度-->
     <dimen name="viewPager_advertisingCarousel_high">180dp</dimen>
-
     <dimen name="activity_detail_image_high">180dp</dimen>
-
     <!--按钮宽度高度-->
     <dimen name="button_width_small">64dp</dimen>
     <dimen name="button_width_normal">80dp</dimen>
@@ -67,13 +71,11 @@
     <dimen name="button_height_smaller">44dp</dimen>
     <dimen name="button_height_small">48dp</dimen>
     <dimen name="button_height_normal">56dp</dimen>
-
     <!--PopupWindow-->
     <dimen name="popupWindow_padding_left">24dp</dimen>
     <dimen name="popupWindow_padding_right">24dp</dimen>
     <dimen name="popupWindow_padding_top">16dp</dimen>
     <dimen name="popupWindow_padding_bottom">16dp</dimen>
-
     <!---->
     <!--padding公共正常间距-->
     <dimen name="common_padding_medium">16dp</dimen>

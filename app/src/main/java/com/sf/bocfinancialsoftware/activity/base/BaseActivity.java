@@ -7,9 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * Created by Administrator on 2017/3/15.
- * 邮箱：769006026@qq.com
- * project: GoodTaste
+ * Activity基类
+ * Created by sn on 2017/6/7
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -21,12 +20,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
-    protected <T extends View> T bindView(int viewId){
-        return (T) findViewById(viewId);
-    }
-
     protected abstract void initView();         //初始化View
+
     protected abstract void initData();        //初始化数据
+
     protected abstract void initListener();    //初始化事件
 
 

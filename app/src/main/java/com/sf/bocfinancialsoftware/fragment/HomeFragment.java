@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     private Button btnMessageReminder;  //通知提醒
     private Button btnBusinessQuery;  //业务查询
     private Button btnBOCAnalyse;  //中银分析
-    private SwipeRefreshLayout swipeRefreshLayoutHomeFragmentBocAnalyse;
+    private SwipeRefreshLayout swipeRefreshLayoutHomeFragmentBocAnalyse;  //下拉刷新控件
     private ListView lvHomeFragmentBocAnalyse; //中银分析新闻列表
     private LinearLayout lltEmptyViewBocAnalyseHome; //处理空数据
     private AdvertisingCarouselHandler handler = new AdvertisingCarouselHandler(new WeakReference<Fragment>(this)); //处理广告轮播的线程
@@ -214,7 +214,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         allBocAnalyseBeanList = DataBaseSQLiteUtil.queryBocAnalyseList();
         if (bocAnalyseBeanList.size() >= allBocAnalyseBeanList.size()) {
             lltLoadMore.setVisibility(View.GONE);// 如果加载完毕，隐藏掉正在加载图标
-//            Toast.makeText(getActivity(), getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
         }
         bocAnalyseAdapter.notifyDataSetChanged();
     }
@@ -286,6 +285,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         protected AdvertisingCarouselHandler(WeakReference<Fragment> wk) {
             weakReference = wk;
         }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

@@ -54,15 +54,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+            <ListView
+                android:id="@+id/lvBocAnalyse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/activity_common_background_gray"
+                android:dividerHeight="@dimen/common_margin_normal"
+                android:scrollbars="none" />
 
-        <ListView
-            android:id="@+id/lvBocAnalyse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@color/activity_common_background_gray"
-            android:dividerHeight="@dimen/common_margin_normal"
-            android:scrollbars="none"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </FrameLayout>
 </LinearLayout>
