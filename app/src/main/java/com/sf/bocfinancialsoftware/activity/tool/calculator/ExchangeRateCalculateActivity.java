@@ -33,8 +33,10 @@ public class ExchangeRateCalculateActivity extends AppCompatActivity implements 
     private TextView tvExchangeRatePurchasePrice;
     private List<String> mList;
     private ArrayAdapter<String> mAdapter;
-    boolean isLeftCheck = true; //是否点击结汇按钮
-    boolean isRightCheck = true; //是否点击售汇按钮
+    private String[] strCurrency = new String[]{"美元", "欧元", "日元"};
+    private int positionCurrency = 0; //币种的位置
+    private String[] strRate = new String[]{"结汇", "售汇"};
+    private int mPositionBtn = 0; //结汇 售汇的位置
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,19 +92,14 @@ public class ExchangeRateCalculateActivity extends AppCompatActivity implements 
 
             @Override
             public void afterTextChanged(Editable s) {
+                //计算操作
                 String string = s.toString();
                 if (TextUtils.isEmpty(string)) {
+                    tvExchangeRateExchange.setText("");
                     return;
                 }
-                int rate = 0;
-                if (isLeftCheck) {
-                    rate = 1000;
-                } else {
-                    rate = 2000;
-                }
-                int money = Integer.parseInt(string);
-                int resultMoney = rate * money;
-                tvExchangeRateExchange.setText(resultMoney + "");
+                String calculate = calculate(strCurrency[positionCurrency], strRate[mPositionBtn], string);
+                tvExchangeRateExchange.setText(calculate);
             }
         });
     }
@@ -114,40 +111,28 @@ public class ExchangeRateCalculateActivity extends AppCompatActivity implements 
                 finish();
                 break;
             case R.id.btnExchangeRateSettlement:
-                if (isLeftCheck) {
-                    isRightCheck = true;
-                    isLeftCheck = false;
-                    btnExchangeRateSettlement.setBackgroundResource(R.mipmap.btn_left_pre);
-                    btnExchangeRateSurrendering.setBackgroundResource(R.mipmap.btn_right);
-                    btnExchangeRateSettlement.setTextColor(getResources().getColor(R.color.white));
-                    btnExchangeRateSurrendering.setTextColor(getResources().getColor(R.color.tv_subtitle));
-                    tvSpotPrice.setText("1000.00");
-                    String string = etExchangeRateCurrency.getText().toString();
-                    if (TextUtils.isEmpty(string)) {
-                        return;
-                    }
-                    int money = Integer.parseInt(string);
-                    int resultMoney = 1000 * money;
-                    tvExchangeRateExchange.setText(resultMoney + "");
-                }
+                mPositionBtn = 0;
+                btnExchangeRateSettlement.setBackgroundResource(R.mipmap.btn_left_pre);
+                btnExchangeRateSurrendering.setBackgroundResource(R.mipmap.btn_right);
+                btnExchangeRateSettlement.setTextColor(getResources().getColor(R.color.white));
+                btnExchangeRateSurrendering.setTextColor(getResources().getColor(R.color.tv_subtitle));
+                //计算操作
+                getRate(strRate[mPositionBtn]);
+                String calculate = calculate(strCurrency[positionCurrency], strRate[mPositionBtn],
+                        etExchangeRateCurrency.getText().toString());
+                tvExchangeRateExchange.setText(calculate);
                 break;
             case R.id.btnExchangeRateSurrendering:
-                if (isRightCheck) {
-                    isLeftCheck = true;
-                    isRightCheck = false;
-                    btnExchangeRateSurrendering.setBackgroundResource(R.mipmap.btn_right_pre);
-                    btnExchangeRateSettlement.setBackgroundResource(R.mipmap.btn_left);
-                    btnExchangeRateSurrendering.setTextColor(getResources().getColor(R.color.white));
-                    btnExchangeRateSettlement.setTextColor(getResources().getColor(R.color.tv_subtitle));
-                    tvSpotPrice.setText("2000.00");
-                    String string = etExchangeRateCurrency.getText().toString();
-                    if (TextUtils.isEmpty(string)) {
-                        return;
-                    }
-                    int money = Integer.parseInt(string);
-                    int resultMoney = 2000 * money;
-                    tvExchangeRateExchange.setText(resultMoney + "");
-                }
+                mPositionBtn = 1;
+                btnExchangeRateSurrendering.setBackgroundResource(R.mipmap.btn_right_pre);
+                btnExchangeRateSettlement.setBackgroundResource(R.mipmap.btn_left);
+                btnExchangeRateSurrendering.setTextColor(getResources().getColor(R.color.white));
+                btnExchangeRateSettlement.setTextColor(getResources().getColor(R.color.tv_subtitle));
+                //计算操作
+                getRate(strRate[mPositionBtn]);
+                String calculate2 = calculate(strCurrency[positionCurrency], strRate[mPositionBtn],
+                        etExchangeRateCurrency.getText().toString());
+                tvExchangeRateExchange.setText(calculate2);
                 break;
         }
     }
@@ -157,44 +142,56 @@ public class ExchangeRateCalculateActivity extends AppCompatActivity implements 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         tvExchangeRateAmount.setText(mAdapter.getItem(position));
         tvExchangeRatePurchasePrice.setText(mAdapter.getItem(position));
+        //计算操作
         String string = etExchangeRateCurrency.getText().toString();
         if (TextUtils.isEmpty(string)) {
             return;
         }
-        if (isLeftCheck) {
-            int money = Integer.parseInt(string);
-            int resultMoney = 1000 * money;
-            tvExchangeRateExchange.setText(resultMoney + "");
-            if (position == 0) {
-                int resultMoneyDollar = 1000 *3* money;
-                tvExchangeRateExchange.setText(resultMoneyDollar + "");
-            } else if (position == 1) {
-                int resultMoneyEuro = 1000 *4* money;
-                tvExchangeRateExchange.setText(resultMoneyEuro + "");
-            } else {
-                int resultMoneyJapan = 1000 *5* money;
-                tvExchangeRateExchange.setText(resultMoneyJapan + "");
-            }
-        } else {
-            int money = Integer.parseInt(string);
-            int resultMoney = 2000 * money;
-            tvExchangeRateExchange.setText(resultMoney + "");
-            if (position == 0) {
-                int resultMoneyDollar = 2000 *3* money;
-                tvExchangeRateExchange.setText(resultMoneyDollar + "");
-            } else if (position == 1) {
-                int resultMoneyEuro = 2000 *4* money;
-                tvExchangeRateExchange.setText(resultMoneyEuro + "");
-            } else {
-                int resultMoneyJapan = 2000 *5* money;
-                tvExchangeRateExchange.setText(resultMoneyJapan + "");
-            }
-        }
+        this.positionCurrency = position;
+        String calculate = calculate(strCurrency[positionCurrency], strRate[mPositionBtn], string);
+        tvExchangeRateExchange.setText(calculate);
     }
 
     //Spinner未选中操作
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    //计算操作
+    public String calculate(String strCurrency, String strRate, String etStr) {
+        if (TextUtils.isEmpty(strCurrency) || TextUtils.isEmpty(strRate) || TextUtils.isEmpty(etStr)) {
+            return "" ;
+        }
+        long money = 0;
+        int rate = getRate(strRate);
+        long a = Long.parseLong(etStr);
+        switch (strCurrency) {
+            case "美元":
+                money = 3 * rate * a;
+                break;
+            case "欧元":
+                money = 4 * rate * a;
+                break;
+            case "日元":
+                money = 5 * rate * a;
+                break;
+        }
+        return money + "";
+    }
+
+    public int getRate(String strRate) {
+        int rate = 1000;
+        switch (strRate) {
+            case "结汇":
+                rate = 1000;
+                tvSpotPrice.setText("1000.00");
+                break;
+            case "售汇":
+                rate = 2000;
+                tvSpotPrice.setText("2000.00");
+                break;
+        }
+        return rate;
     }
 }
