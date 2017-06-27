@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.sf.bocfinancialsoftware.com.sf.bocfinancialsoftware.activity.tool.calculator.ForwardQuotationCalculateActivity">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <include layout="@layout/layout_top_bar"/>
 
@@ -23,6 +22,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin_small"
+                android:layout_marginRight="@dimen/common_margin_normal"
+                android:layout_marginTop="@dimen/common_margin_normal"
                 android:orientation="horizontal">
 
                 <TextView
@@ -32,9 +33,8 @@
                 <Spinner
                     android:id="@+id/spinnerForwardQuotation"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="38dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/common_margin_normal"
                     android:layout_weight="1"
                     android:background="@drawable/shape_spinner_down">
                 </Spinner>
@@ -45,6 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin_small"
+                android:layout_marginRight="@dimen/common_margin_normal"
+                android:layout_marginTop="@dimen/common_margin_normal"
                 android:orientation="horizontal">
 
                 <TextView
@@ -53,9 +55,8 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="38dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/common_margin_normal"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
@@ -63,19 +64,19 @@
                         android:id="@+id/btnForwardQuotationSettlement"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:textColor="@color/white"
+                        android:layout_weight="1"
                         android:background="@mipmap/btn_left_pre"
-                        android:text="结汇"/>
+                        android:text="结汇"
+                        android:textColor="@color/white"/>
 
                     <Button
                         android:id="@+id/btnForwardQuotationSurrendering"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
+                        android:layout_weight="1"
                         android:background="@mipmap/btn_right"
-                        android:textColor="@color/tv_subtitle"
-                        android:text="售汇"/>
+                        android:text="售汇"
+                        android:textColor="@color/tv_subtitle"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -84,6 +85,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin_small"
+                android:layout_marginRight="@dimen/common_margin_normal"
+                android:layout_marginTop="@dimen/common_margin_normal"
                 android:orientation="horizontal">
 
                 <TextView
@@ -93,15 +96,14 @@
                 <TextView
                     android:id="@+id/tvForwardQuotationData"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:gravity="center|left"
-                    android:textColor="@color/tv_subtitle"
-                    android:textSize="@dimen/text_size_normal"
-                    android:padding="@dimen/common_padding_normal"
-                    android:layout_margin="@dimen/common_margin_normal"
+                    android:layout_height="38dp"
                     android:layout_weight="1"
                     android:background="@drawable/shape_search"
-                    android:drawableRight="@mipmap/rl_07"/>
+                    android:drawableRight="@mipmap/rl_07"
+                    android:gravity="center|left"
+                    android:paddingRight="@dimen/common_padding_small"
+                    android:textColor="@color/tv_subtitle"
+                    android:textSize="@dimen/text_size_normal"/>
 
             </LinearLayout>
 
@@ -109,6 +111,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin_small"
+                android:layout_marginRight="@dimen/common_margin_normal"
+                android:layout_marginTop="@dimen/common_margin_normal"
                 android:orientation="horizontal">
 
                 <TextView
@@ -117,8 +121,7 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="@dimen/common_margin_normal"
+                    android:layout_height="38dp"
                     android:layout_weight="1"
                     android:gravity="right"
                     android:orientation="horizontal">
@@ -129,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:text="1,000,000.00"
+                        android:text="1000.00"
                         android:textColor="@color/tv_subtitle"
                         android:textSize="@dimen/text_size_normal"/>
 
@@ -149,6 +152,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin_small"
+                android:layout_marginRight="@dimen/common_margin_normal"
+                android:layout_marginTop="@dimen/common_margin_normal"
                 android:orientation="horizontal">
 
                 <TextView
@@ -158,14 +163,13 @@
                 <EditText
                     android:id="@+id/etForwardQuotationRate"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="38dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_margin="@dimen/common_margin_normal"
                     android:layout_weight="1"
                     android:background="@drawable/shape_search"
                     android:gravity="right"
                     android:inputType="number"
-                    android:padding="@dimen/common_padding_normal"
+                    android:maxLength="15"
                     android:textSize="@dimen/text_size_normal"/>
 
             </LinearLayout>
@@ -174,6 +178,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin_small"
+                android:layout_marginRight="@dimen/common_margin_normal"
+                android:layout_marginTop="@dimen/common_margin_normal"
                 android:orientation="horizontal">
 
                 <TextView
@@ -182,17 +188,16 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="@dimen/common_margin_normal"
+                    android:layout_height="38dp"
                     android:layout_weight="1"
-                    android:gravity="right"
+                    android:gravity="right|center_vertical"
                     android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/etForwardQuotationCurrency"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
+                        android:layout_weight="1"
                         android:background="@drawable/shape_search"
                         android:gravity="right"
                         android:inputType="number"
@@ -215,6 +220,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin_small"
+                android:layout_marginRight="@dimen/common_margin_normal"
+                android:layout_marginTop="@dimen/common_margin_normal"
                 android:orientation="horizontal">
 
                 <TextView
@@ -225,9 +232,8 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_margin="@dimen/common_margin_normal"
                     android:layout_weight="1"
-                    android:gravity="right"
+                    android:gravity="right|center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
@@ -236,7 +242,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:text="900,000.00"
                         android:textColor="#da9928"
                         android:textSize="@dimen/text_size_normal"/>
 
@@ -256,7 +261,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin_normal"
+                android:layout_marginBottom="@dimen/common_margin_normal"
+                android:layout_marginLeft="@dimen/common_margin_medium"
+                android:layout_marginRight="@dimen/common_margin_medium"
+                android:layout_marginTop="@dimen/common_margin_big"
                 android:background="@mipmap/line_03"/>
 
             <include layout="@layout/layout_bottom_content"/>

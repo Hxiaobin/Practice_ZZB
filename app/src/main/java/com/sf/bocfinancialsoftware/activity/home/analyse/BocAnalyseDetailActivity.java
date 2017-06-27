@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.activity.analyse;
+package com.sf.bocfinancialsoftware.activity.home.analyse;
 
 import android.app.Activity;
 import android.content.Intent;

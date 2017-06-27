@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.activity.message;
+package com.sf.bocfinancialsoftware.activity.home.message;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -26,33 +26,34 @@ import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
 
 import java.util.List;
 
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.FACTORING_RESPONSE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.EXPORT_RESPONSE;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_READ;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_READ_SUM;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FACTORING_CONDITION1;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FACTORING_CONDITION2;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FACTORING_CONDITION3;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FACTORING_CONDITION4;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_CONDITION1;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_CONDITION2;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_CONDITION3;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_CONDITION4;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_CONDITION5;
 
 /**
- * 保理通知列表
+ * 出口通知列表
  * Created by sn on 2017/6/12.
  */
 
-public class FactoringMessageListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
+public class ExportMessageListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
 
     private ImageView ivTitleBarBack;  //返回
     private ImageView ivTitleBarFilter;  //筛选
     private TextView tvTitleBarTitle;  //标题
     private SwipeRefreshLayout swipeRefreshLayoutMessage; //下拉刷新上拉加载
-    private ListView lvMessage;  //保理消息列表
     private View headView; //列表头部
     private View footView; //列表尾部
+    private ListView lvMessage;  //出口消息列表
     private LinearLayout lltLoadMore; //列表尾部加载更多
-    private LinearLayout lltEmptyViewMessage; //处理空数据
+    private LinearLayout lltEmptyViewMessage;
     private MessageAdapter messageAdapter; //列表适配器
-    private List<MessageReminderBean> messageBeanList; //消息实体
+    private List<MessageReminderBean> messageBeanList; //已加载的数据
     private List<MessageReminderBean> allMessageList; //所有的数据列表
     private Intent mIntent;
     private String typeId;  //消息类型id
@@ -69,6 +70,7 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
     private TextView tvFilterCondition2;
     private TextView tvFilterCondition3;
     private TextView tvFilterCondition4;
+    private TextView tvFilterCondition5;
     private int msgReadSum; //已读消息数量
     private boolean isLastLine = false;  //列表是否滚动到最后一行
     private int page = 0;
@@ -77,20 +79,20 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what == 4) {
+            if (msg.what == 2) {
                 //下拉刷新，三秒睡眠之后   重新加载
                 page = 0;
-                List<MessageReminderBean> list = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4);
+                List<MessageReminderBean> list = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter,page,4);
                 if (list == null || list.size() <= 0) { //如果刷新失败，还是显示原来的数据
-                    Toast.makeText(FactoringMessageListActivity.this, getString(R.string.common_refresh_failed), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ExportMessageListActivity.this, getString(R.string.common_refresh_failed), Toast.LENGTH_SHORT).show();
                 } else { //刷新成功，清空原来的数据，重新插入数据到列表
                     messageBeanList.clear();
                     messageBeanList.addAll(list);
                     messageAdapter.notifyDataSetChanged();
-                    Toast.makeText(FactoringMessageListActivity.this, getString(R.string.common_refresh_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ExportMessageListActivity.this, getString(R.string.common_refresh_success), Toast.LENGTH_SHORT).show();
                 }
                 swipeRefreshLayoutMessage.setRefreshing(false);//加载完毕，设置不刷新
-            } else if (msg.what == 14) { //上拉加载更多
+            } else if (msg.what == 12) { //上拉加载更多
                 page++; //页数自增
                 List<MessageReminderBean> loadMoreList = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4);
                 messageBeanList.addAll(loadMoreList);
@@ -121,16 +123,16 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         ivTitleBarFilter = (ImageView) findViewById(R.id.ivTitleBarFilter);
         tvTitleBarTitle = (TextView) findViewById(R.id.tvTitleBarTitle);
         swipeRefreshLayoutMessage = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayoutMessage);
-        lvMessage = (ListView) findViewById(R.id.lvMessage);
         headView = LayoutInflater.from(this).inflate(R.layout.layout_list_head, null);
         footView = LayoutInflater.from(this).inflate(R.layout.layout_list_foot, null);
+        lvMessage = (ListView) findViewById(R.id.lvMessage);
         lltLoadMore = (LinearLayout) footView.findViewById(R.id.lltLoadMore);
         lltEmptyViewMessage = (LinearLayout) findViewById(R.id.lltEmptyViewMessage);
     }
 
     @Override
     protected void initData() {
-        tvTitleBarTitle.setText(getString(R.string.common_message_reminder_factoring));
+        tvTitleBarTitle.setText(getString(R.string.common_message_reminder_export));
         ivTitleBarBack.setVisibility(View.VISIBLE);
         ivTitleBarFilter.setVisibility(View.VISIBLE);
         mIntent = getIntent();
@@ -138,7 +140,7 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         page = 0;
         filter = "";
         messageBeanList = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4); //已经加载的数据个数，现在没有筛选条件
-        messageAdapter = new MessageAdapter(FactoringMessageListActivity.this, messageBeanList);
+        messageAdapter = new MessageAdapter(ExportMessageListActivity.this, messageBeanList);
         lvMessage.addHeaderView(headView);
         lvMessage.addFooterView(footView);
         lvMessage.setAdapter(messageAdapter);
@@ -171,7 +173,7 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
             case R.id.ivTitleBarBack:  //返回
                 Intent intent = new Intent();
                 intent.putExtra(MSG_READ_SUM, msgReadSum);
-                setResult(FACTORING_RESPONSE, intent);
+                setResult(EXPORT_RESPONSE, intent);
                 finish();
                 break;
             case R.id.ivTitleBarFilter: //筛选
@@ -182,23 +184,28 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition1:  //筛选保理商签发收账
-                filter = QUERY_FACTORING_CONDITION1;
+            case R.id.lltFilterCondition1:  //筛选进口信用证开立通知
+                filter = QUERY_EXPORT_CONDITION1;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition2: //筛选保理业务确认函
-                filter = QUERY_FACTORING_CONDITION2;
+            case R.id.lltFilterCondition2: //筛选进口信用证到单通知
+                filter = QUERY_EXPORT_CONDITION2;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition3: //筛选商业保理行业管理
-                filter = QUERY_FACTORING_CONDITION3;
+            case R.id.lltFilterCondition3: //筛选进口信用证即期付款提示
+                filter = QUERY_EXPORT_CONDITION3;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition4: //筛选国际保理业务
-                filter = QUERY_FACTORING_CONDITION4;
+            case R.id.lltFilterCondition4: //进口信用证承兑到期付款提示
+                filter = QUERY_EXPORT_CONDITION4;
+                page = 0;
+                filterMessage(typeId, filter, page, 4);
+                break;
+            case R.id.lltFilterCondition5: //进口贸易融资业务到期提示
+                filter = QUERY_EXPORT_CONDITION5;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
@@ -223,17 +230,15 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         mPopWindow.dismiss();
     }
 
-
     /**
      * 创建PopupWindow
      */
     private void createPopupWindow() {
-        View contentView = LayoutInflater.from(FactoringMessageListActivity.this).inflate(R.layout.layout_message_popupwindow, null);
+        View contentView = LayoutInflater.from(ExportMessageListActivity.this).inflate(R.layout.layout_message_popupwindow, null);
         mPopWindow = new PopupWindow(contentView);
         // 设置宽和高
         mPopWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         mPopWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        // 3.获取视图里面的控件进行操作
         // 3.获取视图里面的控件进行操作
         lltFilterCondition0 = (LinearLayout) contentView.findViewById(R.id.lltFilterCondition0);
         lltFilterCondition1 = (LinearLayout) contentView.findViewById(R.id.lltFilterCondition1);
@@ -247,13 +252,14 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         tvFilterCondition2 = (TextView) contentView.findViewById(R.id.tvFilterCondition2);
         tvFilterCondition3 = (TextView) contentView.findViewById(R.id.tvFilterCondition3);
         tvFilterCondition4 = (TextView) contentView.findViewById(R.id.tvFilterCondition4);
+        tvFilterCondition5 = (TextView) contentView.findViewById(R.id.tvFilterCondition5);
         //设置筛选条件
         tvFilterCondition0.setText(getString(R.string.activity_message_filter_condition0));
-        tvFilterCondition1.setText(getString(R.string.activity_message_factoring_filter_condition1));
-        tvFilterCondition2.setText(getString(R.string.activity_message_factoring_filter_condition2));
-        tvFilterCondition3.setText(getString(R.string.activity_message_factoring_filter_condition3));
-        tvFilterCondition4.setText(getString(R.string.activity_message_factoring_filter_condition4));
-        lltFilterCondition5.setVisibility(View.GONE);
+        tvFilterCondition1.setText(getString(R.string.activity_message_export_filter_condition1));
+        tvFilterCondition2.setText(getString(R.string.activity_message_export_filter_condition2));
+        tvFilterCondition3.setText(getString(R.string.activity_message_export_filter_condition3));
+        tvFilterCondition4.setText(getString(R.string.activity_message_export_filter_condition4));
+        tvFilterCondition5.setText(getString(R.string.activity_message_export_filter_condition5));
         lltFilterCondition6.setVisibility(View.GONE);
         //监听事件
         lltFilterCondition0.setOnClickListener(this);
@@ -261,6 +267,7 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         lltFilterCondition2.setOnClickListener(this);
         lltFilterCondition3.setOnClickListener(this);
         lltFilterCondition4.setOnClickListener(this);
+        lltFilterCondition5.setOnClickListener(this);
         // 设置是否可以触摸PopupWindow外部的区域
         mPopWindow.setOutsideTouchable(true);
         mPopWindow.setTouchable(true);
@@ -282,9 +289,9 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
             public void run() {
                 super.run();
                 try {
-                    sleep(1000); //睡眠1秒
+                    sleep(1000); //睡眠3秒
                     Message msg = new Message();
-                    msg.what = 4;
+                    msg.what = 2;
                     mHandler.sendMessage(msg);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -298,7 +305,7 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
             if (messageBeanList.size() >= allMessageList.size()) { // 如果加载完毕，隐藏掉正在加载图标
                 lltLoadMore.setVisibility(View.GONE);
-                Toast.makeText(FactoringMessageListActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ExportMessageListActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
             } else {
                 lltLoadMore.setVisibility(View.VISIBLE);// 如果未加载完毕，显示掉正在加载图标
                 new Thread() {
@@ -306,9 +313,9 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
                     public void run() {
                         super.run();
                         try {
-                            sleep(1000); //睡眠3秒
+                            sleep(1000); //睡眠2秒
                             Message msg = new Message();
-                            msg.what = 14;
+                            msg.what = 12;
                             mHandler.sendMessage(msg);
                         } catch (InterruptedException e) {
                             e.printStackTrace();

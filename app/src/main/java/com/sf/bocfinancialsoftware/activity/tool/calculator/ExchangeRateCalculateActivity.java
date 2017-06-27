@@ -90,7 +90,6 @@ public class ExchangeRateCalculateActivity extends AppCompatActivity implements 
 
             @Override
             public void afterTextChanged(Editable s) {
-
                 String string = s.toString();
                 if (TextUtils.isEmpty(string)) {
                     return;
@@ -166,18 +165,30 @@ public class ExchangeRateCalculateActivity extends AppCompatActivity implements 
             int money = Integer.parseInt(string);
             int resultMoney = 1000 * money;
             tvExchangeRateExchange.setText(resultMoney + "");
-
             if (position == 0) {
-
+                int resultMoneyDollar = 1000 *3* money;
+                tvExchangeRateExchange.setText(resultMoneyDollar + "");
             } else if (position == 1) {
-
+                int resultMoneyEuro = 1000 *4* money;
+                tvExchangeRateExchange.setText(resultMoneyEuro + "");
             } else {
-
+                int resultMoneyJapan = 1000 *5* money;
+                tvExchangeRateExchange.setText(resultMoneyJapan + "");
             }
         } else {
             int money = Integer.parseInt(string);
             int resultMoney = 2000 * money;
             tvExchangeRateExchange.setText(resultMoney + "");
+            if (position == 0) {
+                int resultMoneyDollar = 2000 *3* money;
+                tvExchangeRateExchange.setText(resultMoneyDollar + "");
+            } else if (position == 1) {
+                int resultMoneyEuro = 2000 *4* money;
+                tvExchangeRateExchange.setText(resultMoneyEuro + "");
+            } else {
+                int resultMoneyJapan = 2000 *5* money;
+                tvExchangeRateExchange.setText(resultMoneyJapan + "");
+            }
         }
     }
 

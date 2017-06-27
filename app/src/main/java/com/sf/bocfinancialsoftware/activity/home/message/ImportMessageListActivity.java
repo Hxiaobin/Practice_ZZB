@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.activity.message;
+package com.sf.bocfinancialsoftware.activity.home.message;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -22,17 +22,14 @@ import com.sf.bocfinancialsoftware.activity.base.BaseActivity;
 import com.sf.bocfinancialsoftware.adapter.MessageAdapter;
 import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
 import com.sf.bocfinancialsoftware.util.DataBaseSQLiteUtil;
+import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
 
 import java.util.List;
 
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.GUARANTEE_RESPONSE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.IMPORT_RESPONSE;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_READ;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_READ_SUM;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_GUARANTEE_CONDITION1;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_GUARANTEE_CONDITION2;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_GUARANTEE_CONDITION3;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_GUARANTEE_CONDITION4;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_IMPORT_FINANCIAL_BUSINESS;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_IMPORT_INWARD_COLLECTION;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_IMPORT_OPEN;
@@ -41,11 +38,11 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_IMPORT_P
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_IMPORT_SIGHT_PAYMENT;
 
 /**
- * 保函通知列表
+ * 进口通知列表
  * Created by sn on 2017/6/12.
  */
 
-public class GuaranteeMessageListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
+public class ImportMessageListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
 
     private ImageView ivTitleBarBack;  //返回
     private ImageView ivTitleBarFilter;  //筛选
@@ -57,7 +54,7 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
     private LinearLayout lltLoadMore; //列表尾部加载更多
     private LinearLayout lltEmptyViewMessage; //处理空数据
     private MessageAdapter messageAdapter; //列表适配器
-    private List<MessageReminderBean> messageBeanList; //消息实体
+    private List<MessageReminderBean> messageBeanList; //已加载的数据列表
     private List<MessageReminderBean> allMessageList; //所有的数据列表
     private Intent mIntent;
     private String typeId;  //消息类型id
@@ -74,6 +71,8 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
     private TextView tvFilterCondition2;
     private TextView tvFilterCondition3;
     private TextView tvFilterCondition4;
+    private TextView tvFilterCondition5;
+    private TextView tvFilterCondition6;
     private int msgReadSum; //已读消息数量
     private boolean isLastLine = false;  //列表是否滚动到最后一行
     private int page = 0;
@@ -82,20 +81,20 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what == 3) {
+            if (msg.what == 1) {  //下拉刷新
                 //下拉刷新，三秒睡眠之后   重新加载
                 page = 0;
                 List<MessageReminderBean> list = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4);
                 if (list == null || list.size() <= 0) {
-                    Toast.makeText(GuaranteeMessageListActivity.this, getString(R.string.common_refresh_failed), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ImportMessageListActivity.this, getString(R.string.common_refresh_failed), Toast.LENGTH_SHORT).show();
                 } else {
                     messageBeanList.clear();
                     messageBeanList.addAll(list);
                     messageAdapter.notifyDataSetChanged();
-                    Toast.makeText(GuaranteeMessageListActivity.this, getString(R.string.common_refresh_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ImportMessageListActivity.this, getString(R.string.common_refresh_success), Toast.LENGTH_SHORT).show();
                 }
                 swipeRefreshLayoutMessage.setRefreshing(false);//加载完毕，设置不刷新
-            } else if (msg.what == 13) { //上拉加载更多
+            } else if (msg.what == 11) { //上拉加载更多
                 page++; //页数自增
                 List<MessageReminderBean> loadMoreList = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4);
                 messageBeanList.addAll(loadMoreList);
@@ -123,8 +122,8 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
     @Override
     protected void initView() {
         ivTitleBarBack = (ImageView) findViewById(R.id.ivTitleBarBack);
-        tvTitleBarTitle = (TextView) findViewById(R.id.tvTitleBarTitle);
         ivTitleBarFilter = (ImageView) findViewById(R.id.ivTitleBarFilter);
+        tvTitleBarTitle = (TextView) findViewById(R.id.tvTitleBarTitle);
         swipeRefreshLayoutMessage = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayoutMessage);
         lvMessage = (ListView) findViewById(R.id.lvMessage);
         headView = LayoutInflater.from(this).inflate(R.layout.layout_list_head, null);
@@ -135,14 +134,14 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
 
     @Override
     protected void initData() {
-        tvTitleBarTitle.setText(getString(R.string.common_message_reminder_guarantee));
+        tvTitleBarTitle.setText(getString(R.string.common_message_reminder_import));
         ivTitleBarBack.setVisibility(View.VISIBLE);
         ivTitleBarFilter.setVisibility(View.VISIBLE);
         mIntent = getIntent();
         typeId = mIntent.getStringExtra(MSG_TYPE_ID);
         filter = "";
         messageBeanList = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4); //已经加载的数据个数，现在没有筛选条件
-        messageAdapter = new MessageAdapter(GuaranteeMessageListActivity.this, messageBeanList);
+        messageAdapter = new MessageAdapter(ImportMessageListActivity.this, messageBeanList);
         lvMessage.addHeaderView(headView);
         lvMessage.addFooterView(footView);
         lvMessage.setAdapter(messageAdapter);
@@ -159,10 +158,7 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
         }
         messageAdapter.notifyDataSetChanged();
         //刷新圆圈颜色
-        swipeRefreshLayoutMessage.setColorSchemeResources(R.color.swipe_color_1,
-                R.color.swipe_color_2,
-                R.color.swipe_color_3,
-                R.color.swipe_color_4);
+        SwipeRefreshUtil.setRefreshCircle(swipeRefreshLayoutMessage);
     }
 
     @Override
@@ -179,7 +175,7 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
             case R.id.ivTitleBarBack:  //返回
                 Intent intent = new Intent();
                 intent.putExtra(MSG_READ_SUM, msgReadSum);
-                setResult(GUARANTEE_RESPONSE, intent);
+                setResult(IMPORT_RESPONSE, intent);
                 finish();
                 break;
             case R.id.ivTitleBarFilter: //筛选
@@ -190,24 +186,34 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition1:  //筛选保函通知
-                filter = QUERY_GUARANTEE_CONDITION1;
+            case R.id.lltFilterCondition1:  //筛选进口信用证开立通知
+                filter = QUERY_IMPORT_OPEN;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition2: //筛选保函收费
-                filter = QUERY_GUARANTEE_CONDITION2;
+            case R.id.lltFilterCondition2: //筛选进口信用证到单通知
+                filter = QUERY_IMPORT_ORDER;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition3: //筛选保函上传
-                filter = QUERY_GUARANTEE_CONDITION3;
+            case R.id.lltFilterCondition3: //筛选进口信用证即期付款提示
+                filter = QUERY_IMPORT_SIGHT_PAYMENT;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition4: //融资性担保定义
-                filter = QUERY_GUARANTEE_CONDITION4;
+            case R.id.lltFilterCondition4: //进口信用证承兑到期付款提示
+                filter = QUERY_IMPORT_PAY_AT_MATURITY;
                 page = 0;
+                filterMessage(typeId, filter, page, 4);
+                break;
+            case R.id.lltFilterCondition5: //进口贸易融资业务到期提示
+                filter = QUERY_IMPORT_FINANCIAL_BUSINESS;
+                page = 0;
+                filterMessage(typeId, filter, page, 4);
+                break;
+            case R.id.lltFilterCondition6: //进口代收到单通知
+                filter = QUERY_IMPORT_INWARD_COLLECTION;
+                  page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
             default:
@@ -235,7 +241,7 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
      * 创建PopupWindow
      */
     private void createPopupWindow() {
-        View contentView = LayoutInflater.from(GuaranteeMessageListActivity.this).inflate(R.layout.layout_message_popupwindow, null);
+        View contentView = LayoutInflater.from(ImportMessageListActivity.this).inflate(R.layout.layout_message_popupwindow, null);
         mPopWindow = new PopupWindow(contentView);
         // 设置宽和高
         mPopWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -253,20 +259,24 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
         tvFilterCondition2 = (TextView) contentView.findViewById(R.id.tvFilterCondition2);
         tvFilterCondition3 = (TextView) contentView.findViewById(R.id.tvFilterCondition3);
         tvFilterCondition4 = (TextView) contentView.findViewById(R.id.tvFilterCondition4);
+        tvFilterCondition5 = (TextView) contentView.findViewById(R.id.tvFilterCondition5);
+        tvFilterCondition6 = (TextView) contentView.findViewById(R.id.tvFilterCondition6);
         //设置筛选条件
         tvFilterCondition0.setText(getString(R.string.activity_message_filter_condition0));
-        tvFilterCondition1.setText(getString(R.string.activity_message_guarantee_filter_condition1));
-        tvFilterCondition2.setText(getString(R.string.activity_message_guarantee_filter_condition2));
-        tvFilterCondition3.setText(getString(R.string.activity_message_guarantee_filter_condition3));
-        tvFilterCondition4.setText(getString(R.string.activity_message_guarantee_filter_condition4));
-        lltFilterCondition5.setVisibility(View.GONE);
-        lltFilterCondition6.setVisibility(View.GONE);
+        tvFilterCondition1.setText(getString(R.string.activity_message_import_filter_condition1));
+        tvFilterCondition2.setText(getString(R.string.activity_message_import_filter_condition2));
+        tvFilterCondition3.setText(getString(R.string.activity_message_import_filter_condition3));
+        tvFilterCondition4.setText(getString(R.string.activity_message_import_filter_condition4));
+        tvFilterCondition5.setText(getString(R.string.activity_message_import_filter_condition5));
+        tvFilterCondition6.setText(getString(R.string.activity_message_import_filter_condition6));
         //监听事件
         lltFilterCondition0.setOnClickListener(this);
         lltFilterCondition1.setOnClickListener(this);
         lltFilterCondition2.setOnClickListener(this);
         lltFilterCondition3.setOnClickListener(this);
         lltFilterCondition4.setOnClickListener(this);
+        lltFilterCondition5.setOnClickListener(this);
+        lltFilterCondition6.setOnClickListener(this);
         // 设置是否可以触摸PopupWindow外部的区域
         mPopWindow.setOutsideTouchable(true);
         mPopWindow.setTouchable(true);
@@ -288,9 +298,9 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
             public void run() {
                 super.run();
                 try {
-                    sleep(1000); //睡眠1秒
+                    sleep(1000); //睡眠3秒
                     Message msg = new Message();
-                    msg.what = 3;
+                    msg.what = 1;
                     mHandler.sendMessage(msg);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -304,7 +314,7 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
         if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
             if (messageBeanList.size() >= allMessageList.size()) { // 如果加载完毕，隐藏掉正在加载图标
                 lltLoadMore.setVisibility(View.GONE);
-                Toast.makeText(GuaranteeMessageListActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ImportMessageListActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
             } else {
                 lltLoadMore.setVisibility(View.VISIBLE);// 如果未加载完毕，显示掉正在加载图标
                 new Thread() {
@@ -314,7 +324,7 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
                         try {
                             sleep(1000); //睡眠3秒
                             Message msg = new Message();
-                            msg.what = 13;
+                            msg.what = 11;
                             mHandler.sendMessage(msg);
                         } catch (InterruptedException e) {
                             e.printStackTrace();

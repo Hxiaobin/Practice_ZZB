@@ -20,10 +20,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.activity.analyse.BocAnalyseDetailActivity;
-import com.sf.bocfinancialsoftware.activity.analyse.BocAnalyseListActivity;
-import com.sf.bocfinancialsoftware.activity.business.BusinessQueryActivity;
-import com.sf.bocfinancialsoftware.activity.message.MessageReminderActivity;
+import com.sf.bocfinancialsoftware.activity.home.analyse.BocAnalyseDetailActivity;
+import com.sf.bocfinancialsoftware.activity.home.analyse.BocAnalyseListActivity;
+import com.sf.bocfinancialsoftware.activity.home.business.BusinessQueryActivity;
+import com.sf.bocfinancialsoftware.activity.home.message.MessageReminderActivity;
 import com.sf.bocfinancialsoftware.adapter.ImageCarouselAdapter;
 import com.sf.bocfinancialsoftware.adapter.HomeFragmentBocAnalyseAdapter;
 import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;

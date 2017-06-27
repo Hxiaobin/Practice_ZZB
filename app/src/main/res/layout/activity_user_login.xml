@@ -7,7 +7,7 @@
     android:clickable="true"
     android:orientation="vertical"
     android:padding="@dimen/common_padding_medium"
-    tools:context="com.sf.bocfinancialsoftware.com.sf.bocfinancialsoftware.activity.user.UserLoginActivity">
+    tools:context="com.sf.bocfinancialsoftware.activity.user.UserLoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

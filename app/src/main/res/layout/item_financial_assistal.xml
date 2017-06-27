@@ -8,42 +8,45 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/common_margin_normal"
+        android:layout_marginBottom="@dimen/common_margin_small"
+        android:layout_marginLeft="@dimen/common_margin_normal"
+        android:layout_marginRight="@dimen/common_margin_normal"
+        android:layout_marginTop="@dimen/common_margin_small"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/common_padding_normal"
+            android:paddingTop="@dimen/common_padding_normal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/common_padding_normal"
-                android:paddingTop="@dimen/common_padding_normal">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvAccount1"
-                    style="@style/tv_subtitle"
+                    style="@style/activity_text_normal_black"
                     android:text="账户"/>
 
                 <TextView
                     android:id="@+id/tvAccount"
-                    style="@style/tv_subtitle"
+                    style="@style/activity_text_normal_black"
                     android:text="2869****7875"/>
 
                 <TextView
                     android:id="@+id/tvAccount2"
-                    style="@style/tv_subtitle"
+                    style="@style/activity_text_normal_black"
                     android:text="[人民币]"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_vertical_small_width"
-                android:layout_margin="@dimen/small_margin"
+                android:layout_margin="@dimen/common_margin_small"
                 android:background="@color/line"/>
 
             <LinearLayout
@@ -54,22 +57,17 @@
 
                 <TextView
                     android:id="@+id/tvBalance1"
-                    style="@style/tv_content"
+                    style="@style/activity_text_normal_gray"
                     android:text="账户实时余额"/>
 
                 <TextView
                     android:id="@+id/tvBalance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/common_padding_normal"
-                    android:text="134,231,233.00"
-                    android:textSize="@dimen/text_size_normal"/>
+                    style="@style/activity_text_normal_gray"
+                    android:text="134,231,233.00"/>
 
                 <TextView
                     android:id="@+id/tvBalance2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/common_padding_normal"
+                    style="@style/activity_text_normal_gray"
                     android:text="元"
                     android:textSize="@dimen/text_size_normal"/>
             </LinearLayout>
@@ -77,28 +75,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/common_padding_normal">
+                android:layout_marginBottom="@dimen/common_margin_normal"
+                android:layout_marginTop="@dimen/common_margin_small"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvPay1"
-                    style="@style/tv_content"
+                    style="@style/activity_text_normal_gray"
                     android:text="30日内应付账款"/>
 
                 <TextView
                     android:id="@+id/tvPay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/common_padding_normal"
                     android:text="28,000,000.00"
                     android:textColor="@color/tv_account"
                     android:textSize="@dimen/text_size_normal"/>
 
                 <TextView
                     android:id="@+id/tvPay2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/common_padding_normal"
+                    style="@style/activity_text_normal_gray"
                     android:text="元"
                     android:textSize="@dimen/text_size_normal"/>
             </LinearLayout>

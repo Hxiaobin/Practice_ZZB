@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.activity.business;
+package com.sf.bocfinancialsoftware.activity.home.business;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -74,7 +74,7 @@
     <dimen name="popupWindow_padding_top">16dp</dimen>
     <dimen name="popupWindow_padding_bottom">16dp</dimen>
 
-<!---->
+    <!---->
     <!--padding公共正常间距-->
     <dimen name="common_padding_medium">16dp</dimen>
     <dimen name="common_padding_large">20dp</dimen>

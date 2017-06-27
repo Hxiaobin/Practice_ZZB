@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.activity.message;
+package com.sf.bocfinancialsoftware.activity.home.message;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -26,34 +26,34 @@ import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
 
 import java.util.List;
 
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.EXPORT_RESPONSE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.FORWARD_RESPONSE;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_READ;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_READ_SUM;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_CONDITION1;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_CONDITION2;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_CONDITION3;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_CONDITION4;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_CONDITION5;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FORWARD_CONDITION1;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FORWARD_CONDITION2;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FORWARD_CONDITION3;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FORWARD_CONDITION4;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FORWARD_CONDITION5;
 
 /**
- * 出口通知列表
+ * 远期通知列表
  * Created by sn on 2017/6/12.
  */
 
-public class ExportMessageListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
+public class ForwardMessageListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
 
     private ImageView ivTitleBarBack;  //返回
     private ImageView ivTitleBarFilter;  //筛选
     private TextView tvTitleBarTitle;  //标题
     private SwipeRefreshLayout swipeRefreshLayoutMessage; //下拉刷新上拉加载
+    private ListView lvMessage;  //进口消息列表
     private View headView; //列表头部
     private View footView; //列表尾部
-    private ListView lvMessage;  //出口消息列表
     private LinearLayout lltLoadMore; //列表尾部加载更多
-    private LinearLayout lltEmptyViewMessage;
+    private LinearLayout lltEmptyViewMessage; //处理空数据
     private MessageAdapter messageAdapter; //列表适配器
-    private List<MessageReminderBean> messageBeanList; //已加载的数据
+    private List<MessageReminderBean> messageBeanList; //消息实体
     private List<MessageReminderBean> allMessageList; //所有的数据列表
     private Intent mIntent;
     private String typeId;  //消息类型id
@@ -79,20 +79,20 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what == 2) {
+            if (msg.what == 5) {
                 //下拉刷新，三秒睡眠之后   重新加载
                 page = 0;
-                List<MessageReminderBean> list = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter,page,4);
+                List<MessageReminderBean> list = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4);
                 if (list == null || list.size() <= 0) { //如果刷新失败，还是显示原来的数据
-                    Toast.makeText(ExportMessageListActivity.this, getString(R.string.common_refresh_failed), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForwardMessageListActivity.this, getString(R.string.common_refresh_failed), Toast.LENGTH_SHORT).show();
                 } else { //刷新成功，清空原来的数据，重新插入数据到列表
                     messageBeanList.clear();
                     messageBeanList.addAll(list);
                     messageAdapter.notifyDataSetChanged();
-                    Toast.makeText(ExportMessageListActivity.this, getString(R.string.common_refresh_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForwardMessageListActivity.this, getString(R.string.common_refresh_success), Toast.LENGTH_SHORT).show();
                 }
                 swipeRefreshLayoutMessage.setRefreshing(false);//加载完毕，设置不刷新
-            } else if (msg.what == 12) { //上拉加载更多
+            } else if (msg.what == 15) { //上拉加载更多
                 page++; //页数自增
                 List<MessageReminderBean> loadMoreList = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4);
                 messageBeanList.addAll(loadMoreList);
@@ -120,19 +120,19 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
     @Override
     protected void initView() {
         ivTitleBarBack = (ImageView) findViewById(R.id.ivTitleBarBack);
-        ivTitleBarFilter = (ImageView) findViewById(R.id.ivTitleBarFilter);
         tvTitleBarTitle = (TextView) findViewById(R.id.tvTitleBarTitle);
+        ivTitleBarFilter = (ImageView) findViewById(R.id.ivTitleBarFilter);
         swipeRefreshLayoutMessage = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayoutMessage);
+        lvMessage = (ListView) findViewById(R.id.lvMessage);
         headView = LayoutInflater.from(this).inflate(R.layout.layout_list_head, null);
         footView = LayoutInflater.from(this).inflate(R.layout.layout_list_foot, null);
-        lvMessage = (ListView) findViewById(R.id.lvMessage);
         lltLoadMore = (LinearLayout) footView.findViewById(R.id.lltLoadMore);
         lltEmptyViewMessage = (LinearLayout) findViewById(R.id.lltEmptyViewMessage);
     }
 
     @Override
     protected void initData() {
-        tvTitleBarTitle.setText(getString(R.string.common_message_reminder_export));
+        tvTitleBarTitle.setText(getString(R.string.common_message_reminder_forward));
         ivTitleBarBack.setVisibility(View.VISIBLE);
         ivTitleBarFilter.setVisibility(View.VISIBLE);
         mIntent = getIntent();
@@ -140,7 +140,7 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
         page = 0;
         filter = "";
         messageBeanList = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4); //已经加载的数据个数，现在没有筛选条件
-        messageAdapter = new MessageAdapter(ExportMessageListActivity.this, messageBeanList);
+        messageAdapter = new MessageAdapter(ForwardMessageListActivity.this, messageBeanList);
         lvMessage.addHeaderView(headView);
         lvMessage.addFooterView(footView);
         lvMessage.setAdapter(messageAdapter);
@@ -173,7 +173,7 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
             case R.id.ivTitleBarBack:  //返回
                 Intent intent = new Intent();
                 intent.putExtra(MSG_READ_SUM, msgReadSum);
-                setResult(EXPORT_RESPONSE, intent);
+                setResult(FORWARD_RESPONSE, intent);
                 finish();
                 break;
             case R.id.ivTitleBarFilter: //筛选
@@ -184,28 +184,28 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition1:  //筛选进口信用证开立通知
-                filter = QUERY_EXPORT_CONDITION1;
+            case R.id.lltFilterCondition1:  //筛选远期外汇
+                filter = QUERY_FORWARD_CONDITION1;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition2: //筛选进口信用证到单通知
-                filter = QUERY_EXPORT_CONDITION2;
+            case R.id.lltFilterCondition2: //筛选外汇资金业务
+                filter = QUERY_FORWARD_CONDITION2;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition3: //筛选进口信用证即期付款提示
-                filter = QUERY_EXPORT_CONDITION3;
+            case R.id.lltFilterCondition3: //筛选代理结售汇业务
+                filter = QUERY_FORWARD_CONDITION3;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition4: //进口信用证承兑到期付款提示
-                filter = QUERY_EXPORT_CONDITION4;
+            case R.id.lltFilterCondition4: //筛选代客外汇理财业务
+                filter = QUERY_FORWARD_CONDITION4;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
-            case R.id.lltFilterCondition5: //进口贸易融资业务到期提示
-                filter = QUERY_EXPORT_CONDITION5;
+            case R.id.lltFilterCondition5: //筛选代客外汇风险管理
+                filter = QUERY_FORWARD_CONDITION5;
                 page = 0;
                 filterMessage(typeId, filter, page, 4);
                 break;
@@ -234,7 +234,7 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
      * 创建PopupWindow
      */
     private void createPopupWindow() {
-        View contentView = LayoutInflater.from(ExportMessageListActivity.this).inflate(R.layout.layout_message_popupwindow, null);
+        View contentView = LayoutInflater.from(ForwardMessageListActivity.this).inflate(R.layout.layout_message_popupwindow, null);
         mPopWindow = new PopupWindow(contentView);
         // 设置宽和高
         mPopWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -255,11 +255,11 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
         tvFilterCondition5 = (TextView) contentView.findViewById(R.id.tvFilterCondition5);
         //设置筛选条件
         tvFilterCondition0.setText(getString(R.string.activity_message_filter_condition0));
-        tvFilterCondition1.setText(getString(R.string.activity_message_export_filter_condition1));
-        tvFilterCondition2.setText(getString(R.string.activity_message_export_filter_condition2));
-        tvFilterCondition3.setText(getString(R.string.activity_message_export_filter_condition3));
-        tvFilterCondition4.setText(getString(R.string.activity_message_export_filter_condition4));
-        tvFilterCondition5.setText(getString(R.string.activity_message_export_filter_condition5));
+        tvFilterCondition1.setText(getString(R.string.activity_message_forward_filter_condition1));
+        tvFilterCondition2.setText(getString(R.string.activity_message_forward_filter_condition2));
+        tvFilterCondition3.setText(getString(R.string.activity_message_forward_filter_condition3));
+        tvFilterCondition4.setText(getString(R.string.activity_message_forward_filter_condition4));
+        tvFilterCondition5.setText(getString(R.string.activity_message_forward_filter_condition5));
         lltFilterCondition6.setVisibility(View.GONE);
         //监听事件
         lltFilterCondition0.setOnClickListener(this);
@@ -291,7 +291,7 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
                 try {
                     sleep(1000); //睡眠3秒
                     Message msg = new Message();
-                    msg.what = 2;
+                    msg.what = 5;
                     mHandler.sendMessage(msg);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -305,7 +305,7 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
         if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
             if (messageBeanList.size() >= allMessageList.size()) { // 如果加载完毕，隐藏掉正在加载图标
                 lltLoadMore.setVisibility(View.GONE);
-                Toast.makeText(ExportMessageListActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ForwardMessageListActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
             } else {
                 lltLoadMore.setVisibility(View.VISIBLE);// 如果未加载完毕，显示掉正在加载图标
                 new Thread() {
@@ -313,9 +313,9 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
                     public void run() {
                         super.run();
                         try {
-                            sleep(1000); //睡眠2秒
+                            sleep(1000); //睡眠1秒
                             Message msg = new Message();
-                            msg.what = 12;
+                            msg.what = 15;
                             mHandler.sendMessage(msg);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -332,5 +332,4 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
             isLastLine = true;
         }
     }
-
 }

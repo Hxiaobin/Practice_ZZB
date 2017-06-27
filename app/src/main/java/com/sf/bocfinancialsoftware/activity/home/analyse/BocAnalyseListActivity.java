@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.activity.analyse;
+package com.sf.bocfinancialsoftware.activity.home.analyse;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,7 +53,7 @@ public class BocAnalyseListActivity extends BaseActivity implements AdapterView.
             if (msg.what == 6) {
                 //下拉刷新，1秒睡眠之后   重新加载
                 page = 0;
-                List<BocAnalyseBean> list = DataBaseSQLiteUtil.queryBocAnalyseList(page,5);
+                List<BocAnalyseBean> list = DataBaseSQLiteUtil.queryBocAnalyseList(page, 5);
                 if (list == null || list.size() <= 0) { //如果列表数据为空，
                     Toast.makeText(BocAnalyseListActivity.this, getString(R.string.common_refresh_failed), Toast.LENGTH_SHORT).show();
                 } else { //刷新之后，数据不为空

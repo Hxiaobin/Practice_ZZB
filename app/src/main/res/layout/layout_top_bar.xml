@@ -7,7 +7,7 @@
         android:id="@+id/ry_top_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/red">
+        android:background="@color/appColor">
 
         <ImageView
             android:id="@+id/ivBack"

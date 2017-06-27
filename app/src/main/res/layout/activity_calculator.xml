@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical"
-    tools:context="com.sf.bocfinancialsoftware.com.sf.bocfinancialsoftware.activity.tool.calculator.CalculatorActivity">
+    android:background="@color/activity_common_background_gray"
+    android:orientation="vertical">
 
     <include layout="@layout/layout_top_bar"/>
 
@@ -14,36 +12,35 @@
         android:id="@+id/llCurrencyCalculator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center"
-        android:padding="@dimen/common_padding_small"
         android:layout_marginTop="@dimen/common_margin_normal"
-        android:orientation="horizontal">
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_padding_normal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin_normal"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:scaleType="centerCrop"
             android:src="@mipmap/ic_hljsq720"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_marginLeft="@dimen/common_margin_normal"
+            android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:padding="@dimen/common_padding_normal"
-                android:text="@string/tv_currency_calculator"
-                android:textSize="@dimen/text_size_normal"/>
+                style="@style/activity_text_normal_black"
+                android:layout_centerVertical="true"
+                android:text="@string/tv_currency_calculator"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:padding="@dimen/common_padding_normal"
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop"
                 android:src="@mipmap/jt_shallow_gray_right"/>
 
         </RelativeLayout>
@@ -51,8 +48,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/line_horizontal_small_height"
-        android:background="@color/line"/>
+        android:layout_height="@dimen/common_margin_small_to_normal"
+        android:background="@color/line_horizontal_gray"/>
 
     <LinearLayout
         android:id="@+id/llPriceCalculator"
@@ -60,33 +57,32 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center"
-        android:padding="@dimen/common_padding_small"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/common_padding_normal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin_normal"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:scaleType="centerCrop"
             android:src="@mipmap/ic_bjjsq720"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/common_margin_normal">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/activity_text_normal_black"
+                android:layout_centerVertical="true"
                 android:gravity="center_vertical"
-                android:padding="@dimen/common_padding_normal"
-                android:text="@string/tv_price_calculator"
-                android:textSize="@dimen/text_size_normal"/>
+                android:text="@string/tv_price_calculator"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:padding="@dimen/common_padding_normal"
+                android:layout_centerVertical="true"
                 android:src="@mipmap/jt_shallow_gray_right"/>
 
         </RelativeLayout>

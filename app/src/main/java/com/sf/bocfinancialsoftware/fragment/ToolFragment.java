@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.activity.tool.analysis.BocAnalyseListActivity;
+import com.sf.bocfinancialsoftware.activity.home.analyse.BocAnalyseListActivity;
 import com.sf.bocfinancialsoftware.activity.tool.calculator.CalculatorActivity;
 import com.sf.bocfinancialsoftware.activity.tool.finance.FinanceProductListActivity;
 import com.sf.bocfinancialsoftware.activity.tool.product.IntelProductListActivity;
