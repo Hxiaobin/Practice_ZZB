@@ -46,15 +46,18 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/llSuggestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginTop="@dimen/common_margin_normal"
+            android:layout_marginRight="@dimen/common_margin_small"
+            android:layout_marginLeft="@dimen/common_margin_small"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin_normal"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:src="@mipmap/ic_grzx_yjfk"/>
 
             <LinearLayout
@@ -67,22 +70,22 @@
                     android:id="@+id/rlSuggestion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/common_padding_normal"
                     android:layout_gravity="center">
 
                     <TextView
                         android:id="@+id/tvSuggestion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/common_padding_normal"
                         android:text="@string/tv_user_suggestion"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/text_size_normal"/>
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="@dimen/common_padding_normal"
+                        android:scaleType="centerCrop"
                         android:src="@mipmap/jt_shallow_gray_right"/>
 
                 </RelativeLayout>
@@ -97,15 +100,18 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_normal"
+            android:layout_marginRight="@dimen/common_margin_small"
+            android:layout_marginLeft="@dimen/common_margin_small"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin_normal"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:src="@mipmap/ic_grzx_jcgx"/>
 
             <LinearLayout
@@ -118,14 +124,14 @@
                     android:id="@+id/rlUpdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/common_padding_normal"
                     android:layout_gravity="center">
 
                     <TextView
                         android:id="@+id/tvUpdate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/common_padding_normal"
+                        android:textColor="@color/black"
                         android:text="@string/tv_user_check_update"
                         android:textSize="@dimen/text_size_normal"/>
 
@@ -133,7 +139,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="@dimen/common_padding_normal"
                         android:src="@mipmap/jt_shallow_gray_right"/>
 
                 </RelativeLayout>
@@ -148,15 +153,18 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/llAbout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin_normal"
+            android:layout_marginRight="@dimen/common_margin_small"
+            android:layout_marginLeft="@dimen/common_margin_small"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin_normal"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:src="@mipmap/ic_grzx_gy"/>
 
             <LinearLayout
@@ -169,14 +177,14 @@
                     android:id="@+id/rlAbout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/common_padding_normal"
                     android:layout_gravity="center">
 
                     <TextView
                         android:id="@+id/tvAbout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/common_padding_normal"
+                        android:textColor="@color/black"
                         android:text="@string/tv_user_about"
                         android:textSize="@dimen/text_size_normal"/>
 
@@ -184,7 +192,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="@dimen/common_padding_normal"
                         android:src="@mipmap/jt_shallow_gray_right"/>
 
                 </RelativeLayout>

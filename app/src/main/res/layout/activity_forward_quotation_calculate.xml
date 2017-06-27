@@ -102,6 +102,7 @@
                     android:drawableRight="@mipmap/rl_07"
                     android:gravity="center|left"
                     android:paddingRight="@dimen/common_padding_small"
+                    android:paddingLeft="@dimen/common_padding_small"
                     android:textColor="@color/tv_subtitle"
                     android:textSize="@dimen/text_size_normal"/>
 
@@ -167,9 +168,12 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:background="@drawable/shape_search"
-                    android:gravity="right"
+                    android:gravity="right|center_vertical"
                     android:inputType="number"
                     android:maxLength="15"
+                    android:paddingRight="@dimen/common_padding_normal"
+                    android:paddingLeft="@dimen/common_padding_normal"
+                    android:textColor="@color/tv_subtitle"
                     android:textSize="@dimen/text_size_normal"/>
 
             </LinearLayout>
@@ -196,12 +200,15 @@
                     <EditText
                         android:id="@+id/etForwardQuotationCurrency"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="38dp"
                         android:layout_weight="1"
                         android:background="@drawable/shape_search"
-                        android:gravity="right"
+                        android:gravity="right|center_vertical"
                         android:inputType="number"
-                        android:padding="@dimen/common_padding_normal"
+                        android:maxLength="15"
+                        android:paddingRight="@dimen/common_padding_normal"
+                        android:paddingLeft="@dimen/common_padding_normal"
+                        android:textColor="@color/tv_subtitle"
                         android:textSize="@dimen/text_size_normal"/>
 
                     <TextView

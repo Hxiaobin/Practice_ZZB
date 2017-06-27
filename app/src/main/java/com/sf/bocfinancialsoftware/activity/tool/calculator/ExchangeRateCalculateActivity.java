@@ -67,7 +67,7 @@ public class ExchangeRateCalculateActivity extends AppCompatActivity implements 
             mList.add(currency[i]);
         }
         //为下拉列表定义一个适配器，这里就用到里前面定义的list 为适配器设置下拉列表下拉时的菜单样式
-        mAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, mList);
+        mAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, mList);
         //将适配器添加到下拉列表上
         spinnerExchangeRate.setAdapter(mAdapter);
     }

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
     android:orientation="vertical"
-    android:padding="@dimen/common_padding_medium"
-    tools:context="com.sf.bocfinancialsoftware.activity.user.UserLoginActivity">
+    android:background="@color/white"
+    android:padding="@dimen/common_padding_medium">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -67,6 +66,7 @@
                 android:hint="@string/et_login_user"
                 android:padding="@dimen/common_padding_small"
                 android:singleLine="true"
+                android:textSize="@dimen/text_size_normal"
                 android:textColorHint="@color/login_text"/>
 
         </LinearLayout>
@@ -107,6 +107,7 @@
                 android:padding="@dimen/common_padding_small"
                 android:password="true"
                 android:singleLine="true"
+                android:textSize="@dimen/text_size_normal"
                 android:textColorHint="@color/login_text"/>
 
         </LinearLayout>

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,9 +30,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView ivUserImage; //用户头像
     private Button btnExit;
     private TextView tvUserName; //用户名
-    private RelativeLayout rlSuggestion, rlUpdate, rlAbout;
+    private LinearLayout llSuggestion, llUpdate, llAbout;
     private SharedPreferencesHelper sharedPreferencesHelper;
-    private String isLogin; //判断用户是否登录
     private String userName;
     private String userPasswd;
 
@@ -67,9 +67,9 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         ivBack = (ImageView) findViewById(R.id.ivBack);
         ivUserImage = (ImageView) findViewById(R.id.ivUserImage);
         btnExit = (Button) findViewById(R.id.btnExit);
-        rlSuggestion = (RelativeLayout) findViewById(R.id.rlSuggestion);
-        rlUpdate = (RelativeLayout) findViewById(R.id.rlUpdate);
-        rlAbout = (RelativeLayout) findViewById(R.id.rlAbout);
+        llSuggestion = (LinearLayout) findViewById(R.id.llSuggestion);
+        llUpdate = (LinearLayout) findViewById(R.id.llUpdate);
+        llAbout = (LinearLayout) findViewById(R.id.llAbout);
     }
 
     private void initDate() {
@@ -80,9 +80,9 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         ivBack.setOnClickListener(this);
         ivUserImage.setOnClickListener(this);
         btnExit.setOnClickListener(this);
-        rlSuggestion.setOnClickListener(this);
-        rlUpdate.setOnClickListener(this);
-        rlAbout.setOnClickListener(this);
+        llSuggestion.setOnClickListener(this);
+        llUpdate.setOnClickListener(this);
+        llAbout.setOnClickListener(this);
     }
 
     @Override
@@ -94,14 +94,13 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ivUserImage: //点击登录
                 login();
                 break;
-            case R.id.rlSuggestion: //意见反馈
-                //EventBus.getDefault().post(new UserBean(userName, userPasswd));
+            case R.id.llSuggestion: //意见反馈
                 startActivity(new Intent(UserActivity.this, SuggestionActivity.class));
                 break;
-            case R.id.rlUpdate: //检查更新版本
+            case R.id.llUpdate: //检查更新版本
                 Toast.makeText(mContext, R.string.toast_check_update, Toast.LENGTH_LONG).show();
                 break;
-            case R.id.rlAbout: //关于
+            case R.id.llAbout: //关于
                 startActivity(new Intent(UserActivity.this, AboutActivity.class));
                 break;
             case R.id.btnExit: //退出登录

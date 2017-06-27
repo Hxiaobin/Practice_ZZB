@@ -30,6 +30,7 @@
         <activity android:name=".activity.home.business.BusinessQueryResultActivity"/>
         <activity
             android:name=".activity.user.UserLoginActivity"
+            android:theme="@style/LoginTheme"
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.user.UserActivity"

@@ -110,8 +110,6 @@
     <style name="tv_account">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">@dimen/common_padding_normal</item>
-        <item name="android:paddingTop">@dimen/common_padding_normal</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:textColor">@color/tv_account</item>
     </style>
