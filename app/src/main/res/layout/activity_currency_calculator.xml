@@ -31,27 +31,26 @@
                     style="@style/tv_calculator"
                     android:text="@string/tv_calculate_currency"/>
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/common_margin_small"
-                    android:paddingRight="@dimen/common_margin_small"
-                    android:orientation="horizontal">
+                    android:padding="@dimen/common_padding_more_micro"
+                    android:background="@drawable/shape_search">
 
                     <Spinner
                         android:id="@+id/spinnerExchangeRate"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="38dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
                         android:background="@android:color/transparent"/>
 
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginRight="@dimen/common_margin_small"
                         android:src="@mipmap/right_down"/>
-                </LinearLayout>
+                </FrameLayout>
 
             </LinearLayout>
 
@@ -165,7 +164,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/shape_search"
                         android:gravity="right|center_vertical"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:maxLength="15"
                         android:paddingLeft="@dimen/common_padding_normal"
                         android:paddingRight="@dimen/common_padding_normal"
