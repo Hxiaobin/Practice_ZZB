@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -11,7 +11,7 @@
         android:paddingTop="@dimen/common_padding_medium"
         android:text="注："
         android:textColor="@color/tv_account"
-        android:textSize="@dimen/text_size_normal"/>
+        android:textSize="@dimen/text_size_normal" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,14 +25,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1、"
-            android:textColor="@color/tv_account"/>
+            android:textColor="@color/tv_account" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:max="21"
             android:text="现汇买入价/卖出价:每100外币兑换人民币。"
-            android:textColor="@color/tv_account"/>
+            android:textColor="@color/tv_account" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_margin_small"
         android:orientation="horizontal"
+        android:paddingBottom="@dimen/common_margin_normal"
         android:paddingLeft="@dimen/common_padding_medium"
         android:paddingRight="@dimen/common_padding_medium">
 
@@ -47,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2、"
-            android:textColor="@color/tv_account"/>
+            android:textColor="@color/tv_account" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,7 +56,7 @@
             android:lineSpacingExtra="@dimen/common_margin_micro"
             android:max="21"
             android:text="以上人民币牌价系当日市场开盘价，仅作参考。我行交易报价随市场波动而变化，如需交易，价格以我行当时报价为准。"
-            android:textColor="@color/tv_account"/>
+            android:textColor="@color/tv_account" />
     </LinearLayout>
 
 </LinearLayout>

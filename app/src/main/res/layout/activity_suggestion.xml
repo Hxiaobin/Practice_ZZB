@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activity_common_background_gray"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_top_bar"/>
+    <include layout="@layout/layout_top_bar" />
+
     <EditText
         android:id="@+id/etSuggestion"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:minHeight="100dp"
-        android:maxHeight="130dp"
         android:layout_marginLeft="@dimen/common_margin_normal"
         android:layout_marginRight="@dimen/common_margin_normal"
-        android:layout_marginTop="@dimen/common_margin_super"
+        android:layout_marginTop="@dimen/common_margin_normal"
         android:background="@drawable/shape_suggestion"
+        android:gravity="top|start"
         android:hint="@string/et_suggestion"
+        android:maxHeight="130dp"
+        android:minHeight="100dp"
         android:padding="@dimen/common_padding_small"
         android:textColorHint="@color/login_text"
-        android:textSize="@dimen/text_size_normal"
-        android:gravity="top|start"/>
+        android:textSize="@dimen/text_size_normal" />
 
     <EditText
         android:id="@+id/etContact"
@@ -31,18 +31,17 @@
         android:background="@drawable/shape_suggestion"
         android:hint="@string/et_contact"
         android:padding="@dimen/common_padding_small"
-        android:textSize="@dimen/text_size_normal"
-        android:textColorHint="@color/login_text"/>
+        android:textColorHint="@color/login_text"
+        android:textSize="@dimen/text_size_normal" />
 
     <Button
         android:id="@+id/btnSend"
+        style="@style/btn_red"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/btn_red"
         android:layout_marginLeft="@dimen/common_margin_normal"
         android:layout_marginRight="@dimen/common_margin_normal"
-        android:layout_marginTop="48dp"
-        android:text="@string/btn_send"
-        />
+        android:layout_marginTop="@dimen/common_margin_big"
+        android:text="@string/btn_send" />
 
 </LinearLayout>

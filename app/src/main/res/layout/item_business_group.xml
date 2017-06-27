@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/expandable_list_background"
+        android:background="@color/yellowLight"
         android:orientation="horizontal"
         android:padding="@dimen/common_padding_normal">
 
@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:textColor="@color/white"
+            android:text="进口业务"
+            android:textColor="@color/common_text_gray"
             android:textSize="@dimen/text_size_normal" />
 
         <ImageView
