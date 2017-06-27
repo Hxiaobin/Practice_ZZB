@@ -40,7 +40,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
-            android:layout_margin="@dimen/common_margin_small"
+            android:layout_marginTop="@dimen/common_margin_small"
+            android:layout_marginLeft="@dimen/common_margin_small"
+            android:layout_marginRight="@dimen/common_margin_small"
             android:orientation="horizontal"
             android:padding="@dimen/common_padding_small">
 
@@ -48,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:padding="@dimen/common_padding_small"
+                android:layout_marginRight="@dimen/common_margin_small"
                 android:src="@mipmap/ic_login_user"/>
 
             <View
@@ -64,9 +66,9 @@
                 android:layout_gravity="center_vertical"
                 android:background="@null"
                 android:hint="@string/et_login_user"
-                android:padding="@dimen/common_padding_small"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_normal"
+                android:layout_marginLeft="@dimen/common_margin_small"
                 android:textColorHint="@color/login_text"/>
 
         </LinearLayout>
@@ -80,7 +82,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
-            android:layout_margin="@dimen/common_margin_small"
+            android:layout_marginTop="@dimen/common_margin_small"
+            android:layout_marginLeft="@dimen/common_margin_small"
+            android:layout_marginRight="@dimen/common_margin_small"
             android:orientation="horizontal"
             android:padding="@dimen/common_padding_small">
 
@@ -88,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:padding="@dimen/common_padding_small"
+                android:layout_marginRight="@dimen/common_margin_small"
                 android:src="@mipmap/ic_login_key"/>
 
             <View
@@ -104,9 +108,9 @@
                 android:layout_gravity="center_vertical"
                 android:background="@null"
                 android:hint="@string/et_login_key"
-                android:padding="@dimen/common_padding_small"
                 android:password="true"
                 android:singleLine="true"
+                android:layout_marginLeft="@dimen/common_margin_small"
                 android:textSize="@dimen/text_size_normal"
                 android:textColorHint="@color/login_text"/>
 
