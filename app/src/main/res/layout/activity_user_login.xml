@@ -57,7 +57,6 @@
                 android:layout_width="@dimen/line_vertical_small_width"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/small_margin"
-                android:layout_marginBottom="@dimen/small_margin"
                 android:background="@color/line"/>
 
             <EditText
@@ -66,9 +65,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@null"
+                android:textColor="@color/common_text_black"
                 android:hint="@string/et_login_user"
                 android:singleLine="true"
-                android:textSize="@dimen/text_size_normal"
+                android:textSize="@dimen/text_size_micro"
+
                 android:layout_marginLeft="@dimen/common_margin_small"
                 android:textColorHint="@color/login_text"/>
 
@@ -100,7 +101,6 @@
                 android:layout_width="@dimen/line_vertical_small_width"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/small_margin"
-                android:layout_marginBottom="@dimen/small_margin"
                 android:background="@color/line"/>
 
             <EditText
@@ -113,7 +113,8 @@
                 android:password="true"
                 android:singleLine="true"
                 android:layout_marginLeft="@dimen/common_margin_small"
-                android:textSize="@dimen/text_size_normal"
+                android:textColor="@color/common_text_black"
+                android:textSize="@dimen/text_size_micro"
                 android:textColorHint="@color/login_text"/>
 
         </LinearLayout>
