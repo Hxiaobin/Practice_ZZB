@@ -66,8 +66,6 @@
     <string name="activity_message_forward_filter_condition3">代理结售汇业务通知</string>
     <string name="activity_message_forward_filter_condition4"> 代客外汇理财业务提示</string>
     <string name="activity_message_forward_filter_condition5"> 代客外汇风险管理提示</string>
-    <!---->
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="et_login_key">输入6-15位密码</string>
     <string name="et_login_user">用户名/手机号/邮箱</string>

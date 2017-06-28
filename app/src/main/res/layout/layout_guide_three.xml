@@ -20,7 +20,7 @@
 
         <Button
             android:id="@+id/btnExperience"
-            android:layout_width="@dimen/button_width_large"
+            android:layout_width="@dimen/button_width_super"
             android:layout_height="@dimen/button_height_micro"
             android:background="@drawable/shape_button_experience"
             android:text="立即体验"
