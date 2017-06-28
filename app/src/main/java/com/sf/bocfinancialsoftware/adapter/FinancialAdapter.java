@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.bean.FinanceBean;
+import com.sf.bocfinancialsoftware.bean.ProductBean;
 
 import java.util.List;
 
@@ -19,7 +20,6 @@ import java.util.List;
 public class FinancialAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<FinanceBean> mFinancialBeen;
-
 
     public void setFinancialBeen(List<FinanceBean> Been) {
         if (Been.size()>0){

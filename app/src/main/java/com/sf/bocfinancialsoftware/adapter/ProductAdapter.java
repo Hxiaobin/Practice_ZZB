@@ -30,6 +30,14 @@ public class ProductAdapter extends BaseAdapter {
         mBeanList = beanList;
     }
 
+    public void setProductBeen(List<ProductBean> Been) {
+        if (Been.size()>0){
+            mBeanList.removeAll(mBeanList);
+            mBeanList.addAll(Been);
+            notifyDataSetChanged();
+        }
+    }
+
     @Override
     public int getCount() {
         return mBeanList.size();
@@ -58,7 +66,8 @@ public class ProductAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.title.setText(mBeanList.get(position).getTitle());
-        viewHolder.contents.setTags(mBeanList.get(position).getConcent());
+        viewHolder.contents.setTags(mBeanList.get(position).getContent());
+
         viewHolder.contents.setOnTagClickListener(new TagGroup.OnTagClickListener() {
             @Override
             public void onTagClick(String tag) {

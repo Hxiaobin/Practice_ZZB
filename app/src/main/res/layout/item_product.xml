@@ -7,7 +7,7 @@
               android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/llProduct"
+        android:id="@+id/llSupply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -22,20 +22,21 @@
 
         <me.gujun.android.taggroup.TagGroup
             android:id="@+id/tclToolProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/common_margin_normal"
+            android:layout_marginTop="@dimen/common_margin_normal"
             app:atg_backgroundColor="#fcf3f0"
             app:atg_borderColor="@color/pink"
             app:atg_checkedBackgroundColor="@color/pink"
             app:atg_checkedTextColor="#E3DCDA"
             app:atg_horizontalPadding="@dimen/common_padding_big"
             app:atg_horizontalSpacing="@dimen/common_margin_normal"
+            app:atg_pressedBackgroundColor="@android:color/transparent"
             app:atg_textColor="#ba8c96"
             app:atg_textSize="@dimen/text_size_normal"
             app:atg_verticalPadding="@dimen/common_padding_small"
-            app:atg_verticalSpacing="@dimen/common_margin_small"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/common_margin_normal"
-            android:layout_marginTop="@dimen/common_margin_normal">
+            app:atg_verticalSpacing="@dimen/common_margin_small">
 
         </me.gujun.android.taggroup.TagGroup>
     </LinearLayout>

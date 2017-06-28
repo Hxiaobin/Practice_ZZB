@@ -60,16 +60,15 @@
             android:name=".activity.tool.calculator.ExchangeRateCalculateActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.tool.product.IntelProductListActivity"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".activity.tool.product.IntelProductDetailActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.tool.calculator.ForwardQuotationCalculateActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.financialAssistant.AccountDetailActivity"/>
-        <activity android:name=".activity.tool.product.Activity"/>
+        <activity android:name=".activity.financialAssistant.AccountDetailActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.tool.product.IntelProductListActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -1,5 +1,7 @@
 package com.sf.bocfinancialsoftware.bean;
 
+import java.util.List;
+
 /**
  * 热销理财产品的bean
  * Created by Author: wangyongzhu on 2017/6/28.
@@ -7,11 +9,11 @@ package com.sf.bocfinancialsoftware.bean;
 
 public class ProductBean {
     private String title; //标题
-    private String concent; //内容
+    private List<String> content; //内容
 
-    public ProductBean(String title, String concent) {
+    public ProductBean(String title, List<String> content) {
         this.title = title;
-        this.concent = concent;
+        this.content = content;
     }
 
     public String getTitle() {
@@ -22,11 +24,11 @@ public class ProductBean {
         this.title = title;
     }
 
-    public String getConcent() {
-        return concent;
+    public List<String> getContent() {
+        return content;
     }
 
-    public void setConcent(String concent) {
-        this.concent = concent;
+    public void setContent(List<String> content) {
+        this.content = content;
     }
 }

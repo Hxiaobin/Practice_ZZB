@@ -66,8 +66,6 @@
     <string name="activity_message_forward_filter_condition3">代理结售汇业务通知</string>
     <string name="activity_message_forward_filter_condition4"> 代客外汇理财业务提示</string>
     <string name="activity_message_forward_filter_condition5"> 代客外汇风险管理提示</string>
-    <!---->
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="et_login_key">输入6-15位密码</string>
     <string name="et_login_user">用户名/手机号/邮箱</string>
@@ -107,19 +105,12 @@
     <string name="title_activity_analysis_details">AnalysisDetailsActivity</string>
     <string name="title_activity_financial_product">FinancialProductActivity</string>
     <string name="text_financial">理财</string>
-    <string name="text_financial_title1">背景方法方法付</string>
-    <string name="text_financial_title2">水水水水反反复复</string>
-    <string name="text_financial_title3">花花世界对对对</string>
-    <string name="text_financial_title4">北京话对对对</string>
-    <string name="text_financial_title5">债券FQF1(中银精选基金理财计划)</string>
+    <string name="text_financial_title1">中银QD02(中银稳健增长)</string>
+    <string name="text_financial_title2">中银QD02(中银新兴市场)</string>
+    <string name="text_financial_title3">中银QD02(中银债市通理财计划)</string>
+    <string name="text_financial_title4">债市通(中银债市通理财计划)</string>
+    <string name="text_financial_title5">中银FQF1(中银精选基金理财计划)</string>
     <string name="text_financial_title6">中银QD02(中银精选基金理财计划)</string>
-
-    <!-- <string name="text_financial_title1">中银QD02(中银稳健增长)</string>
-     <string name="text_financial_title2">中银QD02(中银新兴市场)</string>
-     <string name="text_financial_title3">中银QD02(中银债市通理财计划)</string>
-     <string name="text_financial_title4">债市通(中银债市通理财计划)</string>
-     <string name="text_financial_title5">中银FQF1(中银精选基金理财计划)</string>
-     <string name="text_financial_title6">中银QD02(中银精选基金理财计划)</string>-->
     <string name="text_financial_time1">2017-05-01</string>
     <string name="text_financial_time2">2017-05-15</string>
     <string name="text_financial_time3">2017-06-08</string>
@@ -147,4 +138,17 @@
     <string name="title_activity_account_detail">AccountDetailActivity</string>
     <string name="text_financial_assistant">财务助手</string>
     <string name="title_activity_">Activity</string>
+    <string name="text_product_supply">供应链融资</string>
+    <string name="text_product_trade">国际贸易结算</string>
+    <string name="text_not_search">没有找到相匹配的产品</string>
+    <string name="tv_exchange">结汇</string>
+    <string name="tv_sale">售汇</string>
+    <string name="tv_dollar">美元</string>
+    <string name="tv_yuan">元</string>
+    <string name="tv_calculator_data">远期到期日:</string>
+    <string name="tv_account">账户</string>
+    <string name="tv_account_data">2869****787</string>
+    <string name="tv_balance_data">134,231,233.00</string>
+    <string name="tv_payment_data">28,000,000.00</string>
+    <string name="tv_financial_currency">[人民币]</string>
 </resources>

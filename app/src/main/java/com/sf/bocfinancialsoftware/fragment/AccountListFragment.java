@@ -40,7 +40,7 @@ public class AccountListFragment extends Fragment {
         lvFinancialAssistant.setDividerHeight(0);
         mDates = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            mDates.add(new AccountListBean("2869****787"+i,"134,231,233.00","28,000,000.00"));
+            mDates.add(new AccountListBean(getString(R.string.tv_account_data)+i,getString(R.string.tv_balance_data),getString(R.string.tv_payment_data)));
         }
         lvFinancialAssistant.setAdapter(new AccountListAdapter(getActivity(),mDates));
         lvFinancialAssistant.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -78,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@mipmap/btn_left_pre"
-                        android:text="结汇"
+                        android:text="@string/tv_exchange"
                         android:textColor="@color/white"/>
 
                     <Button
@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@mipmap/btn_right"
-                        android:text="售汇"
+                        android:text="@string/tv_sale"
                         android:textColor="@color/tv_subtitle"/>
                 </LinearLayout>
 
@@ -103,7 +103,7 @@
 
                 <TextView
                     style="@style/tv_calculator"
-                    android:text="远期到期日:"/>
+                    android:text="@string/tv_calculator_data"/>
 
                 <TextView
                     android:id="@+id/tvForwardQuotationData"
@@ -155,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/common_margin_small"
-                        android:text="美元"
+                        android:text="@string/tv_dollar"
                         android:textColor="@color/tv_subtitle"
                         android:textSize="@dimen/text_size_normal"/>
                 </LinearLayout>
@@ -228,7 +228,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/common_margin_small"
-                        android:text="美元"
+                        android:text="@string/tv_dollar"
                         android:textColor="@color/tv_subtitle"
                         android:textSize="@dimen/text_size_normal"/>
                 </LinearLayout>
@@ -270,7 +270,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/common_margin_normal"
                         android:layout_marginRight="@dimen/common_margin_medium"
-                        android:text="元"
+                        android:text="@string/tv_yuan"
                         android:textColor="@color/tv_subtitle"
                         android:textSize="@dimen/text_size_normal"/>
 

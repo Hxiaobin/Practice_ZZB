@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
+import com.sf.bocfinancialsoftware.util.MyTextWatcher;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,6 +44,8 @@ public class ForwardQuotationCalculateActivity extends AppCompatActivity impleme
     private int positionCurrency = 0; //币种的位置
     private String[] strRate = new String[]{"结汇", "售汇"};
     private int mPositionBtn = 0; //结汇 售汇的位置
+    private String strRateResult ; //获取签单汇率的结果
+    private String strMoney; //获取外币金额的结果
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,21 +94,12 @@ public class ForwardQuotationCalculateActivity extends AppCompatActivity impleme
         btnForwardQuotationSurrendering.setOnClickListener(this);
         spinnerForwardQuotation.setOnItemSelectedListener(this);
         tvForwardQuotationData.setOnClickListener(this);
-        etForwardQuotationRate.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
+        etForwardQuotationRate.addTextChangedListener(new MyTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 //计算操作
-                String strRateResult = s.toString();
+//                String strRateResult = "0";
+                strRateResult = s.toString();
                 String strMoney = etForwardQuotationCurrency.getText().toString();
                 if (TextUtils.isEmpty(strRateResult) || TextUtils.isEmpty(strMoney)) {
                     tvForwardQuotationExchange.setText("");
@@ -117,22 +110,12 @@ public class ForwardQuotationCalculateActivity extends AppCompatActivity impleme
                 tvForwardQuotationExchange.setText(calculate);
             }
         });
-        etForwardQuotationCurrency.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
+        etForwardQuotationCurrency.addTextChangedListener(new MyTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 //计算操作
-                String strRateResult = etForwardQuotationRate.getText().toString();
-                String strMoney = s.toString();
+                strRateResult = etForwardQuotationRate.getText().toString();
+                strMoney = s.toString();
                 if (TextUtils.isEmpty(strRateResult) || TextUtils.isEmpty(strMoney)) {
                     tvForwardQuotationExchange.setText("");
                     return;
@@ -142,6 +125,7 @@ public class ForwardQuotationCalculateActivity extends AppCompatActivity impleme
                 tvForwardQuotationExchange.setText(calculate);
             }
         });
+
     }
 
     @Override

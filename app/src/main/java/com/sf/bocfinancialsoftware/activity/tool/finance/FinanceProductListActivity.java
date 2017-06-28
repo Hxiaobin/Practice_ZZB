@@ -29,6 +29,7 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
     private ImageView ivSearch;
     private EditText etSearch;
     private ListView lvFinancial;
+    private ListView lvFinancial2; //查询后显示数据的view
     private View mHeaderView; //ListView头部视图
     private List<FinanceBean> mDatas; //原来的数据源
     private List<FinanceBean> mList; //查询后的数据源
@@ -58,6 +59,7 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
         ivSearch = (ImageView) mHeaderView.findViewById(R.id.ivSearch);
         etSearch = (EditText) mHeaderView.findViewById(R.id.etSearch);
         lvFinancial = (ListView) findViewById(R.id.lvFinancial);
+        lvFinancial2 = (ListView) findViewById(R.id.lvFinancial2);
         rollPagerView = (RollPagerView) mHeaderView.findViewById(R.id.rollPagerView);
         etSearch.setFocusable(true);
     }
@@ -114,6 +116,7 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
                 //获取查询的字符串
                 int len = pLen - searchContent.length() + 1;
                 for (j = 0; j < len; j++) {
+                    //String string = tvFinancialTitle[i].substring(j, j + searchContent.length());
                     boolean contains = tvFinancialTitle[i].contains(searchContent);
                     if (contains) {
                         mList.add(new FinanceBean(tvFinancialTitle[i], ""));
@@ -123,10 +126,9 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
                 }
             }
             if (flag) {
-                mList.add(new FinanceBean("", ""));
-                lvFinancial.setBackgroundColor(getResources().getColor(R.color.activity_common_background_gray));
-                lvFinancial.setDividerHeight(0);
-                Toast.makeText(this, "没有找到相匹配的产品", Toast.LENGTH_LONG).show();
+                mList.clear();
+                mDatas.clear();
+                Toast.makeText(this, R.string.text_not_search, Toast.LENGTH_LONG).show();
             }
             Log.e(TAG, "show: " + mList.size());
             myAdapter.setFinancialBeen(mList);

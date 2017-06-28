@@ -11,11 +11,22 @@
         android:id="@+id/lvFinancial"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
         android:layout_marginTop="0dp"
-        android:divider="@color/background"
-        android:dividerHeight="1dp"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:divider="@color/activity_common_background_gray"
+        android:dividerHeight="0dp"
+        android:scrollbars="none">
+
+    </ListView>
+    <ListView
+        android:id="@+id/lvFinancial2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:background="@color/white"
+        android:divider="@color/activity_common_background_gray"
+        android:dividerHeight="0dp"
+        android:scrollbars="none">
 
     </ListView>
 

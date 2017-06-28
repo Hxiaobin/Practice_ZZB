@@ -1,124 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activity_common_background_gray"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.sf.bocfinancialsoftware.activity.tool.product.IntelProductListActivity">
 
-    <include layout="@layout/layout_top_bar" />
+    <include layout="@layout/layout_top_bar"/>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_margin_medium"
+        android:background="@drawable/shape_search"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_padding_small_to_normal">
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:maxLength="16"
+            android:singleLine="true"
+            android:textColor="@color/common_text_black"
+            android:textCursorDrawable="@null"/>
+
+        <ImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/search"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvProduct1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/activity_common_background_gray"
+        android:dividerHeight="@dimen/common_margin_normal"
         android:scrollbars="none">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    </ListView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin_medium"
-                android:background="@drawable/shape_search"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/common_padding_small"
-                android:paddingLeft="@dimen/common_padding_normal"
-                android:paddingRight="@dimen/common_padding_normal"
-                android:paddingTop="@dimen/common_padding_small">
-
-                <EditText
-                    android:id="@+id/etSearch"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:textColor="@color/common_text_black"
-                    android:maxLength="16"
-                    android:paddingLeft="@dimen/common_padding_small"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@null"/>
-
-                <ImageView
-                    android:id="@+id/ivSearch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/search"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llSupply"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/common_margin_normal"
-                android:paddingRight="@dimen/common_margin_normal">
-
-                <TextView
-                    style="@style/activity_text_normal_black"
-                    android:layout_marginTop="@dimen/common_margin_small_to_normal"
-                    android:text="供应链融资" />
-
-                <me.gujun.android.taggroup.TagGroup
-                    android:id="@+id/tclToolProductSupply"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/common_margin_normal"
-                    android:layout_marginTop="@dimen/common_margin_normal"
-                    app:atg_backgroundColor="#fcf3f0"
-                    app:atg_borderColor="@color/pink"
-                    app:atg_checkedBackgroundColor="@color/pink"
-                    app:atg_checkedTextColor="#E3DCDA"
-                    app:atg_horizontalPadding="@dimen/common_padding_big"
-                    app:atg_horizontalSpacing="@dimen/common_margin_normal"
-                    app:atg_pressedBackgroundColor="@color/pink"
-                    app:atg_textColor="#ba8c96"
-                    app:atg_textSize="@dimen/text_size_normal"
-                    app:atg_verticalPadding="@dimen/common_padding_small"
-                    app:atg_verticalSpacing="@dimen/common_margin_small">
-
-                </me.gujun.android.taggroup.TagGroup>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llTrade"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_padding_normal"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/common_margin_normal"
-                android:paddingRight="@dimen/common_margin_normal">
-
-                <TextView
-                    style="@style/activity_text_normal_black"
-                    android:layout_marginTop="@dimen/common_margin_small_to_normal"
-                    android:text="国际贸易结算"/>
-
-                <me.gujun.android.taggroup.TagGroup
-                    android:id="@+id/tclToolProductTrade"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/common_margin_normal"
-                    android:layout_marginTop="@dimen/common_margin_normal"
-                    app:atg_backgroundColor="#fcf3f0"
-                    app:atg_borderColor="@color/pink"
-                    app:atg_checkedBackgroundColor="@color/pink"
-                    app:atg_checkedTextColor="#E3DCDA"
-                    app:atg_horizontalPadding="@dimen/common_padding_big"
-                    app:atg_horizontalSpacing="@dimen/common_margin_normal"
-                    app:atg_textColor="#ba8c96"
-                    app:atg_textSize="@dimen/text_size_normal"
-                    app:atg_verticalPadding="@dimen/common_padding_small"
-                    app:atg_verticalSpacing="@dimen/common_margin_small">
-
-                </me.gujun.android.taggroup.TagGroup>
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>

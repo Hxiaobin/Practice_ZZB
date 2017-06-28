@@ -36,17 +36,16 @@
                 <TextView
                     android:id="@+id/tvAccount1"
                     style="@style/activity_text_normal_black"
-                    android:text="账户" />
+                    android:text="@string/tv_account" />
 
                 <TextView
                     android:id="@+id/tvAccountDetail1"
-                    style="@style/activity_text_normal_black"
-                    android:text="2869****7875" />
+                    style="@style/activity_text_normal_black"/>
 
                 <TextView
                     android:id="@+id/tvAccount2"
                     style="@style/activity_text_normal_black"
-                    android:text="[人民币]" />
+                    android:text="@string/tv_financial_currency" />
             </LinearLayout>
 
             <View
@@ -68,13 +67,12 @@
 
                 <TextView
                     android:id="@+id/tvBalance"
-                    style="@style/activity_text_normal_gray"
-                    android:text="134,231,233.00" />
+                    style="@style/activity_text_normal_gray"/>
 
                 <TextView
                     android:id="@+id/tvBalance2"
                     style="@style/activity_text_normal_gray"
-                    android:text="元"
+                    android:text="@string/tv_yuan"
                     android:textSize="@dimen/text_size_normal" />
             </LinearLayout>
 
@@ -93,14 +91,13 @@
                     android:id="@+id/tvPay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="28,000,000.00"
                     android:textColor="@color/tv_account"
                     android:textSize="@dimen/text_size_normal" />
 
                 <TextView
                     android:id="@+id/tvPay2"
                     style="@style/activity_text_normal_gray"
-                    android:text="元"
+                    android:text="@string/tv_yuan"
                     android:textSize="@dimen/text_size_normal" />
             </LinearLayout>
         </LinearLayout>
@@ -138,12 +135,11 @@
 
                 <TextView
                     style="@style/activity_text_normal_black"
-                    android:text="账户" />
+                    android:text="@string/tv_account" />
 
                 <TextView
                     android:id="@+id/tvAccountDetail2"
-                    style="@style/activity_text_normal_black"
-                    android:text="2869****7875" />
+                    style="@style/activity_text_normal_black"/>
 
                 <TextView
                     style="@style/activity_text_normal_black"
