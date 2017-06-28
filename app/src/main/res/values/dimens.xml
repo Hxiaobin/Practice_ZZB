@@ -69,6 +69,7 @@
     <dimen name="button_width_small">64dp</dimen>
     <dimen name="button_width_normal">80dp</dimen>
     <dimen name="button_width_large">96dp</dimen>
+    <dimen name="button_height_micro">36dp</dimen>
     <dimen name="button_height_smaller">44dp</dimen>
     <dimen name="button_height_small">48dp</dimen>
     <dimen name="button_height_normal">56dp</dimen>
