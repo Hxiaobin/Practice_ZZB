@@ -92,5 +92,9 @@ public class ConstantConfig {
     public static final String QUERY_FORWARD_CONDITION3 = "代理结售汇业务";
     public static final String QUERY_FORWARD_CONDITION4 = "代客外汇理财业务";
     public static final String QUERY_FORWARD_CONDITION5 = "代客外汇风险管理";
+    //欢迎页
+    public static final String FILE_FIRST_IN = "guideFirst"; //保存是否是第一次进入app
+    public static final String IS_FIRST_IN = "isFirstIn"; //是否是第一次进入app
+
 
 }
