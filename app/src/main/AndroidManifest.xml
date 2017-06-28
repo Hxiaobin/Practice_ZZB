@@ -28,6 +28,8 @@
         <activity android:name=".activity.home.business.BusinessQueryActivity" />
         <activity android:name=".activity.home.business.BusinessQueryCriteriaActivity" />
         <activity android:name=".activity.home.business.BusinessQueryResultActivity" />
+        <!--<activity android:name=".activity.GuideActivity" />-->
+        <!--<activity android:name=".activity.MainActivity" />-->
         <activity
             android:name=".activity.user.UserLoginActivity"
             android:screenOrientation="portrait"
