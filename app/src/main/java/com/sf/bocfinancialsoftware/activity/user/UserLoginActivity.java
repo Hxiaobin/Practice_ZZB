@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.SpannedString;
+import android.text.style.AbsoluteSizeSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sf.bocfinancialsoftware.constant.ConstantConfig;
+import com.sf.bocfinancialsoftware.util.SetHintTextSize;
 import com.sf.bocfinancialsoftware.util.SharedPreferencesHelper;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.bean.UserBean;
@@ -49,6 +54,8 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
         btnRegistered = (Button) findViewById(R.id.btnRegistered);
         etLoginUser = (EditText) findViewById(R.id.etLoginUser);
         etLoginKey = (EditText) findViewById(R.id.etLoginKey);
+        SetHintTextSize.setHintTextSize(etLoginUser,getString(R.string.et_login_user),12);
+        SetHintTextSize.setHintTextSize(etLoginKey,getString(R.string.et_login_key),12);
     }
 
     @Override

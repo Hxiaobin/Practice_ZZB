@@ -14,6 +14,7 @@ import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.activity.home.analyse.BocAnalyseListActivity;
 import com.sf.bocfinancialsoftware.activity.tool.calculator.CalculatorActivity;
 import com.sf.bocfinancialsoftware.activity.tool.finance.FinanceProductListActivity;
+import com.sf.bocfinancialsoftware.activity.tool.product.Activity;
 import com.sf.bocfinancialsoftware.activity.tool.product.IntelProductListActivity;
 import com.sf.bocfinancialsoftware.activity.tool.rate.RateActivity;
 import com.sf.bocfinancialsoftware.adapter.PictureAdapter;
@@ -94,7 +95,7 @@ public class ToolFragment extends Fragment implements AdapterView.OnItemClickLis
                 startActivity(new Intent(getActivity(), RateActivity.class));
                 break;
             case 2:
-                startActivity(new Intent(getActivity(), IntelProductListActivity.class));
+                startActivity(new Intent(getActivity(), Activity.class));
                 break;
             case 3:
                 startActivity(new Intent(getActivity(), FinanceProductListActivity.class));

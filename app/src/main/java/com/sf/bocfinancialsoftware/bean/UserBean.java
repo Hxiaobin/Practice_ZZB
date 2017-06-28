@@ -3,12 +3,13 @@ package com.sf.bocfinancialsoftware.bean;
 import java.io.Serializable;
 
 /**
+ * 用户的bean
  * Created by Author: wangyongzhu on 2017/6/12.
  */
 
 public class UserBean implements Serializable{
-    private String userName;
-    private String loginPassword;
+    private String userName;      //用户名
+    private String loginPassword; //登录密码
 
     public UserBean(String userName, String loginPassword) {
         this.userName = userName;

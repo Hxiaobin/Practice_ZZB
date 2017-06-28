@@ -66,9 +66,8 @@
                 android:layout_gravity="center_vertical"
                 android:background="@null"
                 android:textColor="@color/common_text_black"
-                android:hint="@string/et_login_user"
                 android:singleLine="true"
-                android:textSize="@dimen/text_size_micro"
+                android:textSize="@dimen/text_size_normal"
 
                 android:layout_marginLeft="@dimen/common_margin_small"
                 android:textColorHint="@color/login_text"/>
@@ -109,12 +108,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@null"
-                android:hint="@string/et_login_key"
                 android:password="true"
                 android:singleLine="true"
                 android:layout_marginLeft="@dimen/common_margin_small"
                 android:textColor="@color/common_text_black"
-                android:textSize="@dimen/text_size_micro"
+                android:textSize="@dimen/text_size_normal"
                 android:textColorHint="@color/login_text"/>
 
         </LinearLayout>

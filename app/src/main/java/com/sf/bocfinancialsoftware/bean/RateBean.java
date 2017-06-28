@@ -1,6 +1,7 @@
 package com.sf.bocfinancialsoftware.bean;
 
 /**
+ * 汇率的bean
  * Created by Author: wangyongzhu on 2017/6/21.
  */
 

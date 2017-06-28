@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sf.bocfinancialsoftware.util.SetHintTextSize;
 import com.sf.bocfinancialsoftware.util.SharedPreferencesHelper;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.bean.UserBean;
@@ -46,6 +47,8 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
         etRegisteredUserName = (EditText) findViewById(R.id.etRegisteredUserName);
         etRegisteredKey = (EditText) findViewById(R.id.etRegisteredKey);
         ivBack = (ImageView) findViewById(R.id.ivBack);
+        SetHintTextSize.setHintTextSize(etRegisteredUserName,getString(R.string.et_registered_user_name),12);
+        SetHintTextSize.setHintTextSize(etRegisteredKey,getString(R.string.et_registered_key),12);
     }
 
     @Override

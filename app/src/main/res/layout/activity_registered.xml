@@ -30,9 +30,8 @@
                 android:layout_margin="@dimen/common_margin_normal"
                 android:background="@null"
                 android:textColor="@color/common_text_black"
-                android:hint="@string/et_registered_user_name"
                 android:textColorHint="@color/login_text"
-                android:textSize="@dimen/text_size_micro"/>
+                android:textSize="@dimen/text_size_normal"/>
         </LinearLayout>
 
         <View
@@ -52,10 +51,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/common_margin_normal"
                 android:background="@null"
-                android:hint="@string/et_registered_key"
                 android:textColor="@color/common_text_black"
                 android:textColorHint="@color/login_text"
-                android:textSize="@dimen/text_size_micro"
+                android:textSize="@dimen/text_size_normal"
                 android:password="true"/>
         </LinearLayout>
     </LinearLayout>

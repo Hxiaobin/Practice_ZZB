@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/activity_common_background_gray"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/common_margin_normal"
+        android:paddingRight="@dimen/common_margin_normal">
+
+        <TextView
+            android:id="@+id/tvProductTitle"
+            style="@style/activity_text_normal_black"
+            android:layout_marginTop="@dimen/common_margin_small_to_normal"/>
+
+        <me.gujun.android.taggroup.TagGroup
+            android:id="@+id/tclToolProductName"
+            app:atg_backgroundColor="#fcf3f0"
+            app:atg_borderColor="@color/pink"
+            app:atg_checkedBackgroundColor="@color/pink"
+            app:atg_checkedTextColor="#E3DCDA"
+            app:atg_horizontalPadding="@dimen/common_padding_big"
+            app:atg_horizontalSpacing="@dimen/common_margin_normal"
+            app:atg_textColor="#ba8c96"
+            app:atg_textSize="@dimen/text_size_normal"
+            app:atg_verticalPadding="@dimen/common_padding_small"
+            app:atg_verticalSpacing="@dimen/common_margin_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/common_margin_normal"
+            android:layout_marginTop="@dimen/common_margin_normal">
+
+        </me.gujun.android.taggroup.TagGroup>
+    </LinearLayout>
+
+</LinearLayout>

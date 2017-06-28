@@ -146,4 +146,5 @@
     <string name="tv_calculate_rate">签单汇率：</string>
     <string name="title_activity_account_detail">AccountDetailActivity</string>
     <string name="text_financial_assistant">财务助手</string>
+    <string name="title_activity_">Activity</string>
 </resources>

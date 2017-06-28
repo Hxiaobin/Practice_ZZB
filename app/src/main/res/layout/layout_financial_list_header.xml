@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" 
             android:background="@null"
+            android:textColor="@color/common_text_black"
             android:singleLine="true"
             android:textCursorDrawable="@null" />
 
