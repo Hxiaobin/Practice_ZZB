@@ -93,4 +93,5 @@ public class MessageReminderBean {
     public void setUnReadSum(String unReadSum) {
         this.unReadSum = unReadSum;
     }
+
 }

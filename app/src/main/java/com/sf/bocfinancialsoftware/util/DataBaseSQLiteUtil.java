@@ -74,7 +74,6 @@ import static com.sf.bocfinancialsoftware.constant.SQLiteConfig.TABLE_PLEASANT_M
  * 本地数据库操作util
  * Created by sn on 2017/6/9.
  */
-
 public class DataBaseSQLiteUtil {
 
     private static SQLiteDatabase mDatabase;
@@ -117,19 +116,10 @@ public class DataBaseSQLiteUtil {
      * 实例化数据库对象
      */
     public static void openDataBase() {
-        /*if (null == mDbOpenHelper) {
-            mDbOpenHelper = new ContactDBOpenHelper(mContext, DB_NAME, null, DB_VERSION);
-        }*/
         mDbOpenHelper = new ContactDBOpenHelper(mContext, DB_NAME, null, DB_VERSION);
         try {
-            /*if (null == mDatabase) {
-                mDatabase = mDbOpenHelper.getWritableDatabase(); // 获取可写数据库
-            }*/
             mDatabase = mDbOpenHelper.getWritableDatabase(); // 获取可写数据库
         } catch (SQLException e) {
-            /*if (null == mDatabase) {
-                mDatabase = mDbOpenHelper.getReadableDatabase(); // 获取只读数据库
-            }*/
             mDatabase = mDbOpenHelper.getReadableDatabase(); // 获取只读数据库
         }
     }
@@ -214,11 +204,11 @@ public class DataBaseSQLiteUtil {
         List<BocAnalyseBean> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             BocAnalyseBean bean = new BocAnalyseBean();
-            bean.setNewsId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_ID))));
-            bean.setNewsTitle(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_TITLE)));
-            bean.setNewsDesc(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_DESC)));
-            bean.setNewsData(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_DATE)));
-            bean.setNewsImageUrl(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_IMAGE_URL)));
+            bean.setNewsId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_ID)))); //新闻id
+            bean.setNewsTitle(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_TITLE)));  //新闻名称
+            bean.setNewsDesc(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_DESC)));  //新闻描述
+            bean.setNewsData(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_DATE)));  //新闻时间
+            bean.setNewsImageUrl(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_IMAGE_URL)));  //新闻列表的图片
             list.add(bean);
         }
         cursor.close();
@@ -240,11 +230,11 @@ public class DataBaseSQLiteUtil {
         List<BocAnalyseBean> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             BocAnalyseBean bean = new BocAnalyseBean();
-            bean.setNewsId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_ID))));
-            bean.setNewsTitle(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_TITLE)));
-            bean.setNewsDesc(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_DESC)));
-            bean.setNewsData(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_DATE)));
-            bean.setNewsImageUrl(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_IMAGE_URL)));
+            bean.setNewsId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_ID)))); //新闻Id
+            bean.setNewsTitle(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_TITLE)));  //新闻名称
+            bean.setNewsDesc(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_DESC)));  //新闻描述
+            bean.setNewsData(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_DATE)));  //新闻时间
+            bean.setNewsImageUrl(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_IMAGE_URL)));  //新闻列表的图片
             list.add(bean);
         }
         cursor.close();
@@ -265,10 +255,10 @@ public class DataBaseSQLiteUtil {
                 new String[]{id}, null, null, null);
         BocAnalyseBean bocAnalyseBean = new BocAnalyseBean();
         while (cursor.moveToNext()) {
-            bocAnalyseBean.setNewsId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_ID)))); //新闻id
-            bocAnalyseBean.setNewsTitle(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_TITLE))); // 新闻名称
-            bocAnalyseBean.setNewsData(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_DATE))); // 新闻时间
-            bocAnalyseBean.setHtmlContent(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_CONTENT))); // 新闻正文文本
+            bocAnalyseBean.setNewsId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_ID))));  //新闻id
+            bocAnalyseBean.setNewsTitle(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_TITLE)));  // 新闻名称
+            bocAnalyseBean.setNewsData(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_DATE)));  // 新闻时间
+            bocAnalyseBean.setHtmlContent(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_NEWS_CONTENT)));  // 新闻正文文本
             bocAnalyseBean.setImageList(getBocAnalyseImageListById(id));
         }
         cursor.close();
@@ -284,12 +274,12 @@ public class DataBaseSQLiteUtil {
      */
     public static List<String> getBocAnalyseImageListById(String id) {
         openDataBase();
-        String[] projection = {COLUMN_BOC_ANALYSE_DETAIL_NEWS_IMAGE_URL}; //
+        String[] projection = {COLUMN_BOC_ANALYSE_DETAIL_NEWS_IMAGE_URL};
         Cursor cursor = mDatabase.query(TABLE_NAME_BOC_ANALYSE_DETAIL, projection, COLUMN_BOC_ANALYSE_NEWS_ID + "= ?",
                 new String[]{id}, null, null, null);
         List<String> imageList = new ArrayList<>();
         while (cursor.moveToNext()) {
-            imageList.add(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_DETAIL_NEWS_IMAGE_URL)));
+            imageList.add(cursor.getString(cursor.getColumnIndex(COLUMN_BOC_ANALYSE_DETAIL_NEWS_IMAGE_URL)));  //新闻详情图片集合
         }
         cursor.close();
         closeDataBase();
@@ -305,11 +295,11 @@ public class DataBaseSQLiteUtil {
     public static long insertToMessageReminder(MessageReminderBean bean) {
         openDataBase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_MESSAGE_REMINDER_TYPE_ID, bean.getTypeId()); // 消息类型
-        values.put(COLUMN_MESSAGE_REMINDER_MSG_TITLE, bean.getMsgTitle()); // 消息标题
-        values.put(COLUMN_MESSAGE_REMINDER_MSG_DATE, bean.getMsgDate()); // 消息时间
-        values.put(COLUMN_MESSAGE_REMINDER_MSG_CONTENT, bean.getMsgContent()); // 消息内容
-        values.put(COLUMN_MESSAGE_REMINDER_MSG_IS_READ, bean.getMsgIsRead()); // 消息是否已读
+        values.put(COLUMN_MESSAGE_REMINDER_TYPE_ID, bean.getTypeId());  // 消息类型
+        values.put(COLUMN_MESSAGE_REMINDER_MSG_TITLE, bean.getMsgTitle());  // 消息标题
+        values.put(COLUMN_MESSAGE_REMINDER_MSG_DATE, bean.getMsgDate());  // 消息时间
+        values.put(COLUMN_MESSAGE_REMINDER_MSG_CONTENT, bean.getMsgContent());  // 消息内容
+        values.put(COLUMN_MESSAGE_REMINDER_MSG_IS_READ, bean.getMsgIsRead());  // 消息是否已读
         long insert = mDatabase.insert(TABLE_NAME_MESSAGE_REMINDER, null, values);
         closeDataBase();
         return insert; // 插入中银分析表
@@ -324,7 +314,7 @@ public class DataBaseSQLiteUtil {
     public static int updateMessageReminder(MessageReminderBean bean) {
         openDataBase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_MESSAGE_REMINDER_MSG_IS_READ, bean.getMsgIsRead()); // 消息是否已读
+        values.put(COLUMN_MESSAGE_REMINDER_MSG_IS_READ, bean.getMsgIsRead());  // 消息是否已读
         int update = mDatabase.update(TABLE_NAME_MESSAGE_REMINDER, values, COLUMN_MESSAGE_REMINDER_MSG_ID + "= ?", new String[]{bean.getMsgId()});
         closeDataBase();
         return update;
@@ -345,13 +335,13 @@ public class DataBaseSQLiteUtil {
         List<MessageReminderBean> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             MessageReminderBean bean = new MessageReminderBean();
-            bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_ID))));
-            bean.setTypeId(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_TYPE_ID)));
-            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_TITLE)));
-            bean.setMsgDate(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_DATE)));
-            bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_CONTENT)));
-            bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_IS_READ)));
-            bean.setUnReadSum(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_UN_READ_NUMBER)));
+            bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_ID))));  //消息id
+            bean.setTypeId(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_TYPE_ID)));  //消息类型id
+            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_TITLE)));  //消息标题
+            bean.setMsgDate(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_DATE)));  //消息时间
+            bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_CONTENT)));  //消息内容
+            bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_IS_READ)));  //消息是否已读
+            bean.setUnReadSum(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_UN_READ_NUMBER))); //未读消息数量
             list.add(bean);
         }
         cursor.close();
@@ -384,11 +374,11 @@ public class DataBaseSQLiteUtil {
         List<MessageReminderBean> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             MessageReminderBean bean = new MessageReminderBean();
-            bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_ID))));
-            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_TITLE)));
-            bean.setMsgDate(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_DATE)));
-            bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_CONTENT)));
-            bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_IS_READ)));
+            bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_ID))));  //消息id
+            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_TITLE)));  //消息标题
+            bean.setMsgDate(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_DATE)));  //消息时间
+            bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_CONTENT))); //消息内容
+            bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_IS_READ)));  //消息是否已读
             list.add(bean);
         }
         cursor.close();
@@ -419,11 +409,11 @@ public class DataBaseSQLiteUtil {
         List<MessageReminderBean> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             MessageReminderBean bean = new MessageReminderBean();
-            bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_ID))));
-            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_TITLE)));
-            bean.setMsgDate(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_DATE)));
-            bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_CONTENT)));
-            bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_IS_READ)));
+            bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_ID))));  //消息id
+            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_TITLE)));  //消息标题
+            bean.setMsgDate(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_DATE)));  //消息时间
+            bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_CONTENT)));  //消息内容
+            bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_REMINDER_MSG_IS_READ)));  //消息是否已读
             list.add(bean);
         }
         cursor.close();
@@ -440,7 +430,7 @@ public class DataBaseSQLiteUtil {
     public static long insertToBusinessType(BusinessTypeBean bean) {
         openDataBase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_BUSINESS_TYPE_NAME, bean.getTypeName()); // 业务类别名称
+        values.put(COLUMN_BUSINESS_TYPE_NAME, bean.getTypeName());  // 业务类别名称
         long insert = mDatabase.insert(TABLE_NAME_BUSINESS_TYPE, null, values);
         closeDataBase();
         return insert; // 插入中银分析表
@@ -455,10 +445,10 @@ public class DataBaseSQLiteUtil {
     public static long insertToBusiness(BusinessBean bean) {
         openDataBase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_BUSINESS_TYPE_NAME, bean.getTypeName()); // 业务类型
-        values.put(COLUMN_BUSINESS_NAME, bean.getBusinessName()); // 业务名称
-        values.put(COLUMN_BUSINESS_DATE_NAME, bean.getDateName()); // 时间名称
-        values.put(COLUMN_BUSINESS_ID_NAME, bean.getIdName()); // 编号名称
+        values.put(COLUMN_BUSINESS_TYPE_NAME, bean.getTypeName());  // 业务类型
+        values.put(COLUMN_BUSINESS_NAME, bean.getBusinessName());  // 业务名称
+        values.put(COLUMN_BUSINESS_DATE_NAME, bean.getDateName());  // 时间名称
+        values.put(COLUMN_BUSINESS_ID_NAME, bean.getIdName());  // 编号名称
         long insert = mDatabase.insert(TABLE_NAME_BUSINESS, null, values);
         closeDataBase();
         return insert; // 插入中银分析表
@@ -473,11 +463,11 @@ public class DataBaseSQLiteUtil {
     public static long insertToContract(ContractBean bean) {
         openDataBase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_CONTRACT_ID, bean.getContractId()); // 业务编号
-        values.put(COLUMN_BUSINESS_NAME, bean.getBusinessName()); // 业务名称
-        values.put(COLUMN_CONTRACT_SIGN_DATE, bean.getSignDate()); // 签订时间
-        values.put(COLUMN_CONTRACT_OPENING_AMOUNT, (String) bean.getMapObject().get(OPENING_AMOUNT)); // 开证金额
-        values.put(COLUMN_CONTRACT_CREDIT_BALANCE, (String) bean.getMapObject().get(CREDIT_BALANCE)); // 信用证余额
+        values.put(COLUMN_CONTRACT_ID, bean.getContractId());  // 业务编号
+        values.put(COLUMN_BUSINESS_NAME, bean.getBusinessName());  // 业务名称
+        values.put(COLUMN_CONTRACT_SIGN_DATE, bean.getSignDate());  // 签订时间
+        values.put(COLUMN_CONTRACT_OPENING_AMOUNT, (String) bean.getMapObject().get(OPENING_AMOUNT));  // 开证金额
+        values.put(COLUMN_CONTRACT_CREDIT_BALANCE, (String) bean.getMapObject().get(CREDIT_BALANCE));  // 信用证余额
         long insert = mDatabase.insert(TABLE_NAME_CONTRACT, null, values);
         closeDataBase();
         return insert; // 插入中银分析表
@@ -497,13 +487,13 @@ public class DataBaseSQLiteUtil {
         List<ContractBean> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             ContractBean bean = new ContractBean();
-            bean.setAutoId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_CONTRACT_AUTO_ID))));
-            bean.setBusinessName(cursor.getString(cursor.getColumnIndex(COLUMN_BUSINESS_NAME)));
-            bean.setContractId(cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_ID)));
-            bean.setSignDate(cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_SIGN_DATE)));
+            bean.setAutoId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_CONTRACT_AUTO_ID)))); //业务id
+            bean.setBusinessName(cursor.getString(cursor.getColumnIndex(COLUMN_BUSINESS_NAME)));  //业务名称
+            bean.setContractId(cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_ID)));   //业务编号
+            bean.setSignDate(cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_SIGN_DATE)));  //合同签订时间
             HashMap map = new HashMap();
-            map.put(OPENING_AMOUNT, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_OPENING_AMOUNT)));
-            map.put(CREDIT_BALANCE, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_CREDIT_BALANCE)));
+            map.put(OPENING_AMOUNT, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_OPENING_AMOUNT))); //开证金额
+            map.put(CREDIT_BALANCE, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_CREDIT_BALANCE)));  //信用证余额
             bean.setMapObject(map);
             list.add(bean);
         }
@@ -543,12 +533,12 @@ public class DataBaseSQLiteUtil {
         List<ContractBean> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             ContractBean bean = new ContractBean();
-            bean.setAutoId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_CONTRACT_AUTO_ID))));
-            bean.setBusinessName(cursor.getString(cursor.getColumnIndex(COLUMN_BUSINESS_NAME)));
-            bean.setContractId(cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_ID)));
+            bean.setAutoId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_CONTRACT_AUTO_ID)))); //业务id
+            bean.setBusinessName(cursor.getString(cursor.getColumnIndex(COLUMN_BUSINESS_NAME)));  //业务名称
+            bean.setContractId(cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_ID)));  //业务编号
             HashMap map = new HashMap();
-            map.put(OPENING_AMOUNT, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_OPENING_AMOUNT)));
-            map.put(CREDIT_BALANCE, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_CREDIT_BALANCE)));
+            map.put(OPENING_AMOUNT, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_OPENING_AMOUNT)));  //开证金额
+            map.put(CREDIT_BALANCE, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_CREDIT_BALANCE)));  //信用证余额
             bean.setMapObject(map);
             list.add(bean);
         }
@@ -573,11 +563,11 @@ public class DataBaseSQLiteUtil {
         List<ContractBean> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             ContractBean bean = new ContractBean();
-            bean.setAutoId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_CONTRACT_AUTO_ID))));
-            bean.setContractId(cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_ID)));
+            bean.setAutoId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_CONTRACT_AUTO_ID))));  //业务id
+            bean.setContractId(cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_ID)));  //业务编号
             HashMap map = new HashMap();
-            map.put(OPENING_AMOUNT, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_OPENING_AMOUNT)));
-            map.put(CREDIT_BALANCE, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_CREDIT_BALANCE)));
+            map.put(OPENING_AMOUNT, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_OPENING_AMOUNT)));  //开证金额
+            map.put(CREDIT_BALANCE, cursor.getString(cursor.getColumnIndex(COLUMN_CONTRACT_CREDIT_BALANCE)));  //信用证余额
             bean.setMapObject(map);
             list.add(bean);
         }
@@ -595,10 +585,10 @@ public class DataBaseSQLiteUtil {
     public static long insertToPleasantMessage(PleasantMessageBean bean) {
         openDataBase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_PLEASANT_MESSAGE_MSG_TITLE, bean.getMsgTitle()); // 消息标题
-        values.put(COLUMN_PLEASANT_MESSAGE_MSG_CONTENT, bean.getMsgContent()); // 消息内容
-        values.put(COLUMN_PLEASANT_MESSAGE_MSG_IS_READ, bean.getMsgIsRead()); // 消息时间
-        values.put(COLUMN_PLEASANT_MESSAGE_MSG_DATE_AND_TIME, bean.getMsgDateAndTime()); // 消息是否已读
+        values.put(COLUMN_PLEASANT_MESSAGE_MSG_TITLE, bean.getMsgTitle());  // 消息标题
+        values.put(COLUMN_PLEASANT_MESSAGE_MSG_CONTENT, bean.getMsgContent());  // 消息内容
+        values.put(COLUMN_PLEASANT_MESSAGE_MSG_IS_READ, bean.getMsgIsRead());  // 消息时间
+        values.put(COLUMN_PLEASANT_MESSAGE_MSG_DATE_AND_TIME, bean.getMsgDateAndTime());  // 消息是否已读
         long insert = mDatabase.insert(TABLE_NAME_PLEASANT_MESSAGE, null, values);
         closeDataBase();
         return insert;
@@ -619,11 +609,11 @@ public class DataBaseSQLiteUtil {
         List<PleasantMessageBean> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             PleasantMessageBean bean = new PleasantMessageBean();
-            bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_ID))));
-            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_TITLE)));
-            bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_CONTENT)));
-            bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_IS_READ)));
-            bean.setMsgDateAndTime(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_DATE_AND_TIME)));
+            bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_ID))));  //提示信息id
+            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_TITLE)));  //提示信息标题
+            bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_CONTENT)));  //提示信息内容
+            bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_IS_READ)));  //信息是否已读
+            bean.setMsgDateAndTime(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_DATE_AND_TIME))); //提示信息时间
             list.add(bean);
         }
         cursor.close();
@@ -645,11 +635,11 @@ public class DataBaseSQLiteUtil {
         List<PleasantMessageBean> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             PleasantMessageBean bean = new PleasantMessageBean();
-            bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_ID))));
-            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_TITLE)));
-            bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_CONTENT)));
-            bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_IS_READ)));
-            bean.setMsgDateAndTime(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_DATE_AND_TIME)));
+            bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_ID))));  //提示信息id
+            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_TITLE)));  //提示信息标题
+            bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_CONTENT)));  //提示信息内容
+            bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_IS_READ)));  //提示信息是否已读
+            bean.setMsgDateAndTime(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_DATE_AND_TIME)));  //提示信息时间
             list.add(bean);
         }
         cursor.close();

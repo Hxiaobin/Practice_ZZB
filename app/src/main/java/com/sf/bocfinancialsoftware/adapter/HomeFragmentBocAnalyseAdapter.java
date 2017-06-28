@@ -17,7 +17,6 @@ import java.util.List;
  * 首页中银分析列表适配器
  * Created by sn on 2017/6/8.
  */
-
 public class HomeFragmentBocAnalyseAdapter extends BaseAdapter {
 
     private Context context;
@@ -73,4 +72,5 @@ public class HomeFragmentBocAnalyseAdapter extends BaseAdapter {
         private TextView tvHomeFragmentBOCAnalyseNewsDesc;   //新闻描述
         private ImageView ivHomeFragmentExpandReading;       //展开阅读
     }
+
 }

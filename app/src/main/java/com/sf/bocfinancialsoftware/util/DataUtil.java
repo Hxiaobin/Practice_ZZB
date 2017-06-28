@@ -279,7 +279,7 @@ public class DataUtil {
         for (BusinessBean bean : businessBeanList) {
             DataBaseSQLiteUtil.insertToBusiness(bean);
         }
-        //插合同表
+        //插入合同表
         HashMap<Object, Object> mapObject1 = new HashMap<>();
         mapObject1.put(OPENING_AMOUNT, "1000000");
         mapObject1.put(CREDIT_BALANCE, "11000000");

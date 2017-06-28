@@ -30,7 +30,6 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.START_DATE;
  * 业务查询条件
  * Created by sn on 2017/6/14.
  */
-
 public class BusinessQueryCriteriaActivity extends FragmentActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private ImageView ivTitleBarBack;  //返回
@@ -44,12 +43,11 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
     private String businessName; //业务名称
     private DatePickerDialog startDatePickerDialog;  //开始日期选择器对话框
     private DatePickerDialog endDatePickerDialog;  //结束日期选择器对话框
-    private Calendar startCalendar; //日历
-    private Calendar endCalendar; //日历
-    private Date date;
-    private DateFormat format;
-    private String currentYear;
-    private DateFormat format2;
+    private Calendar calendar; //开始时间选择器日历对象
+    private Date date;  //日期对象
+    private DateFormat format;  //日期格式化对象，年
+    private DateFormat format2; //日期格式化对象，年月日
+    private String currentYear;  //当前年份
 
 
     @Override
@@ -82,15 +80,13 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
         businessName = intent.getStringExtra(BUSINESS_NAME);//获取业务类别名称
         tvTitleBarTitle.setText(businessName);
         ivTitleBarBack.setVisibility(View.VISIBLE);
-        startCalendar = Calendar.getInstance();
-        endCalendar = Calendar.getInstance();
-        startDatePickerDialog = DatePickerDialog.newInstance(this, startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH), startCalendar.get(Calendar.DAY_OF_MONTH), false);
-        endDatePickerDialog = DatePickerDialog.newInstance(this, endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH), endCalendar.get(Calendar.DAY_OF_MONTH), false);
-        //获取当前年份
+        calendar = Calendar.getInstance();
+        startDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), false);
+        endDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), false);
         date = new Date();
         format = new SimpleDateFormat("yyyy");
         format2 = new SimpleDateFormat("yyyy-MM-dd");
-        currentYear = format.format(date);
+        currentYear = format.format(date);   //获取当前年份
     }
 
     protected void initListener() {
@@ -155,12 +151,12 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
     }
 
     /**
-     * 日期选择回传值
+     * 处理日期选择回传值
      *
-     * @param datePickerDialog
-     * @param year
-     * @param month
-     * @param day
+     * @param datePickerDialog 时间选择器
+     * @param year             年
+     * @param month            月
+     * @param day              日
      */
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
@@ -229,6 +225,6 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
+
 }

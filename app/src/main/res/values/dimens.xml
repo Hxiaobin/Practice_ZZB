@@ -57,7 +57,7 @@
     <dimen name="line_height_higher">12dp</dimen>
     <dimen name="line_height_more_high">16dp</dimen>
     <!--广告轮播区域高度-->
-    <dimen name="viewPager_advertisingCarousel_high">180dp</dimen>
+    <dimen name="Image_advertisingCarousel_high">180dp</dimen>
     <dimen name="activity_detail_image_high">180dp</dimen>
     <!--按钮宽度高度-->
     <dimen name="button_width_small">64dp</dimen>

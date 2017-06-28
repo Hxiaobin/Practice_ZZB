@@ -115,4 +115,5 @@ public class BusinessQueryAdapter extends BaseExpandableListAdapter {
     private static class ChildItemViewHolder {
         private TextView tvChildItemName; //二级目录名称
     }
+
 }

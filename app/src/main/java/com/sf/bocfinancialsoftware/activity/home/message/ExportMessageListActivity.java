@@ -40,7 +40,6 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_C
  * 出口通知列表
  * Created by sn on 2017/6/12.
  */
-
 public class ExportMessageListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
 
     private ImageView ivTitleBarBack;  //返回
@@ -55,7 +54,7 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
     private MessageAdapter messageAdapter; //列表适配器
     private List<MessageReminderBean> messageBeanList; //已加载的数据
     private List<MessageReminderBean> allMessageList; //所有的数据列表
-    private Intent mIntent;
+    private Intent intent;
     private String typeId;  //消息类型id
     private PopupWindow mPopWindow;
     private LinearLayout lltFilterCondition0;
@@ -135,8 +134,8 @@ public class ExportMessageListActivity extends BaseActivity implements View.OnCl
         tvTitleBarTitle.setText(getString(R.string.common_message_reminder_export));
         ivTitleBarBack.setVisibility(View.VISIBLE);
         ivTitleBarFilter.setVisibility(View.VISIBLE);
-        mIntent = getIntent();
-        typeId = mIntent.getStringExtra(MSG_TYPE_ID);
+        intent = getIntent();
+        typeId = intent.getStringExtra(MSG_TYPE_ID);
         page = 0;
         filter = "";
         messageBeanList = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4); //已经加载的数据个数，现在没有筛选条件

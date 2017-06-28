@@ -30,7 +30,6 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.NEWS_ID;
  * 中银分析列表
  * Created by sn on 2017/6/8.
  */
-
 public class BocAnalyseListActivity extends BaseActivity implements AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
 
     private ImageView ivTitleBarBack;  //返回按钮
@@ -45,7 +44,7 @@ public class BocAnalyseListActivity extends BaseActivity implements AdapterView.
     private List<BocAnalyseBean> allBocAnalyseBeanList; //所有的数据列表
     private BocAnalyseAdapter bocAnalyseAdapter; //列表适配器
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private int page = 0;
+    private int page = 0; //查询页码
     private Handler mHandler = new Handler() {  //主线程中的Handler对象
         @Override
         public void handleMessage(Message msg) {
@@ -167,7 +166,7 @@ public class BocAnalyseListActivity extends BaseActivity implements AdapterView.
                     public void run() {
                         super.run();
                         try {
-                            sleep(1000); //睡眠3秒
+                            sleep(1000); //睡眠1秒
                             Message msg = new Message();
                             msg.what = 16;
                             mHandler.sendMessage(msg);
@@ -183,7 +182,7 @@ public class BocAnalyseListActivity extends BaseActivity implements AdapterView.
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0) {  //当滚到最后一行
-            isLastLine = true;
+            isLastLine = true; //标志列表状态
         }
     }
 }
