@@ -33,7 +33,6 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.START_DATE;
  * 业务查询结果
  * Created by sn on 2017/6/15.
  */
-
 public class BusinessQueryResultActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
 
     private ImageView ivTitleBarBack;  //返回
@@ -60,7 +59,7 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 7) {
-                //下拉刷新，三秒睡眠之后   重新加载
+                //下拉刷新，1秒睡眠之后   重新加载
                 page = 0;
                 List<ContractBean> list = getQueryResult(businessName, startDate, endDate, contractId, page, 5);
                 if (list == null || list.size() <= 0) {
@@ -194,7 +193,6 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
                 }
             }
         }.start();
-
     }
 
     @Override
@@ -228,4 +226,5 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
             isLastLine = true;
         }
     }
+
 }

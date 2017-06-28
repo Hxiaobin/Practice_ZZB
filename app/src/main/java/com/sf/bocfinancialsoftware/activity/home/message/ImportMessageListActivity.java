@@ -41,7 +41,6 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_IMPORT_S
  * 进口通知列表
  * Created by sn on 2017/6/12.
  */
-
 public class ImportMessageListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
 
     private ImageView ivTitleBarBack;  //返回
@@ -56,7 +55,7 @@ public class ImportMessageListActivity extends BaseActivity implements View.OnCl
     private MessageAdapter messageAdapter; //列表适配器
     private List<MessageReminderBean> messageBeanList; //已加载的数据列表
     private List<MessageReminderBean> allMessageList; //所有的数据列表
-    private Intent mIntent;
+    private Intent intent;
     private String typeId;  //消息类型id
     private PopupWindow mPopWindow;
     private LinearLayout lltFilterCondition0;
@@ -75,7 +74,7 @@ public class ImportMessageListActivity extends BaseActivity implements View.OnCl
     private TextView tvFilterCondition6;
     private int msgReadSum; //已读消息数量
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private int page = 0;
+    private int page = 0;  //查询页码
     private String filter = ""; //筛选条件
     private Handler mHandler = new Handler() {  //主线程中的Handler对象
         @Override
@@ -137,8 +136,8 @@ public class ImportMessageListActivity extends BaseActivity implements View.OnCl
         tvTitleBarTitle.setText(getString(R.string.common_message_reminder_import));
         ivTitleBarBack.setVisibility(View.VISIBLE);
         ivTitleBarFilter.setVisibility(View.VISIBLE);
-        mIntent = getIntent();
-        typeId = mIntent.getStringExtra(MSG_TYPE_ID);
+        intent = getIntent();
+        typeId = intent.getStringExtra(MSG_TYPE_ID);
         filter = "";
         messageBeanList = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4); //已经加载的数据个数，现在没有筛选条件
         messageAdapter = new MessageAdapter(ImportMessageListActivity.this, messageBeanList);

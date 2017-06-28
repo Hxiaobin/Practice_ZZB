@@ -20,7 +20,6 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.OPENING_AMOUNT
  * 业务查询列表适配器
  * Created by sn on 2017/6/12.
  */
-
 public class BusinessAdapter extends BaseAdapter {
 
     private Context context;
@@ -71,4 +70,5 @@ public class BusinessAdapter extends BaseAdapter {
         private TextView tvOpeningAmount; //开证金额
         private TextView tvCreditBalance; //信用证余额
     }
+
 }

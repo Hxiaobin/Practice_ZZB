@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activity_common_background_gray"
@@ -10,10 +11,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vpAdvertisingCarousel"
+        <com.jude.rollviewpager.RollPagerView
+            android:id="@+id/rollPagerViewHome"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/viewPager_advertisingCarousel_high" />
+            android:layout_height="@dimen/Image_advertisingCarousel_high"
+            app:rollviewpager_hint_gravity="center"
+            app:rollviewpager_play_delay="3000"/>
 
         <LinearLayout
             android:layout_width="match_parent"

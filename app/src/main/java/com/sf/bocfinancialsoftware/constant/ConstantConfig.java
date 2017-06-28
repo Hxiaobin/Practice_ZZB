@@ -3,9 +3,7 @@ package com.sf.bocfinancialsoftware.constant;
 import com.sf.bocfinancialsoftware.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 常量类
@@ -21,7 +19,7 @@ public class ConstantConfig {
     public static final String LOGOUT = "logout";//登录
     public static final String USER = "user"; //用户信息
     public static final String TITLE = "title";
-
+    //中银分析
     public static final String NEWS_ID = "newsId";  //新闻id
     public static final String MSG_TYPE_ID = "typeId";  //消息类型id
     public static final List<String> IMAGE_LIST = new ArrayList<String>() {{ //轮播图片集合
@@ -29,7 +27,6 @@ public class ConstantConfig {
         add(1, R.mipmap.image_banner2 + "");
         add(2, R.mipmap.image_banner3 + "");
     }};
-
     //消息类型
     public static final String MSG_TYPE_ID_IMPORT = "1";  //进口通知
     public static final String MSG_TYPE_ID_EXPORT = "2";  //出口通知
@@ -95,6 +92,4 @@ public class ConstantConfig {
     //欢迎页
     public static final String FILE_FIRST_IN = "guideFirst"; //保存是否是第一次进入app
     public static final String IS_FIRST_IN = "isFirstIn"; //是否是第一次进入app
-
-
 }

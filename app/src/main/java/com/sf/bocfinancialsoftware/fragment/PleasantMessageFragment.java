@@ -39,7 +39,7 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
     private List<PleasantMessageBean> allPleasantMessageBeanList; //数据源
     private PleasantMessageAdapter adapter; //列表适配器
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private int page = 0;
+    private int page = 0;  //查询页码
     private Handler mHandler = new Handler() {  //主线程中的Handler对象
         @Override
         public void handleMessage(Message msg) {
@@ -67,7 +67,6 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
             }
         }
     };
-
 
     @Nullable
     @Override

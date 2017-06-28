@@ -18,7 +18,6 @@ import java.util.List;
  * 中银分析适配器
  * Created by sn on 2017/6/8.
  */
-
 public class BocAnalyseAdapter extends BaseAdapter {
 
     private Context context;
@@ -72,4 +71,5 @@ public class BocAnalyseAdapter extends BaseAdapter {
         private TextView tvBocAnalyseNewsDesc;  //新闻描述
         private TextView tvBocAnalyseNewsDate;  //新闻时间
     }
+
 }

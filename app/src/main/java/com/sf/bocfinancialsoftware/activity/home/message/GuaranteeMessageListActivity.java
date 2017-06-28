@@ -53,7 +53,7 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
     private MessageAdapter messageAdapter; //列表适配器
     private List<MessageReminderBean> messageBeanList; //消息实体
     private List<MessageReminderBean> allMessageList; //所有的数据列表
-    private Intent mIntent;
+    private Intent intent;
     private String typeId;  //消息类型id
     private PopupWindow mPopWindow;
     private LinearLayout lltFilterCondition0;
@@ -132,8 +132,8 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
         tvTitleBarTitle.setText(getString(R.string.common_message_reminder_guarantee));
         ivTitleBarBack.setVisibility(View.VISIBLE);
         ivTitleBarFilter.setVisibility(View.VISIBLE);
-        mIntent = getIntent();
-        typeId = mIntent.getStringExtra(MSG_TYPE_ID);
+        intent = getIntent();
+        typeId = intent.getStringExtra(MSG_TYPE_ID);
         filter = "";
         messageBeanList = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4); //已经加载的数据个数，现在没有筛选条件
         messageAdapter = new MessageAdapter(GuaranteeMessageListActivity.this, messageBeanList);
