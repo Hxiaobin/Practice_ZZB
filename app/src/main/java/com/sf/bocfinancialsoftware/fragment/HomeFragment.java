@@ -282,6 +282,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         protected static final long MSG_DELAY = 3000; //轮播间隔时间
         private WeakReference<Fragment> weakReference; //使用弱引用避免Handler泄露
         private int currentItem = 0;
+
         protected AdvertisingCarouselHandler(WeakReference<Fragment> wk) {
             weakReference = wk;
         }

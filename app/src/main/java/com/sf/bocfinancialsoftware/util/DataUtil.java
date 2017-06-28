@@ -23,7 +23,7 @@ import static com.sf.bocfinancialsoftware.constant.SQLiteConfig.COLUMN_BUSINESS_
 import static com.sf.bocfinancialsoftware.constant.SQLiteConfig.COLUMN_BUSINESS_TYPE_ID;
 
 /**
- * Created by john on 2017/6/9.
+ * Created by sn on 2017/6/9.
  */
 
 public class DataUtil {
@@ -108,7 +108,6 @@ public class DataUtil {
                 "2014-12-29",
                 "信用证（Letter of Credit，L/C），是指开证银行应申请人（买方）的要求并按其指示向受益人开立的载有一定金额的、在一定的期限内凭符合规定的单据付款的书面保证文件。信用证是国际贸易中最主要、最常用的支付方式。",
                 MSG_UN_READ));
-
         //出口通知
         messageReminderBeanList.add(new MessageReminderBean(
                 ConstantConfig.MSG_TYPE_ID_EXPORT,
@@ -128,7 +127,6 @@ public class DataUtil {
                 "2015-01-01",
                 "开证银行根据信用证的付款条件规定，对外履行付款，同时，对进口公司办理进口结汇，由进口公司填写“购买外汇申请书”和“进口付汇核销单”，然后由银行根据中国银行外汇牌价表的汇率，以人民币兑换信用证上所规定的外币及各项费用。",
                 MSG_UN_READ));
-
         //保函通知
         messageReminderBeanList.add(new MessageReminderBean(
                 ConstantConfig.MSG_TYPE_ID_GUARANTEE,
@@ -160,7 +158,6 @@ public class DataUtil {
                 "2014-12-30",
                 "融资性担保，是指担保项下主合同具有融资性质的担保，包括但不限于为借款、债券发行、融资租赁等提供的，及其他为申请人融资行为而承担保证责任的担保",
                 MSG_UN_READ));
-
         //保理通知
         messageReminderBeanList.add(new MessageReminderBean(
                 ConstantConfig.MSG_TYPE_ID_FACTORING,
@@ -205,7 +202,6 @@ public class DataUtil {
                 "2015-01-01",
                 "远期外汇业务即预约购买与预约出卖的外汇业务，亦即买卖双方先签订合同，规定买卖外汇的币种、数额、汇率和将来交割的时间，到规定的交割日期，再按合同规定，卖方交汇，买方付款的外汇业务。",
                 MSG_UN_READ));
-
         //插入数据库
         for (MessageReminderBean bean : messageReminderBeanList) {
             DataBaseSQLiteUtil.insertToMessageReminder(bean);
@@ -341,14 +337,12 @@ public class DataUtil {
                         "        2、请不要销卡，否则，您下次的工资或补助款将无法发放。如卡片丢失，请及时来我行挂失。",
                 MSG_UN_READ,
                 "2015-11-03    15:50"));
-
         pleasantMessageBeanList.add(new PleasantMessageBean(
                 "温馨提示3",
                 "尊敬的客户：\n" +
                         "        为提高我行电子银行服务质量、维护您的资金安全和合法权益，请不要将您的电子银行密码设为相同或连续升降排列的数字和字母、不要设为银行卡号、账号、身份证号、电话号码、手机号的连续几位。",
                 MSG_UN_READ,
                 "2015-11-02    08:50"));
-
         pleasantMessageBeanList.add(new PleasantMessageBean(
                 "温馨提示4",
                 "尊敬的客户：\n" +

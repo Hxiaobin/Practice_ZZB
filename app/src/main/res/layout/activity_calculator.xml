@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activity_common_background_gray"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_top_bar"/>
+    <include layout="@layout/layout_top_bar" />
 
     <LinearLayout
         android:id="@+id/llCurrencyCalculator"
@@ -19,10 +18,10 @@
         android:padding="@dimen/common_padding_normal">
 
         <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_hljsq720"/>
+            android:src="@mipmap/ic_hljsq720" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -33,7 +32,7 @@
             <TextView
                 style="@style/activity_text_normal_black"
                 android:layout_centerVertical="true"
-                android:text="@string/tv_currency_calculator"/>
+                android:text="@string/tv_currency_calculator" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -41,7 +40,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/jt_shallow_gray_right"/>
+                android:src="@mipmap/jt_shallow_gray_right" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -49,7 +48,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_margin_small_to_normal"
-        android:background="@color/line_horizontal_gray"/>
+        android:background="@color/line_horizontal_gray" />
 
     <LinearLayout
         android:id="@+id/llPriceCalculator"
@@ -61,10 +60,10 @@
         android:padding="@dimen/common_padding_normal">
 
         <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_bjjsq720"/>
+            android:src="@mipmap/ic_bjjsq720" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -76,14 +75,14 @@
                 style="@style/activity_text_normal_black"
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
-                android:text="@string/tv_price_calculator"/>
+                android:text="@string/tv_price_calculator" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/jt_shallow_gray_right"/>
+                android:src="@mipmap/jt_shallow_gray_right" />
 
         </RelativeLayout>
     </LinearLayout>

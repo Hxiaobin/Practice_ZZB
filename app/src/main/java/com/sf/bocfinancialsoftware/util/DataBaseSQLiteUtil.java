@@ -134,7 +134,6 @@ public class DataBaseSQLiteUtil {
         }
     }
 
-
     /**
      * 记得关闭数据库
      */
@@ -226,7 +225,6 @@ public class DataBaseSQLiteUtil {
         closeDataBase();
         return list;
     }
-
 
     /**
      * 分页查询中银分析列表

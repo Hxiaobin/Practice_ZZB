@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.sf.bocfinancialsoftware">
+    package="com.sf.bocfinancialsoftware">
 
     <application
         android:name=".util.ContextUtil"
@@ -12,65 +12,63 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".activity.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.home.analyse.BocAnalyseListActivity"/>
-        <activity android:name=".activity.home.analyse.BocAnalyseDetailActivity"/>
-        <activity android:name=".activity.home.message.MessageReminderActivity"/>
-        <activity android:name=".activity.home.message.ImportMessageListActivity"/>
-        <activity android:name=".activity.home.message.ExportMessageListActivity"/>
-        <activity android:name=".activity.home.message.GuaranteeMessageListActivity"/>
-        <activity android:name=".activity.home.message.FactoringMessageListActivity"/>
-        <activity android:name=".activity.home.message.ForwardMessageListActivity"/>
-        <activity android:name=".activity.home.business.BusinessQueryActivity"/>
-        <activity android:name=".activity.home.business.BusinessQueryCriteriaActivity"/>
-        <activity android:name=".activity.home.business.BusinessQueryResultActivity"/>
+        <activity android:name=".activity.home.analyse.BocAnalyseListActivity" />
+        <activity android:name=".activity.home.analyse.BocAnalyseDetailActivity" />
+        <activity android:name=".activity.home.message.MessageReminderActivity" />
+        <activity android:name=".activity.home.message.ImportMessageListActivity" />
+        <activity android:name=".activity.home.message.ExportMessageListActivity" />
+        <activity android:name=".activity.home.message.GuaranteeMessageListActivity" />
+        <activity android:name=".activity.home.message.FactoringMessageListActivity" />
+        <activity android:name=".activity.home.message.ForwardMessageListActivity" />
+        <activity android:name=".activity.home.business.BusinessQueryActivity" />
+        <activity android:name=".activity.home.business.BusinessQueryCriteriaActivity" />
+        <activity android:name=".activity.home.business.BusinessQueryResultActivity" />
         <activity
             android:name=".activity.user.UserLoginActivity"
-            android:theme="@style/LoginTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.user.UserActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.user.SuggestionActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.user.AboutActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.user.RegisteredActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.tool.rate.RateActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.tool.finance.FinanceProductListActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.tool.finance.FinanceProductDetailActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.tool.calculator.CalculatorActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.tool.calculator.ExchangeRateCalculateActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.tool.product.IntelProductListActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.tool.product.IntelProductDetailActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sf.bocfinancialsoftware.activity.tool.calculator.ForwardQuotationCalculateActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.sf.bocfinancialsoftware.activity.financialAssistant.AccountDetailActivity"
-            android:theme="@style/AppTheme"/>
+            android:screenOrientation="portrait" />
+        <activity android:name="com.sf.bocfinancialsoftware.activity.financialAssistant.AccountDetailActivity" />
     </application>
 
 </manifest>

@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_margin_micro"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_nav_user"
             android:visibility="gone" />

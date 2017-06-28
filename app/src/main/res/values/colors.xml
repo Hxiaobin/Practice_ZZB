@@ -13,11 +13,14 @@
     <color name="gray">#BDBDBD</color>
     <color name="grayLight">#e2e2e2</color>
     <color name="red">#e7262b</color>
+    <color name="orange">#f5a79a</color>
+    <color name="yellowLight">#fafae5</color>
+    <color name="pink">#EDBEBB</color>
     <color name="black">#000000</color>
     <color name="blue">#4c92e2</color>
     <color name="blueLight">#24bbfa</color>
     <color name="blueDark">#156fbb</color>
-    <color name="green">#33c079</color>
+    <color name="green">#00b1bd</color>
     <color name="greenLight">#569b91</color>
     <color name="yellow">#d99828</color>
     <color name="white">#ffffff</color>
@@ -35,20 +38,14 @@
     <color name="swipe_color_2">#E07570</color>
     <color name="swipe_color_3">#fc9b96</color>
     <color name="swipe_color_4">#fac0bd</color>
-
-    <!--//////////////////////////////////////////////////////////-->
     <!--通用背景颜色-->
     <color name="background">#ececec</color>
-
     <!-- 通用颜色值 -->
     <color name="login_text">#bfbfbf</color>
-
     <!-- 个人中心登录横线-->
     <color name="line">#ececec</color>
-
     <!-- 个人中心注册按钮-->
     <color name="btn_registered">#2f9df1</color>
-
     <!-- 个人中心登录按钮-->
     <color name="btn_login">#f55656</color>
     <!-- 财务助手副标题-->
@@ -56,10 +53,11 @@
     <!-- 财务助手时间-->
     <color name="tv_time">#6e6e6e</color>
     <!-- 财务助手余额-->
-    <color name="tv_account">#e10202</color>
+    <color name="tv_account">#ee7c6a</color>
     <!-- 查找边框按钮-->
     <color name="et_border">#d2d2d2</color>
-    <color name="tagcloud_color">#f2f2f2</color>
+    <color name="tagcloud_color">#ffffff</color>
     <!-- 汇率 表头蓝色 -->
     <color name="rate_blue">#2f9df1</color>
+    <color name="rate_green">#00b1bd</color>
 </resources>

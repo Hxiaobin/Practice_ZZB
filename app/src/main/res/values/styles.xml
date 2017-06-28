@@ -72,16 +72,16 @@
         <item name="android:lines">1</item>
         <item name="android:textColor">@color/common_text_gray</item>
     </style>
-<!---->
+    <!---->
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <!-- activity设置成对话框的无标题主题 -->
     <style name="LoginTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowActionBar">false</item>
@@ -151,23 +151,26 @@
     <style name="tv_rate">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">0.25</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:textColor">@color/tv_subtitle</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/shape_rate_textview</item>
-        <item name="android:padding">@dimen/common_padding_normal</item>
+        <item name="android:paddingLeft">@dimen/common_padding_normal</item>
+        <item name="android:paddingRight">@dimen/common_padding_normal</item>
+        <item name="android:paddingTop">@dimen/common_padding_small_to_normal</item>
+        <item name="android:paddingBottom">@dimen/common_padding_small_to_normal</item>
         <item name="android:lines">1</item>
     </style>
     <!-- 汇率 头部 -->
     <style name="tv_rate_head">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">0.25</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/shape_rate_head</item>
-        <item name="android:padding">@dimen/common_padding_normal</item>
+        <item name="android:padding">@dimen/common_padding_small_to_normal</item>
     </style>
 </resources>

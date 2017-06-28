@@ -19,6 +19,7 @@
     <dimen name="common_padding_small">8dp</dimen>
     <dimen name="common_padding_small_to_normal">12dp</dimen>
     <dimen name="common_padding_normal">16dp</dimen>
+    <dimen name="common_padding_big">20dp</dimen>
     <!--通用View的高度-->
     <dimen name="common_view_high_null">0dp</dimen>
 
