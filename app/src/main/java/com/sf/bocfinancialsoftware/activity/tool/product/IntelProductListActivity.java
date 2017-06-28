@@ -125,7 +125,7 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
             }
             tclToolProductTrade.setTags(list2);
         } else {
-            boolean flag = true;
+            boolean flag1 = true;
             //供应链融资
             int supplyLen = productSupplyName.length;
             for (int i = 0; i < supplyLen; i++) {
@@ -134,12 +134,17 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
                     boolean contains = productSupplyName[i].contains(searchStr);
                     if (contains) {
                         list.add(productSupplyName[i]);
-                        flag = false;
+                        flag1 = false;
                         break;
                     }
                 }
             }
+            if (flag1) {
+                llSupply.setVisibility(View.GONE);
+                Toast.makeText(this, "没有找到相匹配的产品", Toast.LENGTH_LONG).show();
+            }
             //国际贸易结算
+            boolean flag2 = true;
             int tradeLen = productTradeName.length;
             for (int i = 0; i < supplyLen; i++) {
                 int len = tradeLen - searchStr.length() + 1;
@@ -147,12 +152,13 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
                     boolean contains = productTradeName[i].contains(searchStr);
                     if (contains) {
                         list2.add(productTradeName[i]);
-                        flag = false;
+                        flag2 = false;
                         break;
                     }
                 }
             }
-            if (flag) {
+            if (flag2) {
+                llTrade.setVisibility(View.GONE);
                 Toast.makeText(this, "没有找到相匹配的产品", Toast.LENGTH_LONG).show();
             }
             Log.e("IntelProductList", "show: " + list.size());

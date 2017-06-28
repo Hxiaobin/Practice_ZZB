@@ -30,7 +30,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView ivUserImage; //用户头像
     private Button btnExit;
     private TextView tvUserName; //用户名
-    private LinearLayout llSuggestion, llUpdate, llAbout;
+    private RelativeLayout llSuggestion, llUpdate, llAbout;
     private SharedPreferencesHelper sharedPreferencesHelper;
     private String userName;
     private String userPasswd;
@@ -67,9 +67,9 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         ivBack = (ImageView) findViewById(R.id.ivBack);
         ivUserImage = (ImageView) findViewById(R.id.ivUserImage);
         btnExit = (Button) findViewById(R.id.btnExit);
-        llSuggestion = (LinearLayout) findViewById(R.id.llSuggestion);
-        llUpdate = (LinearLayout) findViewById(R.id.llUpdate);
-        llAbout = (LinearLayout) findViewById(R.id.llAbout);
+        llSuggestion = (RelativeLayout) findViewById(R.id.llSuggestion);
+        llUpdate = (RelativeLayout) findViewById(R.id.llUpdate);
+        llAbout = (RelativeLayout) findViewById(R.id.llAbout);
     }
 
     private void initDate() {

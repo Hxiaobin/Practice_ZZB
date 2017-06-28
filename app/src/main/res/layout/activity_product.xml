@@ -36,15 +36,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
+                    android:textColor="@color/common_text_black"
                     android:maxLength="16"
+                    android:paddingLeft="@dimen/common_padding_small"
                     android:singleLine="true"
-                    android:textCursorDrawable="@null" />
+                    android:textCursorDrawable="@null"/>
 
                 <ImageView
                     android:id="@+id/ivSearch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/search" />
+                    android:src="@mipmap/search"/>
             </LinearLayout>
 
             <LinearLayout
@@ -93,27 +95,25 @@
                 android:paddingRight="@dimen/common_margin_normal">
 
                 <TextView
-                    style="@style/activity_text_normal_black"
-                    android:layout_marginTop="@dimen/common_margin_small_to_normal"
-                    android:text="国际贸易结算" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/common_padding_normal"
+                    android:text="国际贸易结算"
+                    android:textSize="@dimen/text_size_normal"/>
 
                 <me.gujun.android.taggroup.TagGroup
                     android:id="@+id/tclToolProductTrade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/common_margin_normal"
-                    android:layout_marginTop="@dimen/common_margin_normal"
-                    app:atg_backgroundColor="#fcf3f0"
-                    app:atg_borderColor="@color/pink"
-                    app:atg_checkedBackgroundColor="@color/pink"
-                    app:atg_checkedTextColor="#E3DCDA"
-                    app:atg_horizontalPadding="@dimen/common_padding_big"
-                    app:atg_horizontalSpacing="@dimen/common_margin_normal"
-                    app:atg_pressedBackgroundColor="@color/pink"
-                    app:atg_textColor="#ba8c96"
+                    android:layout_margin="@dimen/common_margin_normal"
+                    app:atg_backgroundColor="@color/background"
+                    app:atg_borderColor="@color/tv_time"
+                    app:atg_horizontalPadding="20dp"
+                    app:atg_horizontalSpacing="15dp"
+                    app:atg_textColor="@color/tv_time"
                     app:atg_textSize="@dimen/text_size_normal"
-                    app:atg_verticalPadding="@dimen/common_padding_small"
-                    app:atg_verticalSpacing="@dimen/common_margin_small">
+                    app:atg_verticalPadding="@dimen/medium_padding"
+                    app:atg_verticalSpacing="@dimen/small_margin">
 
                 </me.gujun.android.taggroup.TagGroup>
             </LinearLayout>
