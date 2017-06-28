@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,8 +28,8 @@
         <activity android:name=".activity.home.business.BusinessQueryActivity" />
         <activity android:name=".activity.home.business.BusinessQueryCriteriaActivity" />
         <activity android:name=".activity.home.business.BusinessQueryResultActivity" />
-        <!--<activity android:name=".activity.GuideActivity" />-->
-        <!--<activity android:name=".activity.MainActivity" />-->
+        <activity android:name=".activity.GuideActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.user.UserLoginActivity"
             android:screenOrientation="portrait"
