@@ -1,6 +1,5 @@
 package com.sf.bocfinancialsoftware.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

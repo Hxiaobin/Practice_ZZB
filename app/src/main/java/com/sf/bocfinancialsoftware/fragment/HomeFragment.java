@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jude.rollviewpager.RollPagerView;
@@ -26,12 +28,20 @@ import com.sf.bocfinancialsoftware.activity.home.message.MessageReminderActivity
 import com.sf.bocfinancialsoftware.adapter.HomeFragmentBocAnalyseAdapter;
 import com.sf.bocfinancialsoftware.adapter.ImageAdapter;
 import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
+import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
 import com.sf.bocfinancialsoftware.util.DataBaseSQLiteUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
 
 import java.util.List;
 
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.IMAGE_LIST;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.IMPORT_REQUEST;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.IMPORT_RESPONSE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_READ_SUM;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TOTAL_READ_SUM;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TOTAL_UN_REN_SUM_REQUEST;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TOTAL_UN_REN_SUM_RESPONSE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_UN_READ;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.NEWS_ID;
 
 /**
@@ -48,6 +58,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     private Button btnMessageReminder;  //通知提醒
     private Button btnBusinessQuery;  //业务查询
     private Button btnBOCAnalyse;  //中银分析
+    private TextView tvMsgTotalReadSum;  //通知总未读数量
     private SwipeRefreshLayout swipeRefreshLayoutHomeFragmentBocAnalyse;  //下拉刷新控件
     private ListView lvHomeFragmentBocAnalyse; //中银分析新闻列表
     private LinearLayout lltEmptyViewBocAnalyseHome; //处理空数据
@@ -56,6 +67,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     private HomeFragmentBocAnalyseAdapter bocAnalyseAdapter; //中银分析列表适配器
     private ImageAdapter imageAdapter;  //图片轮播适配器
     private boolean isLastLine = false;  //列表是否滚动到最后一行
+    private int totalUnReadSum; //总未读数量
     private int page = 0; //查询页码
     private Handler mHandler = new Handler() {  //主线程中的Handler对象
         @Override
@@ -102,6 +114,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         btnMessageReminder = (Button) headView.findViewById(R.id.btnMessageReminder);
         btnBusinessQuery = (Button) headView.findViewById(R.id.btnBusinessQuery);
         btnBOCAnalyse = (Button) headView.findViewById(R.id.btnBOCAnalyse);
+        tvMsgTotalReadSum = (TextView) headView.findViewById(R.id.tvMsgTotalReadSum);
         swipeRefreshLayoutHomeFragmentBocAnalyse = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutHomeFragmentBocAnalyse);
         lvHomeFragmentBocAnalyse = (ListView) view.findViewById(R.id.lvHomeFragmentBocAnalyse);
         lltEmptyViewBocAnalyseHome = (LinearLayout) view.findViewById(R.id.lltEmptyViewBocAnalyseHome);
@@ -113,6 +126,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         rollPagerViewHome.setAdapter(imageAdapter);
         lvHomeFragmentBocAnalyse.setEmptyView(lltEmptyViewBocAnalyseHome); //处理空ListView
         SwipeRefreshUtil.setRefreshCircle(swipeRefreshLayoutHomeFragmentBocAnalyse); //设置刷新样式
+        getMsgTotalUnReadSum(); //初始化的时候，获取通知的总未读数量
+    }
+
+    private void getMsgTotalUnReadSum() {
+        List<MessageReminderBean> msgList = DataBaseSQLiteUtil.queryAllMessageReminderList(); //获取全部类型的所有通知
+        int totalUnReadSum = 0;
+        for (MessageReminderBean bean : msgList) { //遍历通知消息列表
+            if (bean.getMsgIsRead().equals(MSG_UN_READ)) { //如果消息状态为未读状态
+                totalUnReadSum++;
+            }
+        }
+        if (totalUnReadSum <= 0) {
+            tvMsgTotalReadSum.setVisibility(View.GONE);
+        } else {
+            tvMsgTotalReadSum.setText(String.valueOf(totalUnReadSum));
+        }
     }
 
     private void initListener() {
@@ -130,7 +159,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         switch (v.getId()) {
             case R.id.btnMessageReminder: //通知提醒
                 intent = new Intent(getActivity(), MessageReminderActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, MSG_TOTAL_UN_REN_SUM_REQUEST);
                 break;
             case R.id.btnBusinessQuery:  //业务查询
                 intent = new Intent(getActivity(), BusinessQueryActivity.class);
@@ -152,6 +181,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         Intent intent = new Intent(getActivity(), BocAnalyseDetailActivity.class);
         intent.putExtra(NEWS_ID, newsId);
         startActivity(intent);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MSG_TOTAL_UN_REN_SUM_REQUEST && resultCode == MSG_TOTAL_UN_REN_SUM_RESPONSE) { //通知总未读数量
+            int unReadSum = data.getIntExtra(MSG_TOTAL_READ_SUM, 0); //剩余总未读数量
+            if (unReadSum <= 0) {
+                tvMsgTotalReadSum.setVisibility(View.GONE);
+            } else {
+                tvMsgTotalReadSum.setText(String.valueOf(unReadSum));
+            }
+        }
+
     }
 
     /**
