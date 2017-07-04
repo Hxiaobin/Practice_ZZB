@@ -54,6 +54,7 @@ public class UserLoginActivity extends AppCompatActivity implements View.OnClick
         btnRegistered = (Button) findViewById(R.id.btnRegistered);
         etLoginUser = (EditText) findViewById(R.id.etLoginUser);
         etLoginKey = (EditText) findViewById(R.id.etLoginKey);
+        //设置隐藏字体大小
         SetHintTextSize.setHintTextSize(etLoginUser,getString(R.string.et_login_user),12);
         SetHintTextSize.setHintTextSize(etLoginKey,getString(R.string.et_login_key),12);
     }
