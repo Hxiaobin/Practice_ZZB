@@ -26,6 +26,8 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.GUARANTEE_RESP
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.IMPORT_REQUEST;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.IMPORT_RESPONSE;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_READ_SUM;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TOTAL_READ_SUM;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TOTAL_UN_REN_SUM_RESPONSE;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID_EXPORT;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID_FACTORING;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID_FORWARD;
@@ -56,6 +58,7 @@ public class MessageReminderActivity extends BaseActivity implements View.OnClic
     private int guaranteeUnReadSum;  //保函通知总未读数量
     private int factoringUnReadSum;  //保理通知总未读数量
     private int forwardUnReadSum;   //远期通知总未读数量
+    private int totalUnReadSum; //总未读数量
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +120,11 @@ public class MessageReminderActivity extends BaseActivity implements View.OnClic
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
-            case R.id.ivTitleBarBack:
+            case R.id.ivTitleBarBack: //返回
+                intent = new Intent();
+                totalUnReadSum = importUnReadSum + exportUnReadSum + guaranteeUnReadSum + factoringUnReadSum + forwardUnReadSum;  //总未读数量
+                intent.putExtra(MSG_TOTAL_READ_SUM, totalUnReadSum);
+                setResult(MSG_TOTAL_UN_REN_SUM_RESPONSE, intent);
                 finish();
                 break;
             case R.id.lltMessageReminderImport: //进口通知
@@ -156,18 +163,23 @@ public class MessageReminderActivity extends BaseActivity implements View.OnClic
         if (requestCode == IMPORT_REQUEST && resultCode == IMPORT_RESPONSE) { //进口通知未读数量
             int unReadSum = importUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
             showMsgUnReadSum(unReadSum, tvImportUnReadSum);
+            importUnReadSum = unReadSum;
         } else if (requestCode == EXPORT_REQUEST && resultCode == EXPORT_RESPONSE) { //出口通知未读数量
             int unReadSum = exportUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
             showMsgUnReadSum(unReadSum, tvExportUnReadSum);
+            exportUnReadSum = unReadSum;
         } else if (requestCode == GUARANTEE_REQUEST && resultCode == GUARANTEE_RESPONSE) { //保函通知未读数量
             int unReadSum = guaranteeUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
             showMsgUnReadSum(unReadSum, tvGuaranteeUnReadSum);
+            guaranteeUnReadSum = unReadSum;
         } else if (requestCode == FACTORING_REQUEST && resultCode == FACTORING_RESPONSE) { //保理通知未读数量
             int unReadSum = factoringUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
             showMsgUnReadSum(unReadSum, tvFactoringUnReadSum);
+            factoringUnReadSum = unReadSum;
         } else if (requestCode == FORWARD_REQUEST && resultCode == FORWARD_RESPONSE) { //远期通知未读数量
             int unReadSum = forwardUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
             showMsgUnReadSum(unReadSum, tvForwardUnReadSum);
+            forwardUnReadSum = unReadSum;
         }
     }
 

@@ -23,9 +23,9 @@ import static com.sf.bocfinancialsoftware.constant.SQLiteConfig.COLUMN_BUSINESS_
 import static com.sf.bocfinancialsoftware.constant.SQLiteConfig.COLUMN_BUSINESS_TYPE_ID;
 
 /**
+ * 设置通知提醒、业务查询、中银分析、温馨提示的列表数据源
  * Created by sn on 2017/6/9.
  */
-
 public class DataUtil {
 
     /**

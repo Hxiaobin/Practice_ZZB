@@ -3,6 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <!-- 通用margin -->
+    <dimen name="common_margin_more_micro">2dp</dimen>
     <dimen name="common_margin_micro">4dp</dimen>
     <dimen name="common_margin_small">8dp</dimen>
     <dimen name="common_margin_small_to_normal">12dp</dimen>

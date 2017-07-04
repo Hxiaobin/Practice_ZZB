@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     private ViewPager vpMain;
     private HomeFragmentPagerAdapter homeFragmentPagerAdapter;
 
-    private TabLayout.Tab home;
-    private TabLayout.Tab reminder;
-    private TabLayout.Tab financialAssistant;
-    private TabLayout.Tab toolbar;
+    private TabLayout.Tab home;  //首页
+    private TabLayout.Tab reminder;  //温馨提示
+    private TabLayout.Tab financialAssistant;   //财务助手
+    private TabLayout.Tab toolbar;  //工具箱
 
     private List<String> titleList;
     private List<Fragment> fragmentList;

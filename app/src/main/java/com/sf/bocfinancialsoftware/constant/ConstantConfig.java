@@ -37,6 +37,7 @@ public class ConstantConfig {
     public static final String MSG_UN_READ = "0";  //未读
     public static final String MSG_READ = "1";  //已读
     public static final String MSG_READ_SUM = "msgReadSum";  //已读数量
+    public static final String MSG_TOTAL_READ_SUM = "msgTotalReadSum";  //总未读数量
     //业务查询
     public static final String BUSINESS_NAME = "businessName";  //业务类别名称
     public static final String START_DATE = "startTime";  //开始时间
@@ -55,6 +56,8 @@ public class ConstantConfig {
     public static final int FACTORING_RESPONSE = 0x0008;  //保理通知返回码
     public static final int FORWARD_REQUEST = 0x0009;  //远期通知请求码
     public static final int FORWARD_RESPONSE = 0x1000;  //远期通知返回码
+    public static final int MSG_TOTAL_UN_REN_SUM_REQUEST = 0x1001;  //通知总未读数量请求码
+    public static final int MSG_TOTAL_UN_REN_SUM_RESPONSE = 0x1002;  //通知总未读数量返回码
     //扫一扫
     public static final int SCAN_CODE_REQUEST_MAIN = 0x1001;  //Main标题栏扫一扫请求吗
     public static final int SCAN_CODE_REQUEST_BUSINESS_QUERY = 0x1002;  //业务查询页扫一扫请求码
