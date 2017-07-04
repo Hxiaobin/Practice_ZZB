@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
@@ -46,6 +47,7 @@ public class SearchAdapter extends BaseAdapter {
             convertView = View.inflate(mContext, R.layout.item_product_search, null);
             viewHolder = new ViewHolder();
             viewHolder.tvResult = (TextView) convertView.findViewById(R.id.tvResult);
+            viewHolder.llResult = (LinearLayout) convertView.findViewById(R.id.llResult);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -56,5 +58,6 @@ public class SearchAdapter extends BaseAdapter {
 
     class ViewHolder {
         TextView tvResult;
+        LinearLayout llResult;
     }
 }

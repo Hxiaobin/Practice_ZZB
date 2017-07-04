@@ -1,12 +1,13 @@
 package com.sf.bocfinancialsoftware.activity.tool.product;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,7 +20,7 @@ import com.sf.bocfinancialsoftware.adapter.ProductAdapter;
 import com.sf.bocfinancialsoftware.adapter.SearchAdapter;
 import com.sf.bocfinancialsoftware.bean.ProductBean;
 import com.sf.bocfinancialsoftware.bean.ProductSearchBean;
-import com.sf.bocfinancialsoftware.util.MyTextWatcher;
+import com.sf.bocfinancialsoftware.constant.ConstantConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ import static android.view.View.VISIBLE;
 /**
  * 产品介绍
  */
-public class IntelProductListActivity extends AppCompatActivity implements View.OnClickListener {
+public class IntelProductListActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private ImageView ivBack; //返回按钮
     private EditText etSearch; //搜索框 输入框
@@ -40,7 +41,6 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
     private ProductAdapter mAdapter;
     private String[] productSupplyName;
     private String[] productTradeName;
-    private Context mContext;
     private ImageView ivDelete;//删除键
     private ListView lvTips;//弹出列表
     private ArrayAdapter<String> mHintAdapter;//提示adapter
@@ -66,6 +66,7 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
         etSearch = (EditText) findViewById(R.id.etSearch);
         ivSearch = (ImageView) findViewById(R.id.ivSearch);
         lvProduct1 = (ListView) findViewById(R.id.lvProduct1);
+        lvResults = (ListView) findViewById(R.id.lvResults);
         ivBack = (ImageView) findViewById(R.id.ivBack);
         ivDelete = (ImageView) findViewById(R.id.ivDelete);
     }
@@ -78,6 +79,8 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
     private void initListener() {
         ivBack.setOnClickListener(this);
         ivSearch.setOnClickListener(this);
+        ivDelete.setOnClickListener(this);
+        lvResults.setOnItemClickListener(this);
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -88,20 +91,20 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s.toString())) {
                     ivDelete.setVisibility(VISIBLE);
-                    lvTips.setVisibility(VISIBLE);
-                    if (mAutoCompleteAdapter != null && lvTips.getAdapter() != mAutoCompleteAdapter) {
-                        lvTips.setAdapter(mAutoCompleteAdapter);
-                    }
+//                    lvTips.setVisibility(VISIBLE);
+//                    if (mAutoCompleteAdapter != null && lvTips.getAdapter() != mAutoCompleteAdapter) {
+//                        lvTips.setAdapter(mAutoCompleteAdapter);
+//                    }
                     //更新autoComplete数据
 //                    if (mListener != null) {
 //                        mListener.onRefreshAutoComplete(s + "");
 //                    }
                 } else {
                     ivDelete.setVisibility(View.GONE);
-                    if (mHintAdapter != null) {
-                        lvTips.setAdapter(mHintAdapter);
-                    }
-                    lvTips.setVisibility(View.GONE);
+//                    if (mHintAdapter != null) {
+//                        lvTips.setAdapter(mHintAdapter);
+//                    }
+//                    lvTips.setVisibility(View.GONE);
                 }
             }
 
@@ -118,8 +121,12 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
             case R.id.ivBack: //返回
                 finish();
                 break;
+            case R.id.ivDelete: //清除
+                etSearch.setText("");
+                ivDelete.setVisibility(View.GONE);
+                break;
             case R.id.ivSearch: //查询
-                search();
+                onSearch(etSearch.getText().toString().trim());
                 break;
         }
     }
@@ -183,6 +190,35 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
     }
 
     /**
+     * 当搜索框 文本改变时 触发的回调 ,更新自动补全数据
+     * @param text 传入补全后的文本
+     */
+   // @Override
+    public void onRefreshAutoComplete(String text) {
+        getAutoCompleteData(text);
+    }
+
+    /**
+     * 点击搜索键时edit text触发的回调
+     * @param text 传入输入框的文本
+     */
+    //@Override
+    public void onSearch(String text) {
+        //更新result数据
+        getResultData(text);
+        lvProduct1.setVisibility(View.GONE);
+        lvResults.setVisibility(VISIBLE);
+        //第一次获取结果 还未配置适配器
+        if (lvResults.getAdapter() == null) {
+            //获取搜索数据 设置适配器
+            lvResults.setAdapter(resultAdapter);
+        } else {
+            //更新数据
+            resultAdapter.notifyDataSetChanged();
+        }
+    }
+
+    /**
      * 获取搜索结果data和adapter
      */
     private void getResultData(String text) {
@@ -204,34 +240,6 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
         if (resultAdapter == null) {
             resultAdapter = new SearchAdapter(this,resultData);
         } else {
-            resultAdapter.notifyDataSetChanged();
-        }
-    }
-
-    /**
-     * 当搜索框 文本改变时 触发的回调 ,更新自动补全数据
-     * @param text 传入补全后的文本
-     */
-   // @Override
-    public void onRefreshAutoComplete(String text) {
-        getAutoCompleteData(text);
-    }
-
-    /**
-     * 点击搜索键时edit text触发的回调
-     * @param text 传入输入框的文本
-     */
-    //@Override
-    public void onSearch(String text) {
-        //更新result数据
-        getResultData(text);
-        lvResults.setVisibility(VISIBLE);
-        //第一次获取结果 还未配置适配器
-        if (lvResults.getAdapter() == null) {
-            //获取搜索数据 设置适配器
-            lvResults.setAdapter(resultAdapter);
-        } else {
-            //更新数据
             resultAdapter.notifyDataSetChanged();
         }
     }
@@ -265,5 +273,12 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
         mDatas.add(new ProductBean(getString(R.string.text_product_trade), mToolProductTradeList2));
         mAdapter = new ProductAdapter(this, mDatas);
         lvProduct1.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(IntelProductListActivity.this, IntelProductDetailActivity.class);
+        intent.putExtra(ConstantConfig.TITLE, resultData.get(position).getTvResults());
+        startActivity(intent);
     }
 }

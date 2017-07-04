@@ -95,7 +95,7 @@ public class ToolFragment extends Fragment implements AdapterView.OnItemClickLis
                 startActivity(new Intent(getActivity(), RateActivity.class));
                 break;
             case 2:
-                startActivity(new Intent(getActivity(), IntelProductDetailActivity2.class));
+                startActivity(new Intent(getActivity(), IntelProductListActivity.class));
                 break;
             case 3:
                 startActivity(new Intent(getActivity(), FinanceProductListActivity.class));
