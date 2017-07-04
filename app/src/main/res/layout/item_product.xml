@@ -32,7 +32,7 @@
             app:atg_checkedTextColor="#E3DCDA"
             app:atg_horizontalPadding="@dimen/common_padding_big"
             app:atg_horizontalSpacing="@dimen/common_margin_normal"
-            app:atg_pressedBackgroundColor="@android:color/transparent"
+            app:atg_pressedBackgroundColor="#fcf3f0"
             app:atg_textColor="#ba8c96"
             app:atg_textSize="@dimen/text_size_normal"
             app:atg_verticalPadding="@dimen/common_padding_small"

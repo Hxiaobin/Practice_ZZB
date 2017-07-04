@@ -14,11 +14,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jude.rollviewpager.RollPagerView;
+import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.FinancialAdapter;
 import com.sf.bocfinancialsoftware.adapter.RollViewPagerAdapter;
 import com.sf.bocfinancialsoftware.bean.FinanceBean;
-import com.sf.bocfinancialsoftware.R;
-import com.jude.rollviewpager.RollPagerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,5 +141,4 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
         intent.putExtra("product",mDatas.get(position-1).getProductName());
         startActivity(intent);
     }
-
 }

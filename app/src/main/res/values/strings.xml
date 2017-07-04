@@ -151,4 +151,5 @@
     <string name="tv_balance_data">134,231,233.00</string>
     <string name="tv_payment_data">28,000,000.00</string>
     <string name="tv_financial_currency">[人民币]</string>
+    <string name="title_activity_intel_product_detail2">IntelProductDetailActivity2</string>
 </resources>
