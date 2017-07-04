@@ -43,11 +43,14 @@
     <dimen name="icon_normal_width">54dp</dimen>
     <dimen name="icon_normal_high">54dp</dimen>
     <!--超小图标-->
+    <dimen name="icon_more_micro_width">18dp</dimen>
+    <dimen name="icon_more_micro_high">18dp</dimen>
+    <!--微小图标-->
     <dimen name="icon_micro_width">20dp</dimen>
     <dimen name="icon_micro_high">20dp</dimen>
     <!--小图标-->
-    <dimen name="icon_small_width">32dp</dimen>
-    <dimen name="icon_small_high">32dp</dimen>
+    <dimen name="icon_small_width">28dp</dimen>
+    <dimen name="icon_small_high">28dp</dimen>
     <!--正常图片-->
     <dimen name="image_normal_width">90dp</dimen>
     <dimen name="image_normal_high">90dp</dimen>
@@ -61,10 +64,12 @@
     <dimen name="Image_advertisingCarousel_high">180dp</dimen>
     <dimen name="activity_detail_image_high">180dp</dimen>
     <!--按钮宽度高度-->
+    <dimen name="button_width_more_small">54dp</dimen>
     <dimen name="button_width_small">64dp</dimen>
     <dimen name="button_width_normal">80dp</dimen>
     <dimen name="button_width_large">96dp</dimen>
     <dimen name="button_width_super">120dp</dimen>
+    <dimen name="button_height_more_micro">30dp</dimen>
     <dimen name="button_height_micro">36dp</dimen>
     <dimen name="button_height_smaller">44dp</dimen>
     <dimen name="button_height_small">48dp</dimen>
