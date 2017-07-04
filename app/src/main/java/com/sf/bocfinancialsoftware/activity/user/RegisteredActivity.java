@@ -47,6 +47,7 @@ public class RegisteredActivity extends AppCompatActivity implements View.OnClic
         etRegisteredUserName = (EditText) findViewById(R.id.etRegisteredUserName);
         etRegisteredKey = (EditText) findViewById(R.id.etRegisteredKey);
         ivBack = (ImageView) findViewById(R.id.ivBack);
+        //设置隐藏字体大小
         SetHintTextSize.setHintTextSize(etRegisteredUserName,getString(R.string.et_registered_user_name),12);
         SetHintTextSize.setHintTextSize(etRegisteredKey,getString(R.string.et_registered_key),12);
     }

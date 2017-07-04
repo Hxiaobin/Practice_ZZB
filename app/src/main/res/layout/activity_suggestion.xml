@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/activity_common_background_gray"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/activity_common_background_gray"
+              android:orientation="vertical">
 
-    <include layout="@layout/layout_top_bar" />
+    <include layout="@layout/layout_top_bar"/>
 
     <EditText
         android:id="@+id/etSuggestion"
@@ -16,12 +16,12 @@
         android:layout_marginTop="@dimen/common_margin_normal"
         android:background="@drawable/shape_suggestion"
         android:gravity="top|start"
-        android:hint="@string/et_suggestion"
         android:maxHeight="130dp"
         android:minHeight="100dp"
         android:padding="@dimen/common_padding_small"
+        android:textColor="@color/common_text_black"
         android:textColorHint="@color/login_text"
-        android:textSize="@dimen/text_size_normal" />
+        android:textSize="@dimen/text_size_normal"/>
 
     <EditText
         android:id="@+id/etContact"
@@ -29,10 +29,10 @@
         android:layout_height="36dp"
         android:layout_margin="@dimen/common_margin_normal"
         android:background="@drawable/shape_suggestion"
-        android:hint="@string/et_contact"
         android:padding="@dimen/common_padding_small"
+        android:textColor="@color/common_text_black"
         android:textColorHint="@color/login_text"
-        android:textSize="@dimen/text_size_normal" />
+        android:textSize="@dimen/text_size_normal"/>
 
     <Button
         android:id="@+id/btnSend"
@@ -42,6 +42,6 @@
         android:layout_marginLeft="@dimen/common_margin_normal"
         android:layout_marginRight="@dimen/common_margin_normal"
         android:layout_marginTop="@dimen/common_margin_big"
-        android:text="@string/btn_send" />
+        android:text="@string/btn_send"/>
 
 </LinearLayout>

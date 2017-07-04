@@ -14,7 +14,6 @@ import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.activity.home.analyse.BocAnalyseListActivity;
 import com.sf.bocfinancialsoftware.activity.tool.calculator.CalculatorActivity;
 import com.sf.bocfinancialsoftware.activity.tool.finance.FinanceProductListActivity;
-import com.sf.bocfinancialsoftware.activity.tool.product.IntelProductDetailActivity2;
 import com.sf.bocfinancialsoftware.activity.tool.product.IntelProductListActivity;
 import com.sf.bocfinancialsoftware.activity.tool.rate.RateActivity;
 import com.sf.bocfinancialsoftware.adapter.PictureAdapter;

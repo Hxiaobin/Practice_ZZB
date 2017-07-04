@@ -68,7 +68,6 @@
                 android:textColor="@color/common_text_black"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_normal"
-
                 android:layout_marginLeft="@dimen/common_margin_small"
                 android:textColorHint="@color/login_text"/>
 

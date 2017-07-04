@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sf.bocfinancialsoftware.R;
+import com.sf.bocfinancialsoftware.util.SetHintTextSize;
 
 public class SuggestionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,6 +37,9 @@ public class SuggestionActivity extends AppCompatActivity implements View.OnClic
         etContact = (EditText) findViewById(R.id.etContact);
         btnSend = (Button) findViewById(R.id.btnSend);
         ivBack = (ImageView) findViewById(R.id.ivBack);
+        //设置隐藏字体大小
+        SetHintTextSize.setHintTextSize(etSuggestion,getString(R.string.et_suggestion),12);
+        SetHintTextSize.setHintTextSize(etContact,getString(R.string.et_contact),12);
     }
 
 
