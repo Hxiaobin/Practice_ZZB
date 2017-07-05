@@ -10,18 +10,15 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.ProductAdapter;
 import com.sf.bocfinancialsoftware.adapter.SearchAdapter;
 import com.sf.bocfinancialsoftware.bean.ProductBean;
-import com.sf.bocfinancialsoftware.bean.ProductSearchBean;
 import com.sf.bocfinancialsoftware.constant.ConstantConfig;
 
 import java.util.ArrayList;
@@ -37,16 +34,18 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
     private ImageView ivBack; //返回按钮
     private EditText etSearch; //搜索框 输入框
     private ImageView ivSearch; //搜索按钮
-    private ListView lvProduct1; //listview1显示数据源的数据
-    private List<String> mToolProductSupplyList, mToolProductTradeList, mToolProductTradeList2;
-    private List<ProductBean> mDatas; //数据源的数据
-    private ProductAdapter mAdapter;
-    private String[] productSupplyName;
-    private String[] productTradeName;
     private ImageView ivDelete;//删除键
     private ListView lvResults;//搜索结果列表
+    private ListView lvProduct1; //listview1显示数据源的数据
+
+    //    private List<String> mToolProductSupplyList, mToolProductTradeList, mToolProductTradeList2;
+    private List<ProductBean> mDatas = new ArrayList<>(); //数据源的数据
+    private List<String> resultData = new ArrayList<>();//搜索结果的数据
+    private String[] productSupplyName;
+    private String[] productTradeName;
+
+    private ProductAdapter mAdapter;
     private SearchAdapter resultAdapter;//搜索结果列表adapter
-    private List<ProductSearchBean> resultData;//搜索结果的数据
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +68,12 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
     }
 
     private void initData() {
+        mAdapter = new ProductAdapter(this, mDatas);
+        lvProduct1.setAdapter(mAdapter);
+
+        resultAdapter = new SearchAdapter(this, resultData);
+        lvResults.setAdapter(resultAdapter);
+
         getData();
     }
 
@@ -133,14 +138,8 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
             getResultData(text);
             lvProduct1.setVisibility(View.GONE);
             lvResults.setVisibility(VISIBLE);
-            //第一次获取结果 还未配置适配器
-            if (lvResults.getAdapter() == null) {
-                //获取搜索数据 设置适配器
-                lvResults.setAdapter(resultAdapter);
-            } else {
-                //更新数据
-                resultAdapter.notifyDataSetChanged();
-            }
+            //跟新适配器
+            resultAdapter.notifyDataSetChanged();
         }
     }
 
@@ -148,25 +147,15 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
      * 获取搜索结果data和adapter
      */
     private void getResultData(String text) {
-        if (resultData == null) {
-            //初始化
-            resultData = new ArrayList<>();
-        } else {
-            resultData.clear();
-            for (int i = 0; i < mDatas.size(); i++) {
-                List<String> contents = mDatas.get(i).getContent();
-                for (int j = 0; j < mDatas.get(i).getContent().size(); j++) {
-                    String s = contents.get(j);
-                    if (s.contains(text.trim())) {
-                        resultData.add(new ProductSearchBean(s));
-                    }
+        resultData.clear();
+        for (int i = 0; i < mDatas.size(); i++) {
+            List<String> contents = mDatas.get(i).getContent();
+            for (int j = 0; j < mDatas.get(i).getContent().size(); j++) {
+                String s = contents.get(j);
+                if (s.contains(text.trim())) {
+                    resultData.add(s);
                 }
             }
-        }
-        if (resultAdapter == null) {
-            resultAdapter = new SearchAdapter(this, resultData);
-        } else {
-            resultAdapter.notifyDataSetChanged();
         }
     }
 
@@ -175,36 +164,35 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
      */
     public void getData() {
         //供应链融资数据
-        mDatas = new ArrayList<>();
-        mToolProductSupplyList = new ArrayList<>();
         productSupplyName = getResources().getStringArray(R.array.tool_product_name_supply);
+        List<String> content = new ArrayList<>();
         for (int i = 0; i < productSupplyName.length; i++) {
-            mToolProductSupplyList.add(productSupplyName[i]);
+            content.add(productSupplyName[i]);
         }
-        mDatas.add(new ProductBean(getString(R.string.text_product_supply), mToolProductSupplyList));
+        mDatas.add(new ProductBean(getString(R.string.text_product_supply), content));
+
         //国际贸易结算数据
-        mToolProductTradeList = new ArrayList<>();
+        content.clear();
         productTradeName = getResources().getStringArray(R.array.tool_product_name_trade);
         for (int i = 0; i < productTradeName.length; i++) {
-            mToolProductTradeList.add(productTradeName[i]);
+            content.add(productTradeName[i]);
         }
-        mDatas.add(new ProductBean(getString(R.string.text_product_trade), mToolProductTradeList));
-        mAdapter = new ProductAdapter(this, mDatas);
+        mDatas.add(new ProductBean(getString(R.string.text_product_trade), content));
+
         //国际贸易结算数据
-        mToolProductTradeList2 = new ArrayList<>();
+        content.clear();
         productTradeName = getResources().getStringArray(R.array.tool_product_name_trade);
         for (int i = 0; i < productTradeName.length; i++) {
-            mToolProductTradeList2.add(productTradeName[i]);
+            content.add(productTradeName[i]);
         }
-        mDatas.add(new ProductBean(getString(R.string.text_product_trade), mToolProductTradeList2));
-        mAdapter = new ProductAdapter(this, mDatas);
-        lvProduct1.setAdapter(mAdapter);
+        mDatas.add(new ProductBean(getString(R.string.text_product_trade), content));
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(IntelProductListActivity.this, IntelProductDetailActivity.class);
-        intent.putExtra(ConstantConfig.TITLE, resultData.get(position).getTvResults());
+        intent.putExtra(ConstantConfig.TITLE, resultData.get(position));
         startActivity(intent);
     }
 }

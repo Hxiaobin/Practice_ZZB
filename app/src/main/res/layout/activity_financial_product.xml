@@ -21,7 +21,7 @@
     <ListView
         android:id="@+id/lvFinancial2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
         android:background="@color/white"
         android:divider="@color/activity_common_background_gray"
@@ -29,5 +29,26 @@
         android:scrollbars="none">
 
     </ListView>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/icon_super_width"
+            android:layout_height="@dimen/icon_super_high"
+            android:scaleType="centerInside"
+            android:src="@mipmap/image_no_date" />
+
+        <TextView
+            style="@style/activity_text_normal_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_margin_normal"
+            android:text="@string/common_sorry_not_date" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -30,14 +30,6 @@ public class ProductAdapter extends BaseAdapter {
         mBeanList = beanList;
     }
 
-    public void setProductBeen(List<ProductBean> Been) {
-        if (Been.size()>0){
-            mBeanList.removeAll(mBeanList);
-            mBeanList.addAll(Been);
-            notifyDataSetChanged();
-        }
-    }
-
     @Override
     public int getCount() {
         return mBeanList.size();

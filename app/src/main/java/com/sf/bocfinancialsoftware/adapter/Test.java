@@ -11,26 +11,26 @@ import com.sf.bocfinancialsoftware.R;
 import java.util.List;
 
 /**
- * Created by Author: wangyongzhu on 2017/7/3.
+ * Created by Author: wangyongzhu on 2017/7/4.
  */
 
-public class SearchAdapter extends BaseAdapter {
+public class Test extends BaseAdapter {
     private Context mContext;
-    private List<String> mDatas;
+    private List<String> mList;
 
-    public SearchAdapter(Context context, List<String> datas) {
+    public Test(Context context, List<String> list) {
         mContext = context;
-        mDatas = datas;
+        mList = list;
     }
 
     @Override
     public int getCount() {
-        return mDatas.size();
+        return mList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mDatas.get(position);
+        return mList.get(position);
     }
 
     @Override
@@ -40,20 +40,24 @@ public class SearchAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+        Holder holder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_lv_search_result, null);
-            viewHolder = new ViewHolder();
-            viewHolder.tvResult = (TextView) convertView.findViewById(R.id.tvResult);
-            convertView.setTag(viewHolder);
+            holder = new Holder();
+            holder.textview = (TextView) convertView.findViewById(android.R.id.text1);
+            convertView.setTag(holder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            holder = (Holder) convertView.getTag();
         }
-        viewHolder.tvResult.setText(mDatas.get(position));
+
+        CharSequence item = (CharSequence) getItem(position);
+        holder.textview.setText(item);
+
+
         return convertView;
     }
 
-    class ViewHolder {
-        TextView tvResult;
+    class Holder {
+        TextView textview;
     }
 }

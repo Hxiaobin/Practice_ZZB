@@ -73,9 +73,10 @@
         <activity
             android:name=".activity.tool.product.IntelProductListActivity"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".activity.tool.product.IntelProductDetailActivity2"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.TestListActivity">
+        </activity>
+        <activity android:name=".activity.GridActivity">
+        </activity>
     </application>
 
 </manifest>

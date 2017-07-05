@@ -1,5 +1,6 @@
 package com.sf.bocfinancialsoftware.activity.tool.finance;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,7 +34,7 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
     private ListView lvFinancial2; //查询后显示数据的view
     private View mHeaderView; //ListView头部视图
     private List<FinanceBean> mDatas; //原来的数据源
-    private List<FinanceBean> mList; //查询后的数据源
+    private List<FinanceBean> mList = new ArrayList<>(); //查询后的数据源
     private FinancialAdapter myAdapter;
     private RollPagerView rollPagerView; //图片轮播
     private RollViewPagerAdapter mRollViewPagerAdapter; //图片轮播适配器
@@ -94,12 +96,14 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
                 break;
             case R.id.ivSearch:
                 show();
+                //隐藏软键盘
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                 break;
         }
     }
 
     private void show() {
-        mList = new ArrayList<>();
         //编辑框获取字符串
         searchContent = etSearch.getText().toString().trim();
         if (TextUtils.isEmpty(searchContent)) {
@@ -116,7 +120,6 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
                 //获取查询的字符串
                 int len = pLen - searchContent.length() + 1;
                 for (j = 0; j < len; j++) {
-                    //String string = tvFinancialTitle[i].substring(j, j + searchContent.length());
                     boolean contains = tvFinancialTitle[i].contains(searchContent);
                     if (contains) {
                         mList.add(new FinanceBean(tvFinancialTitle[i], ""));
@@ -138,7 +141,7 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(FinanceProductListActivity.this, FinanceProductDetailActivity.class);
-        intent.putExtra("product",mDatas.get(position-1).getProductName());
+        intent.putExtra("product", mDatas.get(position - 1).getProductName());
         startActivity(intent);
     }
 }
