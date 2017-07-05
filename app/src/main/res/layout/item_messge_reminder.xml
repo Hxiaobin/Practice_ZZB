@@ -37,24 +37,22 @@
                 style="@style/activity_text_normal_black"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="bottom"
-                android:layout_marginLeft="@dimen/common_margin_normal"/>
+                android:layout_marginLeft="@dimen/common_margin_normal" />
 
         </LinearLayout>
 
         <View
             android:id="@+id/viewMsgLine"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height_low"
+            style="@style/line_horizontal_gray"
             android:layout_below="@+id/rltMsgTop"
-            android:layout_marginTop="@dimen/common_margin_small"
-            android:background="@color/line_horizontal_gray" />
+            android:layout_marginTop="@dimen/common_margin_small" />
 
         <TextView
             android:id="@+id/tvMsgContent"
             style="@style/activity_text_normal_gray"
             android:layout_below="@+id/viewMsgLine"
             android:layout_marginTop="@dimen/common_padding_small_to_normal"
-            android:lineSpacingExtra="@dimen/common_margin_micro"/>
+            android:lineSpacingExtra="@dimen/common_margin_micro" />
 
     </RelativeLayout>
 

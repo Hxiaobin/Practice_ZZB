@@ -63,13 +63,16 @@
     <!--广告轮播区域高度-->
     <dimen name="Image_advertisingCarousel_high">180dp</dimen>
     <dimen name="activity_detail_image_high">180dp</dimen>
+    <!--分割线左边距-->
+    <dimen name="line_margin_micro">1dp</dimen>
+    <dimen name="line_margin_big">86dp</dimen>
     <!--按钮宽度高度-->
-    <dimen name="button_width_more_small">54dp</dimen>
+    <dimen name="button_width_more_small">56dp</dimen>
     <dimen name="button_width_small">64dp</dimen>
     <dimen name="button_width_normal">80dp</dimen>
     <dimen name="button_width_large">96dp</dimen>
     <dimen name="button_width_super">120dp</dimen>
-    <dimen name="button_height_more_micro">30dp</dimen>
+    <dimen name="button_height_more_micro">32dp</dimen>
     <dimen name="button_height_micro">36dp</dimen>
     <dimen name="button_height_smaller">44dp</dimen>
     <dimen name="button_height_small">48dp</dimen>

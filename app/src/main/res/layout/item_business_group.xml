@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/expandable_list_background"
+        android:background="@drawable/shape_business_query_group"
         android:orientation="horizontal"
         android:padding="@dimen/common_padding_normal">
 
@@ -32,5 +32,10 @@
             android:src="@mipmap/ic_right" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_high"
+        android:background="@color/white" />
 
 </LinearLayout>

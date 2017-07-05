@@ -65,6 +65,12 @@
         <item name="android:lines">1</item>
         <item name="android:textColor">@color/common_text_gray</item>
     </style>
+    <!-- 横向分割线 灰色 -->
+    <style name="line_horizontal_gray">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/line_height_low</item>
+        <item name="android:background">@color/line_horizontal_gray</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

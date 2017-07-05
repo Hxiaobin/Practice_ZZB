@@ -27,4 +27,9 @@
 
     </LinearLayout>
 
+    <View
+       style="@style/line_horizontal_gray"
+        android:layout_marginLeft="@dimen/line_margin_micro"
+        android:layout_marginRight="@dimen/line_margin_micro"/>
+
 </LinearLayout>

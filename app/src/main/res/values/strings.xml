@@ -21,6 +21,9 @@
     <string name="common_message_reminder_forward">远期通知</string>
     <string name="common_boc_analyse">中银分析</string>
     <string name="common_business_query">业务查询</string>
+    <string name="common_business_query_chose_start_time">请选择开始时间</string>
+    <string name="common_business_query_chose_end_time">请选择结束时间</string>
+    <string name="common_business_query_chose_contract_id">请输入业务编号</string>
     <string name="common_business_query_please_enter_the_contract_id">请输入业务编号查询</string>
     <string name="activity_business_query_end_time_wrong">结束时间不能小于等于开始时间，请重新选择结束时间！</string>
     <string name="activity_business_query_end_time_wrong2">结束时间不能大于当前时间，请重新选择结束时间！</string>
