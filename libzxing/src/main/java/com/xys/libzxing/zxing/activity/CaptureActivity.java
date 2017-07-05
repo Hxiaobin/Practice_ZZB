@@ -15,7 +15,6 @@
  */
 package com.xys.libzxing.zxing.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,12 +25,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.zxing.Result;
 import com.xys.libzxing.R;
@@ -53,9 +54,12 @@ import java.lang.reflect.Field;
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
  */
-public final class CaptureActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+public final class CaptureActivity extends AppCompatActivity implements SurfaceHolder.Callback, View.OnClickListener {
 
     private static final String TAG = CaptureActivity.class.getSimpleName();
+
+    private ImageView ivTitleBarBack; //返回按钮
+    private TextView tvTitleBarTitle; //标题
 
     private CameraManager cameraManager;
     private CaptureActivityHandler handler;
@@ -86,10 +90,16 @@ public final class CaptureActivity extends AppCompatActivity implements SurfaceH
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_capture);
 
+        ivTitleBarBack = (ImageView) findViewById(R.id.ivTitleBarBack);
+        tvTitleBarTitle = (TextView) findViewById(R.id.tvTitleBarTitle);
         scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
         scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
         scanCropView = (RelativeLayout) findViewById(R.id.capture_crop_view);
         scanLine = (ImageView) findViewById(R.id.capture_scan_line);
+
+        tvTitleBarTitle.setText(getString(R.string.activity_capture_title));
+        ivTitleBarBack.setVisibility(View.VISIBLE);
+        ivTitleBarBack.setOnClickListener(this);
 
         inactivityTimer = new InactivityTimer(this);
         beepManager = new BeepManager(this);
@@ -301,5 +311,12 @@ public final class CaptureActivity extends AppCompatActivity implements SurfaceH
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.ivTitleBarBack) {
+            finish();
+        }
     }
 }
