@@ -7,8 +7,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
-import android.util.Log;
 
+import com.sf.bocfinancialsoftware.base.BaseApplication;
 import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
 import com.sf.bocfinancialsoftware.bean.BusinessBean;
 import com.sf.bocfinancialsoftware.bean.BusinessTypeBean;
@@ -16,10 +16,7 @@ import com.sf.bocfinancialsoftware.bean.ContractBean;
 import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
 import com.sf.bocfinancialsoftware.bean.PleasantMessageBean;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -77,7 +74,7 @@ import static com.sf.bocfinancialsoftware.constant.SQLiteConfig.TABLE_PLEASANT_M
 public class DataBaseSQLiteUtil {
 
     private static SQLiteDatabase mDatabase;
-    private static Context mContext = ContextUtil.getInstance();
+    private static Context mContext = BaseApplication.getInstance();
     private static ContactDBOpenHelper mDbOpenHelper; // 数据库帮助类
 
     /**

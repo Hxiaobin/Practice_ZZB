@@ -1,19 +1,20 @@
-package com.sf.bocfinancialsoftware.util;
+package com.sf.bocfinancialsoftware.base;
 
 import android.app.Application;
 
-/***
+/**
  * 全局上下文
- *  sn
+ * Created by sn on 2017/7/4.
  */
-public class ContextUtil extends Application {
 
-    private static ContextUtil instance;
+public class BaseApplication extends Application {
 
-    public  boolean isFinishGoodsActivity;
+    private static BaseApplication instance;
 
-    public static void setInstance(ContextUtil instance) {
-        ContextUtil.instance = instance;
+    public boolean isFinishGoodsActivity;
+
+    public static void setInstance(BaseApplication instance) {
+        BaseApplication.instance = instance;
     }
 
     public boolean isFinishGoodsActivity() {
@@ -24,7 +25,7 @@ public class ContextUtil extends Application {
         isFinishGoodsActivity = finishGoodsActivity;
     }
 
-    public static ContextUtil getInstance() {
+    public static BaseApplication getInstance() {
         return instance;
     }
 
@@ -32,7 +33,7 @@ public class ContextUtil extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        isFinishGoodsActivity=false;
+        isFinishGoodsActivity = false;
     }
 
 }

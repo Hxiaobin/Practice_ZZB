@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.activity.base.BaseActivity;
+import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.adapter.MessageAdapter;
 import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
 import com.sf.bocfinancialsoftware.util.DataBaseSQLiteUtil;

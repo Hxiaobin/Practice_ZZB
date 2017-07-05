@@ -1,10 +1,8 @@
-package com.sf.bocfinancialsoftware.activity.base;
+package com.sf.bocfinancialsoftware.base;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
 
 /**
  * Activity基类

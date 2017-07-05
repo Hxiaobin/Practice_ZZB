@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.activity.base.BaseActivity;
+import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
 import com.sf.bocfinancialsoftware.constant.ConstantConfig;
 import com.sf.bocfinancialsoftware.util.DataBaseSQLiteUtil;
