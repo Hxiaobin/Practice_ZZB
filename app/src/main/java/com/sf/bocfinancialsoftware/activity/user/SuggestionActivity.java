@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.util.SetHintTextSize;
+import com.sf.bocfinancialsoftware.widget.SetHintTextSize;
 
 public class SuggestionActivity extends AppCompatActivity implements View.OnClickListener {
 

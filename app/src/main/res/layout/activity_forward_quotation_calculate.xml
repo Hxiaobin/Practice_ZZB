@@ -30,7 +30,7 @@
                     style="@style/tv_calculator"
                     android:text="@string/tv_calculate_currency"/>
 
-                <FrameLayout
+                <!--<FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_search"
@@ -49,7 +49,19 @@
                         android:layout_gravity="right|center_vertical"
                         android:layout_marginRight="@dimen/common_margin_small"
                         android:src="@mipmap/right_down"/>
-                </FrameLayout>
+                </FrameLayout>-->
+                <TextView
+                    android:id="@+id/tvRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/shape_search"
+                    android:drawablePadding="@dimen/common_padding_normal"
+                    android:drawableRight="@mipmap/right_down"
+                    android:padding="@dimen/common_padding_small"
+                    android:text="@string/tv_dollar"
+                    android:textColor="@color/tv_subtitle"
+                    android:textSize="@dimen/text_size_normal"/>
 
             </LinearLayout>
 
@@ -289,4 +301,5 @@
             <include layout="@layout/layout_bottom_content"/>
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

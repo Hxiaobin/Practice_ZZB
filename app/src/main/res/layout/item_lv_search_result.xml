@@ -8,17 +8,16 @@
         android:id="@+id/tvResult"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/blue"
+        android:background="@color/white"
         android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:text="jjnbbbb"
+        android:paddingLeft="@dimen/common_padding_small_to_normal"
         android:textColor="@color/common_text_black"
         android:textSize="@dimen/text_size_normal"/>
 
     <View
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="@dimen/common_padding_small_to_normal"
+        android:layout_marginRight="@dimen/common_padding_small_to_normal"
         android:layout_width="match_parent"
-        android:layout_height="0.4dp"
+        android:layout_height="0.2dp"
         android:background="@color/line_horizontal_gray"/>
 </LinearLayout>

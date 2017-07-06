@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.util;
+package com.sf.bocfinancialsoftware.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

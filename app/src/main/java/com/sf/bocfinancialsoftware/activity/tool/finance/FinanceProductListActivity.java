@@ -4,14 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,19 +30,22 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
 
     private ImageView ivBack;
     private ImageView ivSearch;
+    private ImageView ivClear;
     private EditText etSearch;
+    private LinearLayout llNoData;//显示无数据
     private ListView lvFinancial;
     private ListView lvFinancial2; //查询后显示数据的view
-    private View mHeaderView; //ListView头部视图
-    private List<FinanceBean> mDatas; //原来的数据源
+    //    private View mHeaderView; //ListView头部视图
+    private List<FinanceBean> mDatas = new ArrayList<>(); //原来的数据源
     private List<FinanceBean> mList = new ArrayList<>(); //查询后的数据源
     private FinancialAdapter myAdapter;
+    private FinancialAdapter resultAdapter;//查询后的
     private RollPagerView rollPagerView; //图片轮播
     private RollViewPagerAdapter mRollViewPagerAdapter; //图片轮播适配器
     private String searchContent; //输入的内容
     private String[] tvFinancialTitle; //名字
     private String[] tvFinancialTime; //时间
-    private int i, j;
+    //    private int i, j;
     private final String TAG = "FinanceProduct";
 
     @Override
@@ -57,25 +61,28 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
         TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText(R.string.text_financial);
         ivBack = (ImageView) findViewById(R.id.ivBack);
-        mHeaderView = LayoutInflater.from(this).inflate(R.layout.layout_financial_list_header, null);
-        ivSearch = (ImageView) mHeaderView.findViewById(R.id.ivSearch);
-        etSearch = (EditText) mHeaderView.findViewById(R.id.etSearch);
+//        mHeaderView = LayoutInflater.from(this).inflate(R.layout.layout_financial_list_header, null);
+        ivSearch = (ImageView) findViewById(R.id.ivSearch);
+        ivClear = (ImageView) findViewById(R.id.ivClear);
+        etSearch = (EditText) findViewById(R.id.etSearch);
         lvFinancial = (ListView) findViewById(R.id.lvFinancial);
         lvFinancial2 = (ListView) findViewById(R.id.lvFinancial2);
-        rollPagerView = (RollPagerView) mHeaderView.findViewById(R.id.rollPagerView);
+        rollPagerView = (RollPagerView) findViewById(R.id.rollPagerView);
+        llNoData = (LinearLayout) findViewById(R.id.llNoData);
         etSearch.setFocusable(true);
     }
 
     private void initData() {
-        mDatas = new ArrayList<>();
         tvFinancialTitle = getResources().getStringArray(R.array.tool_financial_title);
         tvFinancialTime = getResources().getStringArray(R.array.tool_financial_time);
         for (int i = 0; i < tvFinancialTitle.length; i++) {
             mDatas.add(new FinanceBean(tvFinancialTitle[i], tvFinancialTime[i]));
         }
         myAdapter = new FinancialAdapter(this, mDatas);
-        lvFinancial.addHeaderView(mHeaderView, null, false);
         lvFinancial.setAdapter(myAdapter);
+        resultAdapter = new FinancialAdapter(this, mList);
+        lvFinancial2.setAdapter(resultAdapter);
+//        lvFinancial.addHeaderView(mHeaderView, null, false);
         //图片轮播
         mRollViewPagerAdapter = new RollViewPagerAdapter();
         rollPagerView.setAdapter(mRollViewPagerAdapter);
@@ -84,7 +91,28 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
     private void initListener() {
         ivBack.setOnClickListener(this);
         ivSearch.setOnClickListener(this);
+        ivClear.setOnClickListener(this);
         lvFinancial.setOnItemClickListener(this);
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(s.toString())) {
+                    ivClear.setVisibility(View.GONE);
+                } else {
+                    ivClear.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
 
@@ -94,8 +122,12 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
             case R.id.ivBack:
                 finish();
                 break;
+            case R.id.ivClear:
+                etSearch.setText("");
+                ivClear.setVisibility(View.GONE);
+                break;
             case R.id.ivSearch:
-                show();
+                onSearch();
                 //隐藏软键盘
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
@@ -103,45 +135,90 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
         }
     }
 
-    private void show() {
+//    private void show() {
+//        //编辑框获取字符串
+//        searchContent = etSearch.getText().toString().trim();
+//        if (TextUtils.isEmpty(searchContent)) {
+//            mList.clear();
+//            mDatas.clear();
+//            for (int i = 0; i < tvFinancialTitle.length; i++) {
+//                mList.add(new FinanceBean(tvFinancialTitle[i], tvFinancialTime[i]));
+//            }
+//            myAdapter.setFinancialBeen(mList);
+//        } else {
+//            boolean flag = true;
+//            int pLen = tvFinancialTitle.length;
+//            for (i = 0; i < pLen; i++) {
+//                //获取查询的字符串
+//                int len = pLen - searchContent.length() + 1;
+//                for (j = 0; j < len; j++) {
+//                    boolean contains = tvFinancialTitle[i].contains(searchContent);
+//                    if (contains) {
+//                        mList.add(new FinanceBean(tvFinancialTitle[i], ""));
+//                        flag = false;
+//                        break;
+//                    }
+//                }
+//            }
+//            if (flag) {
+//                mList.clear();
+//                mDatas.clear();
+//                llNoData.setVisibility(View.VISIBLE);
+//                Toast.makeText(this, R.string.text_not_search, Toast.LENGTH_LONG).show();
+//            }
+//            Log.e(TAG, "show: " + mList.size());
+//            myAdapter.setFinancialBeen(mList);
+//        }
+//    }
+
+    //查询
+    public void onSearch() {
         //编辑框获取字符串
         searchContent = etSearch.getText().toString().trim();
         if (TextUtils.isEmpty(searchContent)) {
-            mList.clear();
-            mDatas.clear();
-            for (int i = 0; i < tvFinancialTitle.length; i++) {
-                mList.add(new FinanceBean(tvFinancialTitle[i], tvFinancialTime[i]));
-            }
-            myAdapter.setFinancialBeen(mList);
+            lvFinancial.setVisibility(View.VISIBLE);
+            lvFinancial2.setVisibility(View.GONE);
+            llNoData.setVisibility(View.GONE);
+            myAdapter.notifyDataSetChanged();
+        } else if (getResultData(searchContent)) {
+            //更新数据
+            lvFinancial.setVisibility(View.GONE);
+            llNoData.setVisibility(View.GONE);
+            lvFinancial2.setVisibility(View.VISIBLE);
+            resultAdapter.notifyDataSetChanged();
         } else {
-            boolean flag = true;
-            int pLen = tvFinancialTitle.length;
-            for (i = 0; i < pLen; i++) {
-                //获取查询的字符串
-                int len = pLen - searchContent.length() + 1;
-                for (j = 0; j < len; j++) {
-                    boolean contains = tvFinancialTitle[i].contains(searchContent);
-                    if (contains) {
-                        mList.add(new FinanceBean(tvFinancialTitle[i], ""));
-                        flag = false;
-                        break;
-                    }
+            lvFinancial.setVisibility(View.GONE);
+            lvFinancial2.setVisibility(View.GONE);
+            llNoData.setVisibility(View.VISIBLE);
+            Toast.makeText(this, R.string.text_not_search, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * 获取搜索结果data和adapter
+     */
+    private boolean getResultData(String text) {
+        mList.clear();
+        for (int i = 0; i < mList.size(); i++) {
+            String str = mDatas.get(i).getProductName();
+            for (int j = 0; j < str.length(); j++) {
+                if (str.contains(text.trim())) {
+                    mList.add(new FinanceBean(str, ""));
                 }
             }
-            if (flag) {
-                mList.clear();
-                mDatas.clear();
-                Toast.makeText(this, R.string.text_not_search, Toast.LENGTH_LONG).show();
-            }
-            Log.e(TAG, "show: " + mList.size());
-            myAdapter.setFinancialBeen(mList);
+        }
+        if (mList.size() == 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(FinanceProductListActivity.this, FinanceProductDetailActivity.class);
-        intent.putExtra("product", mDatas.get(position - 1).getProductName());
+        intent.putExtra("product", mDatas.get(position).getProductName());
         startActivity(intent);
     }
+
 }

@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/activity_common_background_gray"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/activity_common_background_gray"
+              android:orientation="vertical">
 
-    <include layout="@layout/layout_top_bar" />
+    <include layout="@layout/layout_top_bar"/>
+
+    <com.jude.rollviewpager.RollPagerView
+        android:id="@+id/rollPagerView"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        app:rollviewpager_hint_gravity="center"
+        app:rollviewpager_play_delay="3000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_margin_medium"
+        android:background="@drawable/shape_search"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/common_padding_small_to_normal">
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:maxLength="16"
+            android:singleLine="true"
+            android:textColor="@color/common_text_black"
+            android:textCursorDrawable="@null"/>
+
+        <ImageView
+            android:id="@+id/ivClear"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginRight="@dimen/common_margin_small"
+            android:src="@mipmap/ic_clear"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/search"/>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lvFinancial"
@@ -18,10 +62,11 @@
         android:scrollbars="none">
 
     </ListView>
+
     <ListView
         android:id="@+id/lvFinancial2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="0dp"
         android:background="@color/white"
         android:divider="@color/activity_common_background_gray"
@@ -31,24 +76,24 @@
     </ListView>
 
     <LinearLayout
-        android:id="@+id/ll"
+        android:id="@+id/llNoData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="@dimen/icon_super_width"
             android:layout_height="@dimen/icon_super_high"
             android:scaleType="centerInside"
-            android:src="@mipmap/image_no_date" />
+            android:src="@mipmap/image_no_date"/>
 
         <TextView
             style="@style/activity_text_normal_gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_margin_normal"
-            android:text="@string/common_sorry_not_date" />
+            android:text="@string/common_sorry_not_date"/>
     </LinearLayout>
-
 </LinearLayout>

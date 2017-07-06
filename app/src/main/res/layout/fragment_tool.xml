@@ -33,7 +33,7 @@
                     android:layout_height="@dimen/line_horizontal_small_height"
                     android:background="@color/line"/>
 
-                <com.sf.bocfinancialsoftware.util.MyGridView
+                <com.sf.bocfinancialsoftware.widget.MyGridView
                     android:id="@+id/gvProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                     android:numColumns="3"
                     android:scrollbars="none">
 
-                </com.sf.bocfinancialsoftware.util.MyGridView>
+                </com.sf.bocfinancialsoftware.widget.MyGridView>
             </LinearLayout>
 
             <LinearLayout
@@ -68,7 +68,7 @@
                     android:layout_height="@dimen/line_horizontal_small_height"
                     android:background="@color/line"/>
 
-                <com.sf.bocfinancialsoftware.util.MyGridView
+                <com.sf.bocfinancialsoftware.widget.MyGridView
                     android:id="@+id/gvToolkit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                     android:numColumns="3"
                     android:scrollbars="none">
 
-                </com.sf.bocfinancialsoftware.util.MyGridView>
+                </com.sf.bocfinancialsoftware.widget.MyGridView>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

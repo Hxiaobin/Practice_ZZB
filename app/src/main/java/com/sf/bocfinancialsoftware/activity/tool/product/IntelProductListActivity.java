@@ -12,8 +12,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.ProductAdapter;
@@ -35,15 +37,13 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
     private EditText etSearch; //搜索框 输入框
     private ImageView ivSearch; //搜索按钮
     private ImageView ivDelete;//删除键
+    private LinearLayout llNoData;//显示无数据
     private ListView lvResults;//搜索结果列表
     private ListView lvProduct1; //listview1显示数据源的数据
-
-    //    private List<String> mToolProductSupplyList, mToolProductTradeList, mToolProductTradeList2;
     private List<ProductBean> mDatas = new ArrayList<>(); //数据源的数据
     private List<String> resultData = new ArrayList<>();//搜索结果的数据
     private String[] productSupplyName;
     private String[] productTradeName;
-
     private ProductAdapter mAdapter;
     private SearchAdapter resultAdapter;//搜索结果列表adapter
 
@@ -65,15 +65,14 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
         lvResults = (ListView) findViewById(R.id.lvResults);
         ivBack = (ImageView) findViewById(R.id.ivBack);
         ivDelete = (ImageView) findViewById(R.id.ivDelete);
+        llNoData = (LinearLayout) findViewById(R.id.llNoData);
     }
 
     private void initData() {
         mAdapter = new ProductAdapter(this, mDatas);
         lvProduct1.setAdapter(mAdapter);
-
         resultAdapter = new SearchAdapter(this, resultData);
         lvResults.setAdapter(resultAdapter);
-
         getData();
     }
 
@@ -132,11 +131,16 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
         if (TextUtils.isEmpty(text)) {
             lvProduct1.setVisibility(VISIBLE);
             lvResults.setVisibility(View.GONE);
+            llNoData.setVisibility(View.GONE);
             mAdapter.notifyDataSetChanged();
-        } else {
-            //更新result数据
-            getResultData(text);
+        } else if (!getResultData(text)) {
             lvProduct1.setVisibility(View.GONE);
+            lvResults.setVisibility(View.GONE);
+            llNoData.setVisibility(View.VISIBLE);
+            Toast.makeText(this, R.string.text_not_search, Toast.LENGTH_LONG).show();
+        } else {
+            lvProduct1.setVisibility(View.GONE);
+            llNoData.setVisibility(View.GONE);
             lvResults.setVisibility(VISIBLE);
             //跟新适配器
             resultAdapter.notifyDataSetChanged();
@@ -146,16 +150,21 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
     /**
      * 获取搜索结果data和adapter
      */
-    private void getResultData(String text) {
+    private boolean getResultData(String text) {
         resultData.clear();
         for (int i = 0; i < mDatas.size(); i++) {
             List<String> contents = mDatas.get(i).getContent();
-            for (int j = 0; j < mDatas.get(i).getContent().size(); j++) {
+            for (int j = 0; j < contents.size(); j++) {
                 String s = contents.get(j);
                 if (s.contains(text.trim())) {
                     resultData.add(s);
                 }
             }
+        }
+        if (resultData.size() == 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -165,27 +174,27 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
     public void getData() {
         //供应链融资数据
         productSupplyName = getResources().getStringArray(R.array.tool_product_name_supply);
-        List<String> content = new ArrayList<>();
+        List<String> mToolProductSupplyList = new ArrayList<>();
         for (int i = 0; i < productSupplyName.length; i++) {
-            content.add(productSupplyName[i]);
+            mToolProductSupplyList.add(productSupplyName[i]);
         }
-        mDatas.add(new ProductBean(getString(R.string.text_product_supply), content));
+        mDatas.add(new ProductBean(getString(R.string.text_product_supply), mToolProductSupplyList));
 
         //国际贸易结算数据
-        content.clear();
+        List<String> mToolProductTradeList = new ArrayList<>();
         productTradeName = getResources().getStringArray(R.array.tool_product_name_trade);
         for (int i = 0; i < productTradeName.length; i++) {
-            content.add(productTradeName[i]);
+            mToolProductTradeList.add(productTradeName[i]);
         }
-        mDatas.add(new ProductBean(getString(R.string.text_product_trade), content));
+        mDatas.add(new ProductBean(getString(R.string.text_product_trade), mToolProductTradeList));
 
         //国际贸易结算数据
-        content.clear();
+        List<String> mToolProductTradeList2 = new ArrayList<>();
         productTradeName = getResources().getStringArray(R.array.tool_product_name_trade);
         for (int i = 0; i < productTradeName.length; i++) {
-            content.add(productTradeName[i]);
+            mToolProductTradeList2.add(productTradeName[i]);
         }
-        mDatas.add(new ProductBean(getString(R.string.text_product_trade), content));
+        mDatas.add(new ProductBean(getString(R.string.text_product_trade), mToolProductTradeList2));
         mAdapter.notifyDataSetChanged();
     }
 

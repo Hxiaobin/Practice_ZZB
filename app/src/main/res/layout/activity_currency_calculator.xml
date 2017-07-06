@@ -31,26 +31,18 @@
                     style="@style/tv_calculator"
                     android:text="@string/tv_calculate_currency"/>
 
-                <FrameLayout
+                <TextView
+                    android:id="@+id/tvRate"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/common_padding_more_micro"
-                    android:background="@drawable/shape_search">
-
-                    <Spinner
-                        android:id="@+id/spinnerExchangeRate"
-                        android:layout_width="match_parent"
-                        android:layout_height="38dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@android:color/transparent"/>
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="@dimen/common_margin_small"
-                        android:src="@mipmap/right_down"/>
-                </FrameLayout>
+                    android:layout_height="38dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/shape_search"
+                    android:drawablePadding="@dimen/common_padding_normal"
+                    android:drawableRight="@mipmap/right_down"
+                    android:padding="@dimen/common_padding_small"
+                    android:text="@string/tv_dollar"
+                    android:textColor="@color/tv_subtitle"
+                    android:textSize="@dimen/text_size_normal"/>
 
             </LinearLayout>
 

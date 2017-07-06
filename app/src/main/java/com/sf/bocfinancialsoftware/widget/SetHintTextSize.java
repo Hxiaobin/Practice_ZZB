@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.util;
+package com.sf.bocfinancialsoftware.widget;
 
 import android.text.SpannableString;
 import android.text.Spanned;
