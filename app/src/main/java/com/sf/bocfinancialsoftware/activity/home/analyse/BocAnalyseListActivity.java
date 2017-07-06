@@ -183,6 +183,8 @@ public class BocAnalyseListActivity extends BaseActivity implements AdapterView.
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0) {  //当滚到最后一行
             isLastLine = true; //标志列表状态
+        } else {
+            isLastLine = false;
         }
     }
 }
