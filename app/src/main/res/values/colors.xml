@@ -13,6 +13,7 @@
     <color name="gray">#BDBDBD</color>
     <color name="grayLight">#e2e2e2</color>
     <color name="red">#e7262b</color>
+    <color name="redLight">#f55656</color>
     <color name="orange">#fd9d12</color>
     <color name="orangeDeep">#ee7c6a</color>
     <color name="pink">#EDBEBB</color>
@@ -27,8 +28,9 @@
     <color name="white">#ffffff</color>
 
     <!--查询按钮渐变颜色 绿色-->
-    <color name="start_color_green">#18e4f4</color>
-    <color name="end_color_green">#00b1bd</color>
+    <color name="start_color_green">#fa7272</color>
+    <color name="center_color_green">#fd5e5e</color>
+    <color name="end_color_green">#e95151</color>
     <!-- 分割线 -->
     <color name="line_horizontal_gray">#e7e7e7</color>
     <!-- 黑色字体 -->

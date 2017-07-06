@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_business_query_group"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:padding="@dimen/common_padding_normal">
 
         <TextView
@@ -25,8 +26,8 @@
 
         <ImageView
             android:id="@+id/ivOperateList"
-            android:layout_width="@dimen/icon_micro_width"
-            android:layout_height="@dimen/icon_micro_high"
+            android:layout_width="@dimen/icon_smallest_width"
+            android:layout_height="@dimen/icon_smallest_high"
             android:layout_marginLeft="@dimen/common_margin_normal"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_right" />
