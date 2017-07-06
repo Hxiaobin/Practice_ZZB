@@ -35,7 +35,6 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
     private LinearLayout llNoData;//显示无数据
     private ListView lvFinancial;
     private ListView lvFinancial2; //查询后显示数据的view
-    //    private View mHeaderView; //ListView头部视图
     private List<FinanceBean> mDatas = new ArrayList<>(); //原来的数据源
     private List<FinanceBean> mList = new ArrayList<>(); //查询后的数据源
     private FinancialAdapter myAdapter;
@@ -45,8 +44,6 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
     private String searchContent; //输入的内容
     private String[] tvFinancialTitle; //名字
     private String[] tvFinancialTime; //时间
-    //    private int i, j;
-    private final String TAG = "FinanceProduct";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +58,6 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
         TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText(R.string.text_financial);
         ivBack = (ImageView) findViewById(R.id.ivBack);
-//        mHeaderView = LayoutInflater.from(this).inflate(R.layout.layout_financial_list_header, null);
         ivSearch = (ImageView) findViewById(R.id.ivSearch);
         ivClear = (ImageView) findViewById(R.id.ivClear);
         etSearch = (EditText) findViewById(R.id.etSearch);
@@ -82,7 +78,6 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
         lvFinancial.setAdapter(myAdapter);
         resultAdapter = new FinancialAdapter(this, mList);
         lvFinancial2.setAdapter(resultAdapter);
-//        lvFinancial.addHeaderView(mHeaderView, null, false);
         //图片轮播
         mRollViewPagerAdapter = new RollViewPagerAdapter();
         rollPagerView.setAdapter(mRollViewPagerAdapter);
@@ -93,6 +88,7 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
         ivSearch.setOnClickListener(this);
         ivClear.setOnClickListener(this);
         lvFinancial.setOnItemClickListener(this);
+        lvFinancial2.setOnItemClickListener(this);
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -135,43 +131,9 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
         }
     }
 
-//    private void show() {
-//        //编辑框获取字符串
-//        searchContent = etSearch.getText().toString().trim();
-//        if (TextUtils.isEmpty(searchContent)) {
-//            mList.clear();
-//            mDatas.clear();
-//            for (int i = 0; i < tvFinancialTitle.length; i++) {
-//                mList.add(new FinanceBean(tvFinancialTitle[i], tvFinancialTime[i]));
-//            }
-//            myAdapter.setFinancialBeen(mList);
-//        } else {
-//            boolean flag = true;
-//            int pLen = tvFinancialTitle.length;
-//            for (i = 0; i < pLen; i++) {
-//                //获取查询的字符串
-//                int len = pLen - searchContent.length() + 1;
-//                for (j = 0; j < len; j++) {
-//                    boolean contains = tvFinancialTitle[i].contains(searchContent);
-//                    if (contains) {
-//                        mList.add(new FinanceBean(tvFinancialTitle[i], ""));
-//                        flag = false;
-//                        break;
-//                    }
-//                }
-//            }
-//            if (flag) {
-//                mList.clear();
-//                mDatas.clear();
-//                llNoData.setVisibility(View.VISIBLE);
-//                Toast.makeText(this, R.string.text_not_search, Toast.LENGTH_LONG).show();
-//            }
-//            Log.e(TAG, "show: " + mList.size());
-//            myAdapter.setFinancialBeen(mList);
-//        }
-//    }
-
-    //查询
+    /**
+     * 点击搜索键进行搜索
+     */
     public void onSearch() {
         //编辑框获取字符串
         searchContent = etSearch.getText().toString().trim();
@@ -199,12 +161,10 @@ public class FinanceProductListActivity extends AppCompatActivity implements Vie
      */
     private boolean getResultData(String text) {
         mList.clear();
-        for (int i = 0; i < mList.size(); i++) {
+        for (int i = 0; i < mDatas.size(); i++) {
             String str = mDatas.get(i).getProductName();
-            for (int j = 0; j < str.length(); j++) {
-                if (str.contains(text.trim())) {
-                    mList.add(new FinanceBean(str, ""));
-                }
+            if (str.contains(text.trim())) {
+                mList.add(new FinanceBean(str, ""));
             }
         }
         if (mList.size() == 0) {

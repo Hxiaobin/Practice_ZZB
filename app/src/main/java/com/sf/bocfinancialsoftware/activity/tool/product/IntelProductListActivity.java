@@ -124,8 +124,6 @@ public class IntelProductListActivity extends AppCompatActivity implements View.
 
     /**
      * 点击搜索键时edit text触发的回调
-     *
-     * @param text 传入输入框的文本
      */
     public void onSearch(String text) {
         if (TextUtils.isEmpty(text)) {

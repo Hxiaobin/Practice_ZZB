@@ -94,15 +94,22 @@ public class ForwardQuotationCalculateActivity extends AppCompatActivity impleme
         tvForwardQuotationData.setOnClickListener(this);
         tvRate.setOnClickListener(this);
         etForwardQuotationRate.addTextChangedListener(new MyTextWatcher() {
+            String mString;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                mString = s.toString();
+            }
+
             @Override
             public void afterTextChanged(Editable s) {
                 //计算操作
-//                String strRateResult = "0";
                 strRateResult = s.toString();
-                String strMoney = etForwardQuotationCurrency.getText().toString();
-                if (TextUtils.isEmpty(strRateResult) || TextUtils.isEmpty(strMoney)) {
-                    tvForwardQuotationExchange.setText("");
-                    return;
+                strMoney = etForwardQuotationCurrency.getText().toString();
+                if (!TextUtils.isEmpty(strRateResult) &&
+                        !strRateResult.matches("(^[1-9]\\d{0,7}(\\.\\d{0,2})?)|(^0(\\.\\d{0,2})?)")) {
+                    etForwardQuotationRate.setText(mString);
+                    etForwardQuotationRate.setSelection(etForwardQuotationRate.getText().toString().length());
                 }
                 String calculate = calculate(strCurrency[positionCurrency], strRate[mPositionBtn],
                         strRateResult, strMoney);
@@ -110,14 +117,22 @@ public class ForwardQuotationCalculateActivity extends AppCompatActivity impleme
             }
         });
         etForwardQuotationCurrency.addTextChangedListener(new MyTextWatcher() {
+            String mString;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                mString = s.toString();
+            }
+
             @Override
             public void afterTextChanged(Editable s) {
                 //计算操作
                 strRateResult = etForwardQuotationRate.getText().toString();
                 strMoney = s.toString();
-                if (TextUtils.isEmpty(strRateResult) || TextUtils.isEmpty(strMoney)) {
-                    tvForwardQuotationExchange.setText("");
-                    return;
+                if (!TextUtils.isEmpty(strMoney) &&
+                        !strMoney.matches("(^[1-9]\\d{0,7}(\\.\\d{0,2})?)|(^0(\\.\\d{0,2})?)")) {
+                    etForwardQuotationCurrency.setText(mString);
+                    etForwardQuotationCurrency.setSelection(etForwardQuotationCurrency.getText().toString().length());
                 }
                 String calculate = calculate(strCurrency[positionCurrency], strRate[mPositionBtn],
                         strRateResult, strMoney);
