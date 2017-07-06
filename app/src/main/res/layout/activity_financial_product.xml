@@ -58,6 +58,7 @@
         android:layout_marginTop="0dp"
         android:background="@color/white"
         android:divider="@color/activity_common_background_gray"
+        android:listSelector="@color/white"
         android:dividerHeight="0dp"
         android:scrollbars="none">
 
@@ -69,6 +70,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="0dp"
         android:background="@color/white"
+        android:listSelector="@color/white"
         android:divider="@color/activity_common_background_gray"
         android:dividerHeight="0dp"
         android:scrollbars="none">

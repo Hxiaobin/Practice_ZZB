@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +19,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
+import com.sf.bocfinancialsoftware.widget.MyTextWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,26 +77,20 @@ public class ExchangeRateCalculateActivity extends AppCompatActivity implements 
         btnExchangeRateSettlement.setOnClickListener(this);
         btnExchangeRateSurrendering.setOnClickListener(this);
         tvRate.setOnClickListener(this);
-        etExchangeRateCurrency.addTextChangedListener(new TextWatcher() {
+        etExchangeRateCurrency.addTextChangedListener(new MyTextWatcher() {
+            String mString;
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                mString = s.toString();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 //计算操作
                 String string = s.toString();
-                if (TextUtils.isEmpty(string)) {
-                    tvExchangeRateExchange.setText("");
-                    return;
-                }else if (string.equals(".")){
-                    string = "0"+string;
+                if (!TextUtils.isEmpty(string) && !string.matches("(^[1-9]\\d{0,7}(\\.\\d{0,2})?)|(^0(\\.\\d{0,2})?)")) {
+                    etExchangeRateCurrency.setText(mString);
+                    etExchangeRateCurrency.setSelection(etExchangeRateCurrency.getText().toString().length());
                 }
                 String calculate = calculate(strCurrency[positionCurrency], strRate[mPositionBtn], string);
                 tvExchangeRateExchange.setText(calculate);
@@ -146,7 +140,7 @@ public class ExchangeRateCalculateActivity extends AppCompatActivity implements 
     }
 
     /**
-     *初始化popup以及计算
+     * 初始化popup以及计算
      */
     private void initSelectPopup() {
         //添加一个下拉列表项的list菜单项
