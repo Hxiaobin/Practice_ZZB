@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.SwipeRefreshLayout
+        <com.sf.bocfinancialsoftware.widget.SwipeRefreshLayoutHome
             android:id="@+id/swipeRefreshLayoutHomeFragmentBocAnalyse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -22,7 +22,7 @@
                 android:dividerHeight="@dimen/common_margin_micro"
                 android:scrollbars="none" />
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </com.sf.bocfinancialsoftware.widget.SwipeRefreshLayoutHome>
 
         <LinearLayout
             android:id="@+id/lltEmptyViewBocAnalyseHome"

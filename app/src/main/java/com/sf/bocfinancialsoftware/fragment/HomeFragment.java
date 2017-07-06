@@ -6,9 +6,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -31,6 +33,7 @@ import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
 import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
 import com.sf.bocfinancialsoftware.util.DataBaseSQLiteUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
+import com.sf.bocfinancialsoftware.widget.SwipeRefreshLayoutHome;
 
 import java.util.List;
 
@@ -59,7 +62,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     private Button btnBusinessQuery;  //业务查询
     private Button btnBOCAnalyse;  //中银分析
     private TextView tvMsgTotalReadSum;  //通知总未读数量
-    private SwipeRefreshLayout swipeRefreshLayoutHomeFragmentBocAnalyse;  //下拉刷新控件
+    private SwipeRefreshLayoutHome swipeRefreshLayoutHomeFragmentBocAnalyse;  //下拉刷新控件
     private ListView lvHomeFragmentBocAnalyse; //中银分析新闻列表
     private LinearLayout lltEmptyViewBocAnalyseHome; //处理空数据
     private List<BocAnalyseBean> bocAnalyseBeanList;  //中银分析Bean类集合
@@ -67,7 +70,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     private HomeFragmentBocAnalyseAdapter bocAnalyseAdapter; //中银分析列表适配器
     private ImageAdapter imageAdapter;  //图片轮播适配器
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private int totalUnReadSum; //总未读数量
     private int page = 0; //查询页码
     private Handler mHandler = new Handler() {  //主线程中的Handler对象
         @Override
@@ -115,7 +117,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         btnBusinessQuery = (Button) headView.findViewById(R.id.btnBusinessQuery);
         btnBOCAnalyse = (Button) headView.findViewById(R.id.btnBOCAnalyse);
         tvMsgTotalReadSum = (TextView) headView.findViewById(R.id.tvMsgTotalReadSum);
-        swipeRefreshLayoutHomeFragmentBocAnalyse = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutHomeFragmentBocAnalyse);
+        swipeRefreshLayoutHomeFragmentBocAnalyse = (SwipeRefreshLayoutHome) view.findViewById(R.id.swipeRefreshLayoutHomeFragmentBocAnalyse);
         lvHomeFragmentBocAnalyse = (ListView) view.findViewById(R.id.lvHomeFragmentBocAnalyse);
         lltEmptyViewBocAnalyseHome = (LinearLayout) view.findViewById(R.id.lltEmptyViewBocAnalyseHome);
     }
@@ -263,6 +265,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0) {  //当滚到最后一行
             isLastLine = true;
+        } else {
+            isLastLine = false;
         }
     }
 

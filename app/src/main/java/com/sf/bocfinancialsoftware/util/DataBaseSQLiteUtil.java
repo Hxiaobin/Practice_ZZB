@@ -607,7 +607,7 @@ public class DataBaseSQLiteUtil {
         while (cursor.moveToNext()) {
             PleasantMessageBean bean = new PleasantMessageBean();
             bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_ID))));  //提示信息id
-            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_TITLE)));  //提示信息标题
+            bean.setMsgTitle( cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_TITLE)));  //提示信息标题
             bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_CONTENT)));  //提示信息内容
             bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_IS_READ)));  //信息是否已读
             bean.setMsgDateAndTime(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_DATE_AND_TIME))); //提示信息时间
