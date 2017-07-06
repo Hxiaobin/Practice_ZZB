@@ -21,6 +21,7 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.NEWS_ID;
  * 中银分析详情
  * Created by sn on 2017/6/9.
  */
+
 public class BocAnalyseDetailActivity extends BaseActivity {
 
     private ImageView ivTitleBarBack; //返回按钮

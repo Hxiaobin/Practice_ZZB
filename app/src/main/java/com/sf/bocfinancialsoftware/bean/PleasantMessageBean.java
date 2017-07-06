@@ -12,14 +12,11 @@ public class PleasantMessageBean {
     private String msgContent; //消息内容
     private String msgIsRead; //消息是否已读（0：未读；1：已读）
     private String msgDateAndTime; //消息日期和时间
-    private String productId; //国结产品id
-    private String productName; //国结产品名称
-    private String webUrl; //跳转wanURL
 
     public PleasantMessageBean() {
     }
 
-    public PleasantMessageBean( String msgTitle, String msgContent, String msgIsRead, String msgDateAndTime) {
+    public PleasantMessageBean(String msgTitle, String msgContent, String msgIsRead, String msgDateAndTime) {
         this.msgTitle = msgTitle;
         this.msgContent = msgContent;
         this.msgIsRead = msgIsRead;
@@ -66,27 +63,4 @@ public class PleasantMessageBean {
         this.msgDateAndTime = msgDateAndTime;
     }
 
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getWebUrl() {
-        return webUrl;
-    }
-
-    public void setWebUrl(String webUrl) {
-        this.webUrl = webUrl;
-    }
 }

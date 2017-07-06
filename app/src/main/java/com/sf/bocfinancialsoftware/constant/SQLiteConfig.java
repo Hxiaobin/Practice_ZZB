@@ -3,9 +3,9 @@ package com.sf.bocfinancialsoftware.constant;
 /**
  * 数据库常量类
  * 说明：定义有关数据库使用到的各种常量
- *
- * @author qq724418408
+ * Created by sn on 2017/6/9.
  */
+
 public class SQLiteConfig {
 
     //数据库建库建表

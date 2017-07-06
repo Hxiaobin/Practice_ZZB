@@ -45,7 +45,7 @@ public class ConstantConfig {
     public static final String CONTRACT_ID = "contractId";  //业务编号
     public static final String OPENING_AMOUNT = "open_amount";  //开证金额
     public static final String CREDIT_BALANCE = "credit_balance";  //信用证余额
-    //回调
+    //通知提醒的相关请求码、结果码
     public static final int IMPORT_REQUEST = 0x0001;  //进口通知请求码
     public static final int IMPORT_RESPONSE = 0x0002;  //进口通知返回码
     public static final int EXPORT_REQUEST = 0x0003;  //出口通知请求码

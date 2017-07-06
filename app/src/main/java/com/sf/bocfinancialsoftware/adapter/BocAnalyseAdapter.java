@@ -18,6 +18,7 @@ import java.util.List;
  * 中银分析适配器
  * Created by sn on 2017/6/8.
  */
+
 public class BocAnalyseAdapter extends BaseAdapter {
 
     private Context context;

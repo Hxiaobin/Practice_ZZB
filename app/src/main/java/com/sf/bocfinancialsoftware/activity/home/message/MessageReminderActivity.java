@@ -39,6 +39,7 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_UN_READ;
  * 通知提醒页面
  * Created by sn on 2017/6/12.
  */
+
 public class MessageReminderActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView ivTitleBarBack;//返回

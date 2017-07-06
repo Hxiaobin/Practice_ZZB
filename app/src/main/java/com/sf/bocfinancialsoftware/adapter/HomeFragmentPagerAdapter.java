@@ -10,6 +10,7 @@ import java.util.List;
  * 首页TabLayout适配器
  * Created by sn on 2017/6/8.
  */
+
 public class HomeFragmentPagerAdapter extends FragmentPagerAdapter{
 
     private List<String> titleList;  //标题集合

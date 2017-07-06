@@ -40,6 +40,7 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_EXPORT_C
  * 出口通知列表
  * Created by sn on 2017/6/12.
  */
+
 public class ExportMessageListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
 
     private ImageView ivTitleBarBack;  //返回

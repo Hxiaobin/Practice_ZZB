@@ -10,7 +10,8 @@ import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import java.util.List;
 
 /**
- * Created by john on 2017/6/28.
+ * 首页和中银分析详情图片轮播适配器
+ * Created by sn on 2017/6/28.
  */
 
 public class ImageAdapter extends StaticPagerAdapter {

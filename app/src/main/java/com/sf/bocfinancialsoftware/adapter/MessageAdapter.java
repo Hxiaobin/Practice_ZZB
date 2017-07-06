@@ -16,6 +16,7 @@ import java.util.List;
  * 通知提醒消息列表适配器
  * Created by sn on 2017/6/12.
  */
+
 public class MessageAdapter extends BaseAdapter {
 
     private Context context;
