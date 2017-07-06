@@ -11,108 +11,191 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_margin_normal"
+        android:background="@drawable/shape_background_message"
         android:orientation="vertical"
-        android:padding="@dimen/common_padding_normal">
+        android:paddingBottom="@dimen/common_padding_normal"
+        android:paddingLeft="@dimen/common_padding_normal"
+        android:paddingRight="@dimen/common_padding_normal">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/common_margin_normal"
+            android:layout_marginBottom="@dimen/common_margin_micro"
+            android:layout_marginTop="@dimen/common_margin_micro"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
-                style="@style/activity_text_normal_gray"
+                style="@style/activity_text_normal_black"
                 android:text="@string/activity_business_query_start_date" />
 
-            <TextView
-                android:id="@+id/tvBusinessQueryStartDate"
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin_small"
                 android:layout_weight="1"
-                android:background="@drawable/shape_background_message"
-                android:padding="@dimen/common_padding_small_to_normal"
-                android:textColor="@color/common_text_gray"
-                android:textSize="@dimen/text_size_normal" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvBusinessQueryStartDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:hint="@string/common_business_query_chose_end_time"
+                    android:padding="@dimen/common_padding_normal"
+                    android:textColor="@color/common_text_gray"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_micro_width"
+                    android:layout_height="@dimen/icon_micro_width"
+                    android:layout_alignRight="@+id/tvBusinessQueryStartDate"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/common_margin_small"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/ic_calendar"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
 
         </LinearLayout>
+
+        <View
+            style="@style/line_horizontal_gray"
+            android:layout_marginLeft="@dimen/line_margin_big" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/common_margin_normal"
+            android:layout_marginBottom="@dimen/common_margin_micro"
+            android:layout_marginTop="@dimen/common_margin_micro"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
-                style="@style/activity_text_normal_gray"
+                style="@style/activity_text_normal_black"
                 android:text="@string/activity_business_query_end_date" />
 
-            <TextView
-                android:id="@+id/tvBusinessQueryEndDate"
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin_small"
                 android:layout_weight="1"
-                android:background="@drawable/shape_background_message"
-                android:padding="@dimen/common_padding_small_to_normal"
-                android:textColor="@color/common_text_gray"
-                android:textSize="@dimen/text_size_normal" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvBusinessQueryEndDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:hint="@string/common_business_query_chose_end_time"
+                    android:padding="@dimen/common_padding_normal"
+                    android:textColor="@color/common_text_gray"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <ImageView
+                    android:layout_width="@dimen/icon_micro_width"
+                    android:layout_height="@dimen/icon_micro_width"
+                    android:layout_alignRight="@+id/tvBusinessQueryEndDate"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/common_margin_small"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/ic_calendar"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
 
         </LinearLayout>
+
+        <View
+            style="@style/line_horizontal_gray"
+            android:layout_marginLeft="@dimen/line_margin_big" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/common_margin_normal"
+            android:layout_marginBottom="@dimen/common_margin_micro"
+            android:layout_marginTop="@dimen/common_margin_micro"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
-                style="@style/activity_text_normal_gray"
+                style="@style/activity_text_normal_black"
                 android:text="@string/activity_business_query_contract_id" />
 
-            <EditText
-                android:id="@+id/etBusinessQueryContractId"
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin_small"
                 android:layout_weight="1"
-                android:background="@drawable/shape_background_message"
-                android:maxLength="20"
-                android:padding="@dimen/common_padding_small_to_normal"
-                android:textColor="@color/common_text_gray"
-                android:textSize="@dimen/text_size_normal" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etBusinessQueryContractId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:hint="@string/common_business_query_chose_contract_id"
+                    android:maxLength="20"
+                    android:padding="@dimen/common_padding_normal"
+                    android:textColor="@color/common_text_gray"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <ImageView
+                    android:id="@+id/ivContractIdClear"
+                    android:layout_width="@dimen/icon_more_micro_width"
+                    android:layout_height="@dimen/icon_more_micro_high"
+                    android:layout_alignRight="@+id/etBusinessQueryContractId"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/ic_clear"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_margin_super_big"
-            android:orientation="horizontal">
+        <View
+            style="@style/line_horizontal_gray"
+            android:layout_marginLeft="@dimen/line_margin_big" />
 
-            <Button
-                android:id="@+id/btnBusinessQueryCancel"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/button_height_small"
-                android:layout_marginRight="@dimen/common_margin_small_to_normal"
-                android:layout_weight="1"
-                android:background="@drawable/shape_button_cancel"
-                android:text="@string/common_cancel"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_normal" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/btnBusinessQueryOK"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/button_height_small"
-                android:layout_marginLeft="@dimen/common_margin_small_to_normal"
-                android:layout_weight="1"
-                android:background="@drawable/shape_button_search_big"
-                android:text="@string/common_search"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_normal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_margin_normal"
+        android:layout_marginRight="@dimen/common_margin_normal"
+        android:layout_marginTop="@dimen/common_margin_micro"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnBusinessQueryCancel"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/button_height_smaller"
+            android:layout_marginRight="@dimen/common_margin_normal"
+            android:background="@drawable/shape_button_cancel"
+            android:text="@string/common_cancel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal" />
+
+        <Button
+            android:id="@+id/btnBusinessQueryOK"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/button_height_smaller"
+            android:layout_marginLeft="@dimen/common_margin_normal"
+            android:background="@drawable/shape_button_search_big"
+            android:text="@string/common_search"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal" />
 
     </LinearLayout>
 

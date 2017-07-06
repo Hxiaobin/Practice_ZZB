@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.activity.base.BaseActivity;
+import com.sf.bocfinancialsoftware.base.BaseActivity;
 
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.FILE_FIRST_IN;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.IS_FIRST_IN;

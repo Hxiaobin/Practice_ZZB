@@ -14,18 +14,23 @@
     <color name="grayLight">#e2e2e2</color>
     <color name="red">#e7262b</color>
     <color name="orange">#fd9d12</color>
-    <color name="orangeDeep">#fd4e01</color>
+    <color name="orangeDeep">#ee7c6a</color>
     <color name="pink">#EDBEBB</color>
     <color name="black">#000000</color>
-    <color name="blue">#4c92e2</color>
-    <color name="blueLight">#24bbfa</color>
+    <color name="blue">#2f9cf0</color>
+    <color name="blueLight">#2fc1fd</color>
     <color name="blueDark">#156fbb</color>
     <color name="green">#35c17a</color>
     <color name="greenLight">#569b91</color>
+    <color name="greenDeep">#00b1bd</color>
     <color name="yellow">#d99828</color>
     <color name="white">#ffffff</color>
+
+    <!--查询按钮渐变颜色 绿色-->
+    <color name="start_color_green">#18e4f4</color>
+    <color name="end_color_green">#00b1bd</color>
     <!-- 分割线 -->
-    <color name="line_horizontal_gray">#f5f5f5</color>
+    <color name="line_horizontal_gray">#e7e7e7</color>
     <!-- 黑色字体 -->
     <color name="common_text_black">#212121</color>
     <!-- 灰色字体 -->
@@ -59,5 +64,4 @@
     <color name="tagcloud_color">#ffffff</color>
     <!-- 汇率 表头蓝色 -->
     <color name="rate_blue">#2f9df1</color>
-    <color name="rate_green">#00b1bd</color>
 </resources>

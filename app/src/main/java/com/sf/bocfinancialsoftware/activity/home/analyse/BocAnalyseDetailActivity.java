@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.jude.rollviewpager.RollPagerView;
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.activity.base.BaseActivity;
+import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.adapter.ImageAdapter;
 import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
 import com.sf.bocfinancialsoftware.util.DataBaseSQLiteUtil;

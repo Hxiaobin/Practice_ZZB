@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.fourmob.datetimepicker.date.DatePickerDialog;
 import com.sf.bocfinancialsoftware.R;
+import com.sf.bocfinancialsoftware.widget.ClearEditTextTextWatcher;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -33,6 +34,7 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.START_DATE;
 public class BusinessQueryCriteriaActivity extends FragmentActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private ImageView ivTitleBarBack;  //返回
+    private ImageView ivContractIdClear;  //清除文本
     private TextView tvTitleBarTitle;  //标题
     private TextView tvBusinessQueryStartDate; //开始时间
     private TextView tvBusinessQueryEndDate; //结束时间
@@ -67,6 +69,7 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
 
     protected void initView() {
         ivTitleBarBack = (ImageView) findViewById(R.id.ivTitleBarBack);
+        ivContractIdClear = (ImageView) findViewById(R.id.ivContractIdClear);
         tvTitleBarTitle = (TextView) findViewById(R.id.tvTitleBarTitle);
         tvBusinessQueryStartDate = (TextView) findViewById(R.id.tvBusinessQueryStartDate);
         tvBusinessQueryEndDate = (TextView) findViewById(R.id.tvBusinessQueryEndDate);
@@ -87,10 +90,13 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
         format = new SimpleDateFormat("yyyy");
         format2 = new SimpleDateFormat("yyyy-MM-dd");
         currentYear = format.format(date);   //获取当前年份
+        ClearEditTextTextWatcher textWatcher = new ClearEditTextTextWatcher(BusinessQueryCriteriaActivity.this, etBusinessQueryContractId, ivContractIdClear);
+        etBusinessQueryContractId.addTextChangedListener(textWatcher);
     }
 
     protected void initListener() {
         ivTitleBarBack.setOnClickListener(this);
+        ivContractIdClear.setOnClickListener(this);
         btnBusinessQueryCancel.setOnClickListener(this);
         btnBusinessQueryOK.setOnClickListener(this);
         tvBusinessQueryStartDate.setOnClickListener(this);
@@ -102,6 +108,21 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
         switch (v.getId()) {
             case R.id.ivTitleBarBack:  //返回
                 finish();
+                break;
+            case R.id.ivContractIdClear: //清除文本
+                etBusinessQueryContractId.setText("");
+                break;
+            case R.id.tvBusinessQueryStartDate: //开始时间
+                startDatePickerDialog.setVibrate(false);
+                startDatePickerDialog.setYearRange(1985, Integer.parseInt(currentYear));
+                startDatePickerDialog.setCloseOnSingleTapDay(false);
+                startDatePickerDialog.show(getSupportFragmentManager(), DATE_PICKER_TAG);
+                break;
+            case R.id.tvBusinessQueryEndDate:  //结束时间
+                endDatePickerDialog.setVibrate(true);
+                endDatePickerDialog.setYearRange(1985, Integer.parseInt(currentYear));
+                endDatePickerDialog.setCloseOnSingleTapDay(true);
+                endDatePickerDialog.show(getSupportFragmentManager(), DATE_PICKER_TAG);
                 break;
             case R.id.btnBusinessQueryCancel: // 取消
                 finish();
@@ -132,18 +153,6 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
                 } else {
                     Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.common_please_enter_the_useful_criteria), Toast.LENGTH_SHORT).show();
                 }
-                break;
-            case R.id.tvBusinessQueryStartDate: //开始时间
-                startDatePickerDialog.setVibrate(false);
-                startDatePickerDialog.setYearRange(1985, Integer.parseInt(currentYear));
-                startDatePickerDialog.setCloseOnSingleTapDay(false);
-                startDatePickerDialog.show(getSupportFragmentManager(), DATE_PICKER_TAG);
-                break;
-            case R.id.tvBusinessQueryEndDate:  //结束时间
-                endDatePickerDialog.setVibrate(true);
-                endDatePickerDialog.setYearRange(1985, Integer.parseInt(currentYear));
-                endDatePickerDialog.setCloseOnSingleTapDay(true);
-                endDatePickerDialog.show(getSupportFragmentManager(), DATE_PICKER_TAG);
                 break;
             default:
                 break;

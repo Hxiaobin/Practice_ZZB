@@ -17,7 +17,8 @@
         android:layout_marginTop="@dimen/common_margin_normal"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -29,7 +30,6 @@
             android:padding="@dimen/common_padding_micro">
 
             <ImageView
-                android:id="@+id/ivBusinessQueryScan"
                 android:layout_width="@dimen/icon_small_width"
                 android:layout_height="@dimen/icon_small_high"
                 android:scaleType="centerCrop"
@@ -37,7 +37,6 @@
                 android:visibility="visible" />
 
             <EditText
-                android:id="@+id/etBusinessQuery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/common_margin_small"
@@ -51,7 +50,6 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnBusinessQuery"
             android:layout_width="@dimen/button_width_small"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/common_margin_small"
@@ -65,16 +63,103 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/common_margin_normal"
+        android:layout_marginLeft="@dimen/common_margin_normal"
+        android:layout_marginRight="@dimen/common_margin_normal"
+        android:layout_marginTop="@dimen/common_margin_normal"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/common_padding_small"
+                android:paddingTop="@dimen/common_padding_small">
+
+                <ImageView
+                    android:id="@+id/ivBusinessQueryScan"
+                    android:layout_width="@dimen/icon_small_width"
+                    android:layout_height="@dimen/icon_small_high"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_scan"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_margin_small">
+
+                    <EditText
+                        android:id="@+id/etBusinessQuery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:hint="@string/common_business_query_please_enter_the_contract_id"
+                        android:lines="1"
+                        android:maxLength="20"
+                        android:textColor="@color/common_text_black"
+                        android:textColorHint="@color/gray"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <ImageView
+                        android:id="@+id/ivBusinessQueryClear"
+                        android:layout_width="@dimen/icon_more_micro_width"
+                        android:layout_height="@dimen/icon_more_micro_high"
+                        android:layout_alignRight="@+id/etBusinessQuery"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/common_margin_small"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_clear"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                style="@style/line_horizontal_gray"
+                android:layout_gravity="bottom" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnBusinessQuery"
+            android:layout_width="@dimen/button_width_more_small"
+            android:layout_height="@dimen/button_height_more_micro"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/common_margin_small"
+            android:background="@drawable/shape_button_search_small"
+            android:text="@string/common_search"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_small" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
+        android:layout_marginTop="@dimen/common_margin_small"
         android:orientation="horizontal">
 
         <ExpandableListView
             android:id="@+id/elvBusiness"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:childDivider="@color/line_horizontal_gray"
-            android:divider="@color/white"
-            android:dividerHeight="@dimen/line_height_high"
+            android:layout_marginLeft="@dimen/common_margin_normal"
+            android:layout_marginRight="@dimen/common_margin_normal"
+            android:dividerHeight="0dp"
             android:groupIndicator="@null"
             android:listSelector="#00000000"
             android:scrollbars="none">

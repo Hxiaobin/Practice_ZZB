@@ -12,11 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.activity.base.BaseActivity;
 import com.sf.bocfinancialsoftware.adapter.BusinessQueryAdapter;
+import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.bean.BusinessBean;
 import com.sf.bocfinancialsoftware.bean.BusinessTypeBean;
 import com.sf.bocfinancialsoftware.util.DataUtil;
+import com.sf.bocfinancialsoftware.widget.ClearEditTextTextWatcher;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
 
     private ImageView ivTitleBarBack;  //返回
     private ImageView ivBusinessQueryScan;  //扫一扫
+    private ImageView ivBusinessQueryClear;  //清除文本
     private TextView tvTitleBarTitle;  //标题
     private EditText etBusinessQuery; //输入框
     private Button btnBusinessQuery; //查询按钮
@@ -41,6 +43,7 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
     private List<BusinessTypeBean> groups;  //组名集合
     private List<List<BusinessBean>> children; //所有组别下的好友集合
     private BusinessQueryAdapter adapter;  //列表适配器
+    private String contractId;  //业务编号
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
     protected void initView() {
         ivTitleBarBack = (ImageView) findViewById(R.id.ivTitleBarBack);
         ivBusinessQueryScan = (ImageView) findViewById(R.id.ivBusinessQueryScan);
+        ivBusinessQueryClear = (ImageView) findViewById(R.id.ivBusinessQueryClear);
         tvTitleBarTitle = (TextView) findViewById(R.id.tvTitleBarTitle);
         etBusinessQuery = (EditText) findViewById(R.id.etBusinessQuery);
         btnBusinessQuery = (Button) findViewById(R.id.btnBusinessQuery);
@@ -70,14 +74,31 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
         DataUtil.setExpandableListData(groups, children); //设置好友列表信息
         adapter = new BusinessQueryAdapter(BusinessQueryActivity.this, groups, children);
         elvBusiness.setAdapter(adapter);
+        ClearEditTextTextWatcher textWatcher = new ClearEditTextTextWatcher(BusinessQueryActivity.this, etBusinessQuery, ivBusinessQueryClear);
+        etBusinessQuery.addTextChangedListener(textWatcher);
     }
 
     @Override
     protected void initListener() {
         ivTitleBarBack.setOnClickListener(this);
         ivBusinessQueryScan.setOnClickListener(this);
+        ivBusinessQueryClear.setOnClickListener(this);
         elvBusiness.setOnChildClickListener(this);
         btnBusinessQuery.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SCAN_CODE_REQUEST_BUSINESS_QUERY && resultCode == RESULT_OK) {  //扫描二维码值回调
+            Bundle extras = data.getExtras();
+            if (null != extras) {
+                String result = extras.getString("result");  //获取传回的业务编码
+                Intent intent = new Intent(BusinessQueryActivity.this, BusinessQueryResultActivity.class);
+                intent.putExtra(CONTRACT_ID, result);
+                startActivity(intent);
+            }
+        }
     }
 
     @Override
@@ -91,8 +112,11 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
                 intent = new Intent(BusinessQueryActivity.this, CaptureActivity.class);
                 startActivityForResult(intent, SCAN_CODE_REQUEST_BUSINESS_QUERY);
                 break;
+            case R.id.ivBusinessQueryClear: //清除文本
+                etBusinessQuery.setText("");
+                break;
             case R.id.btnBusinessQuery:  //查询
-                String contractId = etBusinessQuery.getText().toString();
+                contractId = etBusinessQuery.getText().toString();
                 if (!TextUtils.isEmpty(contractId)) {
                     intent = new Intent(BusinessQueryActivity.this, BusinessQueryResultActivity.class);
                     intent.putExtra(CONTRACT_ID, contractId);
@@ -109,22 +133,9 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
         Intent intent = new Intent(BusinessQueryActivity.this, BusinessQueryCriteriaActivity.class);
-        intent.putExtra(BUSINESS_NAME, children.get(groupPosition).get(childPosition).getBusinessName());
+        intent.putExtra(BUSINESS_NAME, children.get(groupPosition).get(childPosition).getBusinessName()); //传递业务名称，后一页根据该业务名称，再加上其他条件来查询相应的业务
         startActivity(intent);
         return true;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SCAN_CODE_REQUEST_BUSINESS_QUERY && resultCode == RESULT_OK) {  //扫描二维码值回调
-            Bundle extras = data.getExtras();
-            if (null != extras) {
-                String result = extras.getString("result");  //获取传回的业务编码
-                Intent intent = new Intent(BusinessQueryActivity.this, BusinessQueryResultActivity.class);
-                intent.putExtra(CONTRACT_ID, result);
-                startActivity(intent);
-            }
-        }
-    }
 }
