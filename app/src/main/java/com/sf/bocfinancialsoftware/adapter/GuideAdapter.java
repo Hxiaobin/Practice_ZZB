@@ -13,6 +13,7 @@ import java.util.List;
  * 引导页滑动适配器
  * Created by sn on 2017/6/28.
  */
+
 public class GuideAdapter extends PagerAdapter {
 
     private Context context;

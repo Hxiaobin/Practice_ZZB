@@ -27,8 +27,8 @@
 
     <ImageView
         android:id="@+id/ivHomeFragmentExpandReading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/icon_smallest_width"
+        android:layout_height="@dimen/icon_smallest_high"
         android:layout_marginLeft="@dimen/common_margin_normal"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_expand_reading" />

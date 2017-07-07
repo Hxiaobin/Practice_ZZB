@@ -31,6 +31,7 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.SCAN_CODE_REQU
  * 业务查询
  * Created by sn on 2017/6/14.
  */
+
 public class BusinessQueryActivity extends BaseActivity implements View.OnClickListener, ExpandableListView.OnChildClickListener {
 
     private ImageView ivTitleBarBack;  //返回

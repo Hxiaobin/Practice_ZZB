@@ -31,6 +31,7 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.START_DATE;
  * 业务查询条件
  * Created by sn on 2017/6/14.
  */
+
 public class BusinessQueryCriteriaActivity extends FragmentActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private ImageView ivTitleBarBack;  //返回

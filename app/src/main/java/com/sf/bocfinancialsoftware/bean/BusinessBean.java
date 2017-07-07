@@ -13,9 +13,6 @@ public class BusinessBean {
     private String dateName; //日期名称（可为空，为空APP不显示相应栏位）
     private String idName; //编号名称（可为空，为空APP不显示相应栏位）
 
-    public BusinessBean() {
-    }
-
     public BusinessBean(String businessName) {
         this.businessName = businessName;
     }

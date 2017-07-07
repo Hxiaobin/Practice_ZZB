@@ -101,7 +101,7 @@ public class DataBaseSQLiteUtil {
             String sql6 = createTable(TABLE_NAME_CONTRACT, TABLE_CONTRACT_COLUMNS);
             db.execSQL(sql6); // 创建合同表
             String sql7 = createTable(TABLE_NAME_PLEASANT_MESSAGE, TABLE_PLEASANT_MESSAGE_COLUMNS);
-            db.execSQL(sql7); // 创建合同表
+            db.execSQL(sql7); // 创建温馨提示表
         }
 
         @Override
@@ -195,7 +195,7 @@ public class DataBaseSQLiteUtil {
     public static List<BocAnalyseBean> queryBocAnalyseList() {
         openDataBase();
         String[] projection = {COLUMN_BOC_ANALYSE_NEWS_ID, COLUMN_BOC_ANALYSE_NEWS_TITLE, COLUMN_BOC_ANALYSE_NEWS_DESC, COLUMN_BOC_ANALYSE_NEWS_DATE
-                , COLUMN_BOC_ANALYSE_NEWS_IMAGE_URL}; //
+                , COLUMN_BOC_ANALYSE_NEWS_IMAGE_URL};
         Cursor cursor = mDatabase.query(TABLE_NAME_BOC_ANALYSE, projection, null,
                 null, null, null, null);
         List<BocAnalyseBean> list = new ArrayList<>();
@@ -299,7 +299,7 @@ public class DataBaseSQLiteUtil {
         values.put(COLUMN_MESSAGE_REMINDER_MSG_IS_READ, bean.getMsgIsRead());  // 消息是否已读
         long insert = mDatabase.insert(TABLE_NAME_MESSAGE_REMINDER, null, values);
         closeDataBase();
-        return insert; // 插入中银分析表
+        return insert; // 插入通知提醒表
     }
 
     /**
@@ -347,7 +347,7 @@ public class DataBaseSQLiteUtil {
     }
 
     /**
-     * PopupWindow筛选通知，获取全部该类通知
+     * PopupWindow筛选通知，根据条件，获取全部该类通知
      *
      * @param typeId 通知类型id
      * @param title  筛选条件
@@ -430,7 +430,7 @@ public class DataBaseSQLiteUtil {
         values.put(COLUMN_BUSINESS_TYPE_NAME, bean.getTypeName());  // 业务类别名称
         long insert = mDatabase.insert(TABLE_NAME_BUSINESS_TYPE, null, values);
         closeDataBase();
-        return insert; // 插入中银分析表
+        return insert; // 插入业务类别表
     }
 
     /**
@@ -448,7 +448,7 @@ public class DataBaseSQLiteUtil {
         values.put(COLUMN_BUSINESS_ID_NAME, bean.getIdName());  // 编号名称
         long insert = mDatabase.insert(TABLE_NAME_BUSINESS, null, values);
         closeDataBase();
-        return insert; // 插入中银分析表
+        return insert; // 插入业务表
     }
 
     /**
@@ -467,7 +467,7 @@ public class DataBaseSQLiteUtil {
         values.put(COLUMN_CONTRACT_CREDIT_BALANCE, (String) bean.getMapObject().get(CREDIT_BALANCE));  // 信用证余额
         long insert = mDatabase.insert(TABLE_NAME_CONTRACT, null, values);
         closeDataBase();
-        return insert; // 插入中银分析表
+        return insert; // 插入合同表
     }
 
     /**
@@ -607,7 +607,7 @@ public class DataBaseSQLiteUtil {
         while (cursor.moveToNext()) {
             PleasantMessageBean bean = new PleasantMessageBean();
             bean.setMsgId(String.valueOf(cursor.getInt(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_ID))));  //提示信息id
-            bean.setMsgTitle( cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_TITLE)));  //提示信息标题
+            bean.setMsgTitle(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_TITLE)));  //提示信息标题
             bean.setMsgContent(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_CONTENT)));  //提示信息内容
             bean.setMsgIsRead(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_IS_READ)));  //信息是否已读
             bean.setMsgDateAndTime(cursor.getString(cursor.getColumnIndex(COLUMN_PLEASANT_MESSAGE_MSG_DATE_AND_TIME))); //提示信息时间

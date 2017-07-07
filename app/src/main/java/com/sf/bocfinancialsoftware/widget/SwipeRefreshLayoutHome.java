@@ -11,6 +11,7 @@ import android.view.ViewConfiguration;
  * 说明：处理轮播图左右滑动与列表下拉刷新的冲突
  * Created by sn on 2017/7/5.
  */
+
 public class SwipeRefreshLayoutHome extends SwipeRefreshLayout {
 
     private float startX; //初始X坐标

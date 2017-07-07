@@ -43,6 +43,9 @@
     <dimen name="icon_normal_width">54dp</dimen>
     <dimen name="icon_normal_high">54dp</dimen>
     <!--超小图标-->
+    <dimen name="icon_smallest_width">16dp</dimen>
+    <dimen name="icon_smallest_high">16dp</dimen>
+    <!--超小图标-->
     <dimen name="icon_more_micro_width">18dp</dimen>
     <dimen name="icon_more_micro_high">18dp</dimen>
     <!--微小图标-->

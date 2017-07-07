@@ -19,8 +19,8 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:layout_width="@dimen/icon_micro_width"
-            android:layout_height="@dimen/icon_micro_high"
+            android:layout_width="@dimen/icon_smallest_width"
+            android:layout_height="@dimen/icon_smallest_high"
             android:layout_marginLeft="@dimen/common_margin_normal"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_open" />
@@ -28,8 +28,8 @@
     </LinearLayout>
 
     <View
-       style="@style/line_horizontal_gray"
+        style="@style/line_horizontal_gray"
         android:layout_marginLeft="@dimen/line_margin_micro"
-        android:layout_marginRight="@dimen/line_margin_micro"/>
+        android:layout_marginRight="@dimen/line_margin_micro" />
 
 </LinearLayout>

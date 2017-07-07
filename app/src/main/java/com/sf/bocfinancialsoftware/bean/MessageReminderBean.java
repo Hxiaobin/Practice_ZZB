@@ -1,7 +1,5 @@
 package com.sf.bocfinancialsoftware.bean;
 
-import java.util.List;
-
 /**
  * 通知提醒的消息Bean类
  * Created by sn on 2017/6/12.

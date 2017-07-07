@@ -30,6 +30,7 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.NEWS_ID;
  * 中银分析列表
  * Created by sn on 2017/6/8.
  */
+
 public class BocAnalyseListActivity extends BaseActivity implements AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
 
     private ImageView ivTitleBarBack;  //返回按钮
