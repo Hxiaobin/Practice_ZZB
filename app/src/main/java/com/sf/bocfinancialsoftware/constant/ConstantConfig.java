@@ -11,13 +11,11 @@ import java.util.List;
  */
 
 public class ConstantConfig {
+    //个人中心
     public static final String SP_NAME = "sp_name";//SP的文件名
     public static final String SP_NAME2 = "sp_name2";//SP的文件名
     public static final String USER_NAME = "userName";//用户名
     public static final String PASSWORD = "password";//密码
-    public static final String LOGIN = "login";//登录
-    public static final String LOGOUT = "logout";//登录
-    public static final String USER = "user"; //用户信息
     public static final String TITLE = "title";
     //中银分析
     public static final String NEWS_ID = "newsId";  //新闻id
