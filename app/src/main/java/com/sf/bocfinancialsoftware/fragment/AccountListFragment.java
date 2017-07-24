@@ -4,17 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.activity.financialAssistant.AccountDetailActivity;
 import com.sf.bocfinancialsoftware.adapter.account.AccountListAdapter;
@@ -28,17 +33,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AccountListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
+public class AccountListFragment extends Fragment implements AdapterView.OnItemClickListener, OnRefreshListener, OnLoadmoreListener {
 
     private Context mContext;
-    private SwipeRefreshLayout srlRefresh; //刷新
+    private SmartRefreshLayout smartRefresh; //刷新
     private AccountListAdapter adapter; //
     private ListView lvFinancialAssistant; //list显示数据
-    private View footView;//listView底部显示加载
-    private LinearLayout lltLoad;//加载
+    private LinearLayout lltEmptyView;
     private List<AccountBean.ContentBean.AccountListBean> mDates = new ArrayList<>(); //数据源
     private int currentPage = 1;//分页查询
-    private boolean isRefresh;//是否刷新
     private boolean isLoadMore = true;//是否加载
     private String mHasNext;//是否有下一页
 
@@ -56,22 +59,21 @@ public class AccountListFragment extends Fragment implements SwipeRefreshLayout.
 
     private void initView(View view) {
         lvFinancialAssistant = (ListView) view.findViewById(R.id.lvFinancialAssistant);
-        srlRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srlRefresh);
-        footView = View.inflate(mContext, R.layout.layout_lv_loading_foot, null);
-        lltLoad = (LinearLayout) footView.findViewById(R.id.lltLoad);
+        smartRefresh = (SmartRefreshLayout) view.findViewById(R.id.smartRefresh);
+        lltEmptyView = (LinearLayout) view.findViewById(R.id.dataEmpty);
     }
 
     private void initData() {
-        lltLoad.setVisibility(View.GONE);
-        //设置进度动画的颜色
-        srlRefresh.setColorSchemeColors(getResources().getColor(R.color.redLight));
         //设置分隔线高度为0
         lvFinancialAssistant.setDividerHeight(0);
         adapter = new AccountListAdapter(getActivity());
-        lvFinancialAssistant.addFooterView(footView);
         lvFinancialAssistant.setAdapter(adapter);
         //获取网络请求的数据
         getNetWorkData();
+        //设置 Header 为 Material风格
+        smartRefresh.setRefreshHeader(new MaterialHeader(mContext).setShowBezierWave(true));
+        //设置 Footer 为 球脉冲
+        smartRefresh.setRefreshFooter(new BallPulseFooter(mContext).setSpinnerStyle(SpinnerStyle.Scale));
     }
 
     /**
@@ -85,17 +87,12 @@ public class AccountListFragment extends Fragment implements SwipeRefreshLayout.
             @Override
             public void onSuccess(String json) {
 //                Type type = new TypeToken<List<AccountList.ContentBean.AccountListBean>>(){}.getType();
-                srlRefresh.setRefreshing(false);
                 isLoadMore = true;
                 AccountBean jsonBean = new Gson().fromJson(json, AccountBean.class);
                 if (jsonBean != null) {
-                    lltLoad.setVisibility(View.VISIBLE);
                     mHasNext = jsonBean.getContent().getHasNext();
                     List<AccountBean.ContentBean.AccountListBean> accountList = jsonBean.getContent().getAccountList();
                     if (currentPage == 1) {
-                        if (isRefresh) {
-                            ToastUtil.showToast(mContext, getString(R.string.common_refresh_success));
-                        }
                         mDates.clear();
                         mDates.addAll(accountList);
                         adapter.setDates(accountList);
@@ -103,6 +100,8 @@ public class AccountListFragment extends Fragment implements SwipeRefreshLayout.
                         mDates.addAll(accountList);
                         adapter.addPage(accountList);
                     }
+                    lltEmptyView.setVisibility(View.GONE);
+                    lvFinancialAssistant.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -112,8 +111,8 @@ public class AccountListFragment extends Fragment implements SwipeRefreshLayout.
                     currentPage--;
                 }
                 isLoadMore = true;
-                lltLoad.setVisibility(View.GONE);
-                srlRefresh.setRefreshing(false);
+                lltEmptyView.setVisibility(View.VISIBLE);
+                lvFinancialAssistant.setVisibility(View.GONE);
                 ToastUtil.showToast(mContext, "onError");
             }
         });
@@ -121,18 +120,8 @@ public class AccountListFragment extends Fragment implements SwipeRefreshLayout.
 
     private void initListener() {
         lvFinancialAssistant.setOnItemClickListener(this);
-        lvFinancialAssistant.setOnScrollListener(this);
-        srlRefresh.setOnRefreshListener(this);
-    }
-
-    /**
-     * 加载 刷新
-     */
-    @Override
-    public void onRefresh() {
-        currentPage = 1;
-        isRefresh = true;
-        getNetWorkData();
+        smartRefresh.setOnRefreshListener(this);
+        smartRefresh.setOnLoadmoreListener(this);
     }
 
     @Override
@@ -143,31 +132,36 @@ public class AccountListFragment extends Fragment implements SwipeRefreshLayout.
         startActivity(intent);
     }
 
-    //当滑动状态发生改变的时候
+    /**
+     * smartRefresh 刷新
+     *
+     * @param refreshlayout
+     */
     @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-        switch (scrollState) {
-            //当不滚动的时候
-            case SCROLL_STATE_IDLE:
-                if (isLoadMore && view.getLastVisiblePosition() == (view.getCount()) - 1) {
-                    if (TextUtils.equals(mHasNext, "1")) {
-                        //加载更多
-                        currentPage++;
-                        getNetWorkData();
-                    } else {
-                        lltLoad.setVisibility(View.GONE);
-                        ToastUtil.showToast(mContext, getString(R.string.common_not_date));
-                    }
-                }
-                break;
+    public void onRefresh(RefreshLayout refreshlayout) {
+        //停止刷新
+        refreshlayout.finishRefresh(2000);
+        currentPage = 1;
+        getNetWorkData();
+    }
+
+    /**
+     * @param refreshlayout
+     */
+    @Override
+    public void onLoadmore(RefreshLayout refreshlayout) {
+        if (isLoadMore) {
+            if (TextUtils.equals(mHasNext, "1")) {
+                //加载更多
+                currentPage++;
+                getNetWorkData();
+                //停止加载
+                refreshlayout.finishLoadmore();
+            } else {
+                //停止加载
+                refreshlayout.finishLoadmore();
+                ToastUtil.showToast(mContext, getString(R.string.common_not_date));
+            }
         }
-
     }
-
-    //正在滑动的时候
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-    }
-
 }

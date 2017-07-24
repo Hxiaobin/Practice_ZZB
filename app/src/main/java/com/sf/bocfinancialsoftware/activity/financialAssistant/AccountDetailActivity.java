@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class AccountDetailActivity extends BaseActivity {
     private ListView lvAccountDetail;//
     private AccountDetailAdapter mDetailAdapter;
     private View headView;
+    private LinearLayout dataEmpty;//未获取到数据时显示的布局
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class AccountDetailActivity extends BaseActivity {
         TextView ivTitle = (TextView) findViewById(R.id.tvTitle);
         ivTitle.setText(R.string.text_financial_assistant);
         ivBack = (ImageView) findViewById(R.id.ivBack);
+        dataEmpty = (LinearLayout) findViewById(R.id.dataEmpty);
     }
 
     @Override
@@ -87,12 +90,16 @@ public class AccountDetailActivity extends BaseActivity {
                 Log.e("", "onSuccess() called with: json = [" + json + "]");
                 if (jsonBean != null) {
                     mDetailAdapter.setContractListDatas(jsonBean.getContent().getContractList());
+                    dataEmpty.setVisibility(View.GONE);
+                    lvAccountDetail.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onError() {
                 ToastUtil.showToast(mContext, "onError");
+                dataEmpty.setVisibility(View.VISIBLE);
+                lvAccountDetail.setVisibility(View.GONE);
                 Log.d("", "onError() called");
             }
         });

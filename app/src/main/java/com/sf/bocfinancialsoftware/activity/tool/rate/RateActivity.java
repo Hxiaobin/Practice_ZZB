@@ -54,7 +54,7 @@ public class RateActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        listview.setVisibility(View.INVISIBLE);
         listview.addHeaderView(headView, null, false);
         listview.addFooterView(footView, null, false);
         rateAdapter = new RateAdapter(mContext);
@@ -67,11 +67,13 @@ public class RateActivity extends BaseActivity {
                     mDatas.clear();
                     mDatas.addAll(jsonBean.getContent());
                     rateAdapter.setDatas(jsonBean.getContent());
+                    listview.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onError() {
+                listview.setVisibility(View.INVISIBLE);
                 ToastUtil.showToast(mContext, "onError");
             }
         });

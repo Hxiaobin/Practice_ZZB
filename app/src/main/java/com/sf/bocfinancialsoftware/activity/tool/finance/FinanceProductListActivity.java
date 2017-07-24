@@ -34,13 +34,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FinanceProductListActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
+public class FinanceProductListActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener, SwipeRefreshLayout.OnRefreshListener {
 
     private ImageView ivBack;
     private ImageView ivSearch;
     private ImageView ivClear;
     private EditText etSearch;
     private LinearLayout lltLoad;
+    private LinearLayout linearLayout;//搜索的布局
     private ListView lvFinancial;
     private View footerView;//底部加载更多布局
     private List<FinanceBean.ContentBean.ProductListBean> mDatas = new ArrayList<>(); //原来的数据源
@@ -77,6 +78,7 @@ public class FinanceProductListActivity extends BaseActivity implements View.OnC
         footerView = View.inflate(mContext, R.layout.layout_lv_loading_foot, null);
         lltLoad = (LinearLayout) footerView.findViewById(R.id.lltLoad);
         etSearch.setFocusable(true);
+        linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
     }
 
     @Override
@@ -126,6 +128,7 @@ public class FinanceProductListActivity extends BaseActivity implements View.OnC
                         mDatas.addAll(productList);
                         myAdapter.addPage(productList);
                     }
+                    linearLayout.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -137,6 +140,7 @@ public class FinanceProductListActivity extends BaseActivity implements View.OnC
                 isLoadMore = true;
                 srlRefresh.setRefreshing(false);
                 lltLoad.setVisibility(View.GONE);
+                linearLayout.setVisibility(View.INVISIBLE);
                 ToastUtil.showToast(mContext, "onError");
             }
         });
@@ -300,4 +304,5 @@ public class FinanceProductListActivity extends BaseActivity implements View.OnC
             }
         });
     }
+
 }

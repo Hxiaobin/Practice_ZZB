@@ -11,13 +11,15 @@
     <include layout="@layout/layout_top_bar"/>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/common_margin_medium"
         android:background="@drawable/shape_search"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="@dimen/common_padding_small_to_normal">
+        android:padding="@dimen/common_padding_small_to_normal"
+        android:visibility="invisible">
 
         <EditText
             android:id="@+id/etSearch"
@@ -60,27 +62,5 @@
             android:listSelector="@null"
             android:scrollbars="none"/>
     </android.support.v4.widget.SwipeRefreshLayout>
-
-    <LinearLayout
-        android:id="@+id/llNoData"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <ImageView
-            android:layout_width="@dimen/icon_super_width"
-            android:layout_height="@dimen/icon_super_high"
-            android:scaleType="centerInside"
-            android:src="@mipmap/image_no_date"/>
-
-        <TextView
-            style="@style/activity_text_normal_gray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/common_margin_normal"
-            android:text="@string/common_sorry_not_date"/>
-    </LinearLayout>
 
 </LinearLayout>

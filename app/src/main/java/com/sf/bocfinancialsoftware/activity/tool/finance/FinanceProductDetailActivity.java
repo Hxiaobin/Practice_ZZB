@@ -34,6 +34,8 @@ public class FinanceProductDetailActivity extends BaseActivity {
     private WebView webViewFinancial;//
     private RollPagerView rollPagerView; //图片轮播
     private RollViewPagerAdapter mRollViewPagerAdapter;
+//    private ScrollView scrollView;
+//    private LinearLayout dataEmpty;//数据为空时
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,8 @@ public class FinanceProductDetailActivity extends BaseActivity {
         mTvTitle = (TextView) findViewById(tvTitle);
         ivBack = (ImageView) findViewById(R.id.ivBack);
         rollPagerView = (RollPagerView) findViewById(R.id.rollPagerView);
+//        dataEmpty = (LinearLayout) findViewById(R.id.dataEmpty);
+//        scrollView = (ScrollView) findViewById(R.id.scrollView);
     }
 
     @Override

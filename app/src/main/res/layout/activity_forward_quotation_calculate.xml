@@ -157,7 +157,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:text="1000.00"
                         android:textColor="@color/tv_subtitle"
                         android:textSize="@dimen/text_size_normal"/>
 

@@ -43,6 +43,7 @@ public class IntelProductListActivity extends BaseActivity implements View.OnCli
     private View footView;//ListView底部
     private LinearLayout lltLoad;//显示加载
     private ListView lvProduct1; //listview1显示数据源的数据
+    private LinearLayout linearLayout;//搜索的布局
     private List<IntelProductListBean.ContentBean.TypeListBean> mDatas = new ArrayList<>(); //数据源的数据
     private List<IntelProductListBean.ContentBean.TypeListBean> mResultDatas = new ArrayList<>(); //搜索结果返回的数据
     private IntelProductListAdapter mAdapter;
@@ -72,6 +73,7 @@ public class IntelProductListActivity extends BaseActivity implements View.OnCli
         srlRefresh = (SwipeRefreshLayout) findViewById(R.id.srlRefresh);
         footView = View.inflate(mContext, R.layout.layout_lv_loading_foot, null);
         lltLoad = (LinearLayout) footView.findViewById(R.id.lltLoad);
+        linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
     }
 
     @Override
@@ -202,6 +204,7 @@ public class IntelProductListActivity extends BaseActivity implements View.OnCli
                         mDatas.addAll(typeList);
                         mAdapter.addPage(typeList);
                     }
+                    linearLayout.setVisibility(VISIBLE);
                 }
             }
 
@@ -213,6 +216,7 @@ public class IntelProductListActivity extends BaseActivity implements View.OnCli
                 isLoadMore = true;
                 srlRefresh.setRefreshing(false);
                 lltLoad.setVisibility(View.GONE);
+                linearLayout.setVisibility(View.INVISIBLE);
                 ToastUtil.showToast(mContext, "onError");
             }
         });
