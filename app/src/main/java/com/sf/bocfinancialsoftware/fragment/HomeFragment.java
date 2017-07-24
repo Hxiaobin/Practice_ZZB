@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
@@ -23,14 +22,15 @@ import com.sf.bocfinancialsoftware.activity.home.analyse.BocAnalyseDetailActivit
 import com.sf.bocfinancialsoftware.activity.home.analyse.BocAnalyseListActivity;
 import com.sf.bocfinancialsoftware.activity.home.business.BusinessQueryActivity;
 import com.sf.bocfinancialsoftware.activity.home.message.MessageReminderActivity;
+import com.sf.bocfinancialsoftware.adapter.home.advertisement.ImageAdapter;
 import com.sf.bocfinancialsoftware.adapter.home.analysis.HomeFragmentBocAnalyseAdapter;
-import com.sf.bocfinancialsoftware.adapter.home.ImageAdapter;
 import com.sf.bocfinancialsoftware.bean.AdvertLoopImageBean;
 import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
 import com.sf.bocfinancialsoftware.bean.UnReadMsgBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
+import com.sf.bocfinancialsoftware.util.ToastUtil;
 import com.sf.bocfinancialsoftware.widget.SwipeRefreshLayoutHome;
 
 import java.util.ArrayList;
@@ -117,9 +117,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         lltEmptyView.setVisibility(View.VISIBLE);
         tvPromptMessage.setText(getString(R.string.common_sorry_is_loading_now));  //正在加载
         lvHomeFragmentBocAnalyse.setEmptyView(lltEmptyView); //处理空ListView
-        getAdvertLoopImage(); //获取轮播
-        firstRequest();  //打开页面首次请求列表数据
         SwipeRefreshUtil.setRefreshCircle(swipeRefreshLayoutHomeFragmentBocAnalyse); //设置刷新样式
+        getAdvertLoopImage(); //获取轮播图
+        firstRequest();  //打开页面首次请求中银分析列表数据
     }
 
     private void initListener() {
@@ -222,7 +222,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
             if (hasNext.equals(HAS_NOT_NEXT)) { // 如果没有下一页
                 lltLoadMore.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(getActivity(), getString(R.string.common_not_date));
             } else if (hasNext.equals(HAS_NEXT)) {  //还有下一页
                 lltLoadMore.setVisibility(View.VISIBLE);
                 page++;
@@ -307,7 +307,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
                     swipeRefreshLayoutHomeFragmentBocAnalyse.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(getActivity(), success, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(getActivity(), success);
             }
 
             @Override
@@ -317,7 +317,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
                     swipeRefreshLayoutHomeFragmentBocAnalyse.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(getActivity(), error);
 
             }
 
@@ -328,7 +328,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
                     swipeRefreshLayoutHomeFragmentBocAnalyse.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(getActivity(), e.getMessage());
             }
         });
     }
@@ -375,4 +375,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
             tv.setText(String.valueOf(unReadSum));
         }
     }
+
 }

@@ -9,11 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fourmob.datetimepicker.date.DatePickerDialog;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
+import com.sf.bocfinancialsoftware.util.ToastUtil;
 import com.sf.bocfinancialsoftware.widget.ClearEditTextTextWatcher;
 
 import java.text.DateFormat;
@@ -152,7 +152,7 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
                     intent.putExtra(CONTRACT_ID, contractId);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.common_please_enter_the_useful_criteria), Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(mContext, getString(R.string.common_please_enter_the_useful_criteria));
                 }
                 break;
             default:
@@ -193,7 +193,7 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
                 Log.e("时间----", date1.getTime() + "");
                 if (date1.getTime() >= System.currentTimeMillis()) { //开始时间大于当前时间
                     tvBusinessQueryStartDate.setText("");
-                    Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.activity_business_query_end_time_wrong3), Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(mContext, getString(R.string.activity_business_query_end_time_wrong3));
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -217,7 +217,7 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
                 date2 = format2.parse(endDate);
                 if (date2.getTime() > System.currentTimeMillis()) { //结束时间大于当前时间
                     tvBusinessQueryEndDate.setText("");
-                    Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.activity_business_query_end_time_wrong2), Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(mContext, getString(R.string.activity_business_query_end_time_wrong2));
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -231,7 +231,7 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
             date2 = format2.parse(endDate);
             if (date2.getTime() < date1.getTime()) { //结束时间小于开始时间
                 tvBusinessQueryEndDate.setText("");
-                Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.activity_business_query_end_time_wrong), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, getString(R.string.activity_business_query_end_time_wrong));
             }
         } catch (ParseException e) {
             e.printStackTrace();

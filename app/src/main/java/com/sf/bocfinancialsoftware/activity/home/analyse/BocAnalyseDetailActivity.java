@@ -15,11 +15,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.adapter.home.ImageAdapter;
+import com.sf.bocfinancialsoftware.adapter.home.advertisement.ImageAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
+import com.sf.bocfinancialsoftware.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -146,7 +147,7 @@ public class BocAnalyseDetailActivity extends BaseActivity {
                     lltBocAnalyseDetailNoData.setVisibility(View.VISIBLE);
                 }
                 lltBocAnalyseDetailLoading.setVisibility(View.GONE);
-                Toast.makeText(BocAnalyseDetailActivity.this, success, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, success);
             }
 
             @Override
@@ -154,7 +155,7 @@ public class BocAnalyseDetailActivity extends BaseActivity {
                 lltBocAnalyseDetailNoData.setVisibility(View.VISIBLE);
                 lltBocAnalyseContent.setVisibility(View.GONE);
                 lltBocAnalyseDetailLoading.setVisibility(View.GONE);
-                Toast.makeText(BocAnalyseDetailActivity.this, error, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, error);
             }
 
             @Override
@@ -162,7 +163,7 @@ public class BocAnalyseDetailActivity extends BaseActivity {
                 lltBocAnalyseDetailNoData.setVisibility(View.VISIBLE);
                 lltBocAnalyseContent.setVisibility(View.GONE);
                 lltBocAnalyseDetailLoading.setVisibility(View.GONE);
-                Toast.makeText(BocAnalyseDetailActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, e.getMessage());
             }
         });
     }

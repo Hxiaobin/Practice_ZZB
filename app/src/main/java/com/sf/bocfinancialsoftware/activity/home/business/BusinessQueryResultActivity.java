@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
@@ -21,6 +20,7 @@ import com.sf.bocfinancialsoftware.bean.ContractBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
+import com.sf.bocfinancialsoftware.util.ToastUtil;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -170,7 +170,7 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
         if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
             if (hasNext.equals(HAS_NOT_NEXT)) { // 如果没有下一页
                 lltLoadMore.setVisibility(View.GONE);
-                Toast.makeText(BusinessQueryResultActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, getString(R.string.common_not_date));
             } else if (hasNext.equals(HAS_NEXT)) {  //还有下一页
                 lltLoadMore.setVisibility(View.VISIBLE);
                 page++;
@@ -248,15 +248,15 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
     private void judgementRequestCondition(String businessId, String startDate, String endDate, String contractId) {
         if (!TextUtils.isEmpty(businessId)) { //业务id不为空，
             if (!TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(endDate) && TextUtils.isEmpty(contractId)) { //通过开始时间+结束时间查询
-                Toast.makeText(BusinessQueryResultActivity.this, getString(R.string.activity_business_query_no_date_for_this_time), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, getString(R.string.activity_business_query_no_date_for_this_time));
             } else if (!TextUtils.isEmpty(contractId) && (TextUtils.isEmpty(startDate) || TextUtils.isEmpty(endDate))) {//通过合同编号查询
-                Toast.makeText(BusinessQueryResultActivity.this, getString(R.string.activity_business_query_no_date_for_this_contractId), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, getString(R.string.activity_business_query_no_date_for_this_contractId));
             } else if (!TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(endDate) && !TextUtils.isEmpty(contractId)) { //通过三者查询
-                Toast.makeText(BusinessQueryResultActivity.this, getString(R.string.activity_business_query_no_date_for_this_time_and_contract_id), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, getString(R.string.activity_business_query_no_date_for_this_time_and_contract_id));
             }
         } else { //业务id为空,只根据合同id查询
             if (!TextUtils.isEmpty(contractId)) {
-                Toast.makeText(BusinessQueryResultActivity.this, getString(R.string.activity_business_query_no_date_for_this_contractId), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, getString(R.string.activity_business_query_no_date_for_this_contractId));
             }
         }
     }
@@ -286,7 +286,7 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
                 if (contractArray == null || contractArray.size() <= 0) {  //合同列表为空
                     judgementRequestCondition(businessId, startDate, endDate, contractId);
                 } else {
-                    Toast.makeText(BusinessQueryResultActivity.this, success, Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(mContext, success);
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
             }
@@ -298,7 +298,7 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
                     swipeRefreshLayoutBusinessQueryResult.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE);
-                Toast.makeText(BusinessQueryResultActivity.this, error, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, error);
             }
 
             @Override
@@ -308,7 +308,7 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
                     swipeRefreshLayoutBusinessQueryResult.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(BusinessQueryResultActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, e.getMessage());
             }
         });
     }

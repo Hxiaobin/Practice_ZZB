@@ -23,6 +23,7 @@ import com.sf.bocfinancialsoftware.bean.MessageBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
+import com.sf.bocfinancialsoftware.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -202,7 +203,7 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
         if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
             if (hasNext.equals(HAS_NOT_NEXT)) { // 如果没有下一页
                 lltLoadMore.setVisibility(View.GONE);
-                Toast.makeText(GuaranteeMessageListActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, getString(R.string.common_not_date));
             } else if (hasNext.equals(HAS_NEXT)) {  //还有下一页
                 lltLoadMore.setVisibility(View.VISIBLE);
                 page++;
@@ -295,7 +296,7 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
                     swipeRefreshLayoutMessage.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(GuaranteeMessageListActivity.this, success, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, success);
             }
 
             @Override
@@ -305,7 +306,7 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
                     swipeRefreshLayoutMessage.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(GuaranteeMessageListActivity.this, error, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, error);
             }
 
             @Override
@@ -315,7 +316,7 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
                     swipeRefreshLayoutMessage.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(GuaranteeMessageListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, e.getMessage());
             }
         });
     }

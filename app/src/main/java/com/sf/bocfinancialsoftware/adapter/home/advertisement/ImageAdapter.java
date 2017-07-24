@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.adapter.home;
+package com.sf.bocfinancialsoftware.adapter.home.advertisement;
 
 import android.content.Context;
 import android.view.View;

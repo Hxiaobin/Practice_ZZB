@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
@@ -18,6 +17,7 @@ import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.bean.BusinessBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
+import com.sf.bocfinancialsoftware.util.ToastUtil;
 import com.sf.bocfinancialsoftware.widget.ClearEditTextTextWatcher;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
@@ -168,7 +168,7 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
                     intent.putExtra(CONTRACT_ID, contractId);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(BusinessQueryActivity.this, getString(R.string.common_please_enter_the_contract_id), Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(mContext, getString(R.string.common_please_enter_the_contract_id));
                 }
                 break;
             default:

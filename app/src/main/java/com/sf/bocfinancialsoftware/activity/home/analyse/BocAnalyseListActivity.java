@@ -21,6 +21,7 @@ import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
+import com.sf.bocfinancialsoftware.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -210,7 +211,7 @@ public class BocAnalyseListActivity extends BaseActivity implements AdapterView.
                     swipeRefreshLayoutBocAnalyse.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(BocAnalyseListActivity.this, success, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, success);
             }
 
             @Override
@@ -220,18 +221,17 @@ public class BocAnalyseListActivity extends BaseActivity implements AdapterView.
                     swipeRefreshLayoutBocAnalyse.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(BocAnalyseListActivity.this, error, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, error);
             }
 
             @Override
             public void onError(Exception e) {
                 tvPromptMessage.setText(getString(R.string.common_sorry_not_date));  //暂无数据
-
                 if (flag.equals(REQUEST_FROM_REFRESH)) {  //如果是刷新请求
                     swipeRefreshLayoutBocAnalyse.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(BocAnalyseListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, e.getMessage());
             }
         });
     }
