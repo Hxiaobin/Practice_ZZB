@@ -5,7 +5,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
+import com.sf.bocfinancialsoftware.R;
 
 import java.util.List;
 
@@ -27,7 +30,16 @@ public class ImageAdapter extends StaticPagerAdapter {
     @Override
     public View getView(ViewGroup container, int position) {
         ImageView view = new ImageView(container.getContext());
-        view.setImageResource(Integer.parseInt(imageList.get(position)));
+        view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        Glide
+                .with(context)
+                .load(imageList.get(position))
+                .placeholder(R.mipmap.image_loading)             //在网络加载完成之前，预先加载显示一张本地图片
+                .error(R.mipmap.image_load_failure)              //加载网络图片失败
+                .centerCrop()
+                .crossFade()                                  //设置淡入淡出
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)  //缓存图片源文件
+                .into(view);
         view.setScaleType(ImageView.ScaleType.CENTER_CROP);
         view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));

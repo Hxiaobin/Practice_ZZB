@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/activity_common_background_gray"
     android:orientation="vertical">
 
     <!--中银分析详情-->
@@ -14,53 +14,66 @@
         android:layout_height="match_parent"
         android:scrollbars="none">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/activity_common_background_gray"
-            android:orientation="vertical">
-
-            <com.jude.rollviewpager.RollPagerView
-                android:id="@+id/rollPagerViewBoc"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                app:rollviewpager_hint_gravity="center"
-                app:rollviewpager_play_delay="3000"/>
+            android:layout_height="match_parent">
 
             <LinearLayout
+                android:padding="@dimen/common_padding_normal"
+                android:id="@+id/lltBocAnalyseDetailLoading"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="@dimen/common_margin_normal"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/tvBocAnalyseDetailNewsTitle"
-                    style="@style/activity_text_medium_black"
-                    android:paddingLeft="@dimen/common_padding_normal"
-                    android:paddingRight="@dimen/common_padding_normal"
-                    android:paddingTop="@dimen/common_padding_small" />
+                <include layout="@layout/layout_loading" />
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvBocAnalyseDetailHtmlContent"
-                    style="@style/activity_text_normal_gray"
-                    android:lineSpacingExtra="@dimen/common_padding_micro_to_small"
-                    android:padding="@dimen/common_padding_normal" />
+            <LinearLayout
+                android:padding="@dimen/common_padding_normal"
+                android:id="@+id/lltBocAnalyseDetailNoData"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/tvBocAnalyseDetailNewsDate"
+                <include layout="@layout/layout_no_data" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lltBocAnalyseContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/activity_common_background_gray"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+
+                <com.jude.rollviewpager.RollPagerView
+                    android:id="@+id/rollPagerViewBoc"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/Image_advertisingCarousel_high"
+                    app:rollviewpager_hint_gravity="center"
+                    app:rollviewpager_play_delay="3000" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical|right"
-                    android:padding="@dimen/common_padding_normal"
-                    android:textColor="@color/common_text_gray"
-                    android:textSize="@dimen/text_size_normal" />
+                    android:layout_marginTop="@dimen/common_margin_normal"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <WebView
+                        android:id="@+id/webViewBocAnalyseDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:scrollbars="none" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
-
+        </RelativeLayout>
     </ScrollView>
 
 </LinearLayout>

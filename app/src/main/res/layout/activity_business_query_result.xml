@@ -12,42 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/lltEmptyViewBusinessQuery"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/icon_super_width"
-                    android:layout_height="@dimen/icon_super_high"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/image_no_date" />
-
-                <TextView
-                    style="@style/activity_text_normal_gray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/common_margin_normal"
-                    android:text="@string/common_sorry_not_date" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal"></LinearLayout>
-
-        </LinearLayout>
+        <include layout="@layout/layout_list_empty_view" />
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayoutBusinessQueryResult"

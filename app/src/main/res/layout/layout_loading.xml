@@ -5,21 +5,18 @@
     android:gravity="center"
     android:orientation="horizontal">
 
+    <!--正在加载-->
     <LinearLayout
-        android:id="@+id/lltLoadMore"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:orientation="horizontal">
 
         <ProgressBar
-            android:id="@+id/pbLoadMore"
-            android:layout_width="@dimen/icon_small_width"
-            android:layout_height="@dimen/icon_small_width" />
+            android:layout_width="@dimen/icon_normal_width"
+            android:layout_height="@dimen/icon_normal_high" />
 
         <TextView
-            android:id="@+id/tvReminder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_margin_normal"

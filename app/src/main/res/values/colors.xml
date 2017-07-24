@@ -28,9 +28,9 @@
     <color name="white">#ffffff</color>
 
     <!--查询按钮渐变颜色 绿色-->
-    <color name="start_color_green">#fa7272</color>
-    <color name="center_color_green">#fd5e5e</color>
-    <color name="end_color_green">#e95151</color>
+    <color name="start_color_green">#fa6969</color>
+    <color name="center_color_green">#f95c5c</color>
+    <color name="end_color_green">#e64c4c</color>
     <!-- 分割线 -->
     <color name="line_horizontal_gray">#e7e7e7</color>
     <!-- 黑色字体 -->

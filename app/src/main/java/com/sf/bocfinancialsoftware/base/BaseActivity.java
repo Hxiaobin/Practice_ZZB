@@ -28,5 +28,4 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initListener();    //初始化事件
 
-
 }

@@ -2,8 +2,6 @@ package com.sf.bocfinancialsoftware.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -18,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.activity.home.analyse.BocAnalyseDetailActivity;
@@ -26,20 +25,34 @@ import com.sf.bocfinancialsoftware.activity.home.business.BusinessQueryActivity;
 import com.sf.bocfinancialsoftware.activity.home.message.MessageReminderActivity;
 import com.sf.bocfinancialsoftware.adapter.HomeFragmentBocAnalyseAdapter;
 import com.sf.bocfinancialsoftware.adapter.ImageAdapter;
+import com.sf.bocfinancialsoftware.bean.AdvertLoopImageBean;
 import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
-import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
-import com.sf.bocfinancialsoftware.util.DataBaseSQLiteUtil;
+import com.sf.bocfinancialsoftware.bean.UnReadMsgBean;
+import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
+import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
 import com.sf.bocfinancialsoftware.widget.SwipeRefreshLayoutHome;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.IMAGE_LIST;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.ADVERT_LOOP_IMAGE_TYPE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.ADVERT_LOOP_IMAGE_TYPE_HOME;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.HAS_NEXT;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.HAS_NOT_NEXT;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TOTAL_READ_SUM;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TOTAL_UN_REN_SUM_REQUEST;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TOTAL_UN_REN_SUM_RESPONSE;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_UN_READ;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.NEWS_ID;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_PAGE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FOR_THE_FIRST_TIME;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FROM_FILTER;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FROM_LOAD_MORE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FROM_REFRESH;
+import static com.sf.bocfinancialsoftware.constant.URLConfig.ADVERT_LOOP_IMAGE_URL;
+import static com.sf.bocfinancialsoftware.constant.URLConfig.BOC_ANALYSE_LIST_URL;
+import static com.sf.bocfinancialsoftware.constant.URLConfig.MESSAGE_UN_READ_URL;
 
 /**
  * 首页
@@ -56,41 +69,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     private Button btnBusinessQuery;  //业务查询
     private Button btnBOCAnalyse;  //中银分析
     private TextView tvMsgTotalReadSum;  //通知总未读数量
+    private TextView tvPromptMessage;// 空数据提示消息
     private SwipeRefreshLayoutHome swipeRefreshLayoutHomeFragmentBocAnalyse;  //下拉刷新控件
     private ListView lvHomeFragmentBocAnalyse; //中银分析新闻列表
-    private LinearLayout lltEmptyViewBocAnalyseHome; //处理空数据
-    private List<BocAnalyseBean> bocAnalyseBeanList;  //中银分析Bean类集合
-    private List<BocAnalyseBean> allBocAnalyseBeanList; //所有的数据列表
+    private LinearLayout lltEmptyView; //处理空数据
+    private List<BocAnalyseBean.Content.NewsBean> newsArray; //中银分析列表
     private HomeFragmentBocAnalyseAdapter bocAnalyseAdapter; //中银分析列表适配器
     private ImageAdapter imageAdapter;  //图片轮播适配器
+    private List<String> imageUrlList; //图片Url集合
+    private List<AdvertLoopImageBean.AdvertImage> content; //轮播图片对象集合
     private boolean isLastLine = false;  //列表是否滚动到最后一行
+    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
     private int page = 0; //查询页码
-    private Handler mHandler = new Handler() {  //主线程中的Handler对象
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 8) {
-                //下拉刷新，1秒睡眠之后   重新加载
-                page = 0;
-                List<BocAnalyseBean> list = DataBaseSQLiteUtil.queryBocAnalyseList(page, 8); //获取中银分析列表
-                if (list == null || list.size() <= 0) {
-                    Toast.makeText(getActivity(), getString(R.string.common_refresh_failed), Toast.LENGTH_SHORT).show();
-                } else {
-                    bocAnalyseBeanList.clear();
-                    bocAnalyseBeanList.addAll(list);
-                    bocAnalyseAdapter.notifyDataSetChanged();
-                    Toast.makeText(getActivity(), getString(R.string.common_refresh_success), Toast.LENGTH_SHORT).show();
-                }
-                swipeRefreshLayoutHomeFragmentBocAnalyse.setRefreshing(false);//加载完毕，设置不刷新
-            } else if (msg.what == 18) { //上拉加载更多
-                page++; //页数自增
-                List<BocAnalyseBean> loadMoreList = DataBaseSQLiteUtil.queryBocAnalyseList(page, 8);
-                bocAnalyseBeanList.addAll(loadMoreList);
-                isLastLine = false;
-                bocAnalyseAdapter.notifyDataSetChanged();
-            }
-        }
-    };
+    private HashMap<String, String> map; //保存请求参数
+    private UnReadMsgBean.Content unReadMsgContent;
 
     @Nullable
     @Override
@@ -111,33 +103,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         btnBusinessQuery = (Button) headView.findViewById(R.id.btnBusinessQuery);
         btnBOCAnalyse = (Button) headView.findViewById(R.id.btnBOCAnalyse);
         tvMsgTotalReadSum = (TextView) headView.findViewById(R.id.tvMsgTotalReadSum);
+        tvPromptMessage = (TextView) view.findViewById(R.id.tvPromptMessage);
         swipeRefreshLayoutHomeFragmentBocAnalyse = (SwipeRefreshLayoutHome) view.findViewById(R.id.swipeRefreshLayoutHomeFragmentBocAnalyse);
         lvHomeFragmentBocAnalyse = (ListView) view.findViewById(R.id.lvHomeFragmentBocAnalyse);
-        lltEmptyViewBocAnalyseHome = (LinearLayout) view.findViewById(R.id.lltEmptyViewBocAnalyseHome);
+        lltEmptyView = (LinearLayout) view.findViewById(R.id.lltEmptyView);
     }
 
     private void initData() {
-        getBocAnalyseList(); //获取中银分析列表数据
-        imageAdapter = new ImageAdapter(getActivity(), IMAGE_LIST);
-        rollPagerViewHome.setAdapter(imageAdapter);
-        lvHomeFragmentBocAnalyse.setEmptyView(lltEmptyViewBocAnalyseHome); //处理空ListView
+        HashMap<String, String> map = new HashMap<>();
+        getNetworkData(MESSAGE_UN_READ_URL, map);  // 请求网络获取各类通知未读消息数量
+        lvHomeFragmentBocAnalyse.addHeaderView(headView);
+        lvHomeFragmentBocAnalyse.addFooterView(footView);
+        lltEmptyView.setVisibility(View.VISIBLE);
+        tvPromptMessage.setText(getString(R.string.common_sorry_is_loading_now));  //正在加载
+        lvHomeFragmentBocAnalyse.setEmptyView(lltEmptyView); //处理空ListView
+        getAdvertLoopImage(); //获取轮播
+        firstRequest();  //打开页面首次请求列表数据
         SwipeRefreshUtil.setRefreshCircle(swipeRefreshLayoutHomeFragmentBocAnalyse); //设置刷新样式
-        getMsgTotalUnReadSum(); //初始化的时候，获取通知的总未读数量
-    }
-
-    private void getMsgTotalUnReadSum() {
-        List<MessageReminderBean> msgList = DataBaseSQLiteUtil.queryAllMessageReminderList(); //获取全部类型的所有通知
-        int totalUnReadSum = 0;
-        for (MessageReminderBean bean : msgList) { //遍历通知消息列表
-            if (bean.getMsgIsRead().equals(MSG_UN_READ)) { //如果消息状态为未读状态
-                totalUnReadSum++;
-            }
-        }
-        if (totalUnReadSum <= 0) {
-            tvMsgTotalReadSum.setVisibility(View.GONE);
-        } else {
-            tvMsgTotalReadSum.setText(String.valueOf(totalUnReadSum));
-        }
     }
 
     private void initListener() {
@@ -172,8 +154,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        BocAnalyseBean bocAnalyseBean = bocAnalyseBeanList.get(position - 1); //当前点击项
-        String newsId = bocAnalyseBean.getNewsId(); //获取新闻id,传递给详情页
+        BocAnalyseBean.Content.NewsBean bean = newsArray.get(position - 1); //当前点击项
+        String newsId = bean.getNewsId(); //获取新闻id,传递给详情页
         Intent intent = new Intent(getActivity(), BocAnalyseDetailActivity.class);
         intent.putExtra(NEWS_ID, newsId);
         startActivity(intent);
@@ -183,30 +165,37 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == MSG_TOTAL_UN_REN_SUM_REQUEST && resultCode == MSG_TOTAL_UN_REN_SUM_RESPONSE) { //通知总未读数量
-            int unReadSum = data.getIntExtra(MSG_TOTAL_READ_SUM, 0); //剩余总未读数量
-            if (unReadSum <= 0) {
-                tvMsgTotalReadSum.setVisibility(View.GONE);
-            } else {
-                tvMsgTotalReadSum.setText(String.valueOf(unReadSum));
-            }
+            int totalUnReadSum = data.getIntExtra(MSG_TOTAL_READ_SUM, 0); //剩余总未读数量
+            showMsgUnReadSum(totalUnReadSum, tvMsgTotalReadSum);
         }
-
     }
 
     /**
-     * 获取中银分析列表
+     * 获取轮播图
      */
-    private void getBocAnalyseList() {
-        lvHomeFragmentBocAnalyse.addHeaderView(headView);
-        lvHomeFragmentBocAnalyse.addFooterView(footView);
-        bocAnalyseBeanList = DataBaseSQLiteUtil.queryBocAnalyseList(page, 10); //获取中银分析列表
-        bocAnalyseAdapter = new HomeFragmentBocAnalyseAdapter(getActivity(), bocAnalyseBeanList);
+    private void getAdvertLoopImage() {
+        content = new ArrayList<>();
+        imageUrlList = new ArrayList<>();
+        imageAdapter = new ImageAdapter(getActivity(), imageUrlList);
+        rollPagerViewHome.setAdapter(imageAdapter);
+        HashMap<String, String> imageMap = new HashMap<>();
+        imageMap.put(ADVERT_LOOP_IMAGE_TYPE, ADVERT_LOOP_IMAGE_TYPE_HOME); //轮播图类型：首页
+        getNetworkImage(imageMap);
+    }
+
+    /**
+     * 首次请求网络
+     */
+    private void firstRequest() {
+        page = 0;
+        map = new HashMap<>();
+        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+        String strSuccess = getString(R.string.common_request_success);  //请求成功提示
+        String strError = getString(R.string.common_request_failed);  //请求失败提示
+        newsArray = new ArrayList<>();
+        bocAnalyseAdapter = new HomeFragmentBocAnalyseAdapter(getActivity(), newsArray);
         lvHomeFragmentBocAnalyse.setAdapter(bocAnalyseAdapter);
-        allBocAnalyseBeanList = DataBaseSQLiteUtil.queryBocAnalyseList();
-        if (bocAnalyseBeanList.size() >= allBocAnalyseBeanList.size()) {
-            lltLoadMore.setVisibility(View.GONE);// 如果加载完毕，隐藏掉正在加载图标
-        }
-        bocAnalyseAdapter.notifyDataSetChanged();
+        getNetworkListData(map, strSuccess, strError, REQUEST_FOR_THE_FIRST_TIME);  // 请求网络
     }
 
     /**
@@ -214,47 +203,46 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
      */
     @Override
     public void onRefresh() {
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    sleep(1000); //睡眠3秒
-                    Message msg = new Message();
-                    msg.what = 8;
-                    mHandler.sendMessage(msg);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+        page = 0;
+        map.clear();
+        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+        String strSuccess = getString(R.string.common_refresh_success);  //刷新成功提示
+        String strError = getString(R.string.common_refresh_failed);  //刷新失败提示
+        getNetworkListData(map, strSuccess, strError, REQUEST_FROM_REFRESH);  // 请求网络
     }
 
+    /**
+     * 上拉加载
+     *
+     * @param view
+     * @param scrollState
+     */
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
-            if (bocAnalyseBeanList.size() >= allBocAnalyseBeanList.size()) { // 如果加载完毕，隐藏掉正在加载图标
+            if (hasNext.equals(HAS_NOT_NEXT)) { // 如果没有下一页
                 lltLoadMore.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
-            } else {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        super.run();
-                        try {
-                            sleep(1000); //睡眠1秒
-                            Message msg = new Message();
-                            msg.what = 18;
-                            mHandler.sendMessage(msg);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }.start();
+            } else if (hasNext.equals(HAS_NEXT)) {  //还有下一页
+                lltLoadMore.setVisibility(View.VISIBLE);
+                page++;
+                map.clear();
+                map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+                String strSuccess = getString(R.string.common_load_success);  //加载成功提示
+                String strError = getString(R.string.common_load_failed);  //加载失败提示
+                getNetworkListData(map, strSuccess, strError, REQUEST_FROM_LOAD_MORE);  // 请求网络
             }
         }
     }
 
+    /**
+     * 监听ListView状态
+     *
+     * @param view
+     * @param firstVisibleItem
+     * @param visibleItemCount
+     * @param totalItemCount
+     */
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0) {  //当滚到最后一行
@@ -264,4 +252,127 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         }
     }
 
+    /**
+     * 获取网络轮播图
+     *
+     * @param mapObject 存放请求参数
+     */
+    public void getNetworkImage(final HashMap<String, String> mapObject) {
+        HttpUtil.getNetworksJSonResponse(getActivity(), ADVERT_LOOP_IMAGE_URL, mapObject, new HttpCallBackListener() {
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                AdvertLoopImageBean bean = gson.fromJson(response, AdvertLoopImageBean.class);
+                content.addAll(bean.getContent());
+                for (int i = 0; i < content.size(); i++) {
+                    imageUrlList.add(content.get(i).getImgUrl());  //图片url集合
+                }
+                imageAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailed(String msg) {
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+    }
+
+    /**
+     * 获取中银分析列表数据
+     *
+     * @param mapObject 存放请求参数
+     * @param success   请求成功提示语
+     * @param error     请求失败提示语
+     * @param flag      请求类型
+     */
+    public void getNetworkListData(final HashMap<String, String> mapObject, final String success, final String error, final String flag) {
+        HttpUtil.getNetworksJSonResponse(getActivity(), BOC_ANALYSE_LIST_URL, mapObject, new HttpCallBackListener() {
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                BocAnalyseBean bean = gson.fromJson(response, BocAnalyseBean.class);
+                hasNext = bean.getContent().getHasNext();  //是否还有下一页
+                if (flag.equals(REQUEST_FROM_REFRESH) || flag.equals(REQUEST_FROM_FILTER)) {  //如果是刷新和筛选请求
+                    if (newsArray != null && newsArray.size() > 0) {
+                        newsArray.clear(); //则清空原来的列表数据
+                    }
+                }
+                newsArray.addAll(bean.getContent().getNewsArray());
+                bocAnalyseAdapter.notifyDataSetChanged();
+                if (flag.equals(REQUEST_FROM_REFRESH)) {  //如果是刷新请求
+                    swipeRefreshLayoutHomeFragmentBocAnalyse.setRefreshing(false);  //设置刷新圈圈消失
+                }
+                lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
+                Toast.makeText(getActivity(), success, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailed(String msg) {
+                tvPromptMessage.setText(getString(R.string.common_sorry_not_date));  //暂无数据
+                if (flag.equals(REQUEST_FROM_REFRESH)) {  //如果是刷新请求
+                    swipeRefreshLayoutHomeFragmentBocAnalyse.setRefreshing(false);  //设置刷新圈圈消失
+                }
+                lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
+                Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+                tvPromptMessage.setText(getString(R.string.common_sorry_not_date));  //暂无数据
+                if (flag.equals(REQUEST_FROM_REFRESH)) {  //如果是刷新请求
+                    swipeRefreshLayoutHomeFragmentBocAnalyse.setRefreshing(false);  //设置刷新圈圈消失
+                }
+                lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    /**
+     * 获取未读消息数量
+     *
+     * @return
+     */
+    public void getNetworkData(String url, final HashMap<String, String> mapObject) {
+        HttpUtil.getNetworksJSonResponse(getActivity(), url, mapObject, new HttpCallBackListener() {
+
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                UnReadMsgBean bean = gson.fromJson(response, UnReadMsgBean.class);
+                unReadMsgContent = bean.getContent();
+                int totalUnReadSum = Integer.valueOf(unReadMsgContent.getSum());
+                showMsgUnReadSum(totalUnReadSum, tvMsgTotalReadSum);
+            }
+
+            @Override
+            public void onFailed(String msg) {
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+
+        });
+    }
+
+    /**
+     * 处理未读消息的显示问题
+     *
+     * @param unReadSum 未读消息数量
+     * @param tv        显示控件TextView
+     */
+    private void showMsgUnReadSum(int unReadSum, TextView tv) {
+        if (unReadSum <= 0) {
+            tv.setVisibility(View.GONE);
+        } else {
+            tv.setText(String.valueOf(unReadSum));
+        }
+    }
 }

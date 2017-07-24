@@ -5,11 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.bean.ContractBean;
-import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
+import com.sf.bocfinancialsoftware.util.ChildrenListViewUtil;
 
 import java.util.List;
 
@@ -24,9 +25,9 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.OPENING_AMOUNT
 public class BusinessAdapter extends BaseAdapter {
 
     private Context context;
-    private List<ContractBean> contractBeenList; //业务集合
+    private List<ContractBean.Content.Contract> contractBeenList; //合同集合
 
-    public BusinessAdapter(Context context, List<ContractBean> contractBeenList) {
+    public BusinessAdapter(Context context, List<ContractBean.Content.Contract> contractBeenList) {
         this.context = context;
         this.contractBeenList = contractBeenList;
     }
@@ -48,28 +49,26 @@ public class BusinessAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MessageViewHolder messageViewHolder = null;
+        ContractViewHolder viewHolder = null;
         if (convertView == null) {
-            messageViewHolder = new MessageViewHolder();
+            viewHolder = new ContractViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.item_business_query_result, null);
-            messageViewHolder.tvContractId = (TextView) convertView.findViewById(R.id.tvContractId);
-            messageViewHolder.tvOpeningAmount = (TextView) convertView.findViewById(R.id.tvOpeningAmount);
-            messageViewHolder.tvCreditBalance = (TextView) convertView.findViewById(R.id.tvCreditBalance);
-            convertView.setTag(messageViewHolder);
+            viewHolder.tvContractId = (TextView) convertView.findViewById(R.id.tvContractId);
+            viewHolder.lvContractContent = (ListView) convertView.findViewById(R.id.lvContractContent);
+            convertView.setTag(viewHolder);
         } else {
-            messageViewHolder = (MessageViewHolder) convertView.getTag();
+            viewHolder = (ContractViewHolder) convertView.getTag();
         }
-        ContractBean contractBean = contractBeenList.get(position);
-        messageViewHolder.tvContractId.setText(contractBean.getContractId());
-        messageViewHolder.tvOpeningAmount.setText((String) contractBean.getMapObject().get(OPENING_AMOUNT));
-        messageViewHolder.tvCreditBalance.setText((String)contractBean.getMapObject().get(CREDIT_BALANCE));
+        ContractBean.Content.Contract bean = contractBeenList.get(position);
+        viewHolder.tvContractId.setText(bean.getContractId());
+        viewHolder.lvContractContent.setAdapter(new ContractContentAdapter(context, bean.getObject()));
+        ChildrenListViewUtil.setListViewHeightBasedOnChildren(viewHolder.lvContractContent);
         return convertView;
     }
 
-    class MessageViewHolder {
+    class ContractViewHolder {
         private TextView tvContractId; //业务id
-        private TextView tvOpeningAmount; //开证金额
-        private TextView tvCreditBalance; //信用证余额
+        private ListView lvContractContent; //合同内容列表
     }
 
 }

@@ -1,19 +1,22 @@
 package com.sf.bocfinancialsoftware.activity.home.message;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
-import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
+import com.sf.bocfinancialsoftware.bean.UnReadMsgBean;
 import com.sf.bocfinancialsoftware.constant.ConstantConfig;
-import com.sf.bocfinancialsoftware.util.DataBaseSQLiteUtil;
+import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
+import com.sf.bocfinancialsoftware.http.HttpUtil;
 
-import java.util.List;
+import java.util.HashMap;
 
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.EXPORT_REQUEST;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.EXPORT_RESPONSE;
@@ -25,15 +28,15 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.GUARANTEE_REQU
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.GUARANTEE_RESPONSE;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.IMPORT_REQUEST;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.IMPORT_RESPONSE;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_READ_SUM;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TOTAL_READ_SUM;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TOTAL_UN_REN_SUM_RESPONSE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID_EXPORT;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID_FACTORING;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID_FORWARD;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID_GUARANTEE;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID_IMPORT;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_UN_READ;
+import static com.sf.bocfinancialsoftware.constant.URLConfig.MESSAGE_UN_READ_URL;
 
 /**
  * 通知提醒页面
@@ -54,12 +57,8 @@ public class MessageReminderActivity extends BaseActivity implements View.OnClic
     private LinearLayout lltMessageReminderGuarantee; // 保函提醒
     private LinearLayout lltMessageReminderFactoring; // 保理提醒
     private LinearLayout lltMessageReminderForward; // 远期提醒
-    private int importUnReadSum; //进口通知总未读数量
-    private int exportUnReadSum;  //出口通知总未读数量
-    private int guaranteeUnReadSum;  //保函通知总未读数量
-    private int factoringUnReadSum;  //保理通知总未读数量
-    private int forwardUnReadSum;   //远期通知总未读数量
-    private int totalUnReadSum; //总未读数量
+    private UnReadMsgBean.Content unReadMsgContent;
+    private HashMap<String, String> map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,21 +89,8 @@ public class MessageReminderActivity extends BaseActivity implements View.OnClic
     protected void initData() {
         tvTitleBarTitle.setText(getString(R.string.common_message_reminder));
         ivTitleBarBack.setVisibility(View.VISIBLE);
-        //进口通知未读数量
-        importUnReadSum = getUnReadMessageNumber(MSG_TYPE_ID_IMPORT);
-        showMsgUnReadSum(importUnReadSum, tvImportUnReadSum);
-        //出口通知未读数量
-        exportUnReadSum = getUnReadMessageNumber(MSG_TYPE_ID_EXPORT);
-        showMsgUnReadSum(exportUnReadSum, tvExportUnReadSum);
-        //保函通知未读数量
-        guaranteeUnReadSum = getUnReadMessageNumber(MSG_TYPE_ID_GUARANTEE);
-        showMsgUnReadSum(guaranteeUnReadSum, tvGuaranteeUnReadSum);
-        //保理通知未读数量
-        factoringUnReadSum = getUnReadMessageNumber(MSG_TYPE_ID_FACTORING);
-        showMsgUnReadSum(factoringUnReadSum, tvFactoringUnReadSum);
-        //远期通知未读数量
-        forwardUnReadSum = getUnReadMessageNumber(MSG_TYPE_ID_FORWARD);
-        showMsgUnReadSum(forwardUnReadSum, tvForwardUnReadSum);
+        map = new HashMap<>();
+        getNetworkData(MESSAGE_UN_READ_URL, map);  // 请求网络获取各类通知未读消息数量
     }
 
     @Override
@@ -123,7 +109,13 @@ public class MessageReminderActivity extends BaseActivity implements View.OnClic
         switch (v.getId()) {
             case R.id.ivTitleBarBack: //返回
                 intent = new Intent();
-                totalUnReadSum = importUnReadSum + exportUnReadSum + guaranteeUnReadSum + factoringUnReadSum + forwardUnReadSum;  //总未读数量
+                //获取当前各类通知的未读消息数量
+                int sum1 = Integer.valueOf(tvImportUnReadSum.getText().toString());
+                int sum2 = Integer.valueOf(tvExportUnReadSum.getText().toString());
+                int sum3 = Integer.valueOf(tvGuaranteeUnReadSum.getText().toString());
+                int sum4 = Integer.valueOf(tvFactoringUnReadSum.getText().toString());
+                int sum5 = Integer.valueOf(tvForwardUnReadSum.getText().toString());
+                int totalUnReadSum = sum1 + sum2 + sum3 + sum4 + sum5;
                 intent.putExtra(MSG_TOTAL_READ_SUM, totalUnReadSum);
                 setResult(MSG_TOTAL_UN_REN_SUM_RESPONSE, intent);
                 finish();
@@ -161,41 +153,19 @@ public class MessageReminderActivity extends BaseActivity implements View.OnClic
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        map.clear();
         if (requestCode == IMPORT_REQUEST && resultCode == IMPORT_RESPONSE) { //进口通知未读数量
-            int unReadSum = importUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
-            showMsgUnReadSum(unReadSum, tvImportUnReadSum);
-            importUnReadSum = unReadSum;
+            map.put(MSG_TYPE_ID, MSG_TYPE_ID_IMPORT);
         } else if (requestCode == EXPORT_REQUEST && resultCode == EXPORT_RESPONSE) { //出口通知未读数量
-            int unReadSum = exportUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
-            showMsgUnReadSum(unReadSum, tvExportUnReadSum);
-            exportUnReadSum = unReadSum;
+            map.put(MSG_TYPE_ID, MSG_TYPE_ID_EXPORT);
         } else if (requestCode == GUARANTEE_REQUEST && resultCode == GUARANTEE_RESPONSE) { //保函通知未读数量
-            int unReadSum = guaranteeUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
-            showMsgUnReadSum(unReadSum, tvGuaranteeUnReadSum);
-            guaranteeUnReadSum = unReadSum;
+            map.put(MSG_TYPE_ID, MSG_TYPE_ID_GUARANTEE);
         } else if (requestCode == FACTORING_REQUEST && resultCode == FACTORING_RESPONSE) { //保理通知未读数量
-            int unReadSum = factoringUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
-            showMsgUnReadSum(unReadSum, tvFactoringUnReadSum);
-            factoringUnReadSum = unReadSum;
+            map.put(MSG_TYPE_ID, MSG_TYPE_ID_FACTORING);
         } else if (requestCode == FORWARD_REQUEST && resultCode == FORWARD_RESPONSE) { //远期通知未读数量
-            int unReadSum = forwardUnReadSum - data.getIntExtra(MSG_READ_SUM, 0); //剩余未读数量 = 总未读数量-已读数量
-            showMsgUnReadSum(unReadSum, tvForwardUnReadSum);
-            forwardUnReadSum = unReadSum;
+            map.put(MSG_TYPE_ID, MSG_TYPE_ID_FORWARD);
         }
-    }
-
-    /**
-     * 打开Activity的时候，遍历消息列表获取总未读消息数量
-     */
-    private int getUnReadMessageNumber(String typeId) {
-        List<MessageReminderBean> msgList = DataBaseSQLiteUtil.queryAllMessageByTypeAndTitle(typeId, "");//进口通知列表
-        int unReadSum = 0;
-        for (MessageReminderBean bean : msgList) {
-            if (bean.getMsgIsRead().equals(MSG_UN_READ)) { //如果消息状态为未读状态
-                unReadSum++;
-            }
-        }
-        return unReadSum;
+        getNetworkData(MESSAGE_UN_READ_URL, map);  // 请求网络获取各类通知未读消息数量
     }
 
     /**
@@ -206,10 +176,58 @@ public class MessageReminderActivity extends BaseActivity implements View.OnClic
      */
     private void showMsgUnReadSum(int unReadSum, TextView tv) {
         if (unReadSum <= 0) {
+            tv.setText("0");
             tv.setVisibility(View.GONE);
         } else {
             tv.setText(String.valueOf(unReadSum));
+            tv.setVisibility(View.VISIBLE);
         }
+    }
+
+    /**
+     * 请求服务器，获取未读消息数量
+     *
+     * @param url       请求url
+     * @param mapObject 存放请求参数
+     */
+    public void getNetworkData(String url, final HashMap<String, String> mapObject) {
+        HttpUtil.getNetworksJSonResponse(MessageReminderActivity.this, url, mapObject, new HttpCallBackListener() {
+
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                UnReadMsgBean bean = gson.fromJson(response, UnReadMsgBean.class);
+                unReadMsgContent = bean.getContent();
+                int importUnReadSum = Integer.valueOf(unReadMsgContent.getType1());
+                int exportUnReadSum = Integer.valueOf(unReadMsgContent.getType2());
+                int guaranteeUnReadSum = Integer.valueOf(unReadMsgContent.getType3());
+                int factoringUnReadSum = Integer.valueOf(unReadMsgContent.getType4());
+                int forwardUnReadSum = Integer.valueOf(unReadMsgContent.getType5());
+                showMsgUnReadSum(importUnReadSum, tvImportUnReadSum);
+                showMsgUnReadSum(exportUnReadSum, tvExportUnReadSum);
+                showMsgUnReadSum(guaranteeUnReadSum, tvGuaranteeUnReadSum);
+                showMsgUnReadSum(factoringUnReadSum, tvFactoringUnReadSum);
+                showMsgUnReadSum(forwardUnReadSum, tvForwardUnReadSum);
+            }
+
+            @Override
+            public void onFailed(String msg) {
+                tvImportUnReadSum.setVisibility(View.GONE);
+                tvExportUnReadSum.setVisibility(View.GONE);
+                tvGuaranteeUnReadSum.setVisibility(View.GONE);
+                tvFactoringUnReadSum.setVisibility(View.GONE);
+                tvForwardUnReadSum.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                tvImportUnReadSum.setVisibility(View.GONE);
+                tvExportUnReadSum.setVisibility(View.GONE);
+                tvGuaranteeUnReadSum.setVisibility(View.GONE);
+                tvFactoringUnReadSum.setVisibility(View.GONE);
+                tvForwardUnReadSum.setVisibility(View.GONE);
+            }
+        });
     }
 
 }
