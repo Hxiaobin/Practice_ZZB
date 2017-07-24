@@ -172,6 +172,35 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
     }
 
     /**
+     * 首次请求网络
+     */
+    private void firstRequest() {
+        msgArray = new ArrayList<>();
+        messageAdapter = new MessageAdapter(GuaranteeMessageListActivity.this, msgArray);
+        lvMessage.setAdapter(messageAdapter);
+        page = 0;
+        map = new HashMap<>();
+        map.put(MSG_TYPE_ID, typeId);  //通知类型
+        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+        strSuccess = getString(R.string.common_request_success); //请求成功提示
+        strError = getString(R.string.common_request_failed); //请求失败提示
+        getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FOR_THE_FIRST_TIME);  // 请求网络
+    }
+
+    /**
+     * PopupWindow根据条件筛选通知
+     */
+    public void requestByQueryFilter(String strFilter) {
+        page = 0;
+        map.put(QUERY_FILTER, strFilter);  //筛选条件
+        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+        strSuccess = getString(R.string.common_request_success);
+        strError = getString(R.string.common_request_failed);
+        getNetworkData(GUARANTEE_MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FROM_FILTER);
+        mPopWindow.dismiss();
+    }
+
+    /**
      * 下拉刷新
      */
     @Override
@@ -238,35 +267,6 @@ public class GuaranteeMessageListActivity extends BaseActivity implements View.O
         } else {
             isLastLine = false;
         }
-    }
-
-    /**
-     * 首次请求网络
-     */
-    private void firstRequest() {
-        msgArray = new ArrayList<>();
-        messageAdapter = new MessageAdapter(GuaranteeMessageListActivity.this, msgArray);
-        lvMessage.setAdapter(messageAdapter);
-        page = 0;
-        map = new HashMap<>();
-        map.put(MSG_TYPE_ID, typeId);  //通知类型
-        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
-        strSuccess = getString(R.string.common_request_success); //请求成功提示
-        strError = getString(R.string.common_request_failed); //请求失败提示
-        getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FOR_THE_FIRST_TIME);  // 请求网络
-    }
-
-    /**
-     * PopupWindow根据条件筛选通知
-     */
-    public void requestByQueryFilter(String strFilter) {
-        page = 0;
-        map.put(QUERY_FILTER, strFilter);  //筛选条件
-        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
-        strSuccess = getString(R.string.common_request_success);
-        strError = getString(R.string.common_request_failed);
-        getNetworkData(GUARANTEE_MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FROM_FILTER);
-        mPopWindow.dismiss();
     }
 
     /**

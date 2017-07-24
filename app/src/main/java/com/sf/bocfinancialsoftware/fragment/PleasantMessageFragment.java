@@ -91,6 +91,11 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
         SwipeRefreshUtil.setRefreshCircle(swipeRefreshLayoutPleasantMessage); //设置刷新样式
     }
 
+    private void initListener() {
+        swipeRefreshLayoutPleasantMessage.setOnRefreshListener(this);
+        lvPleasantMessage.setOnScrollListener(this);
+    }
+
     /**
      * 打开页面首次获取列表数据
      */
@@ -105,11 +110,6 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
         strSuccess = getString(R.string.common_request_success); //请求成功提示
         strError = getString(R.string.common_request_failed); //请求失败提示
         getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FOR_THE_FIRST_TIME);  // 请求网络
-    }
-
-    private void initListener() {
-        swipeRefreshLayoutPleasantMessage.setOnRefreshListener(this);
-        lvPleasantMessage.setOnScrollListener(this);
     }
 
     /**
