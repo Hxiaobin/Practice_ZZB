@@ -32,10 +32,6 @@
         <activity android:name=".activity.GuideActivity"/>
         <activity android:name=".activity.MainActivity"/>
         <activity
-            android:name=".activity.user.UserLoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme"/>
-        <activity
             android:name=".activity.user.UserActivity"
             android:screenOrientation="portrait"/>
         <activity
