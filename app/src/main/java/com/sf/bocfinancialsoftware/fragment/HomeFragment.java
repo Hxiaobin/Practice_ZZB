@@ -23,8 +23,8 @@ import com.sf.bocfinancialsoftware.activity.home.analyse.BocAnalyseDetailActivit
 import com.sf.bocfinancialsoftware.activity.home.analyse.BocAnalyseListActivity;
 import com.sf.bocfinancialsoftware.activity.home.business.BusinessQueryActivity;
 import com.sf.bocfinancialsoftware.activity.home.message.MessageReminderActivity;
-import com.sf.bocfinancialsoftware.adapter.HomeFragmentBocAnalyseAdapter;
-import com.sf.bocfinancialsoftware.adapter.ImageAdapter;
+import com.sf.bocfinancialsoftware.adapter.home.analysis.HomeFragmentBocAnalyseAdapter;
+import com.sf.bocfinancialsoftware.adapter.home.ImageAdapter;
 import com.sf.bocfinancialsoftware.bean.AdvertLoopImageBean;
 import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
 import com.sf.bocfinancialsoftware.bean.UnReadMsgBean;

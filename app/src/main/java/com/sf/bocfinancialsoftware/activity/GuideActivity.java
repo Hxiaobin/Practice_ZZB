@@ -14,7 +14,7 @@ import android.widget.Button;
 
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
-import com.sf.bocfinancialsoftware.adapter.GuideAdapter;
+import com.sf.bocfinancialsoftware.adapter.guide.GuideAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

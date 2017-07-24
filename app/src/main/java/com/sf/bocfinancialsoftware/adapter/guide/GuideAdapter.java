@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.adapter;
+package com.sf.bocfinancialsoftware.adapter.guide;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;

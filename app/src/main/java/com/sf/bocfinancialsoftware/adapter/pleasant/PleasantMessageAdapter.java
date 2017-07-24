@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.adapter;
+package com.sf.bocfinancialsoftware.adapter.pleasant;
 
 import android.content.Context;
 import android.view.LayoutInflater;

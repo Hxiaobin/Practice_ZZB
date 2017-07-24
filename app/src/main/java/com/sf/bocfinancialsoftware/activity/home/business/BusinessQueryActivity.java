@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.adapter.BusinessQueryAdapter;
+import com.sf.bocfinancialsoftware.adapter.home.business.BusinessQueryAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.bean.BusinessBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;

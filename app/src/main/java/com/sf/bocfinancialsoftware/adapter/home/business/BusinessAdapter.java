@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.adapter;
+package com.sf.bocfinancialsoftware.adapter.home.business;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,9 +13,6 @@ import com.sf.bocfinancialsoftware.bean.ContractBean;
 import com.sf.bocfinancialsoftware.util.ChildrenListViewUtil;
 
 import java.util.List;
-
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.CREDIT_BALANCE;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.OPENING_AMOUNT;
 
 /**
  * 业务查询列表适配器

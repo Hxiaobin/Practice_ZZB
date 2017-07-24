@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.activity.home.business.BusinessQueryResultActivity;
 import com.sf.bocfinancialsoftware.activity.user.UserActivity;
-import com.sf.bocfinancialsoftware.adapter.HomeFragmentPagerAdapter;
+import com.sf.bocfinancialsoftware.adapter.home.home.HomeFragmentPagerAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.fragment.AccountListFragment;
 import com.sf.bocfinancialsoftware.fragment.HomeFragment;

@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.adapter.MessageAdapter;
+import com.sf.bocfinancialsoftware.adapter.home.message.MessageAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.bean.MessageBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
