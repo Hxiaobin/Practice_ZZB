@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
+import com.sf.bocfinancialsoftware.bean.MessageBean;
 
 import java.util.List;
 
@@ -20,21 +20,21 @@ import java.util.List;
 public class MessageAdapter extends BaseAdapter {
 
     private Context context;
-    private List<MessageReminderBean> messageReminderBeanList; //消息集合
+    private List<MessageBean.Content.MessageObject> msgArray; //消息集合
 
-    public MessageAdapter(Context context, List<MessageReminderBean> messageReminderBeanList) {
+    public MessageAdapter(Context context, List<MessageBean.Content.MessageObject> msgArray) {
         this.context = context;
-        this.messageReminderBeanList = messageReminderBeanList;
+        this.msgArray = msgArray;
     }
 
     @Override
     public int getCount() {
-        return messageReminderBeanList != null ? messageReminderBeanList.size() : 0;
+        return msgArray != null ? msgArray.size() : 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return messageReminderBeanList.get(position);
+        return msgArray.get(position);
     }
 
     @Override
@@ -55,10 +55,10 @@ public class MessageAdapter extends BaseAdapter {
         } else {
             messageViewHolder = (MessageViewHolder) convertView.getTag();
         }
-        MessageReminderBean messageReminderBean = messageReminderBeanList.get(position);
-        messageViewHolder.tvMsgTitle.setText(messageReminderBean.getMsgTitle());
-        messageViewHolder.tvMsgDate.setText("        " + messageReminderBean.getMsgDate());
-        messageViewHolder.tvMsgContent.setText(messageReminderBean.getMsgContent());
+        MessageBean.Content.MessageObject bean = msgArray.get(position);
+        messageViewHolder.tvMsgTitle.setText(bean.getMsgTitle());
+        messageViewHolder.tvMsgDate.setText(bean.getMsgDate());
+        messageViewHolder.tvMsgContent.setText(bean.getMsgContent());
         return convertView;
     }
 

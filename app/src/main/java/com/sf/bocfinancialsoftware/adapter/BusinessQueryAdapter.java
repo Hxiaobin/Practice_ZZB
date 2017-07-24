@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.bean.BusinessBean;
-import com.sf.bocfinancialsoftware.bean.BusinessTypeBean;
 
 import java.util.List;
 
@@ -22,10 +21,10 @@ import java.util.List;
 public class BusinessQueryAdapter extends BaseExpandableListAdapter {
 
     private Context context; //上下文
-    private List<BusinessTypeBean> groups;  //好友分组
-    private List<List<BusinessBean>> children;  //分组下的好友子项
+    private List<BusinessBean.BusinessTypeBean> groups;  //好友分组
+    private List<List<BusinessBean.BusinessTypeBean.Business>> children;  //分组下的好友子项
 
-    public BusinessQueryAdapter(Context context, List<BusinessTypeBean> groups, List<List<BusinessBean>> children) {
+    public BusinessQueryAdapter(Context context, List<BusinessBean.BusinessTypeBean> groups, List<List<BusinessBean.BusinessTypeBean.Business>> children) {
         this.context = context;
         this.groups = groups;
         this.children = children;
@@ -33,12 +32,12 @@ public class BusinessQueryAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return groups.size();
+        return groups != null ? groups.size() : 0;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return children.get(groupPosition).size();
+        return (children != null || children.size() > 0) ? children.get(groupPosition).size() : 0;
     }
 
     @Override

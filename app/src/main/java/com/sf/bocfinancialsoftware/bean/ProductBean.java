@@ -32,3 +32,4 @@ public class ProductBean {
         this.content = content;
     }
 }
+

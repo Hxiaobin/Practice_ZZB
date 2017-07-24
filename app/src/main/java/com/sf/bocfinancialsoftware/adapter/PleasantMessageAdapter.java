@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
+import com.sf.bocfinancialsoftware.bean.MessageBean;
 import com.sf.bocfinancialsoftware.bean.PleasantMessageBean;
 
 import java.util.List;
@@ -21,9 +21,9 @@ import java.util.List;
 public class PleasantMessageAdapter extends BaseAdapter {
 
     private Context context;
-    private List<PleasantMessageBean> pleasantMessageBeanList; //消息集合
+    private List<MessageBean.Content.MessageObject> pleasantMessageBeanList; //消息集合
 
-    public PleasantMessageAdapter(Context context, List<PleasantMessageBean> pleasantMessageBeanList) {
+    public PleasantMessageAdapter(Context context, List<MessageBean.Content.MessageObject> pleasantMessageBeanList) {
         this.context = context;
         this.pleasantMessageBeanList = pleasantMessageBeanList;
     }
@@ -55,9 +55,9 @@ public class PleasantMessageAdapter extends BaseAdapter {
         } else {
             messageViewHolder = (PleasantMessageViewHolder) convertView.getTag();
         }
-        PleasantMessageBean pleasantMessageBean = pleasantMessageBeanList.get(position);
-        messageViewHolder.tvPleasantMsgDateAndTime.setText(pleasantMessageBean.getMsgDateAndTime());
-        messageViewHolder.tvPleasantMsgContent.setText(pleasantMessageBean.getMsgContent());
+        MessageBean.Content.MessageObject bean = pleasantMessageBeanList.get(position);
+        messageViewHolder.tvPleasantMsgDateAndTime.setText(bean.getMsgDate());
+        messageViewHolder.tvPleasantMsgContent.setText(bean.getMsgContent());
         return convertView;
     }
 

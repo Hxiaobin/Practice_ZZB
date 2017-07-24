@@ -41,58 +41,14 @@
             android:layout_marginTop="@dimen/common_margin_small"
             android:background="@color/line_horizontal_gray" />
 
-        <LinearLayout
-            android:id="@+id/lltOpeningAmount"
+        <ListView
+            android:id="@+id/lvContractContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/viewContractLine"
             android:layout_marginTop="@dimen/common_padding_small_to_normal"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/activity_text_normal_gray"
-                android:lineSpacingExtra="@dimen/common_margin_micro"
-                android:text="开证金额：" />
-
-            <TextView
-                android:id="@+id/tvOpeningAmount"
-                style="@style/activity_text_normal_gray"
-                android:layout_marginLeft="@dimen/common_margin_small"
-                android:lineSpacingExtra="@dimen/common_margin_micro" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lltOpeningAmount"
-            android:layout_marginTop="@dimen/common_padding_small_to_normal"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/activity_text_normal_gray"
-                android:lineSpacingExtra="@dimen/common_margin_micro"
-                android:text="信用证余额：" />
-
-            <TextView
-                android:id="@+id/tvCreditBalance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_margin_small"
-                android:lineSpacingExtra="@dimen/common_margin_micro"
-                android:lines="1"
-                android:textColor="@color/red"
-                android:textSize="@dimen/text_size_normal" />
-
-            <TextView
-                style="@style/activity_text_normal_gray"
-                android:lineSpacingExtra="@dimen/common_margin_micro"
-                android:text="元"
-                android:visibility="visible" />
-
-        </LinearLayout>
+            android:dividerHeight="0dp"
+            android:scrollbars="none" />
 
     </RelativeLayout>
 

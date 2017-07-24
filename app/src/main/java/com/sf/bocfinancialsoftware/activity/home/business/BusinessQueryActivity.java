@@ -11,21 +11,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.BusinessQueryAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.bean.BusinessBean;
-import com.sf.bocfinancialsoftware.bean.BusinessTypeBean;
-import com.sf.bocfinancialsoftware.util.DataUtil;
+import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
+import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.widget.ClearEditTextTextWatcher;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.BUSINESS_NAME;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.BUSINESS_ID;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.CONTRACT_ID;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.SCAN_CODE_REQUEST_BUSINESS_QUERY;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.SCAN_CODE_RESULT;
+import static com.sf.bocfinancialsoftware.constant.URLConfig.BUSINESS_TYPE_LIST_URL;
 
 /**
  * 业务查询
@@ -41,10 +45,11 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
     private EditText etBusinessQuery; //输入框
     private Button btnBusinessQuery; //查询按钮
     private ExpandableListView elvBusiness; //可扩展列表
-    private List<BusinessTypeBean> groups;  //组名集合
-    private List<List<BusinessBean>> children; //所有组别下的好友集合
+    private List<BusinessBean.BusinessTypeBean> groups;  //父类集合
+    private List<List<BusinessBean.BusinessTypeBean.Business>> children; //所有子类集合
     private BusinessQueryAdapter adapter;  //列表适配器
     private String contractId;  //业务编号
+    private HashMap<String, String> map; // 保存请求参数
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +75,53 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
     protected void initData() {
         tvTitleBarTitle.setText(getString(R.string.common_business_query));
         ivTitleBarBack.setVisibility(View.VISIBLE);
-        groups = new ArrayList<>();
-        children = new ArrayList<>();
-        DataUtil.setExpandableListData(groups, children); //设置好友列表信息
-        adapter = new BusinessQueryAdapter(BusinessQueryActivity.this, groups, children);
-        elvBusiness.setAdapter(adapter);
+        getBusinessType();  //获取业务类别 一级目录
         ClearEditTextTextWatcher textWatcher = new ClearEditTextTextWatcher(BusinessQueryActivity.this, etBusinessQuery, ivBusinessQueryClear);
         etBusinessQuery.addTextChangedListener(textWatcher);
+    }
+
+    /**
+     * 获取业务类别
+     */
+    public void getBusinessType() {
+        map = new HashMap<>();
+        groups = new ArrayList<>();
+        children = new ArrayList<>();
+        adapter = new BusinessQueryAdapter(BusinessQueryActivity.this, groups, children);
+        elvBusiness.setAdapter(adapter);
+        getBusinessList(BUSINESS_TYPE_LIST_URL, map);  // 请求网络获取业务列表
+    }
+
+    /**
+     * 获取业务列表
+     *
+     * @param url       请求链接
+     * @param mapObject 请求参数
+     */
+    public void getBusinessList(String url, HashMap<String, String> mapObject) {
+        HttpUtil.getNetworksJSonResponse(BusinessQueryActivity.this, url, mapObject, new HttpCallBackListener() {
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                BusinessBean bean = gson.fromJson(response, BusinessBean.class);
+                groups.addAll(bean.getContent()); //父目录
+                for (int i = 0; i < groups.size(); i++) {
+                    List<BusinessBean.BusinessTypeBean.Business> businessArray = groups.get(i).getBusinessArray();
+                    children.add(businessArray);  //子目录
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailed(String msg) {
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
     }
 
     @Override
@@ -94,7 +139,7 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
         if (requestCode == SCAN_CODE_REQUEST_BUSINESS_QUERY && resultCode == RESULT_OK) {  //扫描二维码值回调
             Bundle extras = data.getExtras();
             if (null != extras) {
-                String result = extras.getString("result");  //获取传回的业务编码
+                String result = extras.getString(SCAN_CODE_RESULT);  //获取传回的业务编码
                 Intent intent = new Intent(BusinessQueryActivity.this, BusinessQueryResultActivity.class);
                 intent.putExtra(CONTRACT_ID, result);
                 startActivity(intent);
@@ -134,7 +179,7 @@ public class BusinessQueryActivity extends BaseActivity implements View.OnClickL
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
         Intent intent = new Intent(BusinessQueryActivity.this, BusinessQueryCriteriaActivity.class);
-        intent.putExtra(BUSINESS_NAME, children.get(groupPosition).get(childPosition).getBusinessName()); //传递业务名称，后一页根据该业务名称，再加上其他条件来查询相应的业务
+        intent.putExtra(BUSINESS_ID, children.get(groupPosition).get(childPosition).getBusinessId()); //业务id
         startActivity(intent);
         return true;
     }

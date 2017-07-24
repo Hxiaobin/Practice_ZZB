@@ -2,8 +2,8 @@ package com.sf.bocfinancialsoftware.activity.home.business;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.fourmob.datetimepicker.date.DatePickerDialog;
 import com.sf.bocfinancialsoftware.R;
+import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.widget.ClearEditTextTextWatcher;
 
 import java.text.DateFormat;
@@ -21,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.BUSINESS_NAME;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.BUSINESS_ID;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.CONTRACT_ID;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.DATE_PICKER_TAG;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.END_DATE;
@@ -32,7 +33,7 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.START_DATE;
  * Created by sn on 2017/6/14.
  */
 
-public class BusinessQueryCriteriaActivity extends FragmentActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class BusinessQueryCriteriaActivity extends BaseActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private ImageView ivTitleBarBack;  //返回
     private ImageView ivContractIdClear;  //清除文本
@@ -43,7 +44,7 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
     private Button btnBusinessQueryCancel; //取消
     private Button btnBusinessQueryOK; //确定
     private Intent intent;
-    private String businessName; //业务名称
+    private String businessId; //业务名称
     private DatePickerDialog startDatePickerDialog;  //开始日期选择器对话框
     private DatePickerDialog endDatePickerDialog;  //结束日期选择器对话框
     private Calendar calendar; //开始时间选择器日历对象
@@ -51,7 +52,6 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
     private DateFormat format;  //日期格式化对象，年
     private DateFormat format2; //日期格式化对象，年月日
     private String currentYear;  //当前年份
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +81,8 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
 
     protected void initData() {
         intent = getIntent();
-        businessName = intent.getStringExtra(BUSINESS_NAME);//获取业务类别名称
-        tvTitleBarTitle.setText(businessName);
+        businessId = intent.getStringExtra(BUSINESS_ID);//获取业务类别名称
+        tvTitleBarTitle.setText(getString(R.string.common_business_query));
         ivTitleBarBack.setVisibility(View.VISIBLE);
         calendar = Calendar.getInstance();
         startDatePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), false);
@@ -135,18 +135,18 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
                 Intent intent;
                 if (!TextUtils.isEmpty(startTime) && !TextUtils.isEmpty(endTime) && TextUtils.isEmpty(contractId)) { //开始时间、结束时间不为空，业务编号为空，可查询
                     intent = new Intent(BusinessQueryCriteriaActivity.this, BusinessQueryResultActivity.class);
-                    intent.putExtra(BUSINESS_NAME, businessName);
+                    intent.putExtra(BUSINESS_ID, businessId);
                     intent.putExtra(START_DATE, startTime);
                     intent.putExtra(END_DATE, endTime);
                     startActivity(intent);
                 } else if (!TextUtils.isEmpty(contractId) && (TextUtils.isEmpty(startTime) || TextUtils.isEmpty(endTime))) {//输入了业务编号 和其他
                     intent = new Intent(BusinessQueryCriteriaActivity.this, BusinessQueryResultActivity.class);
-                    intent.putExtra(BUSINESS_NAME, businessName);
+                    intent.putExtra(BUSINESS_ID, businessId);
                     intent.putExtra(CONTRACT_ID, contractId);
                     startActivity(intent);
                 } else if (!TextUtils.isEmpty(startTime) && !TextUtils.isEmpty(endTime) && !TextUtils.isEmpty(contractId)) { //开始时间、结束时间、业务编号都输入
                     intent = new Intent(BusinessQueryCriteriaActivity.this, BusinessQueryResultActivity.class);
-                    intent.putExtra(BUSINESS_NAME, businessName);
+                    intent.putExtra(BUSINESS_ID, businessId);
                     intent.putExtra(START_DATE, startTime);
                     intent.putExtra(END_DATE, endTime);
                     intent.putExtra(CONTRACT_ID, contractId);
@@ -190,6 +190,7 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
             String startDate = tvBusinessQueryStartDate.getText().toString();
             try {
                 date1 = format2.parse(startDate);
+                Log.e("时间----", date1.getTime() + "");
                 if (date1.getTime() >= System.currentTimeMillis()) { //开始时间大于当前时间
                     tvBusinessQueryStartDate.setText("");
                     Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.activity_business_query_end_time_wrong3), Toast.LENGTH_SHORT).show();
@@ -197,7 +198,7 @@ public class BusinessQueryCriteriaActivity extends FragmentActivity implements V
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        } else if (datePickerDialog == datePickerDialog) { //结束时间
+        } else if (datePickerDialog == endDatePickerDialog) { //结束时间
             if ((m / 10) == 1) { //月份是2位数
                 if ((day / 10) >= 1) { //日期是2位数
                     tvBusinessQueryEndDate.setText(year + "-" + m + "-" + day);

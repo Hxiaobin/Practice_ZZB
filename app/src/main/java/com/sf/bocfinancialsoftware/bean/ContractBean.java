@@ -1,6 +1,6 @@
 package com.sf.bocfinancialsoftware.bean;
 
-import java.util.HashMap;
+import java.util.List;
 
 /**
  * 合同bean类
@@ -9,77 +9,95 @@ import java.util.HashMap;
 
 public class ContractBean {
 
-    private String autoId;//合同id
-    private String contractId; //合同编号
-    private String businessName; //业务id
-    private String startDate; //开始时间
-    private String endDate; //结束时间
-    private String signDate; //签订时间
-    private HashMap<Object, Object> mapObject; //返回对象
+    private String rtnMsg;       //返回信息
+    private String rtnCode;      //返回码
+    private Content content;     //内容
 
-    public ContractBean() {
+    public Content getContent() {
+        return content;
     }
 
-    public ContractBean(String contractId, String businessName, String signDate, HashMap<Object, Object> mapObject) {
-        this.contractId = contractId;
-        this.businessName = businessName;
-        this.signDate = signDate;
-        this.mapObject = mapObject;
+    public void setContent(Content content) {
+        this.content = content;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getRtnMsg() {
+        return rtnMsg;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setRtnMsg(String rtnMsg) {
+        this.rtnMsg = rtnMsg;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public String getRtnCode() {
+        return rtnCode;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setRtnCode(String rtnCode) {
+        this.rtnCode = rtnCode;
     }
 
-    public String getContractId() {
-        return contractId;
+    public class Content {
+        private String hasNext; //是否还有下一页
+        private List<Contract> contractArray; //合同集合contractArray
+
+        public String getHasNext() {
+            return hasNext;
+        }
+
+        public void setHasNext(String hasNext) {
+            this.hasNext = hasNext;
+        }
+
+        public List<Contract> getContractArray() {
+            return contractArray;
+        }
+
+        public void setContractArray(List<Contract> contractArray) {
+            this.contractArray = contractArray;
+        }
+
+        public class Contract {
+            private String contractId; //合同Id
+            private List<ContractContent> object; //合同内容集合
+
+            public String getContractId() {
+                return contractId;
+            }
+
+            public void setContractId(String contractId) {
+                this.contractId = contractId;
+            }
+
+            public List<ContractContent> getObject() {
+                return object;
+            }
+
+            public void setObject(List<ContractContent> object) {
+                this.object = object;
+            }
+
+            public class ContractContent {
+                private String key;
+                private String value;
+
+                public String getKey() {
+                    return key;
+                }
+
+                public void setKey(String key) {
+                    this.key = key;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+
+                public void setValue(String value) {
+                    this.value = value;
+                }
+            }
+        }
     }
 
-    public void setContractId(String contractId) {
-        this.contractId = contractId;
-    }
-
-    public HashMap<Object, Object> getMapObject() {
-        return mapObject;
-    }
-
-    public void setMapObject(HashMap<Object, Object> mapObject) {
-        this.mapObject = mapObject;
-    }
-
-    public String getBusinessName() {
-        return businessName;
-    }
-
-    public void setBusinessName(String businessName) {
-        this.businessName = businessName;
-    }
-
-    public String getSignDate() {
-        return signDate;
-    }
-
-    public void setSignDate(String signDate) {
-        this.signDate = signDate;
-    }
-
-    public String getAutoId() {
-        return autoId;
-    }
-
-    public void setAutoId(String autoId) {
-        this.autoId = autoId;
-    }
 }

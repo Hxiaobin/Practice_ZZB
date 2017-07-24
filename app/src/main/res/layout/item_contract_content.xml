@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/common_padding_small"
+    android:paddingTop="@dimen/common_padding_small">
+
+    <TextView
+        android:id="@+id/tvContractContentKey"
+        style="@style/activity_text_normal_gray"
+        android:lineSpacingExtra="@dimen/common_margin_micro"
+        android:text="开证金额：" />
+
+    <TextView
+        android:id="@+id/tvContractContentValue"
+        style="@style/activity_text_normal_gray"
+        android:layout_marginLeft="@dimen/common_margin_small"
+        android:lineSpacingExtra="@dimen/common_margin_micro" />
+
+</LinearLayout>

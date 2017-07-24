@@ -21,9 +21,9 @@ import java.util.List;
 public class HomeFragmentBocAnalyseAdapter extends BaseAdapter {
 
     private Context context;
-    private List<BocAnalyseBean> bocAnalyseBeanList;
+    private List<BocAnalyseBean.Content.NewsBean> bocAnalyseBeanList;
 
-    public HomeFragmentBocAnalyseAdapter(Context context, List<BocAnalyseBean> bocAnalyseBeanList) {
+    public HomeFragmentBocAnalyseAdapter(Context context, List<BocAnalyseBean.Content.NewsBean> bocAnalyseBeanList) {
         this.context = context;
         this.bocAnalyseBeanList = bocAnalyseBeanList;
     }
@@ -51,27 +51,19 @@ public class HomeFragmentBocAnalyseAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_home_boc_analyse, null);
             viewHolder.tvHomeFragmentBOCAnalyseNewsTitle = (TextView) convertView.findViewById(R.id.tvHomeFragmentBOCAnalyseNewsTitle);
             viewHolder.tvHomeFragmentBOCAnalyseNewsDesc = (TextView) convertView.findViewById(R.id.tvHomeFragmentBOCAnalyseNewsDesc);
-            viewHolder.ivHomeFragmentExpandReading = (ImageView) convertView.findViewById(R.id.ivHomeFragmentExpandReading);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (BocAnalyseViewHolder) convertView.getTag();
         }
-        BocAnalyseBean bocAnalyseBean = bocAnalyseBeanList.get(position);
-        viewHolder.tvHomeFragmentBOCAnalyseNewsTitle.setText(bocAnalyseBean.getNewsTitle());
-        viewHolder.tvHomeFragmentBOCAnalyseNewsDesc.setText(bocAnalyseBean.getNewsDesc());
-        viewHolder.ivHomeFragmentExpandReading.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        BocAnalyseBean.Content.NewsBean bean = bocAnalyseBeanList.get(position);
+        viewHolder.tvHomeFragmentBOCAnalyseNewsTitle.setText(bean.getNewsTitle());
+        viewHolder.tvHomeFragmentBOCAnalyseNewsDesc.setText(bean.getNewsDesc());
         return convertView;
     }
 
     class BocAnalyseViewHolder {
         private TextView tvHomeFragmentBOCAnalyseNewsTitle;  //新闻名称
         private TextView tvHomeFragmentBOCAnalyseNewsDesc;   //新闻描述
-        private ImageView ivHomeFragmentExpandReading;       //展开阅读
     }
 
 }

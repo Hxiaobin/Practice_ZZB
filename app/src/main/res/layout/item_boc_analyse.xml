@@ -11,8 +11,7 @@
         android:id="@+id/ivBocAnalyseNewsImageUrl"
         android:layout_width="@dimen/image_normal_width"
         android:layout_height="@dimen/image_normal_high"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/image_boc_analyse_two" />
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -24,17 +23,17 @@
 
         <TextView
             android:id="@+id/tvBocAnalyseNewsTitle"
-            style="@style/activity_text_normal_black"/>
+            style="@style/activity_text_normal_black" />
 
         <TextView
             android:id="@+id/tvBocAnalyseNewsDesc"
             style="@style/activity_text_small_gray"
-            android:layout_marginTop="@dimen/common_margin_small"/>
+            android:layout_marginTop="@dimen/common_margin_small" />
 
         <TextView
             android:id="@+id/tvBocAnalyseNewsDate"
             style="@style/activity_text_small_gray"
-            android:layout_marginTop="@dimen/common_margin_small"/>
+            android:layout_marginTop="@dimen/common_margin_small" />
 
     </LinearLayout>
 

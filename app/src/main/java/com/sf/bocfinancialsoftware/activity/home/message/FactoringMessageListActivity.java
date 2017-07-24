@@ -3,8 +3,6 @@ package com.sf.bocfinancialsoftware.activity.home.message;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,23 +15,36 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.adapter.MessageAdapter;
-import com.sf.bocfinancialsoftware.bean.MessageReminderBean;
-import com.sf.bocfinancialsoftware.util.DataBaseSQLiteUtil;
+import com.sf.bocfinancialsoftware.base.BaseActivity;
+import com.sf.bocfinancialsoftware.bean.MessageBean;
+import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
+import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.FACTORING_RESPONSE;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_READ;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_READ_SUM;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.HAS_NEXT;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.HAS_NOT_NEXT;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_ALL;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FACTORING_CONDITION1;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FACTORING_CONDITION2;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FACTORING_CONDITION3;
 import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FACTORING_CONDITION4;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_FILTER;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_PAGE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FOR_THE_FIRST_TIME;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FROM_FILTER;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FROM_LOAD_MORE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FROM_REFRESH;
+import static com.sf.bocfinancialsoftware.constant.URLConfig.FACTORING_MESSAGE_LIST_URL;
+import static com.sf.bocfinancialsoftware.constant.URLConfig.MESSAGE_LIST_URL;
 
 /**
  * 保理通知列表
@@ -45,66 +56,37 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
     private ImageView ivTitleBarBack;  //返回
     private ImageView ivTitleBarFilter;  //筛选
     private TextView tvTitleBarTitle;  //标题
+    private TextView tvPromptMessage;// 空数据提示消息
     private SwipeRefreshLayout swipeRefreshLayoutMessage; //下拉刷新上拉加载
-    private ListView lvMessage;  //保理消息列表
+    private ListView lvMessage;  //进口消息列表
     private View headView; //列表头部
     private View footView; //列表尾部
     private LinearLayout lltLoadMore; //列表尾部加载更多
-    private LinearLayout lltEmptyViewMessage; //处理空数据
+    private LinearLayout lltEmptyView; //处理空数据
     private MessageAdapter messageAdapter; //列表适配器
-    private List<MessageReminderBean> messageBeanList; //消息实体
-    private List<MessageReminderBean> allMessageList; //所有的数据列表
+    private List<MessageBean.Content.MessageObject> msgArray; //已加载的数据列表
     private Intent intent;
     private String typeId;  //消息类型id
-    private PopupWindow mPopWindow;  //筛选条件弹出Window
-    private LinearLayout lltFilterCondition0;  //筛选全部
-    private LinearLayout lltFilterCondition1;  //筛选条件1
-    private LinearLayout lltFilterCondition2;  //筛选条件2
-    private LinearLayout lltFilterCondition3;  //筛选条件3
-    private LinearLayout lltFilterCondition4;  //筛选条件4
-    private LinearLayout lltFilterCondition5;  //筛选条件5
-    private LinearLayout lltFilterCondition6;  //筛选条件6
+    private PopupWindow mPopWindow;
+    private LinearLayout lltFilterCondition0;
+    private LinearLayout lltFilterCondition1;
+    private LinearLayout lltFilterCondition2;
+    private LinearLayout lltFilterCondition3;
+    private LinearLayout lltFilterCondition4;
+    private LinearLayout lltFilterCondition5;
+    private LinearLayout lltFilterCondition6;
     private TextView tvFilterCondition0;
     private TextView tvFilterCondition1;
     private TextView tvFilterCondition2;
     private TextView tvFilterCondition3;
     private TextView tvFilterCondition4;
-    private int msgReadSum; //已读消息数量
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private int page = 0; //查询页码
+    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
+    private int page = 0;  //查询页码
     private String filter = ""; //筛选条件
-    private Handler mHandler = new Handler() {  //主线程中的Handler对象
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 4) {
-                //下拉刷新，三秒睡眠之后   重新加载
-                page = 0;
-                List<MessageReminderBean> list = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4);
-                if (list == null || list.size() <= 0) { //如果刷新失败，还是显示原来的数据
-                    Toast.makeText(FactoringMessageListActivity.this, getString(R.string.common_refresh_failed), Toast.LENGTH_SHORT).show();
-                } else { //刷新成功，清空原来的数据，重新插入数据到列表
-                    messageBeanList.clear();
-                    messageBeanList.addAll(list);
-                    messageAdapter.notifyDataSetChanged();
-                    Toast.makeText(FactoringMessageListActivity.this, getString(R.string.common_refresh_success), Toast.LENGTH_SHORT).show();
-                }
-                swipeRefreshLayoutMessage.setRefreshing(false);//加载完毕，设置不刷新
-            } else if (msg.what == 14) { //上拉加载更多
-                page++; //页数自增
-                List<MessageReminderBean> loadMoreList = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4);
-                messageBeanList.addAll(loadMoreList);
-                msgReadSum = messageBeanList.size();
-                isLastLine = false;
-                for (MessageReminderBean bean : loadMoreList) {
-                    //在打开消息列表的时候，将消息设置为已读状态,并将改变的状态存入数据库
-                    bean.setMsgIsRead(MSG_READ);
-                    DataBaseSQLiteUtil.updateMessageReminder(bean);
-                }
-                messageAdapter.notifyDataSetChanged();
-            }
-        }
-    };
+    private HashMap<String, String> map; // 保存请求参数
+    private String strSuccess;
+    private String strError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,12 +102,13 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         ivTitleBarBack = (ImageView) findViewById(R.id.ivTitleBarBack);
         ivTitleBarFilter = (ImageView) findViewById(R.id.ivTitleBarFilter);
         tvTitleBarTitle = (TextView) findViewById(R.id.tvTitleBarTitle);
+        tvPromptMessage = (TextView) findViewById(R.id.tvPromptMessage);
         swipeRefreshLayoutMessage = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayoutMessage);
         lvMessage = (ListView) findViewById(R.id.lvMessage);
         headView = LayoutInflater.from(this).inflate(R.layout.layout_list_head, null);
         footView = LayoutInflater.from(this).inflate(R.layout.layout_list_foot, null);
         lltLoadMore = (LinearLayout) footView.findViewById(R.id.lltLoadMore);
-        lltEmptyViewMessage = (LinearLayout) findViewById(R.id.lltEmptyViewMessage);
+        lltEmptyView = (LinearLayout) findViewById(R.id.lltEmptyView);
     }
 
     @Override
@@ -134,27 +117,13 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         ivTitleBarBack.setVisibility(View.VISIBLE);
         ivTitleBarFilter.setVisibility(View.VISIBLE);
         intent = getIntent();
-        typeId = intent.getStringExtra(MSG_TYPE_ID);
-        page = 0;
-        filter = "";
-        messageBeanList = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(typeId, filter, page, 4); //已经加载的数据个数，现在没有筛选条件
-        messageAdapter = new MessageAdapter(FactoringMessageListActivity.this, messageBeanList);
-        lvMessage.addHeaderView(headView);
-        lvMessage.addFooterView(footView);
-        lvMessage.setAdapter(messageAdapter);
-        lvMessage.setEmptyView(lltEmptyViewMessage); //处理空ListView
-        for (MessageReminderBean bean : messageBeanList) {
-            //在打开消息列表的时候，将消息设置为已读状态,并将改变的状态存入数据库
-            bean.setMsgIsRead(MSG_READ);
-            DataBaseSQLiteUtil.updateMessageReminder(bean);
-        }
-        msgReadSum = messageBeanList.size(); //已读消息数量
-        allMessageList = DataBaseSQLiteUtil.queryAllMessageByTypeAndTitle(typeId, filter);
-        if (messageBeanList.size() >= allMessageList.size()) {
-            lltLoadMore.setVisibility(View.GONE);// 如果加载完毕，隐藏掉正在加载图标
-        }
-        messageAdapter.notifyDataSetChanged();
-        SwipeRefreshUtil.setRefreshCircle(swipeRefreshLayoutMessage);
+        typeId = intent.getStringExtra(MSG_TYPE_ID);  //通知类型
+        lvMessage.addHeaderView(headView);  //列表头部
+        lvMessage.addFooterView(footView);  //列表尾部
+        tvPromptMessage.setText(getString(R.string.common_sorry_is_loading_now));  //正在加载
+        lvMessage.setEmptyView(lltEmptyView); //处理空ListView
+        firstRequest();  //打开页面首次请求网络
+        SwipeRefreshUtil.setRefreshCircle(swipeRefreshLayoutMessage);//刷新圆圈颜色
     }
 
     @Override
@@ -170,7 +139,6 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         switch (v.getId()) {
             case R.id.ivTitleBarBack:  //返回
                 Intent intent = new Intent();
-                intent.putExtra(MSG_READ_SUM, msgReadSum);
                 setResult(FACTORING_RESPONSE, intent);
                 finish();
                 break;
@@ -178,29 +146,24 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
                 createPopupWindow();
                 break;
             case R.id.lltFilterCondition0:  //筛选全部
-                filter = "";
-                page = 0;
-                filterMessage(typeId, filter, page, 4);
+                filter = QUERY_ALL;
+                requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition1:  //筛选保理商签发收账
+            case R.id.lltFilterCondition1:  //筛选保理商签发收账通知
                 filter = QUERY_FACTORING_CONDITION1;
-                page = 0;
-                filterMessage(typeId, filter, page, 4);
+                requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition2: //筛选保理业务确认函
+            case R.id.lltFilterCondition2: //筛选保理业务确认函通知
                 filter = QUERY_FACTORING_CONDITION2;
-                page = 0;
-                filterMessage(typeId, filter, page, 4);
+                requestByQueryFilter(filter);
                 break;
             case R.id.lltFilterCondition3: //筛选商业保理行业管理
                 filter = QUERY_FACTORING_CONDITION3;
-                page = 0;
-                filterMessage(typeId, filter, page, 4);
+                requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition4: //筛选国际保理业务
+            case R.id.lltFilterCondition4: //进口国际保理业务
                 filter = QUERY_FACTORING_CONDITION4;
-                page = 0;
-                filterMessage(typeId, filter, page, 4);
+                requestByQueryFilter(filter);
                 break;
             default:
                 break;
@@ -212,48 +175,61 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
      */
     @Override
     public void onRefresh() {
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    sleep(1000); //睡眠1秒
-                    Message msg = new Message();
-                    msg.what = 4;
-                    mHandler.sendMessage(msg);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+        strSuccess = getString(R.string.common_refresh_success); //请求成功提示
+        strError = getString(R.string.common_refresh_success); //请求失败提示
+        page = 0;
+        if (map.get(QUERY_FILTER) == null) { //没有筛选条件
+            map.clear();
+            map.put(MSG_TYPE_ID, typeId);  //通知类型
+            map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+            getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FROM_REFRESH);
+        } else {  //popupWindow过滤筛选
+            map.clear();
+            map.put(QUERY_FILTER, filter);
+            map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+            getNetworkData(FACTORING_MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FROM_REFRESH);
+        }
     }
 
+    /**
+     * 上拉加载
+     *
+     * @param view
+     * @param scrollState
+     */
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
-            if (messageBeanList.size() >= allMessageList.size()) { // 如果加载完毕，隐藏掉正在加载图标
+            if (hasNext.equals(HAS_NOT_NEXT)) { // 如果没有下一页
                 lltLoadMore.setVisibility(View.GONE);
                 Toast.makeText(FactoringMessageListActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
-            } else {
-                lltLoadMore.setVisibility(View.VISIBLE);// 如果未加载完毕，显示掉正在加载图标
-                new Thread() {
-                    @Override
-                    public void run() {
-                        super.run();
-                        try {
-                            sleep(1000); //睡眠3秒
-                            Message msg = new Message();
-                            msg.what = 14;
-                            mHandler.sendMessage(msg);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }.start();
+            } else if (hasNext.equals(HAS_NEXT)) {  //还有下一页
+                lltLoadMore.setVisibility(View.VISIBLE);
+                page++;
+                map.clear();
+                strSuccess = getString(R.string.common_load_success);
+                strError = getString(R.string.common_load_failed);
+                if (map.get(QUERY_FILTER) == null) { //没有筛选条件
+                    map.put(MSG_TYPE_ID, typeId);  //通知类型
+                    map.put(QUERY_PAGE, String.valueOf(page));
+                    getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FROM_LOAD_MORE);
+                } else {  //popupWindow过滤筛选
+                    map.put(QUERY_FILTER, filter);
+                    map.put(QUERY_PAGE, String.valueOf(page));
+                    getNetworkData(FACTORING_MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FROM_LOAD_MORE);
+                }
             }
         }
     }
 
+    /**
+     * 监听ListView状态 是否已经是最后一行
+     *
+     * @param view
+     * @param firstVisibleItem
+     * @param visibleItemCount
+     * @param totalItemCount
+     */
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0) {  //当滚到最后一行
@@ -264,21 +240,86 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
     }
 
     /**
-     * 筛选并刷新列表
+     * 首次请求网络
      */
-    private void filterMessage(String id, String filter, int page, int count) {
-        allMessageList = DataBaseSQLiteUtil.queryAllMessageByTypeAndTitle(id, filter);
-        messageBeanList.clear();
-        messageAdapter.notifyDataSetChanged();
-        List<MessageReminderBean> list = DataBaseSQLiteUtil.queryMessageByTypeAndTitle(id, filter, page, count);
-        messageBeanList.addAll(list);
-        if (messageBeanList.size() >= allMessageList.size()) { //加载完成
-            lltLoadMore.setVisibility(View.GONE);
-        }
-        messageAdapter.notifyDataSetChanged();
+    private void firstRequest() {
+        msgArray = new ArrayList<>();
+        messageAdapter = new MessageAdapter(FactoringMessageListActivity.this, msgArray);
+        lvMessage.setAdapter(messageAdapter);
+        page = 0;
+        map = new HashMap<>();
+        map.put(MSG_TYPE_ID, typeId);  //通知类型
+        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+        strSuccess = getString(R.string.common_request_success); //请求成功提示
+        strError = getString(R.string.common_request_failed); //请求失败提示
+        getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FOR_THE_FIRST_TIME);  // 请求网络
+    }
+
+    /**
+     * PopupWindow根据条件筛选通知
+     */
+    public void requestByQueryFilter(String strFilter) {
+        page = 0;
+        map.clear();
+        map.put(QUERY_FILTER, strFilter);  //筛选条件
+        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+        strSuccess = getString(R.string.common_request_success);
+        strError = getString(R.string.common_request_failed);
+        getNetworkData(FACTORING_MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FROM_FILTER);
         mPopWindow.dismiss();
     }
 
+    /**
+     * 网络请求，获取通知列表
+     *
+     * @param url       请求Url
+     * @param mapObject 存放请求参数
+     * @param success   请求成功提示语
+     * @param error     请求失败提示语
+     * @param flag      请求类型
+     */
+    public void getNetworkData(String url, final HashMap<String, String> mapObject, final String success, final String error, final String flag) {
+        HttpUtil.getNetworksJSonResponse(FactoringMessageListActivity.this, url, mapObject, new HttpCallBackListener() {
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                MessageBean bean = gson.fromJson(response, MessageBean.class);
+                hasNext = bean.getContent().getHasNext();  //是否还有下一页
+                if (flag.equals(REQUEST_FROM_REFRESH) || flag.equals(REQUEST_FROM_FILTER)) {  //如果是刷新和筛选请求
+                    if (msgArray != null && msgArray.size() > 0) {
+                        msgArray.clear(); //则清空原来的列表数据
+                    }
+                }
+                msgArray.addAll(bean.getContent().getMsgArray());  //中银分析数据列表
+                messageAdapter.notifyDataSetChanged();
+                if (flag.equals(REQUEST_FROM_REFRESH)) {  //如果是刷新请求
+                    swipeRefreshLayoutMessage.setRefreshing(false);  //设置刷新圈圈消失
+                }
+                lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
+                Toast.makeText(FactoringMessageListActivity.this, success, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailed(String msg) {
+                tvPromptMessage.setText(getString(R.string.common_sorry_not_date));  //暂无数据
+                if (flag.equals(REQUEST_FROM_REFRESH)) {  //如果是刷新请求
+                    swipeRefreshLayoutMessage.setRefreshing(false);  //设置刷新圈圈消失
+                }
+                lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
+                Toast.makeText(FactoringMessageListActivity.this, error, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                tvPromptMessage.setText(getString(R.string.common_sorry_not_date));  //暂无数据
+                if (flag.equals(REQUEST_FROM_REFRESH)) {  //如果是刷新请求
+                    swipeRefreshLayoutMessage.setRefreshing(false);  //设置刷新圈圈消失
+                }
+                lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
+                Toast.makeText(FactoringMessageListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     /**
      * 创建PopupWindow

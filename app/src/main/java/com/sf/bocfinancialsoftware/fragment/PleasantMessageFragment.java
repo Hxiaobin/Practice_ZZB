@@ -1,8 +1,6 @@
 package com.sf.bocfinancialsoftware.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,15 +10,31 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.PleasantMessageAdapter;
-import com.sf.bocfinancialsoftware.bean.PleasantMessageBean;
-import com.sf.bocfinancialsoftware.util.DataBaseSQLiteUtil;
+import com.sf.bocfinancialsoftware.bean.MessageBean;
+import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
+import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.HAS_NEXT;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.HAS_NOT_NEXT;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.MSG_TYPE_ID_PLEASANT;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.QUERY_PAGE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FOR_THE_FIRST_TIME;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FROM_FILTER;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FROM_LOAD_MORE;
+import static com.sf.bocfinancialsoftware.constant.ConstantConfig.REQUEST_FROM_REFRESH;
+import static com.sf.bocfinancialsoftware.constant.URLConfig.MESSAGE_LIST_URL;
 
 /**
  * 温馨提示
@@ -33,40 +47,18 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
     private View footView; //列表尾部
     private LinearLayout lltLoadMore; //列表尾部加载更多
     private ListView lvPleasantMessage; //温馨提示列表
-    private LinearLayout lltEmptyViewPleasantMessage; // 处理空数据
+    private LinearLayout lltEmptyView; // 处理空数据
+    private TextView tvPromptMessage;// 空数据提示消息
     private SwipeRefreshLayout swipeRefreshLayoutPleasantMessage;
-    private List<PleasantMessageBean> pleasantMessageBeanList; //数据源
-    private List<PleasantMessageBean> allPleasantMessageBeanList; //数据源
     private PleasantMessageAdapter adapter; //列表适配器
+    private List<MessageBean.Content.MessageObject> msgArray; //已加载的数据列表
+    private String typeId;  //消息类型id
     private boolean isLastLine = false;  //列表是否滚动到最后一行
+    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
     private int page = 0;  //查询页码
-    private Handler mHandler = new Handler() {  //主线程中的Handler对象
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 9) {
-                //下拉刷新，三秒睡眠之后   重新加载
-                page = 0;
-                List<PleasantMessageBean> list = DataBaseSQLiteUtil.queryPleasantMessage(page, 4);
-                if (list.size() <= 0 || list == null) {
-                    Toast.makeText(getActivity(), getString(R.string.common_refresh_failed), Toast.LENGTH_SHORT).show();
-                } else {
-                    //获取温馨提醒分析列表
-                    pleasantMessageBeanList.clear();
-                    pleasantMessageBeanList.addAll(list);
-                    adapter.notifyDataSetChanged();
-                    Toast.makeText(getActivity(), getString(R.string.common_refresh_success), Toast.LENGTH_SHORT).show();
-                }
-                swipeRefreshLayoutPleasantMessage.setRefreshing(false);//加载完毕，设置不刷新
-            } else if (msg.what == 19) { //上拉加载更多
-                page++; //页数自增
-                List<PleasantMessageBean> loadMoreList = DataBaseSQLiteUtil.queryPleasantMessage(page, 4);
-                pleasantMessageBeanList.addAll(loadMoreList);
-                isLastLine = false;
-                adapter.notifyDataSetChanged();
-            }
-        }
-    };
+    private HashMap<String, String> map; // 保存请求参数
+    private String strSuccess;
+    private String strError;
 
     @Nullable
     @Override
@@ -83,23 +75,36 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
         footView = inflater.inflate(R.layout.layout_list_foot, null);
         lltLoadMore = (LinearLayout) footView.findViewById(R.id.lltLoadMore);
         lvPleasantMessage = (ListView) view.findViewById(R.id.lvPleasantMessage);
-        lltEmptyViewPleasantMessage = (LinearLayout) view.findViewById(R.id.lltEmptyViewPleasantMessage);
+        lltEmptyView = (LinearLayout) view.findViewById(R.id.lltEmptyView);
+        tvPromptMessage = (TextView) view.findViewById(R.id.tvPromptMessage);
         swipeRefreshLayoutPleasantMessage = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutPleasantMessage);
     }
 
     private void initData() {
-        pleasantMessageBeanList = DataBaseSQLiteUtil.queryPleasantMessage(page, 4);
-        adapter = new PleasantMessageAdapter(getActivity(), pleasantMessageBeanList);
         lvPleasantMessage.addHeaderView(headView);
         lvPleasantMessage.addFooterView(footView);
         lvPleasantMessage.setAdapter(adapter);
-        lvPleasantMessage.setEmptyView(lltEmptyViewPleasantMessage);
-        allPleasantMessageBeanList = DataBaseSQLiteUtil.queryAllPleasantMessage();
-        if (pleasantMessageBeanList.size() >= allPleasantMessageBeanList.size()) {
-            lltLoadMore.setVisibility(View.GONE);// 如果加载完毕，隐藏掉正在加载图标
-        }
-        adapter.notifyDataSetChanged();
+        tvPromptMessage.setText(getString(R.string.common_sorry_is_loading_now));  //正在加载
+        lvPleasantMessage.setEmptyView(lltEmptyView);
+        typeId = MSG_TYPE_ID_PLEASANT;  //消息类型
+        firstRequest();  //打开页面首次请求网络
         SwipeRefreshUtil.setRefreshCircle(swipeRefreshLayoutPleasantMessage); //设置刷新样式
+    }
+
+    /**
+     * 打开页面首次获取列表数据
+     */
+    private void firstRequest() {
+        msgArray = new ArrayList<>();
+        adapter = new PleasantMessageAdapter(getActivity(), msgArray);
+        lvPleasantMessage.setAdapter(adapter);
+        page = 0;
+        map = new HashMap<>();
+        map.put(MSG_TYPE_ID, typeId);  //通知类型
+        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+        strSuccess = getString(R.string.common_request_success); //请求成功提示
+        strError = getString(R.string.common_request_failed); //请求失败提示
+        getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FOR_THE_FIRST_TIME);  // 请求网络
     }
 
     private void initListener() {
@@ -112,47 +117,51 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
      */
     @Override
     public void onRefresh() {
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    sleep(1000); //睡眠1秒
-                    Message msg = new Message();
-                    msg.what = 9;
-                    mHandler.sendMessage(msg);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+        strSuccess = getString(R.string.common_refresh_success); //请求成功提示
+        strError = getString(R.string.common_refresh_success); //请求失败提示
+        if (msgArray != null && msgArray.size() > 0) {
+            msgArray.clear(); //清空列表
+        }
+        page = 0;
+        map.clear();
+        map.put(MSG_TYPE_ID, typeId);  //通知类型
+        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+        getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FROM_REFRESH);
     }
 
+    /**
+     * 上拉加载
+     *
+     * @param view
+     * @param scrollState
+     */
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
-            if (pleasantMessageBeanList.size() >= allPleasantMessageBeanList.size()) { // 如果加载完毕，隐藏掉正在加载图标
+            if (hasNext.equals(HAS_NOT_NEXT)) { // 如果没有下一页
                 lltLoadMore.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
-            } else {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        super.run();
-                        try {
-                            sleep(1000); //睡眠1秒
-                            Message msg = new Message();
-                            msg.what = 19;
-                            mHandler.sendMessage(msg);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }.start();
+            } else if (hasNext.equals(HAS_NEXT)) {  //还有下一页
+                lltLoadMore.setVisibility(View.VISIBLE);
+                strSuccess = getString(R.string.common_load_success);
+                strError = getString(R.string.common_load_failed);
+                page++;
+                map.clear();
+                map.put(MSG_TYPE_ID, typeId);  //通知类型
+                map.put(QUERY_PAGE, String.valueOf(page));
+                getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FROM_LOAD_MORE);
             }
         }
     }
 
+    /**
+     * 监听ListView滚动状态
+     *
+     * @param view
+     * @param firstVisibleItem
+     * @param visibleItemCount
+     * @param totalItemCount
+     */
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount > 0) {  //当滚到最后一行
@@ -160,6 +169,58 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
         } else {
             isLastLine = false;
         }
+    }
+
+    /**
+     * 网络请求，获取温馨提示列表数据
+     *
+     * @param url       请求url
+     * @param mapObject 请求参数
+     * @param success   请求成功提示语
+     * @param error     请求失败提示语
+     * @param flag      请求类型
+     */
+    public void getNetworkData(String url, final HashMap<String, String> mapObject, final String success, final String error, final String flag) {
+        HttpUtil.getNetworksJSonResponse(getActivity(), url, mapObject, new HttpCallBackListener() {
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                MessageBean bean = gson.fromJson(response, MessageBean.class);
+                hasNext = bean.getContent().getHasNext();  //是否还有下一页
+                if (flag.equals(REQUEST_FROM_REFRESH) || flag.equals(REQUEST_FROM_FILTER)) {  //如果是刷新和筛选请求
+                    if (msgArray != null && msgArray.size() > 0) {
+                        msgArray.clear(); //则清空原来的列表数据
+                    }
+                }
+                msgArray.addAll(bean.getContent().getMsgArray());  //温馨提示数据列表
+                adapter.notifyDataSetChanged();
+                if (flag.equals(REQUEST_FROM_REFRESH)) {  //如果是刷新请求
+                    swipeRefreshLayoutPleasantMessage.setRefreshing(false);  //设置刷新圈圈消失
+                }
+                lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
+                Toast.makeText(getActivity(), success, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailed(String msg) {
+                tvPromptMessage.setText(getString(R.string.common_sorry_not_date));  //暂无数据
+                if (flag.equals(REQUEST_FROM_REFRESH)) {  //如果是刷新请求
+                    swipeRefreshLayoutPleasantMessage.setRefreshing(false);  //设置刷新圈圈消失
+                }
+                lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
+                Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                tvPromptMessage.setText(getString(R.string.common_sorry_not_date));  //暂无数据
+                if (flag.equals(REQUEST_FROM_REFRESH)) {  //如果是刷新请求
+                    swipeRefreshLayoutPleasantMessage.setRefreshing(false);  //设置刷新圈圈消失
+                }
+                lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
