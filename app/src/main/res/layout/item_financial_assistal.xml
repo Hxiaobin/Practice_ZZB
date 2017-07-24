@@ -32,7 +32,8 @@
                 <TextView
                     android:id="@+id/tvAccount1"
                     style="@style/activity_text_normal_black"
-                    android:text="@string/tv_account"/>
+                    android:text="@string/tv_account"
+                    android:layout_width="wrap_content"/>
 
                 <TextView
                     android:id="@+id/tvAccount"

@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class UserBean implements Serializable{
     private String userName;      //用户名
     private String loginPassword; //登录密码
+    private boolean isLogin;
 
     public UserBean(String userName, String loginPassword) {
         this.userName = userName;
@@ -30,5 +31,13 @@ public class UserBean implements Serializable{
 
     public void setLoginPassword(String loginPassword) {
         this.loginPassword = loginPassword;
+    }
+
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+    public void setLogin(boolean login) {
+        isLogin = login;
     }
 }

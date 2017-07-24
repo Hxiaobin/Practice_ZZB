@@ -1,27 +1,47 @@
-package com.sf.bocfinancialsoftware.adapter;
+package com.sf.bocfinancialsoftware.adapter.account;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.bean.AccountListBean;
+import com.sf.bocfinancialsoftware.bean.account.AccountBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 财务助手账户列表的Adapter
  * Created by Author: wangyongzhu on 2017/6/22.
  */
 
 public class AccountListAdapter extends BaseAdapter {
     private Context mContext;
-    private List<AccountListBean> mDates;
+    private List<AccountBean.ContentBean.AccountListBean> mDates = new ArrayList<>();
 
-    public AccountListAdapter(Context context, List<AccountListBean> dates) {
+    public AccountListAdapter(Context context) {
         mContext = context;
-        mDates = dates;
+    }
+
+    public List<AccountBean.ContentBean.AccountListBean> getDates() {
+        return mDates;
+    }
+
+    public void setDates(List<AccountBean.ContentBean.AccountListBean> dates) {
+        if (dates != null) {
+            mDates.clear();
+            mDates.addAll(dates);
+            notifyDataSetChanged();
+        }
+    }
+    public void addPage(List<AccountBean.ContentBean.AccountListBean> dates) {
+        if (dates != null) {
+            mDates.addAll(dates);
+            notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -58,9 +78,10 @@ public class AccountListAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tvAccount.setText(mDates.get(position).getTvAccount());
-        viewHolder.tvBalance.setText(mDates.get(position).getTvBalance());
-        viewHolder.tvPay.setText(mDates.get(position).getTvPay());
+        Log.e("AccountListAdapter", "getView: "+getItem(position));
+        viewHolder.tvAccount.setText(mDates.get(position).getAccountName());
+        viewHolder.tvBalance.setText(mDates.get(position).getBalance());
+        viewHolder.tvPay.setText(mDates.get(position).getPayable());
         return convertView;
     }
 

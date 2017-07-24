@@ -16,7 +16,7 @@ public class ConstantConfig {
     public static final String SP_NAME2 = "sp_name2";//SP的文件名
     public static final String USER_NAME = "userName";//用户名
     public static final String PASSWORD = "password";//密码
-    public static final String TITLE = "title";
+    public static final String IS_LOGIN = "is_login";//是否登录
     //中银分析
     public static final String NEWS_ID = "newsId";  //新闻id
     public static final String MSG_TYPE_ID = "typeId";  //消息类型id
@@ -93,4 +93,16 @@ public class ConstantConfig {
     //欢迎页
     public static final String FILE_FIRST_IN = "guideFirst"; //保存是否是第一次进入app
     public static final String IS_FIRST_IN = "isFirstIn"; //是否是第一次进入app
+    //财务助手
+    public static final String INTENT_KEY_INT1 = "intent_key_int1";//财务助手传信息
+    public static final String INTENT_KEY_INT2 = "intent_key_int2";//财务助手传信息
+    public static final String INTENT_KEY_SER = "intent_key_ser";//财务助手传信息
+    public static final String ACCOUNT_NAME = "name";//财务助手传信息
+    public static final String ACCOUNT_BALANCE = "balance";//财务助手传信息
+    public static final String ACCOUNT_PAYABLE = "payable";//财务助手传信息
+    // /热销理财产品
+    public static final String PRODUCT_TITLE = "productTitle";//热销理财产品传标题
+    public static final String FINANCE_PRODUCT_KEY_SER = "product_key_ser";//热销理财产品传信息
+    //产品介绍
+    public static final String INTEL_PRODUCT_KEY_SER = "product_key_ser";//产品介绍传信息
 }

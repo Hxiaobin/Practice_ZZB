@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.adapter;
+package com.sf.bocfinancialsoftware.adapter.rate;
 
 import android.content.Context;
 import android.view.View;
@@ -8,21 +8,30 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.bean.RateBean;
+import com.sf.bocfinancialsoftware.bean.rate.ExchangeRateBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 汇率
  * Created by Author: wangyongzhu on 2017/6/22.
  */
 
 public class RateAdapter extends BaseAdapter {
-    private List<RateBean> mDatas;
+    private List<ExchangeRateBean.ContentBean> mDatas = new ArrayList<>();
     private Context mContext;
 
-    public RateAdapter(List<RateBean> rateBeen, Context context) {
-        mDatas = rateBeen;
+    public RateAdapter(Context context) {
         mContext = context;
+    }
+
+    public void setDatas(List<ExchangeRateBean.ContentBean> datas) {
+        if (datas != null) {
+            mDatas.clear();
+            mDatas.addAll(datas);
+            notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -59,13 +68,13 @@ public class RateAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tvRateCurrency.setText(mDatas.get(position).getRateCurrency());
-        viewHolder.tvRateTime.setText(mDatas.get(position).getRateTime());
-        viewHolder.tvKnotRate.setText(mDatas.get(position).getKnotRate());
-        viewHolder.tvSellingRate.setText(mDatas.get(position).getSellingRate());
+        viewHolder.tvRateCurrency.setText(mDatas.get(position).getMoneyName());
+        viewHolder.tvRateTime.setText(mDatas.get(position).getTimeLimit());
+        viewHolder.tvKnotRate.setText(mDatas.get(position).getSettlePrice());
+        viewHolder.tvSellingRate.setText(mDatas.get(position).getSalePrice());
         if (position == 0) {
             viewHolder.ll.setVisibility(View.GONE);
-        }else if (position % 4 == 0) {
+        } else if (position % 4 == 0) {
             viewHolder.ll.setVisibility(View.VISIBLE);
             viewHolder.tvRateCurrency1.setBackgroundColor(mContext.getResources().getColor(R.color.tagcloud_color));
             viewHolder.tvRateTime1.setBackgroundColor(mContext.getResources().getColor(R.color.tagcloud_color));

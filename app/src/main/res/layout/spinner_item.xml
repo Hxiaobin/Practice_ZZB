@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="38dp"
+    android:minHeight="38dp"
     android:layout_marginBottom="1dp"
     android:background="@color/white"
     android:ellipsize="marquee"

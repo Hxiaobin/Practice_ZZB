@@ -70,7 +70,6 @@
     <string name="activity_message_forward_filter_condition4"> 代客外汇理财业务提示</string>
     <string name="activity_message_forward_filter_condition5"> 代客外汇风险管理提示</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="et_login_key">输入6-15位密码</string>
     <string name="et_login_user">用户名/手机号/邮箱</string>
     <string name="btn_registered">注册</string>
     <string name="btn_login">登录</string>
@@ -92,7 +91,7 @@
     <string name="et_suggestion">请输入您的意见或建议</string>
     <string name="toast_get_suggestion">已经收到您的意见</string>
     <string name="et_registered_user_name">请输入用户名/手机号/邮箱</string>
-    <string name="et_registered_key">请输入6-15位密码</string>
+    <string name="et_key">请输入6-15位密码</string>
     <string name="tv_tool_product"><![CDATA[产品&市场]]></string>
     <string name="tv_tool_toolkit">工具箱</string>
     <string name="text_analysis">中银分析</string>
@@ -155,4 +154,6 @@
     <string name="tv_payment_data">28,000,000.00</string>
     <string name="tv_financial_currency">[人民币]</string>
     <string name="title_activity_intel_product_detail2">IntelProductDetailActivity2</string>
+    <string name="text_loading">正在加载...</string>
+    <string name="toast_suggestion_error">反馈失败</string>
 </resources>
