@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.adapter;
+package com.sf.bocfinancialsoftware.adapter.home.home;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

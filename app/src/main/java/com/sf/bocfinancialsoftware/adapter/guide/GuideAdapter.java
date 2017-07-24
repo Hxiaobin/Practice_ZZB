@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.adapter;
+package com.sf.bocfinancialsoftware.adapter.guide;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -16,8 +16,8 @@ import java.util.List;
 
 public class GuideAdapter extends PagerAdapter {
 
-    private Context context;
-    private List<View> views;
+    private Context context;  //上下文
+    private List<View> views;  //图片视图集合
 
     public GuideAdapter(Context context, List<View> views) {
         this.context = context;
@@ -44,4 +44,5 @@ public class GuideAdapter extends PagerAdapter {
         container.addView(views.get(position));
         return views.get(position);
     }
+
 }

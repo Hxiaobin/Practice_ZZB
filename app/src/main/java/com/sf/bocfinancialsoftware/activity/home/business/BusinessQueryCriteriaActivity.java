@@ -9,11 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fourmob.datetimepicker.date.DatePickerDialog;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
+import com.sf.bocfinancialsoftware.util.ToastUtil;
 import com.sf.bocfinancialsoftware.widget.ClearEditTextTextWatcher;
 
 import java.text.DateFormat;
@@ -152,7 +152,7 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
                     intent.putExtra(CONTRACT_ID, contractId);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.common_please_enter_the_useful_criteria), Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(mContext, getString(R.string.common_please_enter_the_useful_criteria));
                 }
                 break;
             default:
@@ -173,7 +173,7 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
         int m = month + 1;
         Date date1; //开始时间
         Date date2; //结束时间
-        if (datePickerDialog == startDatePickerDialog) { //开始时间
+        if (datePickerDialog == startDatePickerDialog) { //如果当前选择器是开始时间选择器
             if ((m / 10) == 1) { //月份是2位数
                 if ((day / 10) >= 1) { //日期是2位数
                     tvBusinessQueryStartDate.setText(year + "-" + m + "-" + day);
@@ -190,15 +190,14 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
             String startDate = tvBusinessQueryStartDate.getText().toString();
             try {
                 date1 = format2.parse(startDate);
-                Log.e("时间----", date1.getTime() + "");
                 if (date1.getTime() >= System.currentTimeMillis()) { //开始时间大于当前时间
                     tvBusinessQueryStartDate.setText("");
-                    Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.activity_business_query_end_time_wrong3), Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(mContext, getString(R.string.activity_business_query_end_time_wrong3));
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        } else if (datePickerDialog == endDatePickerDialog) { //结束时间
+        } else if (datePickerDialog == endDatePickerDialog) { //如果当前选择器是结束时间选择器
             if ((m / 10) == 1) { //月份是2位数
                 if ((day / 10) >= 1) { //日期是2位数
                     tvBusinessQueryEndDate.setText(year + "-" + m + "-" + day);
@@ -217,7 +216,7 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
                 date2 = format2.parse(endDate);
                 if (date2.getTime() > System.currentTimeMillis()) { //结束时间大于当前时间
                     tvBusinessQueryEndDate.setText("");
-                    Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.activity_business_query_end_time_wrong2), Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(mContext, getString(R.string.activity_business_query_end_time_wrong2));
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -231,7 +230,7 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
             date2 = format2.parse(endDate);
             if (date2.getTime() < date1.getTime()) { //结束时间小于开始时间
                 tvBusinessQueryEndDate.setText("");
-                Toast.makeText(BusinessQueryCriteriaActivity.this, getString(R.string.activity_business_query_end_time_wrong), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, getString(R.string.activity_business_query_end_time_wrong));
             }
         } catch (ParseException e) {
             e.printStackTrace();

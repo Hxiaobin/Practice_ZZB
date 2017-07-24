@@ -1,1 +1,1 @@
-include ':app', ':libzxing', ':datetimepicker-library'
+include ':app', ':libzxing'

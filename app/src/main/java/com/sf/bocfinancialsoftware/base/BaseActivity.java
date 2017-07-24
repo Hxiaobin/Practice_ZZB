@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
+
     protected Context mContext;
 
     @Override
@@ -20,7 +21,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         //设置支持屏幕的方向
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
-
 
     protected abstract void initView();         //初始化View
 

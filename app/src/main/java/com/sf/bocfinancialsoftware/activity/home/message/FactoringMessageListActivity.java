@@ -13,16 +13,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.adapter.MessageAdapter;
+import com.sf.bocfinancialsoftware.adapter.home.message.MessageAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
-import com.sf.bocfinancialsoftware.bean.MessageBean;
+import com.sf.bocfinancialsoftware.bean.message.MessageBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
+import com.sf.bocfinancialsoftware.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,12 +81,12 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
     private TextView tvFilterCondition3;
     private TextView tvFilterCondition4;
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
+    private String hasNext = HAS_NOT_NEXT; //是否含有下一页，默认为没有有下一页，0：没有，1：有
     private int page = 0;  //查询页码
     private String filter = ""; //筛选条件
     private HashMap<String, String> map; // 保存请求参数
-    private String strSuccess;
-    private String strError;
+    private String strSuccess;  //请求成功提示语
+    private String strError;  //请求失败提示语
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,21 +153,51 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
                 filter = QUERY_FACTORING_CONDITION1;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition2: //筛选保理业务确认函通知
+            case R.id.lltFilterCondition2:  //筛选保理业务确认函通知
                 filter = QUERY_FACTORING_CONDITION2;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition3: //筛选商业保理行业管理
+            case R.id.lltFilterCondition3:  //筛选商业保理行业管理
                 filter = QUERY_FACTORING_CONDITION3;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition4: //进口国际保理业务
+            case R.id.lltFilterCondition4:  //进口国际保理业务
                 filter = QUERY_FACTORING_CONDITION4;
                 requestByQueryFilter(filter);
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 首次请求网络
+     */
+    private void firstRequest() {
+        msgArray = new ArrayList<>();
+        messageAdapter = new MessageAdapter(FactoringMessageListActivity.this, msgArray);
+        lvMessage.setAdapter(messageAdapter);
+        page = 0;
+        map = new HashMap<>();
+        map.put(MSG_TYPE_ID, typeId);  //通知类型
+        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+        strSuccess = getString(R.string.common_request_success); //请求成功提示
+        strError = getString(R.string.common_request_failed); //请求失败提示
+        getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FOR_THE_FIRST_TIME);  // 请求网络
+    }
+
+    /**
+     * PopupWindow根据条件筛选通知
+     */
+    public void requestByQueryFilter(String strFilter) {
+        page = 0;
+        map.clear();
+        map.put(QUERY_FILTER, strFilter);  //筛选条件
+        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
+        strSuccess = getString(R.string.common_request_success);
+        strError = getString(R.string.common_request_failed);
+        getNetworkData(FACTORING_MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FROM_FILTER);
+        mPopWindow.dismiss();
     }
 
     /**
@@ -202,7 +232,7 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
         if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
             if (hasNext.equals(HAS_NOT_NEXT)) { // 如果没有下一页
                 lltLoadMore.setVisibility(View.GONE);
-                Toast.makeText(FactoringMessageListActivity.this, getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, getString(R.string.common_not_date));
             } else if (hasNext.equals(HAS_NEXT)) {  //还有下一页
                 lltLoadMore.setVisibility(View.VISIBLE);
                 page++;
@@ -240,36 +270,6 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
     }
 
     /**
-     * 首次请求网络
-     */
-    private void firstRequest() {
-        msgArray = new ArrayList<>();
-        messageAdapter = new MessageAdapter(FactoringMessageListActivity.this, msgArray);
-        lvMessage.setAdapter(messageAdapter);
-        page = 0;
-        map = new HashMap<>();
-        map.put(MSG_TYPE_ID, typeId);  //通知类型
-        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
-        strSuccess = getString(R.string.common_request_success); //请求成功提示
-        strError = getString(R.string.common_request_failed); //请求失败提示
-        getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FOR_THE_FIRST_TIME);  // 请求网络
-    }
-
-    /**
-     * PopupWindow根据条件筛选通知
-     */
-    public void requestByQueryFilter(String strFilter) {
-        page = 0;
-        map.clear();
-        map.put(QUERY_FILTER, strFilter);  //筛选条件
-        map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
-        strSuccess = getString(R.string.common_request_success);
-        strError = getString(R.string.common_request_failed);
-        getNetworkData(FACTORING_MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FROM_FILTER);
-        mPopWindow.dismiss();
-    }
-
-    /**
      * 网络请求，获取通知列表
      *
      * @param url       请求Url
@@ -296,7 +296,7 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
                     swipeRefreshLayoutMessage.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(FactoringMessageListActivity.this, success, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, success);
             }
 
             @Override
@@ -306,7 +306,7 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
                     swipeRefreshLayoutMessage.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(FactoringMessageListActivity.this, error, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, error);
             }
 
             @Override
@@ -316,7 +316,7 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
                     swipeRefreshLayoutMessage.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(FactoringMessageListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, e.getMessage());
             }
         });
     }

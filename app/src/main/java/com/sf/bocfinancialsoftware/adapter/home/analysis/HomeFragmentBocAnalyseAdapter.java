@@ -1,15 +1,14 @@
-package com.sf.bocfinancialsoftware.adapter;
+package com.sf.bocfinancialsoftware.adapter.home.analysis;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
+import com.sf.bocfinancialsoftware.bean.analysis.BocAnalyseBean;
 
 import java.util.List;
 
@@ -20,8 +19,8 @@ import java.util.List;
 
 public class HomeFragmentBocAnalyseAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<BocAnalyseBean.Content.NewsBean> bocAnalyseBeanList;
+    private Context context;  //上下文
+    private List<BocAnalyseBean.Content.NewsBean> bocAnalyseBeanList;  //中银分析列表数据集合
 
     public HomeFragmentBocAnalyseAdapter(Context context, List<BocAnalyseBean.Content.NewsBean> bocAnalyseBeanList) {
         this.context = context;

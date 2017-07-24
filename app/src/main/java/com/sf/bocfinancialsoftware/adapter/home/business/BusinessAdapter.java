@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.adapter;
+package com.sf.bocfinancialsoftware.adapter.home.business;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,13 +9,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.bean.ContractBean;
+import com.sf.bocfinancialsoftware.bean.business.ContractBean;
 import com.sf.bocfinancialsoftware.util.ChildrenListViewUtil;
 
 import java.util.List;
-
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.CREDIT_BALANCE;
-import static com.sf.bocfinancialsoftware.constant.ConstantConfig.OPENING_AMOUNT;
 
 /**
  * 业务查询列表适配器
@@ -24,7 +21,7 @@ import static com.sf.bocfinancialsoftware.constant.ConstantConfig.OPENING_AMOUNT
 
 public class BusinessAdapter extends BaseAdapter {
 
-    private Context context;
+    private Context context;  //上下文
     private List<ContractBean.Content.Contract> contractBeenList; //合同集合
 
     public BusinessAdapter(Context context, List<ContractBean.Content.Contract> contractBeenList) {

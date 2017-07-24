@@ -10,16 +10,16 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.adapter.ImageAdapter;
+import com.sf.bocfinancialsoftware.adapter.home.advertisement.ImageAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
-import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
+import com.sf.bocfinancialsoftware.bean.analysis.BocAnalyseBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
+import com.sf.bocfinancialsoftware.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,6 +74,7 @@ public class BocAnalyseDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
         tvTitleBarTitle.setText(getString(R.string.common_boc_analyse));
+        ivTitleBarBack.setVisibility(View.VISIBLE);
         intent = getIntent();
         newsId = intent.getStringExtra(NEWS_ID); //获取上一页面传递的newsId
         WebSettings webSettings = webViewBocAnalyseDetail.getSettings();
@@ -94,7 +95,6 @@ public class BocAnalyseDetailActivity extends BaseActivity {
             }
         });
     }
-
 
     /**
      * 首次请求网络
@@ -126,8 +126,7 @@ public class BocAnalyseDetailActivity extends BaseActivity {
                     imageList.add(imageBeans.get(i).getImageUrl());  //图片url集合
                 }
                 adapter.notifyDataSetChanged();
-                //详情页正文内容
-                htmlContent = bean.getContent().getHtmlContent();
+                htmlContent = bean.getContent().getHtmlContent(); //详情页正文内容
                 webViewBocAnalyseDetail.loadUrl(htmlContent);   //加载网络正文
                 webViewBocAnalyseDetail.setWebViewClient(new WebViewClient() {
                     @Override
@@ -146,7 +145,7 @@ public class BocAnalyseDetailActivity extends BaseActivity {
                     lltBocAnalyseDetailNoData.setVisibility(View.VISIBLE);
                 }
                 lltBocAnalyseDetailLoading.setVisibility(View.GONE);
-                Toast.makeText(BocAnalyseDetailActivity.this, success, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, success);
             }
 
             @Override
@@ -154,7 +153,7 @@ public class BocAnalyseDetailActivity extends BaseActivity {
                 lltBocAnalyseDetailNoData.setVisibility(View.VISIBLE);
                 lltBocAnalyseContent.setVisibility(View.GONE);
                 lltBocAnalyseDetailLoading.setVisibility(View.GONE);
-                Toast.makeText(BocAnalyseDetailActivity.this, error, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, error);
             }
 
             @Override
@@ -162,7 +161,7 @@ public class BocAnalyseDetailActivity extends BaseActivity {
                 lltBocAnalyseDetailNoData.setVisibility(View.VISIBLE);
                 lltBocAnalyseContent.setVisibility(View.GONE);
                 lltBocAnalyseDetailLoading.setVisibility(View.GONE);
-                Toast.makeText(BocAnalyseDetailActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(mContext, e.getMessage());
             }
         });
     }

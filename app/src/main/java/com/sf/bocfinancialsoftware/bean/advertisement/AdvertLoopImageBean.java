@@ -1,6 +1,4 @@
-package com.sf.bocfinancialsoftware.bean;
-
-import android.graphics.Bitmap;
+package com.sf.bocfinancialsoftware.bean.advertisement;
 
 import java.util.List;
 

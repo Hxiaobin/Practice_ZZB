@@ -1,6 +1,4 @@
-package com.sf.bocfinancialsoftware.bean;
-
-import java.util.List;
+package com.sf.bocfinancialsoftware.bean.message;
 
 /**
  * 未读消息bean类
@@ -38,12 +36,12 @@ public class UnReadMsgBean {
     }
 
     public class Content {
-        private String sum;
-        private String type1;
-        private String type2;
-        private String type3;
-        private String type4;
-        private String type5;
+        private String sum;    //总未读数量
+        private String type1;  //进口通知未读数量
+        private String type2;  //出口通知未读数量
+        private String type3;  //保函通知未读数量
+        private String type4;  //保理通知未读数量
+        private String type5;  //远期通知未读数量
 
         public String getSum() {
             return sum;

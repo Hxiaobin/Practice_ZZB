@@ -11,15 +11,15 @@ import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.adapter.PleasantMessageAdapter;
-import com.sf.bocfinancialsoftware.bean.MessageBean;
+import com.sf.bocfinancialsoftware.adapter.pleasant.PleasantMessageAdapter;
+import com.sf.bocfinancialsoftware.bean.message.MessageBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
+import com.sf.bocfinancialsoftware.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,11 +54,11 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
     private List<MessageBean.Content.MessageObject> msgArray; //已加载的数据列表
     private String typeId;  //消息类型id
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
+    private String hasNext = HAS_NOT_NEXT; //是否含有下一页，默认为没有有下一页，0：没有，1：有
     private int page = 0;  //查询页码
     private HashMap<String, String> map; // 保存请求参数
-    private String strSuccess;
-    private String strError;
+    private String strSuccess;  //请求成功提示语
+    private String strError;  //请求失败提示语
 
     @Nullable
     @Override
@@ -91,6 +91,11 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
         SwipeRefreshUtil.setRefreshCircle(swipeRefreshLayoutPleasantMessage); //设置刷新样式
     }
 
+    private void initListener() {
+        swipeRefreshLayoutPleasantMessage.setOnRefreshListener(this);
+        lvPleasantMessage.setOnScrollListener(this);
+    }
+
     /**
      * 打开页面首次获取列表数据
      */
@@ -105,11 +110,6 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
         strSuccess = getString(R.string.common_request_success); //请求成功提示
         strError = getString(R.string.common_request_failed); //请求失败提示
         getNetworkData(MESSAGE_LIST_URL, map, strSuccess, strError, REQUEST_FOR_THE_FIRST_TIME);  // 请求网络
-    }
-
-    private void initListener() {
-        swipeRefreshLayoutPleasantMessage.setOnRefreshListener(this);
-        lvPleasantMessage.setOnScrollListener(this);
     }
 
     /**
@@ -140,7 +140,7 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
         if (scrollState == SCROLL_STATE_IDLE && isLastLine) { //停止滚动，且滚动到最后一行
             if (hasNext.equals(HAS_NOT_NEXT)) { // 如果没有下一页
                 lltLoadMore.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), getString(R.string.common_not_date), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(getActivity(), getString(R.string.common_not_date));
             } else if (hasNext.equals(HAS_NEXT)) {  //还有下一页
                 lltLoadMore.setVisibility(View.VISIBLE);
                 strSuccess = getString(R.string.common_load_success);
@@ -198,7 +198,7 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
                     swipeRefreshLayoutPleasantMessage.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(getActivity(), success, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(getActivity(), success);
             }
 
             @Override
@@ -208,7 +208,7 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
                     swipeRefreshLayoutPleasantMessage.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(getActivity(), error);
             }
 
             @Override
@@ -218,7 +218,7 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
                     swipeRefreshLayoutPleasantMessage.setRefreshing(false);  //设置刷新圈圈消失
                 }
                 lltLoadMore.setVisibility(View.GONE); //隐藏正在加载
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                ToastUtil.showToast(getActivity(), e.getMessage());
             }
         });
     }

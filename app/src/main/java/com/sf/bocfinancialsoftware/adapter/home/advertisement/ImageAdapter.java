@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.adapter;
+package com.sf.bocfinancialsoftware.adapter.home.advertisement;
 
 import android.content.Context;
 import android.view.View;
@@ -19,8 +19,8 @@ import java.util.List;
 
 public class ImageAdapter extends StaticPagerAdapter {
 
-    private Context context;
-    private List<String> imageList;
+    private Context context;  //上下文
+    private List<String> imageList; //图片URL集合
 
     public ImageAdapter(Context context, List<String> imageList) {
         this.context = context;
@@ -37,7 +37,7 @@ public class ImageAdapter extends StaticPagerAdapter {
                 .placeholder(R.mipmap.image_loading)             //在网络加载完成之前，预先加载显示一张本地图片
                 .error(R.mipmap.image_load_failure)              //加载网络图片失败
                 .centerCrop()
-                .crossFade()                                  //设置淡入淡出
+                .crossFade()                                 //设置淡入淡出
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)  //缓存图片源文件
                 .into(view);
         view.setScaleType(ImageView.ScaleType.CENTER_CROP);

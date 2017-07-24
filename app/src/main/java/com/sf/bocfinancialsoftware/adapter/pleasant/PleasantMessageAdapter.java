@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.adapter;
+package com.sf.bocfinancialsoftware.adapter.pleasant;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.bean.MessageBean;
-import com.sf.bocfinancialsoftware.bean.PleasantMessageBean;
+import com.sf.bocfinancialsoftware.bean.message.MessageBean;
 
 import java.util.List;
 

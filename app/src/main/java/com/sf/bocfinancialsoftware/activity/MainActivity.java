@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.activity.home.business.BusinessQueryResultActivity;
 import com.sf.bocfinancialsoftware.activity.user.UserActivity;
-import com.sf.bocfinancialsoftware.adapter.HomeFragmentPagerAdapter;
+import com.sf.bocfinancialsoftware.adapter.home.home.HomeFragmentPagerAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
 import com.sf.bocfinancialsoftware.fragment.AccountListFragment;
 import com.sf.bocfinancialsoftware.fragment.HomeFragment;
@@ -39,12 +39,10 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
     private TabLayout tabLayout;
     private ViewPager vpMain;
     private HomeFragmentPagerAdapter homeFragmentPagerAdapter;
-
     private TabLayout.Tab home;  //首页
     private TabLayout.Tab reminder;  //温馨提示
     private TabLayout.Tab financialAssistant;   //财务助手
     private TabLayout.Tab toolbar;  //工具箱
-
     private List<String> titleList;
     private List<Fragment> fragmentList;
 
@@ -71,22 +69,6 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
         createBottomNavigationBar(); //创建底部导航栏
         ivTitleBarPersonalCenter.setVisibility(View.VISIBLE); //显示个人中心图标
         ivTitleBarScan.setVisibility(View.VISIBLE);  //显示扫一扫
-//        List<BocAnalyseBean> bocAnalyseBeanList = DataBaseSQLiteUtil.queryBocAnalyseList();
-//        if (bocAnalyseBeanList == null || bocAnalyseBeanList.size() <= 0) {
-//            DataUtil.setBocAnalyseDate(); //设置中银分析数据源
-//        }
-//        List<MessageBean> messageReminderBeanList = DataBaseSQLiteUtil.queryAllMessageReminderList();
-//        if (messageReminderBeanList == null || messageReminderBeanList.size() <= 0) {
-//            DataUtil.setMessageReminderData(); //设置通知提醒数据源
-//        }
-//        List<ContractBean> contractBeanList = DataBaseSQLiteUtil.queryAllContractList();
-//        if (contractBeanList == null || contractBeanList.size() <= 0) {
-//            DataUtil.setContractDate(); //设置业务合同数据
-//        }
-//        List<PleasantMessageBean> pleasantMessageBeanList = DataBaseSQLiteUtil.queryAllPleasantMessage();
-//        if (pleasantMessageBeanList == null || pleasantMessageBeanList.size() <= 0) {
-//            DataUtil.setPleasantMessageData(); //设置温馨提示数据
-//        }
     }
 
     @Override
