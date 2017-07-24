@@ -35,10 +35,10 @@
                     android:id="@+id/tvRate"
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
-                    android:gravity="center_vertical"
                     android:background="@drawable/shape_search"
                     android:drawablePadding="@dimen/common_padding_normal"
                     android:drawableRight="@mipmap/right_down"
+                    android:gravity="center_vertical"
                     android:padding="@dimen/common_padding_small"
                     android:text="@string/tv_dollar"
                     android:textColor="@color/tv_subtitle"
@@ -113,7 +113,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:text="1000.00"
                         android:textColor="@color/tv_subtitle"
                         android:textSize="@dimen/text_size_normal"/>
 

@@ -51,31 +51,23 @@
             android:src="@mipmap/search"/>
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lvFinancial"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srlRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="0dp"
-        android:background="@color/white"
-        android:divider="@color/activity_common_background_gray"
-        android:listSelector="@color/white"
-        android:dividerHeight="0dp"
-        android:scrollbars="none">
+        android:layout_height="wrap_content">
 
-    </ListView>
+        <ListView
+            android:id="@+id/lvFinancial"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:background="@color/white"
+            android:divider="@color/activity_common_background_gray"
+            android:dividerHeight="0dp"
+            android:listSelector="@color/white"
+            android:scrollbars="none"/>
 
-    <ListView
-        android:id="@+id/lvFinancial2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="0dp"
-        android:background="@color/white"
-        android:listSelector="@color/white"
-        android:divider="@color/activity_common_background_gray"
-        android:dividerHeight="0dp"
-        android:scrollbars="none">
-
-    </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/llNoData"

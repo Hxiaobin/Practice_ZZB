@@ -19,6 +19,7 @@
         android:maxHeight="130dp"
         android:minHeight="100dp"
         android:padding="@dimen/common_padding_small"
+        android:maxLength="120"
         android:textColor="@color/common_text_black"
         android:textColorHint="@color/login_text"
         android:textSize="@dimen/text_size_normal"/>
@@ -28,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:layout_margin="@dimen/common_margin_normal"
+        android:singleLine="true"
         android:background="@drawable/shape_suggestion"
         android:padding="@dimen/common_padding_small"
         android:textColor="@color/common_text_black"

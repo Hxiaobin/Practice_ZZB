@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/common_margin_small"
+        android:layout_marginLeft="@dimen/common_margin_normal"
+        android:layout_marginRight="@dimen/common_margin_normal"
+        android:layout_marginTop="@dimen/common_margin_normal"
+        android:background="@drawable/shape_background_message"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/common_margin_small"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/common_padding_normal"
+            android:paddingRight="@dimen/common_padding_normal"
+            android:paddingTop="@dimen/common_margin_normal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/common_margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvAccount1"
+                    style="@style/activity_text_normal_black"
+                    android:text="@string/tv_account"/>
+
+                <TextView
+                    android:id="@+id/tvAccountDetail1"
+                    style="@style/activity_text_normal_black"/>
+
+                <TextView
+                    android:id="@+id/tvAccount2"
+                    style="@style/activity_text_normal_black"
+                    android:text="@string/tv_financial_currency"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_vertical_small_width"
+                android:background="@color/line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/common_margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvBalance1"
+                    style="@style/activity_text_normal_gray"
+                    android:text="账户实时余额"/>
+
+                <TextView
+                    android:id="@+id/tvBalance"
+                    style="@style/activity_text_normal_gray"/>
+
+                <TextView
+                    android:id="@+id/tvBalance2"
+                    style="@style/activity_text_normal_gray"
+                    android:text="@string/tv_yuan"
+                    android:textSize="@dimen/text_size_normal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPay1"
+                    style="@style/activity_text_normal_gray"
+                    android:text="30日内应付账款"/>
+
+                <TextView
+                    android:id="@+id/tvPay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tv_account"
+                    android:textSize="@dimen/text_size_normal"/>
+
+                <TextView
+                    android:id="@+id/tvPay2"
+                    style="@style/activity_text_normal_gray"
+                    android:text="@string/tv_yuan"
+                    android:textSize="@dimen/text_size_normal"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_vertical_small_width"
+        android:layout_marginLeft="@dimen/common_margin_normal"
+        android:layout_marginRight="@dimen/common_margin_normal"
+        android:background="@color/line"/>
+
+</LinearLayout>

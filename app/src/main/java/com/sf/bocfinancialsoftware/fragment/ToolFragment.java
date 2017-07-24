@@ -47,7 +47,7 @@ public class ToolFragment extends Fragment implements AdapterView.OnItemClickLis
     private void initDate() {
         productPictures = new ArrayList<>();
         calculatorPictures = new ArrayList<>();
-        if (isAdded()) {
+        if (isAdded()) { //当该Fragment对象被添加到了它的Activity中时
             //产品市场图片的文字标题
             productName = getResources().getStringArray(R.array.tool_product_name);
             //产品市场图片

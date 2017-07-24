@@ -12,14 +12,12 @@ import java.util.List;
  */
 
 public class ConstantConfig {
+    //个人中心
     public static final String SP_NAME = "sp_name";//SP的文件名
     public static final String SP_NAME2 = "sp_name2";//SP的文件名
     public static final String USER_NAME = "userName";//用户名
     public static final String PASSWORD = "password";//密码
-    public static final String LOGIN = "login";//登录
-    public static final String LOGOUT = "logout";//登录
-    public static final String USER = "user"; //用户信息
-    public static final String TITLE = "title";
+    public static final String IS_LOGIN = "is_login";//是否登录
     //公用
     public static final String QUERY_PAGE = "page";  //查询页码
     public static final String QUERY_FILTER = "filter"; // 查询条件
@@ -104,4 +102,16 @@ public class ConstantConfig {
     //SharePreference本地保存
     public static final String FILE_FIRST_IN = "guideFirst"; //保存是否是第一次进入app
     public static final String IS_FIRST_IN = "isFirstIn"; //是否是第一次进入app
+    //财务助手
+    public static final String INTENT_KEY_INT1 = "intent_key_int1";//财务助手传信息
+    public static final String INTENT_KEY_INT2 = "intent_key_int2";//财务助手传信息
+    public static final String INTENT_KEY_SER = "intent_key_ser";//财务助手传信息
+    public static final String ACCOUNT_NAME = "name";//财务助手传信息
+    public static final String ACCOUNT_BALANCE = "balance";//财务助手传信息
+    public static final String ACCOUNT_PAYABLE = "payable";//财务助手传信息
+    // /热销理财产品
+    public static final String PRODUCT_TITLE = "productTitle";//热销理财产品传标题
+    public static final String FINANCE_PRODUCT_KEY_SER = "product_key_ser";//热销理财产品传信息
+    //产品介绍
+    public static final String INTEL_PRODUCT_KEY_SER = "product_key_ser";//产品介绍传信息
 }

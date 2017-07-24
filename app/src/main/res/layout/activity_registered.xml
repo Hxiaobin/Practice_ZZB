@@ -11,9 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_margin_super"
         android:layout_marginLeft="@dimen/common_margin_normal"
         android:layout_marginRight="@dimen/common_margin_normal"
+        android:layout_marginTop="@dimen/common_margin_super"
         android:background="@drawable/shape_suggestion"
         android:orientation="vertical">
 
@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/common_margin_normal"
                 android:background="@null"
+                android:singleLine="true"
                 android:textColor="@color/common_text_black"
                 android:textColorHint="@color/login_text"
                 android:textSize="@dimen/text_size_normal"/>
@@ -42,8 +43,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/etRegisteredKey"
@@ -51,10 +52,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/common_margin_normal"
                 android:background="@null"
+                android:password="true"
+                android:singleLine="true"
                 android:textColor="@color/common_text_black"
                 android:textColorHint="@color/login_text"
-                android:textSize="@dimen/text_size_normal"
-                android:password="true"/>
+                android:textSize="@dimen/text_size_normal"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -63,8 +65,8 @@
         style="@style/btn_blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_margin_super"
         android:layout_marginLeft="@dimen/common_margin_normal"
         android:layout_marginRight="@dimen/common_margin_normal"
+        android:layout_marginTop="@dimen/common_margin_super"
         android:text="@string/btn_registered"/>
 </LinearLayout>
