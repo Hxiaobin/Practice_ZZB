@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.home.message.MessageAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
-import com.sf.bocfinancialsoftware.bean.MessageBean;
+import com.sf.bocfinancialsoftware.bean.message.MessageBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
@@ -83,12 +83,12 @@ public class ForwardMessageListActivity extends BaseActivity implements View.OnC
     private TextView tvFilterCondition4;
     private TextView tvFilterCondition5;
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
+    private String hasNext = HAS_NOT_NEXT; //是否含有下一页，默认为没有有下一页，0：没有，1：有
     private int page = 0;  //查询页码
     private String filter = ""; //筛选条件
     private HashMap<String, String> map; // 保存请求参数
-    private String strSuccess;
-    private String strError;
+    private String strSuccess;  //请求成功提示语
+    private String strError;  //请求失败提示语
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,19 +155,19 @@ public class ForwardMessageListActivity extends BaseActivity implements View.OnC
                 filter = QUERY_FORWARD_CONDITION1;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition2: //筛选外汇资金业务通知
+            case R.id.lltFilterCondition2:  //筛选外汇资金业务通知
                 filter = QUERY_FORWARD_CONDITION2;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition3: //筛选代理结售汇业务提示
+            case R.id.lltFilterCondition3:  //筛选代理结售汇业务提示
                 filter = QUERY_FORWARD_CONDITION3;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition4: //进口代客外汇理财业务提示
+            case R.id.lltFilterCondition4:  //进口代客外汇理财业务提示
                 filter = QUERY_FORWARD_CONDITION4;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition5: //进口代客外汇风险管理提示
+            case R.id.lltFilterCondition5:  //进口代客外汇风险管理提示
                 filter = QUERY_FORWARD_CONDITION5;
                 requestByQueryFilter(filter);
                 break;

@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.home.message.MessageAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
-import com.sf.bocfinancialsoftware.bean.MessageBean;
+import com.sf.bocfinancialsoftware.bean.message.MessageBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
@@ -81,12 +81,12 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
     private TextView tvFilterCondition3;
     private TextView tvFilterCondition4;
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
+    private String hasNext = HAS_NOT_NEXT; //是否含有下一页，默认为没有有下一页，0：没有，1：有
     private int page = 0;  //查询页码
     private String filter = ""; //筛选条件
     private HashMap<String, String> map; // 保存请求参数
-    private String strSuccess;
-    private String strError;
+    private String strSuccess;  //请求成功提示语
+    private String strError;  //请求失败提示语
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,15 +153,15 @@ public class FactoringMessageListActivity extends BaseActivity implements View.O
                 filter = QUERY_FACTORING_CONDITION1;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition2: //筛选保理业务确认函通知
+            case R.id.lltFilterCondition2:  //筛选保理业务确认函通知
                 filter = QUERY_FACTORING_CONDITION2;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition3: //筛选商业保理行业管理
+            case R.id.lltFilterCondition3:  //筛选商业保理行业管理
                 filter = QUERY_FACTORING_CONDITION3;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition4: //进口国际保理业务
+            case R.id.lltFilterCondition4:  //进口国际保理业务
                 filter = QUERY_FACTORING_CONDITION4;
                 requestByQueryFilter(filter);
                 break;

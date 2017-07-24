@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
+import com.sf.bocfinancialsoftware.bean.analysis.BocAnalyseBean;
 
 import java.util.List;
 
@@ -22,8 +22,8 @@ import java.util.List;
 
 public class BocAnalyseAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<BocAnalyseBean.Content.NewsBean> bocAnalyseBeanList;
+    private Context context;  //上下文
+    private List<BocAnalyseBean.Content.NewsBean> bocAnalyseBeanList;  //中银分析列表数据集合
 
     public BocAnalyseAdapter(Context context, List<BocAnalyseBean.Content.NewsBean> bocAnalyseBeanList) {
         this.context = context;

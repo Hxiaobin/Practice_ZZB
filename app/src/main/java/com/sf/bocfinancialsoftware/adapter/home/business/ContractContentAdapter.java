@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.bean.ContractBean;
+import com.sf.bocfinancialsoftware.bean.business.ContractBean;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ContractContentAdapter extends BaseAdapter {
 
-    private Context context;
+    private Context context;  //上下文
     private List<ContractBean.Content.Contract.ContractContent> contentList;  //合同内容
 
     public ContractContentAdapter(Context context, List<ContractBean.Content.Contract.ContractContent> contentList) {

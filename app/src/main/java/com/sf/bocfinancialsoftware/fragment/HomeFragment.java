@@ -24,9 +24,9 @@ import com.sf.bocfinancialsoftware.activity.home.business.BusinessQueryActivity;
 import com.sf.bocfinancialsoftware.activity.home.message.MessageReminderActivity;
 import com.sf.bocfinancialsoftware.adapter.home.advertisement.ImageAdapter;
 import com.sf.bocfinancialsoftware.adapter.home.analysis.HomeFragmentBocAnalyseAdapter;
-import com.sf.bocfinancialsoftware.bean.AdvertLoopImageBean;
-import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
-import com.sf.bocfinancialsoftware.bean.UnReadMsgBean;
+import com.sf.bocfinancialsoftware.bean.advertisement.AdvertLoopImageBean;
+import com.sf.bocfinancialsoftware.bean.analysis.BocAnalyseBean;
+import com.sf.bocfinancialsoftware.bean.message.UnReadMsgBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
@@ -79,10 +79,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
     private List<String> imageUrlList; //图片Url集合
     private List<AdvertLoopImageBean.AdvertImage> content; //轮播图片对象集合
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
+    private String hasNext = HAS_NOT_NEXT; //是否含有下一页，默认为没有有下一页，0：没有，1：有
     private int page = 0; //查询页码
     private HashMap<String, String> map; //保存请求参数
     private UnReadMsgBean.Content unReadMsgContent;
+    private String strSuccess;  //请求成功提示语
+    private String strError;  //请求失败提示语
 
     @Nullable
     @Override
@@ -190,8 +192,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         page = 0;
         map = new HashMap<>();
         map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
-        String strSuccess = getString(R.string.common_request_success);  //请求成功提示
-        String strError = getString(R.string.common_request_failed);  //请求失败提示
+        //请求成功提示
+        strSuccess = getString(R.string.common_request_success);
+        strError = getString(R.string.common_request_failed);  //请求失败提示
         newsArray = new ArrayList<>();
         bocAnalyseAdapter = new HomeFragmentBocAnalyseAdapter(getActivity(), newsArray);
         lvHomeFragmentBocAnalyse.setAdapter(bocAnalyseAdapter);
@@ -206,8 +209,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
         page = 0;
         map.clear();
         map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
-        String strSuccess = getString(R.string.common_refresh_success);  //刷新成功提示
-        String strError = getString(R.string.common_refresh_failed);  //刷新失败提示
+        //刷新成功提示
+        strSuccess = getString(R.string.common_refresh_success);
+        //刷新失败提示
+        strError = getString(R.string.common_refresh_failed);
         getNetworkListData(map, strSuccess, strError, REQUEST_FROM_REFRESH);  // 请求网络
     }
 
@@ -228,8 +233,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Adap
                 page++;
                 map.clear();
                 map.put(QUERY_PAGE, String.valueOf(page)); //查询页码
-                String strSuccess = getString(R.string.common_load_success);  //加载成功提示
-                String strError = getString(R.string.common_load_failed);  //加载失败提示
+                strSuccess = getString(R.string.common_load_success);  //加载成功提示
+                strError = getString(R.string.common_load_failed);  //加载失败提示
                 getNetworkListData(map, strSuccess, strError, REQUEST_FROM_LOAD_MORE);  // 请求网络
             }
         }

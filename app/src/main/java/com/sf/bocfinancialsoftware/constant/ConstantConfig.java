@@ -49,8 +49,6 @@ public class ConstantConfig {
     public static final String START_DATE = "startDate";  //开始时间
     public static final String END_DATE = "endDate";  //结束时间
     public static final String CONTRACT_ID = "contractId";  //业务编号
-    public static final String OPENING_AMOUNT = "open_amount";  //开证金额
-    public static final String CREDIT_BALANCE = "credit_balance";  //信用证余额
     //通知提醒的相关请求码、结果码
     public static final int IMPORT_REQUEST = 0x0001;  //进口通知请求码
     public static final int IMPORT_RESPONSE = 0x0002;  //进口通知返回码

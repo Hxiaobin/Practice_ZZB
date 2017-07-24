@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.bean.MessageBean;
+import com.sf.bocfinancialsoftware.bean.message.MessageBean;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MessageAdapter extends BaseAdapter {
 
-    private Context context;
+    private Context context;  //上下文
     private List<MessageBean.Content.MessageObject> msgArray; //消息集合
 
     public MessageAdapter(Context context, List<MessageBean.Content.MessageObject> msgArray) {

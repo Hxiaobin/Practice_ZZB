@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.home.business.BusinessAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
-import com.sf.bocfinancialsoftware.bean.ContractBean;
+import com.sf.bocfinancialsoftware.bean.business.ContractBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
@@ -71,13 +71,13 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
     private String endDate; // 结束时间
     private String contractId; //业务编号
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
+    private String hasNext = HAS_NOT_NEXT; //是否含有下一页，默认为没有有下一页，0：没有，1：有
     private int page = 0; //查询页码,默认从第0页开始查询
     private HashMap<String, String> map; //保存请求参数
-    private String strSuccess;
-    private String strError;
-    private long start;
-    private long end;
+    private String strSuccess;  //请求成功提示语
+    private String strError;  //请求失败提示语
+    private long start; //开始时间
+    private long end;  //结束时间
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,8 +112,8 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
         startDate = intent.getStringExtra(START_DATE);   //开始时间
         endDate = intent.getStringExtra(END_DATE);   //结束时间
         contractId = intent.getStringExtra(CONTRACT_ID);  //合同编号
-        start = transformIntoTime(startDate);
-        end = transformIntoTime(endDate);
+        start = transformIntoTime(startDate);  //开始时间转化为时间格式，并获取时间大小
+        end = transformIntoTime(endDate);   //结束时间转化为时间格式，并获取时间大小
         tvPromptMessage.setText(getString(R.string.common_sorry_is_loading_now));  //正在加载
         lvBusinessQueryResult.setEmptyView(lltEmptyView);
         lvBusinessQueryResult.addHeaderView(headView);
@@ -314,7 +314,7 @@ public class BusinessQueryResultActivity extends BaseActivity implements View.On
     }
 
     /**
-     * 将字符串转化为时间
+     * 将字符串转化为时间，并获取大小
      *
      * @param strTime
      * @return

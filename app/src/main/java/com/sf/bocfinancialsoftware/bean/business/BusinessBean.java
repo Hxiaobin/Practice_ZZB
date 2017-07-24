@@ -1,9 +1,10 @@
-package com.sf.bocfinancialsoftware.bean;
+package com.sf.bocfinancialsoftware.bean.business;
 
 import java.util.List;
 
 /**
- * Created by john on 2017/7/18.
+ * 业务列表Bean类
+ * Created by sn on 2017/7/18.
  */
 
 public class BusinessBean {

@@ -173,7 +173,7 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
         int m = month + 1;
         Date date1; //开始时间
         Date date2; //结束时间
-        if (datePickerDialog == startDatePickerDialog) { //开始时间
+        if (datePickerDialog == startDatePickerDialog) { //如果当前选择器是开始时间选择器
             if ((m / 10) == 1) { //月份是2位数
                 if ((day / 10) >= 1) { //日期是2位数
                     tvBusinessQueryStartDate.setText(year + "-" + m + "-" + day);
@@ -190,7 +190,6 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
             String startDate = tvBusinessQueryStartDate.getText().toString();
             try {
                 date1 = format2.parse(startDate);
-                Log.e("时间----", date1.getTime() + "");
                 if (date1.getTime() >= System.currentTimeMillis()) { //开始时间大于当前时间
                     tvBusinessQueryStartDate.setText("");
                     ToastUtil.showToast(mContext, getString(R.string.activity_business_query_end_time_wrong3));
@@ -198,7 +197,7 @@ public class BusinessQueryCriteriaActivity extends BaseActivity implements View.
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        } else if (datePickerDialog == endDatePickerDialog) { //结束时间
+        } else if (datePickerDialog == endDatePickerDialog) { //如果当前选择器是结束时间选择器
             if ((m / 10) == 1) { //月份是2位数
                 if ((day / 10) >= 1) { //日期是2位数
                     tvBusinessQueryEndDate.setText(year + "-" + m + "-" + day);

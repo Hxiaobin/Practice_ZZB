@@ -19,8 +19,8 @@ import java.util.List;
 
 public class ImageAdapter extends StaticPagerAdapter {
 
-    private Context context;
-    private List<String> imageList;
+    private Context context;  //上下文
+    private List<String> imageList; //图片URL集合
 
     public ImageAdapter(Context context, List<String> imageList) {
         this.context = context;

@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.home.business.BusinessQueryAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
-import com.sf.bocfinancialsoftware.bean.BusinessBean;
+import com.sf.bocfinancialsoftware.bean.business.BusinessBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.ToastUtil;

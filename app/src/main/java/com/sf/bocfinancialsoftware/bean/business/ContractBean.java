@@ -1,4 +1,4 @@
-package com.sf.bocfinancialsoftware.bean;
+package com.sf.bocfinancialsoftware.bean.business;
 
 import java.util.List;
 

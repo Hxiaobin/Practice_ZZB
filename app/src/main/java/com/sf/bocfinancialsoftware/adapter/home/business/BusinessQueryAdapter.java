@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sf.bocfinancialsoftware.R;
-import com.sf.bocfinancialsoftware.bean.BusinessBean;
+import com.sf.bocfinancialsoftware.bean.business.BusinessBean;
 
 import java.util.List;
 

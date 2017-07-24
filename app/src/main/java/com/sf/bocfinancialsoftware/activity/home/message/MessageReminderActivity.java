@@ -1,7 +1,6 @@
 package com.sf.bocfinancialsoftware.activity.home.message;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
-import com.sf.bocfinancialsoftware.bean.UnReadMsgBean;
+import com.sf.bocfinancialsoftware.bean.message.UnReadMsgBean;
 import com.sf.bocfinancialsoftware.constant.ConstantConfig;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
@@ -57,8 +56,8 @@ public class MessageReminderActivity extends BaseActivity implements View.OnClic
     private LinearLayout lltMessageReminderGuarantee; // 保函提醒
     private LinearLayout lltMessageReminderFactoring; // 保理提醒
     private LinearLayout lltMessageReminderForward; // 远期提醒
-    private UnReadMsgBean.Content unReadMsgContent;
-    private HashMap<String, String> map;
+    private UnReadMsgBean.Content unReadMsgContent; //未读消息数量实体类
+    private HashMap<String, String> map;   //存放请求参数
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

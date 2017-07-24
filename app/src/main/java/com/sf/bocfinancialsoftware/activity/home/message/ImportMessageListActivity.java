@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.home.message.MessageAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
-import com.sf.bocfinancialsoftware.bean.MessageBean;
+import com.sf.bocfinancialsoftware.bean.message.MessageBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
@@ -85,12 +85,12 @@ public class ImportMessageListActivity extends BaseActivity implements View.OnCl
     private TextView tvFilterCondition5;
     private TextView tvFilterCondition6;
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
+    private String hasNext = HAS_NOT_NEXT; //是否含有下一页，默认为没有有下一页，0：没有，1：有
     private int page = 0;  //查询页码
     private String filter = ""; //筛选条件
     private HashMap<String, String> map; // 保存请求参数
-    private String strSuccess;
-    private String strError;
+    private String strSuccess;  //请求成功提示语
+    private String strError;  //请求失败提示语
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,19 +161,19 @@ public class ImportMessageListActivity extends BaseActivity implements View.OnCl
                 filter = QUERY_IMPORT_ORDER;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition3: //筛选进口信用证即期付款提示
+            case R.id.lltFilterCondition3:  //筛选进口信用证即期付款提示
                 filter = QUERY_IMPORT_SIGHT_PAYMENT;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition4: //进口信用证承兑到期付款提示
+            case R.id.lltFilterCondition4:  //进口信用证承兑到期付款提示
                 filter = QUERY_IMPORT_PAY_AT_MATURITY;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition5: //进口贸易融资业务到期提示
+            case R.id.lltFilterCondition5:  //进口贸易融资业务到期提示
                 filter = QUERY_IMPORT_FINANCIAL_BUSINESS;
                 requestByQueryFilter(filter);
                 break;
-            case R.id.lltFilterCondition6: //进口代收到单通知
+            case R.id.lltFilterCondition6:  //进口代收到单通知
                 filter = QUERY_IMPORT_INWARD_COLLECTION;
                 requestByQueryFilter(filter);
                 break;

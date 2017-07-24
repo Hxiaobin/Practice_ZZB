@@ -17,7 +17,7 @@ import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.home.analysis.BocAnalyseAdapter;
 import com.sf.bocfinancialsoftware.base.BaseActivity;
-import com.sf.bocfinancialsoftware.bean.BocAnalyseBean;
+import com.sf.bocfinancialsoftware.bean.analysis.BocAnalyseBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
@@ -56,7 +56,7 @@ public class BocAnalyseListActivity extends BaseActivity implements AdapterView.
     private List<BocAnalyseBean.Content.NewsBean> newsArray; //加载的数据列表
     private BocAnalyseAdapter bocAnalyseAdapter; //列表适配器
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
+    private String hasNext = HAS_NOT_NEXT; //是否含有下一页，默认为没有有下一页，0：没有，1：有
     private int page = 0; //查询页码,默认从第0页开始查询
     private HashMap<String, String> map; //保存请求参数
 

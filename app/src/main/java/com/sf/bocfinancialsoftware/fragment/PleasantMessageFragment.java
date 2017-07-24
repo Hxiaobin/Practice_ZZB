@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.sf.bocfinancialsoftware.R;
 import com.sf.bocfinancialsoftware.adapter.pleasant.PleasantMessageAdapter;
-import com.sf.bocfinancialsoftware.bean.MessageBean;
+import com.sf.bocfinancialsoftware.bean.message.MessageBean;
 import com.sf.bocfinancialsoftware.http.HttpCallBackListener;
 import com.sf.bocfinancialsoftware.http.HttpUtil;
 import com.sf.bocfinancialsoftware.util.SwipeRefreshUtil;
@@ -54,11 +54,11 @@ public class PleasantMessageFragment extends Fragment implements SwipeRefreshLay
     private List<MessageBean.Content.MessageObject> msgArray; //已加载的数据列表
     private String typeId;  //消息类型id
     private boolean isLastLine = false;  //列表是否滚动到最后一行
-    private String hasNext = "0"; //是否含有下一页，默认为没有有下一页，0：没有，1：有
+    private String hasNext = HAS_NOT_NEXT; //是否含有下一页，默认为没有有下一页，0：没有，1：有
     private int page = 0;  //查询页码
     private HashMap<String, String> map; // 保存请求参数
-    private String strSuccess;
-    private String strError;
+    private String strSuccess;  //请求成功提示语
+    private String strError;  //请求失败提示语
 
     @Nullable
     @Override
